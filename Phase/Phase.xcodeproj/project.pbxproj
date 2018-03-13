@@ -15,6 +15,8 @@
 		81C9EE1F2058795200C27016 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81C9EE1D2058795200C27016 /* LaunchScreen.storyboard */; };
 		81C9EE2A2058795300C27016 /* PhaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C9EE292058795300C27016 /* PhaseTests.swift */; };
 		81C9EE352058795300C27016 /* PhaseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C9EE342058795300C27016 /* PhaseUITests.swift */; };
+		81CFD3F42058822F00DDD630 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CFD3F32058822F00DDD630 /* View.swift */; };
+		81CFD3F62058824700DDD630 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CFD3F52058824700DDD630 /* Models.swift */; };
 		C6B46A8543265BAEF66E0411 /* Pods_PhaseTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E71635C053C1F5A36A0E3E9 /* Pods_PhaseTests.framework */; };
 		EAB9DF6080B0DDD7A709CE05 /* Pods_PhaseUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77732BF92135231E852C350B /* Pods_PhaseUITests.framework */; };
 /* End PBXBuildFile section */
@@ -53,6 +55,8 @@
 		81C9EE302058795300C27016 /* PhaseUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PhaseUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		81C9EE342058795300C27016 /* PhaseUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhaseUITests.swift; sourceTree = "<group>"; };
 		81C9EE362058795300C27016 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		81CFD3F32058822F00DDD630 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
+		81CFD3F52058824700DDD630 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		9E534A5BA8A8AA1BD6106D54 /* Pods-PhaseTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhaseTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PhaseTests/Pods-PhaseTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B9EA73BB8347138AE4D02088 /* Pods-PhaseUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhaseUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PhaseUITests/Pods-PhaseUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		CDBD6CF13FB8FF84C3DB0F83 /* Pods-PhaseUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhaseUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PhaseUITests/Pods-PhaseUITests.release.xcconfig"; sourceTree = "<group>"; };
@@ -103,6 +107,7 @@
 			isa = PBXGroup;
 			children = (
 				81C9EE132058795200C27016 /* Phase */,
+				81C9EE202058795200C27016 /* Info.plist */,
 				81C9EE282058795300C27016 /* PhaseTests */,
 				81C9EE332058795300C27016 /* PhaseUITests */,
 				81C9EE122058795200C27016 /* Products */,
@@ -124,12 +129,11 @@
 		81C9EE132058795200C27016 /* Phase */ = {
 			isa = PBXGroup;
 			children = (
-				81C9EE142058795200C27016 /* AppDelegate.swift */,
-				81C9EE162058795200C27016 /* ViewController.swift */,
-				81C9EE182058795200C27016 /* Main.storyboard */,
-				81C9EE1B2058795200C27016 /* Assets.xcassets */,
-				81C9EE1D2058795200C27016 /* LaunchScreen.storyboard */,
-				81C9EE202058795200C27016 /* Info.plist */,
+				81CFD3EE2058817900DDD630 /* Models */,
+				81CFD3EF2058818A00DDD630 /* Views */,
+				81CFD3F02058819700DDD630 /* ViewControllers */,
+				81CFD3F2205881C200DDD630 /* Storyboards */,
+				81CFD3F1205881B000DDD630 /* SupportingFiles */,
 			);
 			path = Phase;
 			sourceTree = "<group>";
@@ -150,6 +154,48 @@
 				81C9EE362058795300C27016 /* Info.plist */,
 			);
 			path = PhaseUITests;
+			sourceTree = "<group>";
+		};
+		81CFD3EE2058817900DDD630 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				81CFD3F52058824700DDD630 /* Models.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		81CFD3EF2058818A00DDD630 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				81CFD3F32058822F00DDD630 /* View.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		81CFD3F02058819700DDD630 /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				81C9EE162058795200C27016 /* ViewController.swift */,
+			);
+			path = ViewControllers;
+			sourceTree = "<group>";
+		};
+		81CFD3F1205881B000DDD630 /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
+				81C9EE142058795200C27016 /* AppDelegate.swift */,
+				81C9EE1B2058795200C27016 /* Assets.xcassets */,
+			);
+			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		81CFD3F2205881C200DDD630 /* Storyboards */ = {
+			isa = PBXGroup;
+			children = (
+				81C9EE1D2058795200C27016 /* LaunchScreen.storyboard */,
+				81C9EE182058795200C27016 /* Main.storyboard */,
+			);
+			path = Storyboards;
 			sourceTree = "<group>";
 		};
 		EB49043DDF2017CF81237AA4 /* Pods */ = {
@@ -464,6 +510,8 @@
 			files = (
 				81C9EE172058795200C27016 /* ViewController.swift in Sources */,
 				81C9EE152058795200C27016 /* AppDelegate.swift in Sources */,
+				81CFD3F42058822F00DDD630 /* View.swift in Sources */,
+				81CFD3F62058824700DDD630 /* Models.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
