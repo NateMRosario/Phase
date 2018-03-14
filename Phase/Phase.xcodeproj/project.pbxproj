@@ -19,6 +19,9 @@
 		81CFD3F62058824700DDD630 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CFD3F52058824700DDD630 /* Models.swift */; };
 		C6B46A8543265BAEF66E0411 /* Pods_PhaseTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E71635C053C1F5A36A0E3E9 /* Pods_PhaseTests.framework */; };
 		EAB9DF6080B0DDD7A709CE05 /* Pods_PhaseUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77732BF92135231E852C350B /* Pods_PhaseUITests.framework */; };
+		F48DA6BD20588ACD006E4FFC /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48DA6BC20588ACD006E4FFC /* User.swift */; };
+		F48DA6BF20588F17006E4FFC /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48DA6BE20588F17006E4FFC /* Post.swift */; };
+		F48DA6C120589024006E4FFC /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48DA6C020589024006E4FFC /* Comment.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -61,6 +64,9 @@
 		B9EA73BB8347138AE4D02088 /* Pods-PhaseUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhaseUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PhaseUITests/Pods-PhaseUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		CDBD6CF13FB8FF84C3DB0F83 /* Pods-PhaseUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhaseUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PhaseUITests/Pods-PhaseUITests.release.xcconfig"; sourceTree = "<group>"; };
 		DEE8D0B9C3C33D7DFA205C39 /* Pods-PhaseTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhaseTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PhaseTests/Pods-PhaseTests.release.xcconfig"; sourceTree = "<group>"; };
+		F48DA6BC20588ACD006E4FFC /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		F48DA6BE20588F17006E4FFC /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
+		F48DA6C020589024006E4FFC /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		FB898E9F3A3E362DE3BD876E /* Pods-Phase.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Phase.release.xcconfig"; path = "Pods/Target Support Files/Pods-Phase/Pods-Phase.release.xcconfig"; sourceTree = "<group>"; };
 		FE00CE277B7AB4A621DE7AA9 /* Pods_Phase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Phase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -160,6 +166,9 @@
 			isa = PBXGroup;
 			children = (
 				81CFD3F52058824700DDD630 /* Models.swift */,
+				F48DA6BC20588ACD006E4FFC /* User.swift */,
+				F48DA6BE20588F17006E4FFC /* Post.swift */,
+				F48DA6C020589024006E4FFC /* Comment.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -511,6 +520,9 @@
 				81C9EE172058795200C27016 /* ViewController.swift in Sources */,
 				81C9EE152058795200C27016 /* AppDelegate.swift in Sources */,
 				81CFD3F42058822F00DDD630 /* View.swift in Sources */,
+				F48DA6C120589024006E4FFC /* Comment.swift in Sources */,
+				F48DA6BF20588F17006E4FFC /* Post.swift in Sources */,
+				F48DA6BD20588ACD006E4FFC /* User.swift in Sources */,
 				81CFD3F62058824700DDD630 /* Models.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
