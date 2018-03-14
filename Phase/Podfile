@@ -7,7 +7,9 @@ target 'Phase' do
 
   # Pods for Phase
   pod 'AWSMobileClient'
-
+  pod 'SnapKit'
+  pod 'Material'
+  
   target 'PhaseTests' do
     inherit! :search_paths
     # Pods for testing
