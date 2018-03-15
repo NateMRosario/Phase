@@ -17,6 +17,14 @@ class DiscoverCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    @IBOutlet weak var profileImage: UIImageView! {
+        didSet {
+            profileImage.layer.cornerRadius = profileImage.bounds.height / 2
+            profileImage.borderColor = UIColor.white
+            profileImage.layer.borderWidth = 2
+        }
+    }
+    
     public func set(image: UIImage) {
         contentImageView.image = image
     }
