@@ -34,6 +34,20 @@
 		81AB8AB0205AF75D00A98AFB /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AB8AAF205AF75D00A98AFB /* UIViewController+Extensions.swift */; };
 		81AB8AB2205AF77C00A98AFB /* UISearchBar+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AB8AB1205AF77C00A98AFB /* UISearchBar+Extensions.swift */; };
 		81AB8AB4205AF7AB00A98AFB /* UINavigationBar+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AB8AB3205AF7AB00A98AFB /* UINavigationBar+Extensions.swift */; };
+		81AB8AB7205AF8EA00A98AFB /* GridViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AB8AB6205AF8EA00A98AFB /* GridViewProtocol.swift */; };
+		81AB8AB9205AF99100A98AFB /* CollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AB8AB8205AF99100A98AFB /* CollectionViewLayout.swift */; };
+		81AB8ABB205AF9DD00A98AFB /* Column.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AB8ABA205AF9DD00A98AFB /* Column.swift */; };
+		81AB8ABD205AFA1000A98AFB /* ColumnContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AB8ABC205AFA1000A98AFB /* ColumnContainer.swift */; };
+		81AB8ABF205AFA7C00A98AFB /* DB.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AB8ABE205AFA7C00A98AFB /* DB.swift */; };
+		81AB8AC2205AFB0500A98AFB /* Animator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AB8AC1205AFB0500A98AFB /* Animator.swift */; };
+		81AB8AC4205AFB4200A98AFB /* AnimateDiscoverToDetailVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AB8AC3205AFB4200A98AFB /* AnimateDiscoverToDetailVC.swift */; };
+		81AB8AC7205AFBD700A98AFB /* DiscoveryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AB8AC6205AFBD700A98AFB /* DiscoveryViewController.swift */; };
+		81AB8ACA205AFC7A00A98AFB /* DiscoverCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AB8AC8205AFC7A00A98AFB /* DiscoverCollectionViewCell.swift */; };
+		81AB8ACB205AFC7A00A98AFB /* DiscoverCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81AB8AC9205AFC7A00A98AFB /* DiscoverCollectionViewCell.xib */; };
+		81AB8ACD205AFD8C00A98AFB /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AB8ACC205AFD8C00A98AFB /* DetailViewController.swift */; };
+		81AB8ACF205AFDBF00A98AFB /* DetailNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AB8ACE205AFDBF00A98AFB /* DetailNavigationViewController.swift */; };
+		81AB8AD1205AFECD00A98AFB /* Discover.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB8AD0205AFECD00A98AFB /* Discover.storyboard */; };
+		81AB8AD3205B050200A98AFB /* DiscoverDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB8AD2205B050200A98AFB /* DiscoverDetail.storyboard */; };
 		81C9EE152058795200C27016 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C9EE142058795200C27016 /* AppDelegate.swift */; };
 		81C9EE172058795200C27016 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C9EE162058795200C27016 /* ViewController.swift */; };
 		81C9EE1A2058795200C27016 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81C9EE182058795200C27016 /* Main.storyboard */; };
@@ -95,6 +109,20 @@
 		81AB8AAF205AF75D00A98AFB /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
 		81AB8AB1205AF77C00A98AFB /* UISearchBar+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UISearchBar+Extensions.swift"; sourceTree = "<group>"; };
 		81AB8AB3205AF7AB00A98AFB /* UINavigationBar+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationBar+Extensions.swift"; sourceTree = "<group>"; };
+		81AB8AB6205AF8EA00A98AFB /* GridViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GridViewProtocol.swift; sourceTree = "<group>"; };
+		81AB8AB8205AF99100A98AFB /* CollectionViewLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CollectionViewLayout.swift; sourceTree = "<group>"; };
+		81AB8ABA205AF9DD00A98AFB /* Column.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Column.swift; sourceTree = "<group>"; };
+		81AB8ABC205AFA1000A98AFB /* ColumnContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColumnContainer.swift; sourceTree = "<group>"; };
+		81AB8ABE205AFA7C00A98AFB /* DB.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DB.swift; sourceTree = "<group>"; };
+		81AB8AC1205AFB0500A98AFB /* Animator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Animator.swift; sourceTree = "<group>"; };
+		81AB8AC3205AFB4200A98AFB /* AnimateDiscoverToDetailVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnimateDiscoverToDetailVC.swift; sourceTree = "<group>"; };
+		81AB8AC6205AFBD700A98AFB /* DiscoveryViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryViewController.swift; sourceTree = "<group>"; };
+		81AB8AC8205AFC7A00A98AFB /* DiscoverCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoverCollectionViewCell.swift; sourceTree = "<group>"; };
+		81AB8AC9205AFC7A00A98AFB /* DiscoverCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = DiscoverCollectionViewCell.xib; sourceTree = "<group>"; };
+		81AB8ACC205AFD8C00A98AFB /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		81AB8ACE205AFDBF00A98AFB /* DetailNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailNavigationViewController.swift; sourceTree = "<group>"; };
+		81AB8AD0205AFECD00A98AFB /* Discover.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Discover.storyboard; sourceTree = "<group>"; };
+		81AB8AD2205B050200A98AFB /* DiscoverDetail.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = DiscoverDetail.storyboard; sourceTree = "<group>"; };
 		81C9EE112058795200C27016 /* Phase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Phase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81C9EE142058795200C27016 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		81C9EE162058795200C27016 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -161,6 +189,8 @@
 			isa = PBXGroup;
 			children = (
 				81AB8A95205AD42900A98AFB /* ProfileTableViewCell.swift */,
+				81AB8AC8205AFC7A00A98AFB /* DiscoverCollectionViewCell.swift */,
+				81AB8AC9205AFC7A00A98AFB /* DiscoverCollectionViewCell.xib */,
 			);
 			path = "Custom Cells";
 			sourceTree = "<group>";
@@ -168,7 +198,10 @@
 		81AB8A99205AF62600A98AFB /* DiscoveryVCCore */ = {
 			isa = PBXGroup;
 			children = (
+				81AB8AC0205AFAF500A98AFB /* Animator */,
+				81AB8ABE205AFA7C00A98AFB /* DB.swift */,
 				81AB8A9A205AF64800A98AFB /* Constants.swift */,
+				81AB8AB5205AF8CE00A98AFB /* Layout */,
 				81AB8A9C205AF66F00A98AFB /* Extensions */,
 			);
 			path = DiscoveryVCCore;
@@ -185,6 +218,37 @@
 				81AB8AB3205AF7AB00A98AFB /* UINavigationBar+Extensions.swift */,
 			);
 			path = Extensions;
+			sourceTree = "<group>";
+		};
+		81AB8AB5205AF8CE00A98AFB /* Layout */ = {
+			isa = PBXGroup;
+			children = (
+				819A1F3A2058D0D100FFF4BD /* CustomCVLayout.swift */,
+				81AB8AB6205AF8EA00A98AFB /* GridViewProtocol.swift */,
+				81AB8AB8205AF99100A98AFB /* CollectionViewLayout.swift */,
+				81AB8ABA205AF9DD00A98AFB /* Column.swift */,
+				81AB8ABC205AFA1000A98AFB /* ColumnContainer.swift */,
+			);
+			path = Layout;
+			sourceTree = "<group>";
+		};
+		81AB8AC0205AFAF500A98AFB /* Animator */ = {
+			isa = PBXGroup;
+			children = (
+				81AB8AC1205AFB0500A98AFB /* Animator.swift */,
+				81AB8AC3205AFB4200A98AFB /* AnimateDiscoverToDetailVC.swift */,
+			);
+			path = Animator;
+			sourceTree = "<group>";
+		};
+		81AB8AC5205AFB9000A98AFB /* Discovery */ = {
+			isa = PBXGroup;
+			children = (
+				81AB8AC6205AFBD700A98AFB /* DiscoveryViewController.swift */,
+				81AB8ACC205AFD8C00A98AFB /* DetailViewController.swift */,
+				81AB8ACE205AFDBF00A98AFB /* DetailNavigationViewController.swift */,
+			);
+			path = Discovery;
 			sourceTree = "<group>";
 		};
 		81C9EE082058795200C27016 = {
@@ -243,9 +307,8 @@
 		81CFD3EE2058817900DDD630 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				81AB8A99205AF62600A98AFB /* DiscoveryVCCore */,
 				81CFD3F52058824700DDD630 /* Models.swift */,
-				819A1F3A2058D0D100FFF4BD /* CustomCVLayout.swift */,
+				81AB8A99205AF62600A98AFB /* DiscoveryVCCore */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -269,6 +332,7 @@
 		81CFD3F02058819700DDD630 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				81AB8AC5205AFB9000A98AFB /* Discovery */,
 				81AB8A97205AEE3B00A98AFB /* TabsViewController.swift */,
 				81C9EE162058795200C27016 /* ViewController.swift */,
 				81DC9F012058B210005F2724 /* ProfileViewController.swift */,
@@ -299,6 +363,8 @@
 			children = (
 				81C9EE1D2058795200C27016 /* LaunchScreen.storyboard */,
 				81C9EE182058795200C27016 /* Main.storyboard */,
+				81AB8AD0205AFECD00A98AFB /* Discover.storyboard */,
+				81AB8AD2205B050200A98AFB /* DiscoverDetail.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -432,7 +498,10 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				81AB8AD3205B050200A98AFB /* DiscoverDetail.storyboard in Resources */,
 				81C9EE1F2058795200C27016 /* LaunchScreen.storyboard in Resources */,
+				81AB8ACB205AFC7A00A98AFB /* DiscoverCollectionViewCell.xib in Resources */,
+				81AB8AD1205AFECD00A98AFB /* Discover.storyboard in Resources */,
 				81C9EE1C2058795200C27016 /* Assets.xcassets in Resources */,
 				81C9EE1A2058795200C27016 /* Main.storyboard in Resources */,
 			);
@@ -623,15 +692,22 @@
 				81AB8A9B205AF64800A98AFB /* Constants.swift in Sources */,
 				810935882059BD2400A95B30 /* EditProfileView.swift in Sources */,
 				8109358C2059BD6500A95B30 /* CreateNewPostView.swift in Sources */,
+				81AB8AB7205AF8EA00A98AFB /* GridViewProtocol.swift in Sources */,
 				81AB8A96205AD42900A98AFB /* ProfileTableViewCell.swift in Sources */,
+				81AB8AB9205AF99100A98AFB /* CollectionViewLayout.swift in Sources */,
 				8109358A2059BD5800A95B30 /* SearchView.swift in Sources */,
 				810935862059BCE800A95B30 /* FollowsView.swift in Sources */,
 				810935702059BA7600A95B30 /* CreateAccountViewController.swift in Sources */,
+				81AB8ACD205AFD8C00A98AFB /* DetailViewController.swift in Sources */,
+				81AB8AC7205AFBD700A98AFB /* DiscoveryViewController.swift in Sources */,
 				8109357A2059BBD300A95B30 /* SearchViewController.swift in Sources */,
 				81AB8AB2205AF77C00A98AFB /* UISearchBar+Extensions.swift in Sources */,
 				81C9EE172058795200C27016 /* ViewController.swift in Sources */,
 				81AB8AAA205AF6BE00A98AFB /* Array+Extensions.swift in Sources */,
 				810935822059BCCB00A95B30 /* HomeView.swift in Sources */,
+				81AB8ABB205AF9DD00A98AFB /* Column.swift in Sources */,
+				81AB8ABD205AFA1000A98AFB /* ColumnContainer.swift in Sources */,
+				81AB8AC4205AFB4200A98AFB /* AnimateDiscoverToDetailVC.swift in Sources */,
 				810935762059BB0D00A95B30 /* FollowsViewController.swift in Sources */,
 				81AB8AB4205AF7AB00A98AFB /* UINavigationBar+Extensions.swift in Sources */,
 				810935842059BCDD00A95B30 /* ActivityView.swift in Sources */,
@@ -644,7 +720,11 @@
 				8109356E2059BA5B00A95B30 /* LoginViewController.swift in Sources */,
 				810935722059BA8400A95B30 /* HomeViewController.swift in Sources */,
 				81AB8AAC205AF6F600A98AFB /* CALayer+Extensions.swift in Sources */,
+				81AB8ABF205AFA7C00A98AFB /* DB.swift in Sources */,
 				810935802059BCA300A95B30 /* CreateAccountView.swift in Sources */,
+				81AB8AC2205AFB0500A98AFB /* Animator.swift in Sources */,
+				81AB8ACF205AFDBF00A98AFB /* DetailNavigationViewController.swift in Sources */,
+				81AB8ACA205AFC7A00A98AFB /* DiscoverCollectionViewCell.swift in Sources */,
 				81AB8A98205AEE3B00A98AFB /* TabsViewController.swift in Sources */,
 				8109357E2059BC8300A95B30 /* LoginView.swift in Sources */,
 				810935782059BB9200A95B30 /* EditProfileViewController.swift in Sources */,
