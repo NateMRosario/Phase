@@ -14,7 +14,7 @@ class ViewController: UICollectionViewController, CustomLayoutDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         collectionView?.backgroundColor = UIColor.white
         
         let layout = collectionViewLayout as! CustomLayout
