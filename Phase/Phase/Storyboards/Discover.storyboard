@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Item-->
+        <scene sceneID="pNj-vh-ot1">
+            <objects>
+                <navigationController id="Fhm-lf-h23" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Item" id="EdV-ZH-jNH"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="fjf-OB-oBg">
+                        <rect key="frame" x="0.0" y="20" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="jXR-qd-7Cj" kind="relationship" relationship="rootViewController" id="sv9-sA-xOb"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Ju6-bJ-MwB" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-308" y="133"/>
+        </scene>
+        <!--Discovery View Controller-->
+        <scene sceneID="i07-ES-8bW">
+            <objects>
+                <viewController storyboardIdentifier="DiscoveryViewController" id="jXR-qd-7Cj" customClass="DiscoveryViewController" customModule="Phase" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="qkN-iH-YZJ">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="JRI-uf-n4g">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="867"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="PdK-99-WKT">
+                                    <size key="itemSize" width="50" height="50"/>
+                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                    <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
+                                </collectionViewFlowLayout>
+                                <cells/>
+                            </collectionView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                        <constraints>
+                            <constraint firstItem="JRI-uf-n4g" firstAttribute="centerY" secondItem="qkN-iH-YZJ" secondAttribute="centerY" constant="100" id="2Gr-Io-Raa"/>
+                            <constraint firstItem="JRI-uf-n4g" firstAttribute="height" secondItem="qkN-iH-YZJ" secondAttribute="height" constant="200" id="9ls-S5-NHb"/>
+                            <constraint firstItem="JRI-uf-n4g" firstAttribute="width" secondItem="qkN-iH-YZJ" secondAttribute="width" id="Jol-ra-yRX"/>
+                            <constraint firstItem="JRI-uf-n4g" firstAttribute="centerX" secondItem="IFP-OP-Gvs" secondAttribute="centerX" id="gUl-GV-IgB"/>
+                        </constraints>
+                        <viewLayoutGuide key="safeArea" id="IFP-OP-Gvs"/>
+                    </view>
+                    <navigationItem key="navigationItem" id="1bI-HM-YD5"/>
+                    <connections>
+                        <outlet property="collectionView" destination="JRI-uf-n4g" id="DAH-Pu-Mhu"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="BMA-zZ-sdL" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="456.80000000000001" y="132.68365817091455"/>
+        </scene>
+    </scenes>
+</document>
