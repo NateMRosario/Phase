@@ -12,6 +12,8 @@ class TabsViewController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.tabBar.tintColor = UIColor.white
+        
         // Profile VC
         let profileVC = ProfileViewController.storyboardInstance()
         profileVC.tabBarItem = UITabBarItem()
