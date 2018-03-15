@@ -12,11 +12,15 @@ class TabsViewController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        // Profile VC
         let profileVC = ProfileViewController.storyboardInstance()
-        let DiscoverVC = 
         profileVC.tabBarItem = UITabBarItem()
         profileVC.tabBarItem.title = "Profile"
-        self.setViewControllers([profileVC], animated: true)
         
+        // Discover/Search VC
+        let discoverVC = UINavigationController(rootViewController: DiscoveryViewController.instantiate(withStoryboard: "Discover"))
+        discoverVC.tabBarItem.title = "Discover"
+        
+        self.setViewControllers([discoverVC, profileVC], animated: true)
     }
 }
