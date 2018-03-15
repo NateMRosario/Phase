@@ -10,22 +10,18 @@ import UIKit
 import SnapKit
 import Material
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: UIViewController, UITableViewDelegate {
     
-    @IBOutlet weak var postsCount: UILabel!
-    @IBOutlet weak var commentsCount: UILabel!
-    @IBOutlet weak var upvotesCount: UILabel!
+    @IBOutlet weak var segmentedViewTop: NSLayoutConstraint!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var atDisplayNameLabel: UILabel!
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var profileView: UIView!
     @IBOutlet weak var handleLabel: UILabel!
-    @IBOutlet weak var hiddenLabel: UILabel!
     @IBOutlet weak var headerLabel: UILabel!
     @IBOutlet weak var segmentedView: UIView!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var profileImage: UIImageView!
-    @IBOutlet weak var statsContainerView: UIView!
     @IBOutlet weak var editProfileButton: UIButton!
     @IBOutlet weak var editProfileButtonView: UIView!
     @IBOutlet weak var constraintHeightHeaderImages: NSLayoutConstraint!
@@ -34,6 +30,7 @@ class ProfileViewController: UIViewController {
             tableView.estimatedRowHeight = 100 //experimental
         }
     }
+    @IBOutlet weak var bioLabel: UILabel!
     @IBAction func segmentedControl(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0: // All comments
@@ -66,28 +63,52 @@ class ProfileViewController: UIViewController {
         let biv = UIImageView()
         biv.alpha = 0.0
         biv.contentMode = .scaleAspectFill
-       // biv.image = .blur(radius: 10, tintColor: UIColor.clear, saturationDeltaFactor: 1)
+        biv.image = #imageLiteral(resourceName: "Manhattan").blur(radius: 10, tintColor: UIColor.clear, saturationDeltaFactor: 1)
         return biv
     }()
     
     lazy var headerImageView: UIImageView = {
         let hiv = UIImageView()
-        hiv.image = #imageLiteral(resourceName: "fate-stay-night-saber-armored-ruler-fate-apocrypha-fate-grand-order-omgmuchlove-anime-7962")
+        hiv.image = #imageLiteral(resourceName: "Manhattan")
         hiv.contentMode = .scaleAspectFill
         return hiv
     }()
     
-//    var user: {
-//        didSet{
-//            nameLabel.text = user!.firstName
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        bioLabel.text = "I am the long text header View\n ----header view------ ------header view------ ---------header view-------- ------header view---- ------header view------- -----header view---- ----header view------- ---header view---- ------header view------- ---------header view---------end I am the long text header View\n ----header view------ ------header view------ ---------header view-------- ------header view---- ------header view------- -----header view---- ----header view------- ---header view---- ------header view------- ---------header view---------endI am the long text header View\n ----header view------ ------header view------ ---------header view-------- ------header view---- ------header view------- -----header view---- ----header view------- ---header view---- ------header view------- ---------header view---------end"
+        let size = profileView.systemLayoutSizeFitting(UILayoutFittingCompressedSize)
+        profileView.frame.size = size
+        tableView.tableHeaderView = profileView
+        segmentedView.snp.makeConstraints { (make) in
+            make.top.equalTo(profileView.snp.bottom)
+        }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+//        if let headerView = tableView.tableHeaderView {
+//
+//            let height = headerView.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height
+//            var headerFrame = headerView.frame
+//
+//            //Comparison necessary to avoid infinite loop
+//            if height != headerFrame.size.height {
+//                headerFrame.size.height = height
+//                headerView.frame = headerFrame
+//                tableView.tableHeaderView = headerView
+//            }
 //        }
-//    }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        tableView.tableFooterView = segmentedView
+        
         setupUI()
         loadData()
-//        tableView.delegate = self
+        tableView.delegate = self
         tableView.dataSource = self
         tableView.contentInset = UIEdgeInsetsMake(headerView.frame.height, 0, 0, 0)
         //setupSettingsButton()
@@ -117,7 +138,8 @@ class ProfileViewController: UIViewController {
         editProfileButton.layer.borderColor = UIColor.gray.cgColor
         editProfileButton.layer.borderWidth = 1
         editProfileButton.layer.cornerRadius = 14
-        
+
+ 
         headerView.clipsToBounds = true
         
         // Header - imageView
@@ -152,7 +174,7 @@ class ProfileViewController: UIViewController {
     }
     
     public static func storyboardInstance() -> ProfileViewController {
-        let storyboard = UIStoryboard(name: "ProfileView", bundle: nil)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let profileViewController = storyboard.instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
         return profileViewController
     }
