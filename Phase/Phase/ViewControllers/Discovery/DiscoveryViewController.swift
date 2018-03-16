@@ -47,7 +47,7 @@ class DiscoveryViewController: UIViewController {
         navigationItem.titleView = searchBar
         navigationController?.navigationBar.disableShadow()
         navigationController?.navigationBar.tintColor = UIColor.white
-        //        navigationController?.hidesBarsOnSwipe = true
+//                navigationController?.hidesBarsOnSwipe = true // Only use if can get it to hide and appear smooth
         navigationController?.barHideOnSwipeGestureRecognizer.setTranslation(CGPoint.zero, in: view)
     }
     
@@ -73,7 +73,7 @@ extension DiscoveryViewController: UICollectionViewDataSource {
 
 extension DiscoveryViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let detailNC = DetailNavigationViewController(rootViewController: DetailViewController.instantiate(withStoryboard: "DiscoverDetail"))
+        let detailNC = DetailNavigationViewController.instantiate(withStoryboard: "DiscoverDetail")
 
         selectedIndexPath = indexPath
         present(detailNC, animated: true, completion: nil)
@@ -84,7 +84,7 @@ extension DiscoveryViewController: CollectionViewDelegateLayout {
     func sizeForItemAt(indexPath: IndexPath) -> CGSize {
         let image = contents[indexPath.row]
         let width = CollectionViewLayout.Configuration().itemWidth
-        let height = width / image.size.width * image.size.height + 79 // 49 = Cell's white space below image
+        let height = width / image.size.width * image.size.height + 79 // 79 = Cell's clear space below image
         return CGSize(width: width, height: height)
     }
 }
