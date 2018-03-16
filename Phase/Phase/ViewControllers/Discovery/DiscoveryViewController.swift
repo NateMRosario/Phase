@@ -84,7 +84,7 @@ extension DiscoveryViewController: CollectionViewDelegateLayout {
     func sizeForItemAt(indexPath: IndexPath) -> CGSize {
         let image = contents[indexPath.row]
         let width = CollectionViewLayout.Configuration().itemWidth
-        let height = width / image.size.width * image.size.height + 49 // 49 = Cell's white space below image
+        let height = width / image.size.width * image.size.height + 79 // 49 = Cell's white space below image
         return CGSize(width: width, height: height)
     }
 }

@@ -9,6 +9,7 @@ target 'Phase' do
   pod 'AWSMobileClient'
   pod 'SnapKit'
   pod 'Material'
+  pod 'BetterSegmentedControl', '~> 0.9'
   
   target 'PhaseTests' do
     inherit! :search_paths
