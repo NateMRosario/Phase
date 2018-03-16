@@ -13,13 +13,4 @@ class DetailViewController: UIViewController {
     @IBAction func tappedBackButton(_ sender: UIBarButtonItem) {
         dismiss(animated: true, completion: nil)
     }
-
-    override func viewDidLoad() {
-        super.viewDidLoad()
-
-    }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-    }
 }
