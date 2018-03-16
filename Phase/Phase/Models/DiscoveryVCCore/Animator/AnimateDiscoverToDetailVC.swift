@@ -28,7 +28,10 @@ class AnimateDiscoverToDetailVC: Animator {
     }
     
     private func presenting(transitionContext: UIViewControllerContextTransitioning, fromVC: UIViewController, toVC: UIViewController, containerView: UIView) {
-        guard let homeVC = (fromVC as? UINavigationController)?.viewControllers.first as? DiscoveryViewController else { return }
+        // god damn nested controllers
+        guard let homeVC = ((fromVC as? TabsViewController)?
+            .viewControllers?.first as? UINavigationController)?
+            .viewControllers.first as? DiscoveryViewController else { return }
         
         containerView.addSubview(toVC.view)
         
@@ -70,7 +73,9 @@ class AnimateDiscoverToDetailVC: Animator {
     }
     
     private func dismissing(transitionContext: UIViewControllerContextTransitioning, fromVC: UIViewController, toVC: UIViewController, containerView: UIView) {
-        guard let homeVC = (toVC as? UINavigationController)?.viewControllers.first as? DiscoveryViewController else { return }
+        guard let homeVC = ((toVC as? TabsViewController)? // again, nested AF
+            .viewControllers?.first as? UINavigationController)?
+            .viewControllers.first as? DiscoveryViewController else { return }
         
         containerView.insertSubview(toVC.view, belowSubview: fromVC.view)
         
