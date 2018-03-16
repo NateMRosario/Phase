@@ -16,6 +16,7 @@ class AnimateDiscoverToDetailVC: Animator {
         return 0.3
     }
     
+    // Will trigger by DiscoverVC to DetailVC Nav
     override func animateTransition(transitionContext: UIViewControllerContextTransitioning, fromVC: UIViewController, toVC: UIViewController, containerView: UIView) {
         switch operation {
         case .push:
@@ -28,19 +29,25 @@ class AnimateDiscoverToDetailVC: Animator {
     }
     
     private func presenting(transitionContext: UIViewControllerContextTransitioning, fromVC: UIViewController, toVC: UIViewController, containerView: UIView) {
-        guard let homeVC = (fromVC as? UINavigationController)?.viewControllers.first as? DiscoveryViewController else { return }
+        // god damn nested controllers
+        guard let homeVC = ((fromVC as? TabsViewController)?
+            .viewControllers?.first as? UINavigationController)?
+            .viewControllers.first as? DiscoveryViewController else { return }
         
         containerView.addSubview(toVC.view)
         
+        // cell that was selected from DiscoverVC
         guard let cell = homeVC.collectionView.cellForItem(at: homeVC.selectedIndexPath) as? DiscoverCollectionViewCell else { return }
         
+        // converts the coordinate of the cell to the same coordinate of DiscoverVC
         let origin = cell.convert(CGPoint.zero, to: homeVC.view)
         
+        // full screen that shit
         let point = CGPoint(x: origin.x / UIScreen.main.bounds.width,
                             y: origin.y / UIScreen.main.bounds.height)
         homeVC.view.layer.setAnchorPoint(newAnchorPoint: point, forView: homeVC.view)
         
-        toVC.view.alpha = 0
+        toVC.view.alpha = 0 // dim lights on Discover VC
         
         let snapShotImageView = cell.snapShotForTransition()
         snapShotImageView.layer.setAnchorPoint(newAnchorPoint: CGPoint.zero, forView: snapShotImageView)
@@ -70,7 +77,9 @@ class AnimateDiscoverToDetailVC: Animator {
     }
     
     private func dismissing(transitionContext: UIViewControllerContextTransitioning, fromVC: UIViewController, toVC: UIViewController, containerView: UIView) {
-        guard let homeVC = (toVC as? UINavigationController)?.viewControllers.first as? DiscoveryViewController else { return }
+        guard let homeVC = ((toVC as? TabsViewController)? // again, nested AF
+            .viewControllers?.first as? UINavigationController)?
+            .viewControllers.first as? DiscoveryViewController else { return }
         
         containerView.insertSubview(toVC.view, belowSubview: fromVC.view)
         
