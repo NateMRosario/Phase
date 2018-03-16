@@ -76,30 +76,13 @@ class ProfileViewController: UIViewController, UITableViewDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        bioLabel.text = "I am the long text header View\n ----header view------ ------header view------ ---------header view-------- ------header view---- ------header view------- -----header view---- ----header view------- ---header view---- ------header view------- ---------header view---------end I am the long text header View\n ----header view------ ------header view------ ---------header view-------- ------header view---- ------header view------- -----header view---- ----header view------- ---header view---- ------header view------- ---------header view---------endI am the long text header View\n ----header view------ ------header view------ ---------header view-------- ------header view---- ------header view------- -----header view---- ----header view------- ---header view---- ------header view------- ---------header view---------end"
+        bioLabel.text = "I am the long text header View\n ----header view------ ------header view------ ---------header view-------- ------header view---- ------header view------- -----header view---- ----header view------- ---header view---- ------header view------- ---------header view---------end"
         let size = profileView.systemLayoutSizeFitting(UILayoutFittingCompressedSize)
         profileView.frame.size = size
         tableView.tableHeaderView = profileView
         segmentedView.snp.makeConstraints { (make) in
             make.top.equalTo(profileView.snp.bottom)
         }
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        
-//        if let headerView = tableView.tableHeaderView {
-//
-//            let height = headerView.systemLayoutSizeFitting(UILayoutFittingCompressedSize).height
-//            var headerFrame = headerView.frame
-//
-//            //Comparison necessary to avoid infinite loop
-//            if height != headerFrame.size.height {
-//                headerFrame.size.height = height
-//                headerView.frame = headerFrame
-//                tableView.tableHeaderView = headerView
-//            }
-//        }
     }
     
     override func viewDidLoad() {
@@ -131,7 +114,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate {
         // Header - Profile image
         profileImage.layer.borderWidth = 4
         profileImage.borderColor = .white
-        profileImage.layer.cornerRadius = 20
+        profileImage.layer.cornerRadius = profileImage.bounds.height/2
         profileImage.clipsToBounds = true
         
         // Header - Edit profile button
