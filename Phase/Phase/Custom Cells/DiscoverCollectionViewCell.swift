@@ -24,6 +24,7 @@ class DiscoverCollectionViewCell: UICollectionViewCell {
             profileImage.layer.borderWidth = 2
         }
     }
+    @IBOutlet weak var content3: UIImageView!
     
     @IBOutlet weak var extraWhiteSpace: UIView! {
         didSet {
@@ -40,10 +41,27 @@ class DiscoverCollectionViewCell: UICollectionViewCell {
     @IBOutlet weak var contentTwo: UIImageView!
     
     public func set(image: UIImage) {
+        let num = arc4random_uniform(3)
+        
         // if image view is not nil stackView. content distribution = fill proportional else fill by equal distribution
-        contentImageView.image = image
-        profileImage.image = image
-        contentTwo.image = #imageLiteral(resourceName: "f")
+
+        if num == 1 {
+            contentImageView.image = image
+            profileImage.image = image
+            contentTwo.image = image
+            content3.image = image
+        }
+        else if num == 2 {
+            contentImageView.image = image
+            profileImage.image = image
+            content3.image = image
+            contentTwo.image = nil
+        } else {
+            contentImageView.image = image
+            profileImage.image = image
+            content3.image = nil
+            contentTwo.image = nil
+        }
     }
     @IBOutlet weak var stackView: UIStackView! {
         didSet {
@@ -54,6 +72,7 @@ class DiscoverCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        self.contentView.layer.cornerRadius = 8
     }
 }
 
