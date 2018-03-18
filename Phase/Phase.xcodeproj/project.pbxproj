@@ -61,6 +61,7 @@
 		F48DA6BD20588ACD006E4FFC /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48DA6BC20588ACD006E4FFC /* User.swift */; };
 		F48DA6BF20588F17006E4FFC /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48DA6BE20588F17006E4FFC /* Post.swift */; };
 		F48DA6C120589024006E4FFC /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48DA6C020589024006E4FFC /* Comment.swift */; };
+		F4D34A7A205C482C00F4D50D /* ActivityCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D34A79205C482C00F4D50D /* ActivityCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -145,6 +146,7 @@
 		F48DA6BC20588ACD006E4FFC /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		F48DA6BE20588F17006E4FFC /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		F48DA6C020589024006E4FFC /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
+		F4D34A79205C482C00F4D50D /* ActivityCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityCollectionViewCell.swift; sourceTree = "<group>"; };
 		FB898E9F3A3E362DE3BD876E /* Pods-Phase.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Phase.release.xcconfig"; path = "Pods/Target Support Files/Pods-Phase/Pods-Phase.release.xcconfig"; sourceTree = "<group>"; };
 		FE00CE277B7AB4A621DE7AA9 /* Pods_Phase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Phase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -193,6 +195,7 @@
 				81AB8A95205AD42900A98AFB /* ProfileTableViewCell.swift */,
 				81AB8AC8205AFC7A00A98AFB /* DiscoverCollectionViewCell.swift */,
 				81AB8AC9205AFC7A00A98AFB /* DiscoverCollectionViewCell.xib */,
+				F4D34A79205C482C00F4D50D /* ActivityCollectionViewCell.swift */,
 			);
 			path = "Custom Cells";
 			sourceTree = "<group>";
@@ -313,7 +316,6 @@
 				F48DA6BC20588ACD006E4FFC /* User.swift */,
 				F48DA6BE20588F17006E4FFC /* Post.swift */,
 				F48DA6C020589024006E4FFC /* Comment.swift */,
-				819A1F3A2058D0D100FFF4BD /* CustomCVLayout.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -708,6 +710,7 @@
 				81AB8AC7205AFBD700A98AFB /* DiscoveryViewController.swift in Sources */,
 				8109357A2059BBD300A95B30 /* SearchViewController.swift in Sources */,
 				81AB8AB2205AF77C00A98AFB /* UISearchBar+Extensions.swift in Sources */,
+				F4D34A7A205C482C00F4D50D /* ActivityCollectionViewCell.swift in Sources */,
 				81AB8AAA205AF6BE00A98AFB /* Array+Extensions.swift in Sources */,
 				810935822059BCCB00A95B30 /* HomeView.swift in Sources */,
 				81AB8ABB205AF9DD00A98AFB /* Column.swift in Sources */,
@@ -904,10 +907,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = KSNU4DN7MY;
+				DEVELOPMENT_TEAM = XYLS53SA6G;
 				INFOPLIST_FILE = "$(SRCROOT)/Phase/SupportingFiles/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.reiazgafar.Phase;
+				PRODUCT_BUNDLE_IDENTIFIER = clintmejia.Phase;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -920,10 +923,10 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = KSNU4DN7MY;
+				DEVELOPMENT_TEAM = XYLS53SA6G;
 				INFOPLIST_FILE = "$(SRCROOT)/Phase/SupportingFiles/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.reiazgafar.Phase;
+				PRODUCT_BUNDLE_IDENTIFIER = clintmejia.Phase;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
