@@ -64,7 +64,6 @@ extension ActivityViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: activityView.collectionViewCellID, for: indexPath) as! ActivityCollectionViewCell
-//        let testCase = testArray[indexPath.row]
         return cell
     }
 }

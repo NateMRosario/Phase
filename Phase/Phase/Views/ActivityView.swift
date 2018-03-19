@@ -9,6 +9,26 @@
 import UIKit
 import SnapKit
 
+extension UIView {
+    enum ViewSide {
+        case left, right, top, bottom
+    }
+    
+    func addBorder(toSide side: ViewSide, withColor color: CGColor, andThickness thickness: CGFloat) {
+        
+        let border = CALayer()
+        border.backgroundColor = color
+        
+        switch side {
+        case .left: border.frame = CGRect(x: frame.minX, y: frame.minY, width: thickness, height: frame.height)
+        case .right: border.frame = CGRect(x: frame.maxX, y: frame.minY, width: thickness, height: frame.height)
+        case .top: border.frame = CGRect(x: frame.minX, y: frame.minY, width: frame.width, height: thickness)
+        case .bottom: border.frame = CGRect(x: frame.minX, y: frame.maxY, width: frame.width, height: thickness)
+        }
+        layer.addSublayer(border)
+    }
+}
+
 class ActivityView: UIView {
     
     // Cell Identifier
@@ -37,7 +57,7 @@ class ActivityView: UIView {
         let label = UILabel()
         label.text = "Activity"
         label.textAlignment = .left
-        label.font = UIFont.systemFont(ofSize: 17, weight: .regular)
+        label.font = UIFont.systemFont(ofSize: 17, weight: .bold)
         return label
     }()
     
@@ -47,8 +67,8 @@ class ActivityView: UIView {
         imageView.contentMode = .scaleAspectFit
         imageView.layer.masksToBounds = true
         imageView.clipsToBounds = true
-//        imageView.layer.cornerRadius = frame.size.width/2
-        imageView.layer.borderWidth = 1
+        imageView.layer.borderWidth = 0.5
+        imageView.layer.borderColor = UIColor.gray.cgColor
         return imageView
     }()
     
@@ -57,6 +77,7 @@ class ActivityView: UIView {
         label.text = "Username"
         label.textAlignment = .left
         label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        label.textColor = UIColor.darkGray
         return label
     }()
     
@@ -64,7 +85,8 @@ class ActivityView: UIView {
         let label = UILabel()
         label.text = "32 mins ago"
         label.textAlignment = .justified
-        label.font = UIFont.systemFont(ofSize: 12, weight: .regular)
+        label.font = UIFont.systemFont(ofSize: 10, weight: .regular)
+        label.textColor = UIColor.darkGray
         return label
     }()
     
@@ -73,6 +95,7 @@ class ActivityView: UIView {
         label.text = "#100DaysOfCode"
         label.textAlignment = .left
         label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        label.textColor = UIColor.darkGray
         return label
     }()
     
@@ -81,14 +104,17 @@ class ActivityView: UIView {
         label.text = "This is my 51st day of the challenge!"
         label.textAlignment = .left
         label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
+        label.textColor = UIColor.darkGray
         return label
     }()
     
     lazy var subscribeButton: UIButton = {
         let button = UIButton(type: UIButtonType.custom) as UIButton
-        button.title(for: .normal)
-        button.titleLabel?.text = "Subscribe"
-        button.titleColor(for: .normal)
+        button.backgroundColor = UIColor.blue
+        button.setTitle("Subscribe", for: .normal)
+        button.setTitleColor(UIColor.white, for: .normal)
+        button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 11)
+        button.contentEdgeInsets = UIEdgeInsetsMake(5, 8, 5, 8)
         return button
     }()
     
@@ -106,6 +132,7 @@ class ActivityView: UIView {
     private func commonInit() {
         backgroundColor = UIColor.white
         setupViews()
+        setCollectionViewAttributes()
     }
     
     // MARK: - Functions
@@ -116,15 +143,26 @@ class ActivityView: UIView {
         setupTimepostedLabel()
         setupActivityCollectionView()
         setupSubscribeButton()
-//        setupActivityHashTagLabel()
-//        setupActivityDescriptionLabel()
+        //        setupActivityHashTagLabel()
+        //        setupActivityDescriptionLabel()
     }
-
+    
+    // profileImageView corner radius implementation
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        profileImageView.layer.cornerRadius = profileImageView.bounds.width/2.0
+    }
+    
+    // collectionView layer attributes implementation
+    private func setCollectionViewAttributes() {
+        activityCollectionView.addBorder(toSide: .top, withColor: UIColor.gray.cgColor, andThickness: 0.5)
+    }
+    
     private func setupActivityHeaderLabel() {
         addSubview(activityHeaderLabel)
         activityHeaderLabel.snp.makeConstraints { (make) in
             make.leading.equalTo(self).offset(8)
-            make.top.equalTo(safeAreaLayoutGuide.snp.top)
+            make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(8)
         }
     }
     
@@ -133,8 +171,8 @@ class ActivityView: UIView {
         profileImageView.snp.makeConstraints { (make) in
             make.leading.equalTo(self).offset(8)
             make.top.equalTo(activityHeaderLabel.snp.bottom).offset(10)
-            make.width.equalTo(self.bounds.height/4.5)
-            make.height.equalTo(self.bounds.height/4.5)
+            make.height.equalTo(snp.height).multipliedBy(0.08)
+            make.width.equalTo(profileImageView.snp.height)
         }
     }
     private func setupUsernameLabel() {
@@ -156,9 +194,6 @@ class ActivityView: UIView {
     private func setupActivityCollectionView() {
         addSubview(activityCollectionView)
         activityCollectionView.snp.makeConstraints { (make) in
-            //            make.edges.equalTo(self)
-            //            make.top.equalTo(safeAreaLayoutGuide.snp.top)
-            //            make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom)
             make.leading.equalTo(self)
             make.trailing.equalTo(self)
             make.top.equalTo(profileImageView.snp.bottom).offset(10)

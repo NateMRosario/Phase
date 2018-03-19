@@ -52,12 +52,7 @@ class ActivityCollectionViewCell: UICollectionViewCell {
     private func setupActivityImageView() {
         addSubview(activityImageView)
         activityImageView.snp.makeConstraints { (make) in
-            make.width.equalTo(self)
-            make.height.equalTo(self)
-            make.trailing.equalTo(self)
-            make.leading.equalTo(self)
-//            make.centerX.equalTo(self)
-//            make.edges.equalTo(self)
+            make.edges.equalTo(self)
         }
     }
     
