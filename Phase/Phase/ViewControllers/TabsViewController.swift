@@ -23,6 +23,10 @@ class TabsViewController: UITabBarController {
         let discoverVC = UINavigationController(rootViewController: DiscoveryViewController.instantiate(withStoryboard: "Discover"))
         discoverVC.tabBarItem.title = "Discover"
         
-        self.setViewControllers([discoverVC, profileVC], animated: true)
+        // Login VC
+        let loginVC = UINavigationController(rootViewController: LoginViewController())
+        loginVC.tabBarItem.title = "Auth"
+        
+        self.setViewControllers([discoverVC, profileVC, loginVC], animated: true)
     }
 }
