@@ -9,6 +9,7 @@
 import UIKit
 import SnapKit
 import Material
+import BetterSegmentedControl
 
 class ProfileViewController: UIViewController, UITableViewDelegate {
     
@@ -22,8 +23,11 @@ class ProfileViewController: UIViewController, UITableViewDelegate {
     @IBOutlet weak var segmentedView: UIView!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var profileImage: UIImageView!
-    @IBOutlet weak var editProfileButton: UIButton!
-    @IBOutlet weak var editProfileButtonView: UIView!
+    @IBOutlet weak var editProfileButton: UIButton! {
+        didSet {
+        editProfileButton.tintColor = UIColor.gray
+        }
+    }
     @IBOutlet weak var constraintHeightHeaderImages: NSLayoutConstraint!
     @IBOutlet weak var tableView: UITableView! {
         didSet {
@@ -33,11 +37,11 @@ class ProfileViewController: UIViewController, UITableViewDelegate {
     @IBOutlet weak var bioLabel: UILabel!
     @IBAction func segmentedControl(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
-        case 0: // All comments
+        case 0:
             selectedSegment = 0
-        case 1: // All posts
+        case 1:
             selectedSegment = 1
-        case 2: // About
+        case 2:
             selectedSegment = 2
         default:
             break
@@ -76,13 +80,10 @@ class ProfileViewController: UIViewController, UITableViewDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        bioLabel.text = "I am the long text header View\n ----header view------ ------header view------ ---------header view-------- ------header view---- ------header view------- -----header view---- ----header view------- ---header view---- ------header view------- ---------header view---------end"
+        bioLabel.text = "An Asian boy living in new york city An Asian boy living in new york cityAn Asian boy living in new york cityAn Asian boy living in new york cityAn Asian boy living in new york cityAn Asian boy living in new york cityAn Asian boy living in new york cityAn Asian boy living in new york city"
         let size = profileView.systemLayoutSizeFitting(UILayoutFittingCompressedSize)
         profileView.frame.size = size
         tableView.tableHeaderView = profileView
-        segmentedView.snp.makeConstraints { (make) in
-            make.top.equalTo(profileView.snp.bottom)
-        }
     }
     
     override func viewDidLoad() {
@@ -94,6 +95,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.contentInset = UIEdgeInsetsMake(headerView.frame.height, 0, 0, 0)
+        
         //setupSettingsButton()
         
 //        handleLabel.text = currentUser!.displayName
@@ -161,21 +163,51 @@ class ProfileViewController: UIViewController, UITableViewDelegate {
         let profileViewController = storyboard.instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
         return profileViewController
     }
+    
+    @objc func controlValueChanged(_ sender: BetterSegmentedControl) {
+        switch sender.index {
+        case 0:
+            print(0)
+        case 1:
+            print(1)
+        case 2:
+            print(2)
+        default:
+            break
+        }
+    }
 }
 
 //MARK: - TABLEVIEW METHODS
 extension ProfileViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 44
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let v = UIView()
+        v.heightPreset = .large
+        let control = BetterSegmentedControl(
+            frame: CGRect(x: 0.0, y: -1, width: view.bounds.width, height: 44.0),
+            titles: ["One", "Two", "Three"],
+            index: 0,
+            options: [.backgroundColor(UIColor(displayP3Red: 245/255, green: 245/255, blue: 245/255, alpha: 1)),
+                      .titleColor(.gray),
+                      .indicatorViewBackgroundColor(UIColor.lightGray),
+                      .selectedTitleColor(.white),
+                      .cornerRadius(4),
+                      .titleFont(UIFont(name: "HelveticaNeue-Medium", size: 20.0)!),
+                      .selectedTitleFont(UIFont(name: "HelveticaNeue-Medium", size: 20.0)!)]
+        )
+        control.addTarget(self, action: #selector(controlValueChanged(_:)), for: .valueChanged)
+        view.addSubview(control)
+        v.addSubview(control)
+        return v
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //TODO: return the corresponding correct amount of cells
-        if selectedSegment == 0 {
-            //return posts.count
-        } else if selectedSegment == 1 {
-            //return comments.count
-        } else if selectedSegment == 2{
-            return about.count
-        }
-        return 0
+
+        return 50
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -184,43 +216,11 @@ extension ProfileViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if selectedSegment == 0 {
-            
-            let cell = tableView.dequeueReusableCell(withIdentifier: "FeedCell", for: indexPath)
+
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ActivityCell", for: indexPath)
+        cell.textLabel?.text = "1"
             return cell
-        } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "ActivityCell", for: indexPath)
-            
-            switch self.selectedSegment {
-//            case 0: // All posts
-//                let post = posts[indexPath.row]
-//                cell.isUserInteractionEnabled = true
-//                cell.textLabel?.text = post.header
-//                cell.detailTextLabel?.text = post.body
-//                cell.textLabel?.font = UIFont.systemFont(ofSize: 17)
-//            case 1: // All comments
-//                let comment = comments[indexPath.row]
-//
-//                cell.isUserInteractionEnabled = true
-//                cell.textLabel?.font = UIFont.systemFont(ofSize: 17)
-//                cell.textLabel?.text = comment.userName
-//                cell.detailTextLabel?.text = comment.text
-            case 2: // About
-                let about = self.about[indexPath.row]
-                if indexPath.row == 0 && indexPath.section == 0 {
-                    cell.isUserInteractionEnabled = false
-                    cell.textLabel?.text = "Account"
-                    cell.textLabel?.font = UIFont.systemFont(ofSize: 17, weight: .bold)
-                    cell.detailTextLabel?.text = ""
-                } else if indexPath.section == 0 {
-                    cell.textLabel?.text = about
-                    cell.detailTextLabel?.text = ""
-                }
-            default:
-                break
-            }
-            return cell
-        }
+      //  }
     }
 }
 
@@ -259,11 +259,17 @@ extension ProfileViewController: UIScrollViewDelegate {
             
             // PROFILE IMAGE
             // Slow down the animation
-            let profileImageScaleFactor = (min(headerStopOffset, offset)) / profileImage.bounds.height / 3.4
+            let profileImageScaleFactor = (min(headerStopOffset, offset)) / profileImage.bounds.height / 2.7
             let profileImageSizeVariation = ((profileImage.bounds.height * (1.0 + profileImageScaleFactor)) - profileImage.bounds.height) / 2
             
             profileImageTransform = CATransform3DTranslate(profileImageTransform, 0, profileImageSizeVariation, 0)
             profileImageTransform = CATransform3DScale(profileImageTransform, 1.0 - profileImageScaleFactor, 1.0 - profileImageScaleFactor, 0)
+            
+            if headerBlurImageView.layer.zPosition < headerView.layer.zPosition {
+                tableView.contentInset.top = headerView.frame.height -  headerStopOffset
+            } else {
+                tableView.contentInset.top = headerView.frame.height
+            }
             
             if offset <= headerStopOffset {
                 if profileImage.layer.zPosition < headerView.layer.zPosition {
@@ -281,16 +287,16 @@ extension ProfileViewController: UIScrollViewDelegate {
         headerView.layer.transform = headerTransform
         profileImage.layer.transform = profileImageTransform
         
-        // MARK: - Segmented control offset *Maybe put as section header?, not sure if it works with multiple sections*
-        // Segment control
-        let segmentViewOffset = profileView.bounds.height - segmentedView.bounds.height - offset
-        var segmentTransform = CATransform3DIdentity
-        
-        // Scroll the segment view until its offset reaches the same offset at which the header stopped shrinking
-        segmentTransform = CATransform3DTranslate(segmentTransform, 0, max(segmentViewOffset, -headerStopOffset), 0)
-        segmentedView.layer.transform = segmentTransform
-        
-        // Set scroll view insets just underneath the segment control
-        tableView.scrollIndicatorInsets = UIEdgeInsetsMake(segmentedView.bounds.maxY, 0, 0, 0)
+//        // MARK: - Segmented control offset *Maybe put as section header?, not sure if it works with multiple sections*
+//        // Segment control
+//        let segmentViewOffset = profileView.bounds.height - segmentedView.bounds.height - offset
+//        var segmentTransform = CATransform3DIdentity
+//
+//        // Scroll the segment view until its offset reaches the same offset at which the header stopped shrinking
+//        segmentTransform = CATransform3DTranslate(segmentTransform, 0, max(segmentViewOffset, -headerStopOffset), 0)
+//        segmentedView.layer.transform = segmentTransform
+//
+//        // Set scroll view insets just underneath the segment control
+//        tableView.scrollIndicatorInsets = UIEdgeInsetsMake(segmentedView.bounds.maxY, 0, 0, 0)
     }
 }
