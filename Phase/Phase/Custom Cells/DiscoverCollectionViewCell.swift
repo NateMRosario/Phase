@@ -80,7 +80,7 @@ extension DiscoverCollectionViewCell: GridViewProtocol {
     // TODO: MAKE THE SNAPSHOT VIEW == DiscoverCollectionViewNib
     func snapShotForTransition() -> UIView {
         let snapShotView = UIImageView(image: contentImageView.image)
-        snapShotView.frame = contentImageView.frame
+        snapShotView.frame = CGRect.init(x: 0, y: 0, width: contentImageView.frame.width, height: contentImageView.frame.height * CGFloat(3))
         snapShotView.layer.masksToBounds = contentImageView.layer.masksToBounds
         snapShotView.layer.cornerRadius = contentImageView.layer.cornerRadius
         snapShotView.contentMode = .scaleAspectFill
