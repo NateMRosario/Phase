@@ -33,11 +33,11 @@ class ProfileViewController: UIViewController, UITableViewDelegate {
     @IBOutlet weak var bioLabel: UILabel!
     @IBAction func segmentedControl(_ sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
-        case 0: // All comments
+        case 0:
             selectedSegment = 0
-        case 1: // All posts
+        case 1:
             selectedSegment = 1
-        case 2: // About
+        case 2:
             selectedSegment = 2
         default:
             break
@@ -76,13 +76,10 @@ class ProfileViewController: UIViewController, UITableViewDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        bioLabel.text = "I am the long text header View\n ----header view------ ------header view------ ---------header view-------- ------header view---- ------header view------- -----header view---- ----header view------- ---header view---- ------header view------- ---------header view---------end"
+        bioLabel.text = "A VERY LONG HEADER A VERY LONG HEADER A VERY LONG HEADER A VERY LONG HEADER A VERY LONG HEADER A VERY LONG HEADER A VERY LONG HEADER A VERY LONG HEADER A VERY LONG HEADER A VERY LONG HEADER A VERY LONG HEADER A VERY LONG HEADER A VERY LONG HEADER A VERY LONG HEADER A VERY LONG HEADER A VERY LONG HEADER A VERY LONG HEADER "
         let size = profileView.systemLayoutSizeFitting(UILayoutFittingCompressedSize)
         profileView.frame.size = size
         tableView.tableHeaderView = profileView
-        segmentedView.snp.makeConstraints { (make) in
-            make.top.equalTo(profileView.snp.bottom)
-        }
     }
     
     override func viewDidLoad() {
@@ -94,6 +91,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.contentInset = UIEdgeInsetsMake(headerView.frame.height, 0, 0, 0)
+        
         //setupSettingsButton()
         
 //        handleLabel.text = currentUser!.displayName
@@ -165,17 +163,24 @@ class ProfileViewController: UIViewController, UITableViewDelegate {
 
 //MARK: - TABLEVIEW METHODS
 extension ProfileViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 50
+    }
+    
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let v = UIView()
+        v.heightPreset = .large
+        v.backgroundColor = UIColor.darkGray
+        let segmentedControl = UISegmentedControl(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: 50))
+        segmentedControl.insertSegment(withTitle: "Phases", at: 0, animated: false)
+        segmentedControl.insertSegment(withTitle: "About", at: 1, animated: false)
+        v.addSubview(segmentedControl)
+        return v
+    }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        //TODO: return the corresponding correct amount of cells
-        if selectedSegment == 0 {
-            //return posts.count
-        } else if selectedSegment == 1 {
-            //return comments.count
-        } else if selectedSegment == 2{
-            return about.count
-        }
-        return 0
+
+        return 50
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -184,43 +189,11 @@ extension ProfileViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if selectedSegment == 0 {
-            
-            let cell = tableView.dequeueReusableCell(withIdentifier: "FeedCell", for: indexPath)
+
+        let cell = tableView.dequeueReusableCell(withIdentifier: "ActivityCell", for: indexPath)
+        cell.textLabel?.text = "1"
             return cell
-        } else {
-            let cell = tableView.dequeueReusableCell(withIdentifier: "ActivityCell", for: indexPath)
-            
-            switch self.selectedSegment {
-//            case 0: // All posts
-//                let post = posts[indexPath.row]
-//                cell.isUserInteractionEnabled = true
-//                cell.textLabel?.text = post.header
-//                cell.detailTextLabel?.text = post.body
-//                cell.textLabel?.font = UIFont.systemFont(ofSize: 17)
-//            case 1: // All comments
-//                let comment = comments[indexPath.row]
-//
-//                cell.isUserInteractionEnabled = true
-//                cell.textLabel?.font = UIFont.systemFont(ofSize: 17)
-//                cell.textLabel?.text = comment.userName
-//                cell.detailTextLabel?.text = comment.text
-            case 2: // About
-                let about = self.about[indexPath.row]
-                if indexPath.row == 0 && indexPath.section == 0 {
-                    cell.isUserInteractionEnabled = false
-                    cell.textLabel?.text = "Account"
-                    cell.textLabel?.font = UIFont.systemFont(ofSize: 17, weight: .bold)
-                    cell.detailTextLabel?.text = ""
-                } else if indexPath.section == 0 {
-                    cell.textLabel?.text = about
-                    cell.detailTextLabel?.text = ""
-                }
-            default:
-                break
-            }
-            return cell
-        }
+      //  }
     }
 }
 
@@ -259,11 +232,17 @@ extension ProfileViewController: UIScrollViewDelegate {
             
             // PROFILE IMAGE
             // Slow down the animation
-            let profileImageScaleFactor = (min(headerStopOffset, offset)) / profileImage.bounds.height / 3.4
+            let profileImageScaleFactor = (min(headerStopOffset, offset)) / profileImage.bounds.height / 2.7
             let profileImageSizeVariation = ((profileImage.bounds.height * (1.0 + profileImageScaleFactor)) - profileImage.bounds.height) / 2
             
             profileImageTransform = CATransform3DTranslate(profileImageTransform, 0, profileImageSizeVariation, 0)
             profileImageTransform = CATransform3DScale(profileImageTransform, 1.0 - profileImageScaleFactor, 1.0 - profileImageScaleFactor, 0)
+            
+            if headerLabel.frame.center.y <= headerBlurImageView.frame.height {
+                tableView.contentInset.top = 44
+            } else {
+                tableView.contentInset.top = headerView.frame.height
+            }
             
             if offset <= headerStopOffset {
                 if profileImage.layer.zPosition < headerView.layer.zPosition {
@@ -281,16 +260,16 @@ extension ProfileViewController: UIScrollViewDelegate {
         headerView.layer.transform = headerTransform
         profileImage.layer.transform = profileImageTransform
         
-        // MARK: - Segmented control offset *Maybe put as section header?, not sure if it works with multiple sections*
-        // Segment control
-        let segmentViewOffset = profileView.bounds.height - segmentedView.bounds.height - offset
-        var segmentTransform = CATransform3DIdentity
-        
-        // Scroll the segment view until its offset reaches the same offset at which the header stopped shrinking
-        segmentTransform = CATransform3DTranslate(segmentTransform, 0, max(segmentViewOffset, -headerStopOffset), 0)
-        segmentedView.layer.transform = segmentTransform
-        
-        // Set scroll view insets just underneath the segment control
-        tableView.scrollIndicatorInsets = UIEdgeInsetsMake(segmentedView.bounds.maxY, 0, 0, 0)
+//        // MARK: - Segmented control offset *Maybe put as section header?, not sure if it works with multiple sections*
+//        // Segment control
+//        let segmentViewOffset = profileView.bounds.height - segmentedView.bounds.height - offset
+//        var segmentTransform = CATransform3DIdentity
+//
+//        // Scroll the segment view until its offset reaches the same offset at which the header stopped shrinking
+//        segmentTransform = CATransform3DTranslate(segmentTransform, 0, max(segmentViewOffset, -headerStopOffset), 0)
+//        segmentedView.layer.transform = segmentTransform
+//
+//        // Set scroll view insets just underneath the segment control
+//        tableView.scrollIndicatorInsets = UIEdgeInsetsMake(segmentedView.bounds.maxY, 0, 0, 0)
     }
 }

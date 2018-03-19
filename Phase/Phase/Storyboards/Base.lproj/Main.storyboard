@@ -157,54 +157,12 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="nR3-Vy-s8S" userLabel="Segmented view">
-                                <rect key="frame" x="0.0" y="230" width="375" height="45"/>
-                                <subviews>
-                                    <segmentedControl opaque="NO" multipleTouchEnabled="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="top" segmentControlStyle="bordered" selectedSegmentIndex="0" translatesAutoresizingMaskIntoConstraints="NO" id="xat-XO-GT7">
-                                        <rect key="frame" x="-4" y="0.0" width="383" height="45"/>
-                                        <segments>
-                                            <segment title="All Posts"/>
-                                            <segment title="All Comments"/>
-                                            <segment title="About"/>
-                                        </segments>
-                                        <color key="tintColor" red="0.12984204290000001" green="0.12984612579999999" blue="0.12984395030000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="isDividerHidden" value="YES"/>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="dividerThickness">
-                                                <real key="value" value="0.0"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </segmentedControl>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="G5L-Lo-JBi" userLabel="Line">
-                                        <rect key="frame" x="0.0" y="44" width="375" height="1"/>
-                                        <color key="backgroundColor" white="0.0" alpha="0.12" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="1" id="9jt-Uv-QJX"/>
-                                        </constraints>
-                                    </view>
-                                </subviews>
-                                <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="xat-XO-GT7" secondAttribute="trailing" constant="-4" id="BY4-fe-pEl"/>
-                                    <constraint firstAttribute="height" constant="45" id="DT7-z6-xKn"/>
-                                    <constraint firstAttribute="width" constant="375" id="OpD-DK-B94"/>
-                                    <constraint firstItem="xat-XO-GT7" firstAttribute="leading" secondItem="nR3-Vy-s8S" secondAttribute="leading" constant="-4" id="OqV-Wn-0gi"/>
-                                    <constraint firstItem="G5L-Lo-JBi" firstAttribute="leading" secondItem="nR3-Vy-s8S" secondAttribute="leading" id="PM4-sU-wng"/>
-                                    <constraint firstAttribute="trailing" secondItem="G5L-Lo-JBi" secondAttribute="trailing" id="lBp-Tn-wxn"/>
-                                    <constraint firstAttribute="bottom" secondItem="G5L-Lo-JBi" secondAttribute="bottom" id="npK-Kr-cp8"/>
-                                    <constraint firstItem="xat-XO-GT7" firstAttribute="top" secondItem="nR3-Vy-s8S" secondAttribute="top" id="pP6-mn-yeC"/>
-                                    <constraint firstItem="G5L-Lo-JBi" firstAttribute="top" secondItem="xat-XO-GT7" secondAttribute="bottom" id="xYz-bF-ab2"/>
-                                </constraints>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="nR3-Vy-s8S" firstAttribute="trailing" secondItem="uMB-7s-yx5" secondAttribute="trailing" id="1ZF-IV-56j"/>
                             <constraint firstItem="uMB-7s-yx5" firstAttribute="bottom" secondItem="7Gr-2i-Syk" secondAttribute="bottom" id="2Li-Ks-i60"/>
                             <constraint firstItem="7Gr-2i-Syk" firstAttribute="top" secondItem="FrX-n9-WZp" secondAttribute="top" id="45d-Vb-Im7"/>
-                            <constraint firstItem="nR3-Vy-s8S" firstAttribute="leading" secondItem="uMB-7s-yx5" secondAttribute="leading" id="NN5-32-zVR"/>
                             <constraint firstItem="uMB-7s-yx5" firstAttribute="trailing" secondItem="7Gr-2i-Syk" secondAttribute="trailing" id="QoU-eZ-N6i"/>
-                            <constraint firstItem="nR3-Vy-s8S" firstAttribute="top" secondItem="Ee5-qn-1aL" secondAttribute="bottom" constant="30" id="Rn7-9R-ZZW"/>
                             <constraint firstItem="7Gr-2i-Syk" firstAttribute="leading" secondItem="uMB-7s-yx5" secondAttribute="leading" id="Ve9-0H-lbx"/>
                             <constraint firstItem="Ee5-qn-1aL" firstAttribute="leading" secondItem="uMB-7s-yx5" secondAttribute="leading" id="c7b-ea-67V"/>
                             <constraint firstItem="Ee5-qn-1aL" firstAttribute="trailing" secondItem="uMB-7s-yx5" secondAttribute="trailing" id="pSl-pf-6o6"/>
@@ -222,9 +180,6 @@
                         <outlet property="headerView" destination="Ee5-qn-1aL" id="wh4-4u-efU"/>
                         <outlet property="profileImage" destination="jmp-bG-NY2" id="7cJ-00-f7Q"/>
                         <outlet property="profileView" destination="4k0-iW-35V" id="pv6-tt-mdl"/>
-                        <outlet property="segmentedControl" destination="xat-XO-GT7" id="tZ9-x2-tVd"/>
-                        <outlet property="segmentedView" destination="nR3-Vy-s8S" id="Uzd-Y0-UBw"/>
-                        <outlet property="segmentedViewTop" destination="pP6-mn-yeC" id="O6N-0Y-4sd"/>
                         <outlet property="tableView" destination="7Gr-2i-Syk" id="VOW-hn-APl"/>
                     </connections>
                 </viewController>
