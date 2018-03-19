@@ -39,6 +39,12 @@ class DiscoverCollectionViewCell: UICollectionViewCell {
         }
     }
     @IBOutlet weak var contentTwo: UIImageView!
+    @IBOutlet weak var stackViewContainer: UIView! {
+        didSet {
+            stackViewContainer.layer.cornerRadius = 10
+            stackViewContainer.clipsToBounds = true
+        }
+    }
     
     public func set(image: UIImage) {
         let num = arc4random_uniform(3)

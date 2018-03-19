@@ -9,6 +9,7 @@
 import UIKit
 import SnapKit
 import Material
+import BetterSegmentedControl
 
 class ProfileViewController: UIViewController, UITableViewDelegate {
     
@@ -76,7 +77,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        bioLabel.text = "A VERY LONG HEADER A VERY LONG HEADER A VERY LONG HEADER A VERY LONG HEADER A VERY LONG HEADER A VERY LONG HEADER A VERY LONG HEADER A VERY LONG HEADER A VERY LONG HEADER A VERY LONG HEADER A VERY LONG HEADER A VERY LONG HEADER A VERY LONG HEADER A VERY LONG HEADER A VERY LONG HEADER A VERY LONG HEADER A VERY LONG HEADER "
+        bioLabel.text = "An Asian boy living in new york city"
         let size = profileView.systemLayoutSizeFitting(UILayoutFittingCompressedSize)
         profileView.frame.size = size
         tableView.tableHeaderView = profileView
@@ -159,22 +160,45 @@ class ProfileViewController: UIViewController, UITableViewDelegate {
         let profileViewController = storyboard.instantiateViewController(withIdentifier: "ProfileViewController") as! ProfileViewController
         return profileViewController
     }
+    
+    @objc func controlValueChanged(_ sender: BetterSegmentedControl) {
+        switch sender.index {
+        case 0:
+            print(0)
+        case 1:
+            print(1)
+        case 2:
+            print(2)
+        default:
+            break
+        }
+    }
 }
 
 //MARK: - TABLEVIEW METHODS
 extension ProfileViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 50
+        return 44
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let v = UIView()
         v.heightPreset = .large
-        v.backgroundColor = UIColor.darkGray
-        let segmentedControl = UISegmentedControl(frame: CGRect(x: 0, y: 0, width: tableView.bounds.width, height: 50))
-        segmentedControl.insertSegment(withTitle: "Phases", at: 0, animated: false)
-        segmentedControl.insertSegment(withTitle: "About", at: 1, animated: false)
-        v.addSubview(segmentedControl)
+        let control = BetterSegmentedControl(
+            frame: CGRect(x: 0.0, y: -1, width: view.bounds.width, height: 44.0),
+            titles: ["One", "Two", "Three"],
+            index: 0,
+            options: [.backgroundColor(UIColor(displayP3Red: 245/255, green: 245/255, blue: 245/255, alpha: 1)),
+                      .titleColor(.gray),
+                      .indicatorViewBackgroundColor(UIColor.lightGray),
+                      .selectedTitleColor(.white),
+                      .cornerRadius(4),
+                      .titleFont(UIFont(name: "HelveticaNeue-Medium", size: 20.0)!),
+                      .selectedTitleFont(UIFont(name: "HelveticaNeue-Medium", size: 20.0)!)]
+        )
+        control.addTarget(self, action: #selector(controlValueChanged(_:)), for: .valueChanged)
+        view.addSubview(control)
+        v.addSubview(control)
         return v
     }
     
@@ -238,7 +262,7 @@ extension ProfileViewController: UIScrollViewDelegate {
             profileImageTransform = CATransform3DTranslate(profileImageTransform, 0, profileImageSizeVariation, 0)
             profileImageTransform = CATransform3DScale(profileImageTransform, 1.0 - profileImageScaleFactor, 1.0 - profileImageScaleFactor, 0)
             
-            if headerLabel.frame.center.y <= headerBlurImageView.frame.height {
+            if headerView.bounds.maxY - 20 <= offset {
                 tableView.contentInset.top = 44
             } else {
                 tableView.contentInset.top = headerView.frame.height
