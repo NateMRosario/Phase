@@ -56,7 +56,7 @@
                                     <constraint firstAttribute="height" constant="200" id="Skf-14-qnR"/>
                                 </constraints>
                             </view>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="7Gr-2i-Syk">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" contentInsetAdjustmentBehavior="never" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="-1" estimatedRowHeight="-1" sectionHeaderHeight="28" sectionFooterHeight="28" contentViewInsetsToSafeArea="NO" translatesAutoresizingMaskIntoConstraints="NO" id="7Gr-2i-Syk">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="778"/>
                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.040000000000000001" colorSpace="calibratedRGB"/>
                                 <view key="tableHeaderView" contentMode="scaleToFill" id="4k0-iW-35V">
@@ -70,13 +70,6 @@
                                                 <constraint firstAttribute="height" constant="100" id="MKx-6e-O8h"/>
                                             </constraints>
                                         </imageView>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qwf-B0-YE9">
-                                            <rect key="frame" x="291" y="8" width="72" height="29"/>
-                                            <fontDescription key="fontDescription" type="system" weight="medium" pointSize="14"/>
-                                            <state key="normal" title="Edit profile">
-                                                <color key="titleColor" red="0.37055522200000002" green="0.37056469920000001" blue="0.37055957319999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            </state>
-                                        </button>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ty Zhao" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="gEE-uu-JgQ">
                                             <rect key="frame" x="145" y="51.999999999999993" width="87" height="28.666666666666664"/>
                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="24"/>
@@ -151,6 +144,13 @@
                                             <color key="textColor" red="0.37055522200000002" green="0.37056469920000001" blue="0.37055957319999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qwf-B0-YE9">
+                                            <rect key="frame" x="327" y="16" width="32" height="32"/>
+                                            <state key="normal" image="preference">
+                                                <color key="titleColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                <color key="titleShadowColor" red="0.57414853570000002" green="0.57416242360000003" blue="0.57415497299999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </state>
+                                        </button>
                                     </subviews>
                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
@@ -159,16 +159,16 @@
                                         <constraint firstAttribute="bottom" secondItem="Qtq-Xc-jSh" secondAttribute="bottom" constant="16" id="4kX-Sf-S66"/>
                                         <constraint firstItem="Qtq-Xc-jSh" firstAttribute="top" secondItem="W3a-D2-Lbz" secondAttribute="bottom" constant="16" id="CB0-Wb-oLb"/>
                                         <constraint firstAttribute="trailing" secondItem="Qtq-Xc-jSh" secondAttribute="trailing" constant="32" id="Dea-KI-RLw"/>
-                                        <constraint firstItem="qwf-B0-YE9" firstAttribute="top" secondItem="4k0-iW-35V" secondAttribute="top" constant="8" id="OH6-SA-2DM"/>
                                         <constraint firstAttribute="trailing" secondItem="W3a-D2-Lbz" secondAttribute="trailing" constant="16" id="TcN-DC-RwM"/>
+                                        <constraint firstItem="qwf-B0-YE9" firstAttribute="top" secondItem="4k0-iW-35V" secondAttribute="top" constant="16" id="cBa-BT-Q0P"/>
                                         <constraint firstItem="jmp-bG-NY2" firstAttribute="top" secondItem="4k0-iW-35V" secondAttribute="top" constant="-50" id="ctd-q2-8iK"/>
                                         <constraint firstItem="W3a-D2-Lbz" firstAttribute="top" secondItem="pxo-Y1-5A6" secondAttribute="bottom" constant="8" id="dqT-da-ZEP"/>
                                         <constraint firstItem="W3a-D2-Lbz" firstAttribute="leading" secondItem="4k0-iW-35V" secondAttribute="leading" constant="16" id="gx0-3m-Ni8"/>
                                         <constraint firstItem="pxo-Y1-5A6" firstAttribute="top" secondItem="gEE-uu-JgQ" secondAttribute="bottom" constant="4" id="hLY-CN-VNO"/>
+                                        <constraint firstAttribute="trailing" secondItem="qwf-B0-YE9" secondAttribute="trailing" constant="16" id="ilN-lD-utH"/>
                                         <constraint firstItem="pxo-Y1-5A6" firstAttribute="top" secondItem="gEE-uu-JgQ" secondAttribute="bottom" constant="4" id="lfF-r0-5D2"/>
                                         <constraint firstItem="gEE-uu-JgQ" firstAttribute="top" secondItem="jmp-bG-NY2" secondAttribute="bottom" constant="2" id="nfH-eA-aBa"/>
                                         <constraint firstItem="pxo-Y1-5A6" firstAttribute="centerX" secondItem="jmp-bG-NY2" secondAttribute="centerX" id="s27-2r-OkW"/>
-                                        <constraint firstAttribute="trailing" secondItem="qwf-B0-YE9" secondAttribute="trailing" constant="12" id="yxB-9D-hRd"/>
                                         <constraint firstItem="gEE-uu-JgQ" firstAttribute="centerX" secondItem="jmp-bG-NY2" secondAttribute="centerX" id="zMB-lP-0oT"/>
                                     </constraints>
                                 </view>
@@ -231,5 +231,6 @@
     </scenes>
     <resources>
         <image name="7-R5CLfl_400x400" width="400" height="400"/>
+        <image name="preference" width="32" height="32"/>
     </resources>
 </document>
