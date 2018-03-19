@@ -10,6 +10,11 @@ target 'Phase' do
   pod 'SnapKit'
   pod 'Material'
   pod 'BetterSegmentedControl', '~> 0.9'
+  pod 'SkyFloatingLabelTextField', '~> 3.0'
+  pod 'AMPopTip'
+  pod 'AWSCognitoIdentityProvider'
+  pod 'AWSCognitoAuth'
+  pod 'AWSUserPoolsSignIn'
   
   target 'PhaseTests' do
     inherit! :search_paths
