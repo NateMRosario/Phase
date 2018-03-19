@@ -12,10 +12,10 @@ import SnapKit
 class ActivityViewController: UIViewController {
     
     // MARK: - Testbed
-    var testArray = [Post]()
+    private var testArray = [Post]()
 
     // MARK: - Constants
-    let activityView = ActivityView()
+    private let activityView = ActivityView()
     
     // MARK: - Init (Dependency injection)
 //    init(list: List){
@@ -30,9 +30,10 @@ class ActivityViewController: UIViewController {
     // MARK: - Life cycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.view.backgroundColor = UIColor.brown
         self.activityView.activityCollectionView.dataSource = self
         self.activityView.activityCollectionView.delegate = self
-
+        setupView()
     }
 
     override func didReceiveMemoryWarning() {
@@ -41,16 +42,13 @@ class ActivityViewController: UIViewController {
     }
     
     // MARK: - Functions
-    private func addSubView() {
-        self.view.addSubview(activityView)
-    }
-    
     private func setupView() {
         setupActivityView()
     }
 
     // MARK: - Contraints
     private func setupActivityView() {
+        self.view.addSubview(activityView)
         activityView.snp.makeConstraints { (make) in
             make.edges.equalTo(view.safeAreaLayoutGuide.snp.edges)
         }
@@ -60,13 +58,28 @@ class ActivityViewController: UIViewController {
 
 extension ActivityViewController: UICollectionViewDataSource {
     
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 10
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: activityView.cellID, for: indexPath) as! ActivityCollectionViewCell
-        let post = testArray[indexPath.]
-        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: activityView.collectionViewCellID, for: indexPath) as! ActivityCollectionViewCell
+//        let testCase = testArray[indexPath.row]
+        return cell
+    }
+}
+
+extension ActivityViewController: UICollectionViewDelegate {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        return
+    }
+}
+
+extension ProfileViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let itemWidth: CGFloat = collectionView.bounds.width
+        let itemHeight: CGFloat = collectionView.bounds.height
+        return CGSize(width: itemWidth, height: itemHeight)
     }
 }

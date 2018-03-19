@@ -22,8 +22,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        window?.rootViewController = tabBar
 //        window?.makeKeyAndVisible()
         
+                let tabBar = ActivityViewController()
+                window = UIWindow(frame: UIScreen.main.bounds)
+                window?.rootViewController = tabBar
+                window?.makeKeyAndVisible()
         
-        return true
+        return true // @ line 26
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
