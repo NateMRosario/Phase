@@ -23,8 +23,11 @@ class ProfileViewController: UIViewController, UITableViewDelegate {
     @IBOutlet weak var segmentedView: UIView!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var profileImage: UIImageView!
-    @IBOutlet weak var editProfileButton: UIButton!
-    @IBOutlet weak var editProfileButtonView: UIView!
+    @IBOutlet weak var editProfileButton: UIButton! {
+        didSet {
+        editProfileButton.tintColor = UIColor.gray
+        }
+    }
     @IBOutlet weak var constraintHeightHeaderImages: NSLayoutConstraint!
     @IBOutlet weak var tableView: UITableView! {
         didSet {
@@ -77,7 +80,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        bioLabel.text = "An Asian boy living in new york city"
+        bioLabel.text = "An Asian boy living in new york city An Asian boy living in new york cityAn Asian boy living in new york cityAn Asian boy living in new york cityAn Asian boy living in new york cityAn Asian boy living in new york cityAn Asian boy living in new york cityAn Asian boy living in new york city"
         let size = profileView.systemLayoutSizeFitting(UILayoutFittingCompressedSize)
         profileView.frame.size = size
         tableView.tableHeaderView = profileView
@@ -262,8 +265,8 @@ extension ProfileViewController: UIScrollViewDelegate {
             profileImageTransform = CATransform3DTranslate(profileImageTransform, 0, profileImageSizeVariation, 0)
             profileImageTransform = CATransform3DScale(profileImageTransform, 1.0 - profileImageScaleFactor, 1.0 - profileImageScaleFactor, 0)
             
-            if headerView.bounds.maxY - 20 <= offset {
-                tableView.contentInset.top = 44
+            if headerBlurImageView.layer.zPosition < headerView.layer.zPosition {
+                tableView.contentInset.top = headerView.frame.height -  headerStopOffset
             } else {
                 tableView.contentInset.top = headerView.frame.height
             }
