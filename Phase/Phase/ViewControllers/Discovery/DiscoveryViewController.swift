@@ -69,8 +69,8 @@ class DiscoveryViewController: UIViewController {
     }
     
     private func fetchContents() {
-        for _ in 0...30 {
-            ImageAPIClient.manager.loadImage(from: urls[Int(arc4random_uniform(UInt32(urls.count)))], completionHandler: {self.contents.append($0)}, errorHandler: {print($0)})
+        for _ in 0...40 {
+            ImageAPIClient.manager.loadImage(from: urls[Int(arc4random_uniform(UInt32(urls.count - 1)))], completionHandler: {self.contents.append($0)}, errorHandler: {print($0)})
         }
 //        DB.fetchContents() { [weak self] contents in
 //            self?.contents = contents
@@ -105,6 +105,6 @@ extension DiscoveryViewController: CollectionViewDelegateLayout {
         let image = contents[indexPath.row]
         let width = CollectionViewLayout.Configuration().itemWidth
         let height = width / image.size.width * image.size.height + 79 // 79 = Cell's clear space below image
-        return CGSize(width: width, height: height)
+        return CGSize(width: width, height: max(height, width / image.size.height * image.size.height + 79))
     }
 }
