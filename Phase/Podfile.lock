@@ -1,4 +1,5 @@
 PODS:
+  - ADMozaicCollectionViewLayout (4.0.3)
   - AMPopTip (3.1.4)
   - AWSAuthCore (2.6.12):
     - AWSCore (= 2.6.12)
@@ -22,10 +23,12 @@ PODS:
   - Motion (1.3.5):
     - Motion/Core (= 1.3.5)
   - Motion/Core (1.3.5)
+  - Segmentio (3.0)
   - SkyFloatingLabelTextField (3.4.0)
   - SnapKit (4.0.0)
 
 DEPENDENCIES:
+  - ADMozaicCollectionViewLayout (~> 4.0)
   - AMPopTip
   - AWSCognitoAuth
   - AWSCognitoIdentityProvider
@@ -33,10 +36,12 @@ DEPENDENCIES:
   - AWSUserPoolsSignIn
   - BetterSegmentedControl (~> 0.9)
   - Material
+  - Segmentio
   - SkyFloatingLabelTextField (~> 3.0)
   - SnapKit
 
 SPEC CHECKSUMS:
+  ADMozaicCollectionViewLayout: bdb593a4d53cfc66fca9de5f406d1ae45b0f7404
   AMPopTip: 74c343e06fb7cd859fa2bd672e45edb97836f1b0
   AWSAuthCore: 55376d5a47c2b5cefdd3f78d247e0a5496fc25c4
   AWSCognitoAuth: 4e5874323836782cba292364e88e0909b78087ae
@@ -48,9 +53,10 @@ SPEC CHECKSUMS:
   BetterSegmentedControl: 40b2b6a08bbc59663149624d1b5235efa8d43a3c
   Material: ef704dcc1bced32ab7c91ece2ba734da557e3f36
   Motion: 9f74d115d7f72bb5380a8e3cde2f8a1fc898ac36
+  Segmentio: 1607fba3b42230f5f91e997d1a3f337f1176674c
   SkyFloatingLabelTextField: 703aa1420b697392b1e7dba25571180dde018477
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
 
-PODFILE CHECKSUM: fe7745bb226b9bbf1ba6fb7ffc7f1d581bac4c37
+PODFILE CHECKSUM: c1064acc7e92241c237b2957c0e70e8b30da1d35
 
 COCOAPODS: 1.4.0

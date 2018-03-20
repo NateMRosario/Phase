@@ -5,11 +5,10 @@
 //  Created by C4Q on 3/13/18.
 //  Copyright © 2018 Reiaz Gafar. All rights reserved.
 //
-
 import UIKit
-import SnapKit
 import Material
-import BetterSegmentedControl
+import SnapKit
+import Segmentio
 
 class ProfileViewController: UIViewController, UITableViewDelegate {
     
@@ -25,13 +24,15 @@ class ProfileViewController: UIViewController, UITableViewDelegate {
     @IBOutlet weak var profileImage: UIImageView!
     @IBOutlet weak var editProfileButton: UIButton! {
         didSet {
-        editProfileButton.tintColor = UIColor.gray
+            editProfileButton.tintColor = UIColor.gray
         }
     }
     @IBOutlet weak var constraintHeightHeaderImages: NSLayoutConstraint!
     @IBOutlet weak var tableView: UITableView! {
         didSet {
-            tableView.estimatedRowHeight = 100 //experimental
+            tableView.estimatedRowHeight = 300
+            tableView.estimatedRowHeight = UITableViewAutomaticDimension//experimental
+            tableView.register(UINib.init(nibName: "JourneyTableViewCell", bundle: nil), forCellReuseIdentifier: "JourneyCell")
         }
     }
     @IBOutlet weak var bioLabel: UILabel!
@@ -60,8 +61,11 @@ class ProfileViewController: UIViewController, UITableViewDelegate {
             tableView.reloadData()
         }
     }
-
+    
     private var about = ["Account", "Your Hypes","Posts You've Hypped", "Your Posts", "Your Comments", "History", "Blocked Users", "Flagged Posts"]
+    
+    // SEGMENTIO
+    var segmentioStyle = SegmentioStyle.imageOverLabel
     
     lazy var headerBlurImageView: UIImageView = {
         let biv = UIImageView()
@@ -96,11 +100,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate {
         tableView.dataSource = self
         tableView.contentInset = UIEdgeInsetsMake(headerView.frame.height, 0, 0, 0)
         
-        //setupSettingsButton()
-        
-//        handleLabel.text = currentUser!.displayName
-//        atDisplayNameLabel.text = "@" + currentUser!.displayName!
-//        hiddenLabel.text = "@" + currentUser!.displayName!
+        //setupSettingsButton()k
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -108,7 +108,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate {
     }
     
     private func loadData() {
-    
+        
     }
     
     private func setupUI() {
@@ -123,8 +123,8 @@ class ProfileViewController: UIViewController, UITableViewDelegate {
         editProfileButton.layer.borderColor = UIColor.gray.cgColor
         editProfileButton.layer.borderWidth = 1
         editProfileButton.layer.cornerRadius = 14
-
- 
+        
+        
         headerView.clipsToBounds = true
         
         // Header - imageView
@@ -164,63 +164,54 @@ class ProfileViewController: UIViewController, UITableViewDelegate {
         return profileViewController
     }
     
-    @objc func controlValueChanged(_ sender: BetterSegmentedControl) {
-        switch sender.index {
-        case 0:
-            print(0)
-        case 1:
-            print(1)
-        case 2:
-            print(2)
-        default:
-            break
-        }
+    fileprivate func selectedSegmentioIndex() -> Int {
+        return 0
     }
 }
 
 //MARK: - TABLEVIEW METHODS
 extension ProfileViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 44
+        return 50
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let v = UIView()
-        v.heightPreset = .large
-        let control = BetterSegmentedControl(
-            frame: CGRect(x: 0.0, y: -1, width: view.bounds.width, height: 44.0),
-            titles: ["One", "Two", "Three"],
-            index: 0,
-            options: [.backgroundColor(UIColor(displayP3Red: 245/255, green: 245/255, blue: 245/255, alpha: 1)),
-                      .titleColor(.gray),
-                      .indicatorViewBackgroundColor(UIColor.lightGray),
-                      .selectedTitleColor(.white),
-                      .cornerRadius(4),
-                      .titleFont(UIFont(name: "HelveticaNeue-Medium", size: 20.0)!),
-                      .selectedTitleFont(UIFont(name: "HelveticaNeue-Medium", size: 20.0)!)]
+        let v = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
+        let line = UIView(frame: CGRect(x: 0, y: 49, width: UIScreen.main.bounds.width, height: 1))
+        line.backgroundColor = ColorPalette.whiteSmoke
+        
+        let segmentioView = Segmentio()
+        SegmentioBuilder.buildSegmentioView(
+            segmentioView: segmentioView,
+            segmentioStyle: segmentioStyle
         )
-        control.addTarget(self, action: #selector(controlValueChanged(_:)), for: .valueChanged)
-        view.addSubview(control)
-        v.addSubview(control)
+        segmentioView.selectedSegmentioIndex = selectedSegmentioIndex()
+        segmentioView.valueDidChange = { [weak self] _, segmentIndex in
+            print(segmentIndex)
+        }
+        v.addSubview(segmentioView)
+        v.addSubview(line)
+        
+        segmentioView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview().offset(-1)
+        }
+        
         return v
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-
+        
         return 50
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableViewAutomaticDimension
+        return 300
         // UIScreen.main.bounds.width * 0.5628 + 32 //for testing purposes
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-
-        let cell = tableView.dequeueReusableCell(withIdentifier: "ActivityCell", for: indexPath)
-        cell.textLabel?.text = "1"
-            return cell
-      //  }
+        let cell = tableView.dequeueReusableCell(withIdentifier: "JourneyCell", for: indexPath) as! JourneyTableViewCell
+        return cell
     }
 }
 
@@ -287,16 +278,16 @@ extension ProfileViewController: UIScrollViewDelegate {
         headerView.layer.transform = headerTransform
         profileImage.layer.transform = profileImageTransform
         
-//        // MARK: - Segmented control offset *Maybe put as section header?, not sure if it works with multiple sections*
-//        // Segment control
-//        let segmentViewOffset = profileView.bounds.height - segmentedView.bounds.height - offset
-//        var segmentTransform = CATransform3DIdentity
-//
-//        // Scroll the segment view until its offset reaches the same offset at which the header stopped shrinking
-//        segmentTransform = CATransform3DTranslate(segmentTransform, 0, max(segmentViewOffset, -headerStopOffset), 0)
-//        segmentedView.layer.transform = segmentTransform
-//
-//        // Set scroll view insets just underneath the segment control
-//        tableView.scrollIndicatorInsets = UIEdgeInsetsMake(segmentedView.bounds.maxY, 0, 0, 0)
+        //        // MARK: - Segmented control offset *Maybe put as section header?, not sure if it works with multiple sections*
+        //        // Segment control
+        //        let segmentViewOffset = profileView.bounds.height - segmentedView.bounds.height - offset
+        //        var segmentTransform = CATransform3DIdentity
+        //
+        //        // Scroll the segment view until its offset reaches the same offset at which the header stopped shrinking
+        //        segmentTransform = CATransform3DTranslate(segmentTransform, 0, max(segmentViewOffset, -headerStopOffset), 0)
+        //        segmentedView.layer.transform = segmentTransform
+        //
+        //        // Set scroll view insets just underneath the segment control
+        //        tableView.scrollIndicatorInsets = UIEdgeInsetsMake(segmentedView.bounds.maxY, 0, 0, 0)
     }
 }

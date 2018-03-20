@@ -151,12 +151,22 @@
                                                 <color key="titleShadowColor" red="0.57414853570000002" green="0.57416242360000003" blue="0.57415497299999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </state>
                                         </button>
+                                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Bn-Vj-qyE">
+                                            <rect key="frame" x="0.0" y="250" width="375" height="8"/>
+                                            <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="8" id="80C-WG-RGp"/>
+                                            </constraints>
+                                        </view>
                                     </subviews>
                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstItem="Qtq-Xc-jSh" firstAttribute="leading" secondItem="4k0-iW-35V" secondAttribute="leading" constant="32" id="1Ze-Ou-qWK"/>
                                         <constraint firstItem="jmp-bG-NY2" firstAttribute="centerX" secondItem="4k0-iW-35V" secondAttribute="centerX" id="3cp-WV-Nhs"/>
                                         <constraint firstAttribute="bottom" secondItem="Qtq-Xc-jSh" secondAttribute="bottom" constant="16" id="4kX-Sf-S66"/>
+                                        <constraint firstAttribute="bottom" secondItem="1Bn-Vj-qyE" secondAttribute="bottom" id="5ob-RR-AMD"/>
+                                        <constraint firstItem="1Bn-Vj-qyE" firstAttribute="leading" secondItem="4k0-iW-35V" secondAttribute="leading" id="7vR-Nd-wBs"/>
+                                        <constraint firstAttribute="trailing" secondItem="1Bn-Vj-qyE" secondAttribute="trailing" id="8Xv-fJ-4lM"/>
                                         <constraint firstItem="Qtq-Xc-jSh" firstAttribute="top" secondItem="W3a-D2-Lbz" secondAttribute="bottom" constant="16" id="CB0-Wb-oLb"/>
                                         <constraint firstAttribute="trailing" secondItem="Qtq-Xc-jSh" secondAttribute="trailing" constant="32" id="Dea-KI-RLw"/>
                                         <constraint firstAttribute="trailing" secondItem="W3a-D2-Lbz" secondAttribute="trailing" constant="16" id="TcN-DC-RwM"/>
@@ -173,28 +183,13 @@
                                     </constraints>
                                 </view>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationWidth="10" reuseIdentifier="ActivityCell" textLabel="ss8-ZQ-WYH" detailTextLabel="96G-3d-let" rowHeight="133" style="IBUITableViewCellStyleSubtitle" id="tBD-iM-4UI" customClass="TableViewCell" customModule="Material">
-                                        <rect key="frame" x="0.0" y="286" width="375" height="133"/>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="default" hidesAccessoryWhenEditing="NO" indentationWidth="10" reuseIdentifier="JourneyCell" rowHeight="260" id="tBD-iM-4UI" customClass="JourneyTableViewCell" customModule="Phase" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="286" width="375" height="260"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="tBD-iM-4UI" id="ksV-5j-oao">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="132.66666666666666"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="375" height="259.66666666666669"/>
                                             <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="ss8-ZQ-WYH">
-                                                    <rect key="frame" x="15" y="46" width="33.333333333333336" height="20.333333333333332"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" multipleTouchEnabled="YES" contentMode="left" insetsLayoutMarginsFromSafeArea="NO" text="Subtitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" id="96G-3d-let">
-                                                    <rect key="frame" x="14.999999999999996" y="69.333333333333329" width="43.666666666666664" height="14.333333333333334"/>
-                                                    <autoresizingMask key="autoresizingMask"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
+                                            <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
                                 </prototypes>
