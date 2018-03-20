@@ -9,11 +9,29 @@
 import UIKit
 
 class DiscoveryViewController: UIViewController {
+    
+    let urls = [
+        "https://images.unsplash.com/photo-1520824247747-126a95298fe3?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjF9&s=e74039124f299f828767e569585b1dd0",
+        "https://images.unsplash.com/photo-1519374086542-9ff30b72beec?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjF9&s=bece3c94ca262933aae9e60e607cc84a",
+        "https://images.unsplash.com/photo-1519383886281-9b35dfe073bd?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjF9&s=d4a46e874369abf3eddf1d056b49c3d7",
+        "https://images.unsplash.com/photo-1519740588306-ffbb1214223a?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjF9&s=b04a12a120f4066359e15d37de1a9008",
+        "https://images.unsplash.com/photo-1518981070596-e270c9106c91?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjF9&s=b2ed5e6b9223d055afd8b40bd9150b18",
+        "https://images.unsplash.com/photo-1519741414274-5b1ee71137fa?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjF9&s=a50c6de358b4a3e3e3bf52961a1b7b7d",
+        "https://cdn.pixabay.com/photo/2018/02/24/20/40/fashion-3179178_1280.jpg",
+        "https://cdn.pixabay.com/photo/2017/09/30/22/16/rail-2803725_1280.jpg",
+        "https://cdn.pixabay.com/photo/2017/10/12/20/15/photoshop-2845779_1280.jpg"
+    ]
 
     fileprivate(set) var selectedIndexPath = IndexPath(item: 0, section: 0)
     
-    fileprivate var layout = CollectionViewLayout(number: 2)
-    fileprivate var contents = [UIImage]()
+
+    fileprivate var layout = CollectionViewLayout()
+    fileprivate var contents = [UIImage]() {
+        didSet {
+            print(contents.count)
+            self.collectionView.reloadData()
+        }
+    }
     
     @IBOutlet dynamic private(set) weak var collectionView: UICollectionView! {
         didSet {
@@ -46,16 +64,19 @@ class DiscoveryViewController: UIViewController {
         searchBar.textField?.textColor = .gray
         navigationItem.titleView = searchBar
         navigationController?.navigationBar.disableShadow()
-        navigationController?.navigationBar.tintColor = UIColor.white
-        //        navigationController?.hidesBarsOnSwipe = true
+//        navigationController?.navigationBar.tintColor = UIColor.white
+//                navigationController?.hidesBarsOnSwipe = true // Only use if can get it to hide and appear smooth
         navigationController?.barHideOnSwipeGestureRecognizer.setTranslation(CGPoint.zero, in: view)
     }
     
     private func fetchContents() {
-        DB.fetchContents() { [weak self] contents in
-            self?.contents = contents
-            self?.collectionView.reloadData()
+        for _ in 0...40 {
+            ImageAPIClient.manager.loadImage(from: urls[Int(arc4random_uniform(UInt32(urls.count - 1)))], completionHandler: {self.contents.append($0)}, errorHandler: {print($0)})
         }
+//        DB.fetchContents() { [weak self] contents in
+//            self?.contents = contents
+//            self?.collectionView.reloadData()
+//        }
     }
 }
 
@@ -73,7 +94,7 @@ extension DiscoveryViewController: UICollectionViewDataSource {
 
 extension DiscoveryViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let detailNC = DetailNavigationViewController(rootViewController: DetailViewController.instantiate(withStoryboard: "DiscoverDetail"))
+        let detailNC = DetailNavigationViewController.instantiate(withStoryboard: "DiscoverDetail")
 
         selectedIndexPath = indexPath
         present(detailNC, animated: true, completion: nil)
@@ -87,8 +108,8 @@ extension DiscoveryViewController: CollectionViewDelegateLayout {
     
     func sizeForItemAt(indexPath: IndexPath) -> CGSize {
         let image = contents[indexPath.row]
-        let width = CollectionViewLayout.Configuration(numberOfColumns: 2).itemWidth
-        let height = width / image.size.width * image.size.height + 49 // 49 = Cell's white space below image
-        return CGSize(width: width, height: height)
+        let width = CollectionViewLayout.Configuration().itemWidth
+        let height = width / image.size.width * image.size.height + 79 // 79 = Cell's clear space below image
+        return CGSize(width: width, height: max(height, width / image.size.height * image.size.height + 79))
     }
 }

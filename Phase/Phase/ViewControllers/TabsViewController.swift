@@ -15,7 +15,7 @@ class TabsViewController: UITabBarController {
         self.tabBar.tintColor = UIColor.white
         
         // Profile VC
-        let profileVC = ProfileViewController.storyboardInstance()
+        let profileVC = ProfileViewController.instantiate(withStoryboard: "Main")
         profileVC.tabBarItem = UITabBarItem()
         profileVC.tabBarItem.title = "Profile"
         
@@ -23,9 +23,14 @@ class TabsViewController: UITabBarController {
         let discoverVC = UINavigationController(rootViewController: DiscoveryViewController.instantiate(withStoryboard: "Discover"))
         discoverVC.tabBarItem.title = "Discover"
         
+        // HomeFeed VC
         let homeVC = UINavigationController(rootViewController: HomeViewController.instantiate(withStoryboard: "HomeFeed"))
         homeVC.tabBarItem.title = "Home"
         
-        self.setViewControllers([homeVC, discoverVC, profileVC], animated: true)
+        // Login VC
+        let loginVC = UINavigationController(rootViewController: LoginViewController())
+        loginVC.tabBarItem.title = "Auth"
+        
+        self.setViewControllers([homeVC, discoverVC, profileVC, loginVC], animated: true)
     }
 }

@@ -16,9 +16,9 @@ class CollectionViewLayout: UICollectionViewLayout {
     
     struct Configuration {
         var numberOfColumns: Int
-        let minimumInterItemSpacing: CGFloat = 16
-        let minimumLineSpacing: CGFloat = 16
-        var sectionInsets = UIEdgeInsets(top: 4, left: 16, bottom: 16, right: 16) // CollectionView Insets
+        let minimumInterItemSpacing: CGFloat = 8
+        let minimumLineSpacing: CGFloat = 8
+        var sectionInsets = UIEdgeInsets(top: 4, left: 8, bottom: 16, right: 8) // CollectionView Insets
         
         init(numberOfColumns: Int) {
             self.numberOfColumns = numberOfColumns
