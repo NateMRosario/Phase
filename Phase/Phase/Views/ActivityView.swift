@@ -246,18 +246,6 @@ class ActivityView: UIView {
         let percentage = Double(usersFollowers / highestFollowerCount)
         return percentage
     }
-    
-//    private func setupFollowerOneImageView() {
-//        addSubview(followerOneImageView)
-//        followerOneImageView.snp.makeConstraints { (make) in
-//            make.leading.equalTo(self).offset(8)
-//            make.top.equalTo(activityDescriptionLabel.snp.bottom).offset(20)
-//            make.height.equalTo(snp.height).multipliedBy(0.15)
-//            make.width.equalTo(followerOneImageView.snp.height)
-//        }
-//    }
-//
-//
 
 }
 
