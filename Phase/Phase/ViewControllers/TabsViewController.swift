@@ -12,12 +12,16 @@ class TabsViewController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tabBar.tintColor = UIColor.white
-        
+        self.tabBar.barTintColor = UIColor.white
+                
         // Profile VC
         let profileVC = ProfileViewController.instantiate(withStoryboard: "Main")
         profileVC.tabBarItem = UITabBarItem()
         profileVC.tabBarItem.title = "Profile"
+        
+        //Camera View Controller
+        let cameraVC = CameraViewController()
+        cameraVC.tabBarItem = UITabBarItem(title: "Camera", image: #imageLiteral(resourceName: "camera"), selectedImage: #imageLiteral(resourceName: "camera"))
         
         // Discover/Search VC
         let discoverVC = DiscoveryNavViewController(rootViewController: DiscoveryViewController.instantiate(withStoryboard: "Discover"))
@@ -31,6 +35,6 @@ class TabsViewController: UITabBarController {
         let loginVC = UINavigationController(rootViewController: LoginViewController())
         loginVC.tabBarItem.title = "Auth"
         
-        self.setViewControllers([homeVC, discoverVC, profileVC, loginVC], animated: true)
+        self.setViewControllers([homeVC, discoverVC, cameraVC, profileVC, loginVC], animated: true)
     }
 }
