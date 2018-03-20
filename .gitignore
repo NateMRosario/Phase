@@ -16,7 +16,9 @@ DerivedData/
 *.perspectivev3
 !default.perspectivev3
 xcuserdata/
+Phase/SupportingFiles/awsconfiguration.json
 awsconfiguration.json
+Phase/Models/CognitoConstants
 CognitoConstants.swift
 
 ## Other
