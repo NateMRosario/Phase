@@ -241,23 +241,6 @@ class ActivityView: UIView {
             make.top.equalTo(activityHashTagLabel.snp.bottom).offset(8)
         }
     }
-    
-    public func sizeFollowerImagesBased(on highestFollowerCount: Int, and usersFollowers: Int) -> Double {
-        let percentage = Double(usersFollowers / highestFollowerCount)
-        return percentage
-    }
-    
-//    private func setupFollowerOneImageView() {
-//        addSubview(followerOneImageView)
-//        followerOneImageView.snp.makeConstraints { (make) in
-//            make.leading.equalTo(self).offset(8)
-//            make.top.equalTo(activityDescriptionLabel.snp.bottom).offset(20)
-//            make.height.equalTo(snp.height).multipliedBy(0.15)
-//            make.width.equalTo(followerOneImageView.snp.height)
-//        }
-//    }
-//
-//
 
 }
 

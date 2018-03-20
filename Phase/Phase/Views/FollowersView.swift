@@ -98,10 +98,6 @@ class FollowersView: UIView {
     // MARK: - Functions
     private func setupViews() {
         setupFollowerOneImageView()
-        //        setupFollowerTwoImageView()
-        //        setupFollowerThreeImageView()
-        //        setupFollowerFourImageView()
-        //        setupFollowerFiveImageView()
         setupMoreFollowersButton()
     }
     
@@ -110,10 +106,6 @@ class FollowersView: UIView {
         super.layoutSubviews()
         moreFollowersButton.layer.cornerRadius = moreFollowersButton.bounds.width/2
         followerOneImageView.layer.cornerRadius = followerOneImageView.bounds.width/2.0
-        //        followerTwoImageView.layer.cornerRadius = followerTwoImageView.bounds.width/2.0
-        //        followerThreeImageView.layer.cornerRadius = followerThreeImageView.bounds.width/2.0
-        //        followerFourImageView.layer.cornerRadius = followerFourImageView.bounds.width/2.0
-        //        followerFiveImageView.layer.cornerRadius = followerFiveImageView.bounds.width/2.0
     }
     
     public func getResizePercentage(usersFollowers: Int, userWithHighestFollowers: Int) -> Double {
