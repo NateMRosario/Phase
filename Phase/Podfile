@@ -15,6 +15,7 @@ target 'Phase' do
   pod 'AWSCognitoIdentityProvider'
   pod 'AWSCognitoAuth'
   pod 'AWSUserPoolsSignIn'
+  pod 'AWSDynamoDB'
   
   target 'PhaseTests' do
     inherit! :search_paths

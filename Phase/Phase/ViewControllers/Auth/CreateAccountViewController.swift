@@ -10,12 +10,6 @@ import UIKit
 import AWSCognitoIdentityProvider
 import AWSCognitoAuth
 
-
-let CognitoIdentityUserPoolRegion: AWSRegionType = .USEast1
-let CognitoIdentityUserPoolId = "us-east-1_yXNNPJ34H"
-let CognitoIdentityUserPoolAppClientId = "21cf9hr5e4abibj5980pjh79sj"
-let CognitoIdentityUserPoolAppClientSecret = "1csibrq3jle1d4rtnp461cm3jnnf6766vmrrtf37k52ueof07gse"
-
 let AWSCognitoUserPoolsSignInProviderKey = "UserPool"
 
 class CreateAccountViewController: UIViewController {

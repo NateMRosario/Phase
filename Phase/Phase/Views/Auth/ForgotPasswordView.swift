@@ -65,6 +65,37 @@ class ForgotPasswordView: UIView {
     }
     
     private func setupViews() {
+        setupUsernameTextField()
+        setupForgotPasswordButton()
     }
 
 }
+
+extension ForgotPasswordView {
+    private func setupUsernameTextField() {
+        addSubview(usernameTextField)
+        usernameTextField.snp.makeConstraints { (make) in
+            make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(12)
+            make.centerX.equalTo(safeAreaLayoutGuide.snp.centerX)
+            make.width.equalTo(safeAreaLayoutGuide.snp.width).multipliedBy(0.90)
+        }
+    }
+    
+    private func setupForgotPasswordButton() {
+        addSubview(forgotPasswordButton)
+        forgotPasswordButton.snp.makeConstraints { (make) in
+            make.top.equalTo(usernameTextField.snp.bottom)
+            make.centerX.equalTo(safeAreaLayoutGuide.snp.centerX)
+            make.width.equalTo(safeAreaLayoutGuide.snp.width).multipliedBy(0.90)
+        }
+        
+        
+    }
+    
+    
+}
+
+
+
+
+

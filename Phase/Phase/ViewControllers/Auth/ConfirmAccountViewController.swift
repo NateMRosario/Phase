@@ -21,6 +21,7 @@ class ConfirmAccountViewController: UIViewController {
         super.viewDidLoad()
         view.addSubview(confirmAccountView)
         setupButtons()
+        print(user?.username ?? "no username")
     }
 
 

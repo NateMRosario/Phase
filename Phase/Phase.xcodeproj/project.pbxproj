@@ -32,6 +32,7 @@
 		810935D4205C45F000A95B30 /* ConfirmForgotPasswordView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810935D3205C45F000A95B30 /* ConfirmForgotPasswordView.swift */; };
 		810935D620600D6600A95B30 /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 810935D520600D6600A95B30 /* awsconfiguration.json */; };
 		810935D8206010F600A95B30 /* AuthNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810935D7206010F600A95B30 /* AuthNavigationController.swift */; };
+		810935DA2061503800A95B30 /* CognitoConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810935D92061503800A95B30 /* CognitoConstants.swift */; };
 		81AB8A96205AD42900A98AFB /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AB8A95205AD42900A98AFB /* ProfileTableViewCell.swift */; };
 		81AB8A98205AEE3B00A98AFB /* TabsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AB8A97205AEE3B00A98AFB /* TabsViewController.swift */; };
 		81AB8A9B205AF64800A98AFB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AB8A9A205AF64800A98AFB /* Constants.swift */; };
@@ -61,7 +62,6 @@
 		81C9EE1F2058795200C27016 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81C9EE1D2058795200C27016 /* LaunchScreen.storyboard */; };
 		81C9EE2A2058795300C27016 /* PhaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C9EE292058795300C27016 /* PhaseTests.swift */; };
 		81C9EE352058795300C27016 /* PhaseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C9EE342058795300C27016 /* PhaseUITests.swift */; };
-		81CFD3F42058822F00DDD630 /* View.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CFD3F32058822F00DDD630 /* View.swift */; };
 		81CFD3F62058824700DDD630 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CFD3F52058824700DDD630 /* Models.swift */; };
 		81DC9F022058B210005F2724 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81DC9F012058B210005F2724 /* ProfileViewController.swift */; };
 		C6B46A8543265BAEF66E0411 /* Pods_PhaseTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E71635C053C1F5A36A0E3E9 /* Pods_PhaseTests.framework */; };
@@ -113,6 +113,7 @@
 		810935D3205C45F000A95B30 /* ConfirmForgotPasswordView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmForgotPasswordView.swift; sourceTree = "<group>"; };
 		810935D520600D6600A95B30 /* awsconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
 		810935D7206010F600A95B30 /* AuthNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthNavigationController.swift; sourceTree = "<group>"; };
+		810935D92061503800A95B30 /* CognitoConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CognitoConstants.swift; sourceTree = "<group>"; };
 		81AB8A95205AD42900A98AFB /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		81AB8A97205AEE3B00A98AFB /* TabsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabsViewController.swift; sourceTree = "<group>"; };
 		81AB8A9A205AF64800A98AFB /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -148,7 +149,6 @@
 		81C9EE302058795300C27016 /* PhaseUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PhaseUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		81C9EE342058795300C27016 /* PhaseUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhaseUITests.swift; sourceTree = "<group>"; };
 		81C9EE362058795300C27016 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		81CFD3F32058822F00DDD630 /* View.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = View.swift; sourceTree = "<group>"; };
 		81CFD3F52058824700DDD630 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		81DC9F012058B210005F2724 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		9E534A5BA8A8AA1BD6106D54 /* Pods-PhaseTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhaseTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PhaseTests/Pods-PhaseTests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -344,6 +344,7 @@
 			isa = PBXGroup;
 			children = (
 				81CFD3F52058824700DDD630 /* Models.swift */,
+				810935D92061503800A95B30 /* CognitoConstants.swift */,
 				81AB8A99205AF62600A98AFB /* DiscoveryVCCore */,
 			);
 			path = Models;
@@ -352,7 +353,6 @@
 		81CFD3EF2058818A00DDD630 /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				81CFD3F32058822F00DDD630 /* View.swift */,
 				810935CE205C45B700A95B30 /* Auth */,
 				810935812059BCCB00A95B30 /* HomeView.swift */,
 				810935832059BCDD00A95B30 /* ActivityView.swift */,
@@ -638,6 +638,7 @@
 				"${BUILT_PRODUCTS_DIR}/AWSCognitoIdentityProvider/AWSCognitoIdentityProvider.framework",
 				"${BUILT_PRODUCTS_DIR}/AWSCognitoIdentityProviderASF/AWSCognitoIdentityProviderASF.framework",
 				"${BUILT_PRODUCTS_DIR}/AWSCore/AWSCore.framework",
+				"${BUILT_PRODUCTS_DIR}/AWSDynamoDB/AWSDynamoDB.framework",
 				"${BUILT_PRODUCTS_DIR}/AWSMobileClient/AWSMobileClient.framework",
 				"${BUILT_PRODUCTS_DIR}/AWSUserPoolsSignIn/AWSUserPoolsSignIn.framework",
 				"${BUILT_PRODUCTS_DIR}/BetterSegmentedControl/BetterSegmentedControl.framework",
@@ -654,6 +655,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCognitoIdentityProvider.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCognitoIdentityProviderASF.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSCore.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSDynamoDB.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSMobileClient.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSUserPoolsSignIn.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BetterSegmentedControl.framework",
@@ -761,6 +763,7 @@
 				81AB8AC4205AFB4200A98AFB /* AnimateDiscoverToDetailVC.swift in Sources */,
 				810935D0205C45D200A95B30 /* ConfirmAccountView.swift in Sources */,
 				810935762059BB0D00A95B30 /* FollowsViewController.swift in Sources */,
+				810935DA2061503800A95B30 /* CognitoConstants.swift in Sources */,
 				81AB8AB4205AF7AB00A98AFB /* UINavigationBar+Extensions.swift in Sources */,
 				810935842059BCDD00A95B30 /* ActivityView.swift in Sources */,
 				810935D8206010F600A95B30 /* AuthNavigationController.swift in Sources */,
@@ -768,7 +771,6 @@
 				81DC9F022058B210005F2724 /* ProfileViewController.swift in Sources */,
 				8109357C2059BBF600A95B30 /* CreateNewPostViewController.swift in Sources */,
 				810935742059BAAC00A95B30 /* ActivityViewController.swift in Sources */,
-				81CFD3F42058822F00DDD630 /* View.swift in Sources */,
 				8109356E2059BA5B00A95B30 /* LoginViewController.swift in Sources */,
 				810935722059BA8400A95B30 /* HomeViewController.swift in Sources */,
 				81AB8AAC205AF6F600A98AFB /* CALayer+Extensions.swift in Sources */,
@@ -954,7 +956,7 @@
 				DEVELOPMENT_TEAM = 3V32EPY5YP;
 				INFOPLIST_FILE = "$(SRCROOT)/Phase/SupportingFiles/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.tyzhaoac.Phase;
+				PRODUCT_BUNDLE_IDENTIFIER = com.reiazgafar.Phase;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -970,7 +972,7 @@
 				DEVELOPMENT_TEAM = 3V32EPY5YP;
 				INFOPLIST_FILE = "$(SRCROOT)/Phase/SupportingFiles/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.tyzhaoac.Phase;
+				PRODUCT_BUNDLE_IDENTIFIER = com.reiazgafar.Phase;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

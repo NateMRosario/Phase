@@ -21,7 +21,7 @@ class LoginView: UIView {
     lazy var logoImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.contentMode = .scaleAspectFill
-        imageView.image = #imageLiteral(resourceName: "violet1")
+        imageView.image = #imageLiteral(resourceName: "ufo3")
         return imageView
     }()
     
@@ -29,7 +29,7 @@ class LoginView: UIView {
         let label = UILabel()
         label.textAlignment = .center
         label.font = UIFont.systemFont(ofSize: 25)
-        label.text = "KAWAII DESU"
+        label.text = "KAWAII DESU~~~"
         return label
     }()
     
