@@ -9,7 +9,7 @@
 import UIKit
 
 class AnimateDiscoverToDetailVC: Animator {
-    private let animationScale = UIScreen.main.bounds.width / (CollectionViewLayout.Configuration().itemWidth + 16) // bit small if 16*2?
+    private let animationScale = UIScreen.main.bounds.width / (CollectionViewLayout.Configuration(numberOfColumns: 2).itemWidth + 16) // bit small if 16*2?
     private let margin: CGFloat = 16
     
     override func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
