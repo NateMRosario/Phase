@@ -25,7 +25,7 @@ class DiscoveryViewController: UIViewController {
     fileprivate(set) var selectedIndexPath = IndexPath(item: 0, section: 0)
     
 
-    fileprivate var layout = CollectionViewLayout()
+    fileprivate var layout = CollectionViewLayout(number: 2)
     fileprivate var contents = [UIImage]() {
         didSet {
             print(contents.count)
@@ -108,7 +108,7 @@ extension DiscoveryViewController: CollectionViewDelegateLayout {
     
     func sizeForItemAt(indexPath: IndexPath) -> CGSize {
         let image = contents[indexPath.row]
-        let width = CollectionViewLayout.Configuration().itemWidth
+        let width = CollectionViewLayout.Configuration(numberOfColumns: 2) .itemWidth
         let height = width / image.size.width * image.size.height + 79 // 79 = Cell's clear space below image
         return CGSize(width: width, height: max(height, width / image.size.height * image.size.height + 79))
     }

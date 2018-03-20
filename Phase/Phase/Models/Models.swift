@@ -69,3 +69,39 @@ struct ImageAPIClient {
                                               errorHandler: errorHandler)
     }
 }
+
+struct Journey: Codable {
+    let user: String
+    let dateCreated: String
+    let isOriginal: Bool
+    let inspiredBy: String // Journey ID
+    let postCount: Int
+    let posts: [String] // Event IDs
+    let numberOfWatchers: Int
+    let collectionsInspired: [String]
+}
+
+struct Event: Codable {
+    let user: String
+    let dateCreated: String
+    let collecion: String // Journey ID
+    let linkToMedia: String
+    let caption: String
+    let numberOfLikes: Int
+    let numberOfViews: Int
+    let viewers: [String] // User IDs
+}
+
+struct AppUser: Codable {
+    let dateCreated: String
+    let username: String
+    let numberOfCollections: Int
+    let collections: [String] // Journey IDs
+    let peopleFollowed: [String] // User IDs
+    let collectionsFollowed: [String]
+    let followerCount: Int
+    let watcherCount: Int
+    let hasViewed: [String] // Event IDs
+    let isWatching: [String] // Journey IDs
+    let isPremium: Bool
+}

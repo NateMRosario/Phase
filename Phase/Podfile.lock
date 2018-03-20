@@ -1,5 +1,5 @@
 PODS:
-  - ADMozaicCollectionViewLayout (4.0.3)
+  - ADMozaicCollectionViewLayout (4.0.4)
   - AMPopTip (3.1.4)
   - AWSAuthCore (2.6.12):
     - AWSCore (= 2.6.12)
@@ -10,6 +10,8 @@ PODS:
     - AWSCore (= 2.6.12)
   - AWSCognitoIdentityProviderASF (1.0.1)
   - AWSCore (2.6.12)
+  - AWSDynamoDB (2.6.12):
+    - AWSCore (= 2.6.12)
   - AWSMobileClient (2.6.12):
     - AWSAuthCore (= 2.6.12)
   - AWSUserPoolsSignIn (2.6.12):
@@ -32,6 +34,7 @@ DEPENDENCIES:
   - AMPopTip
   - AWSCognitoAuth
   - AWSCognitoIdentityProvider
+  - AWSDynamoDB
   - AWSMobileClient
   - AWSUserPoolsSignIn
   - BetterSegmentedControl (~> 0.9)
@@ -41,13 +44,14 @@ DEPENDENCIES:
   - SnapKit
 
 SPEC CHECKSUMS:
-  ADMozaicCollectionViewLayout: bdb593a4d53cfc66fca9de5f406d1ae45b0f7404
+  ADMozaicCollectionViewLayout: 3145a65a65e5f1f5dc22dd31b2e9a03407259adf
   AMPopTip: 74c343e06fb7cd859fa2bd672e45edb97836f1b0
   AWSAuthCore: 55376d5a47c2b5cefdd3f78d247e0a5496fc25c4
   AWSCognitoAuth: 4e5874323836782cba292364e88e0909b78087ae
   AWSCognitoIdentityProvider: 2b7f74c4d6b63c9e5a3ba55db7453e997afa0566
   AWSCognitoIdentityProviderASF: f94f1a502e72ef3d0a1de93e10bf7a79c8698118
   AWSCore: d0d6e4f6831754aaf98058d2306a016ae71510fe
+  AWSDynamoDB: a1626a8e025a12fa71723da8eee0c1ff51da5dc0
   AWSMobileClient: 5972fea7b8b7a9eae8790386700b8a7f330f8ee3
   AWSUserPoolsSignIn: a731c43b295ac7d4cf9647c655ce580b3ced9397
   BetterSegmentedControl: 40b2b6a08bbc59663149624d1b5235efa8d43a3c
@@ -57,6 +61,6 @@ SPEC CHECKSUMS:
   SkyFloatingLabelTextField: 703aa1420b697392b1e7dba25571180dde018477
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
 
-PODFILE CHECKSUM: c1064acc7e92241c237b2957c0e70e8b30da1d35
+PODFILE CHECKSUM: 70e6c694a594d3c68ebcbcc14c1f84b8aebe005b
 
 COCOAPODS: 1.4.0

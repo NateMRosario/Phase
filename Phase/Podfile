@@ -15,6 +15,7 @@ target 'Phase' do
   pod 'AWSCognitoIdentityProvider'
   pod 'AWSCognitoAuth'
   pod 'AWSUserPoolsSignIn'
+  pod 'AWSDynamoDB'
   pod 'ADMozaicCollectionViewLayout', '~> 4.0'
   pod 'Segmentio'
   
