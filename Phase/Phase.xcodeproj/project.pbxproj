@@ -75,6 +75,10 @@
 		81C9EE352058795300C27016 /* PhaseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C9EE342058795300C27016 /* PhaseUITests.swift */; };
 		81CFD3F62058824700DDD630 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CFD3F52058824700DDD630 /* Models.swift */; };
 		81DC9F022058B210005F2724 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81DC9F012058B210005F2724 /* ProfileViewController.swift */; };
+		81DD11BE2061BC4100A9AD1A /* CameraPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81DD11BD2061BC4100A9AD1A /* CameraPreviewViewController.swift */; };
+		81DD11C02061BC6A00A9AD1A /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81DD11BF2061BC6A00A9AD1A /* CameraViewController.swift */; };
+		81DD11C22061BC8A00A9AD1A /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81DD11C12061BC8A00A9AD1A /* CameraView.swift */; };
+		81DD11C42061BC9500A9AD1A /* CapturedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81DD11C32061BC9400A9AD1A /* CapturedImageView.swift */; };
 		8791DFDB2060171F00337CA3 /* FollowersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8791DFDA2060171F00337CA3 /* FollowersView.swift */; };
 		C6B46A8543265BAEF66E0411 /* Pods_PhaseTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E71635C053C1F5A36A0E3E9 /* Pods_PhaseTests.framework */; };
 		EAB9DF6080B0DDD7A709CE05 /* Pods_PhaseUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77732BF92135231E852C350B /* Pods_PhaseUITests.framework */; };
@@ -178,6 +182,10 @@
 		81C9EE362058795300C27016 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		81CFD3F52058824700DDD630 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		81DC9F012058B210005F2724 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		81DD11BD2061BC4100A9AD1A /* CameraPreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CameraPreviewViewController.swift; path = Phase/ViewControllers/CameraPreviewViewController.swift; sourceTree = SOURCE_ROOT; };
+		81DD11BF2061BC6A00A9AD1A /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
+		81DD11C12061BC8A00A9AD1A /* CameraView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
+		81DD11C32061BC9400A9AD1A /* CapturedImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CapturedImageView.swift; sourceTree = "<group>"; };
 		8791DFDA2060171F00337CA3 /* FollowersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowersView.swift; sourceTree = "<group>"; };
 		9E534A5BA8A8AA1BD6106D54 /* Pods-PhaseTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhaseTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PhaseTests/Pods-PhaseTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B9EA73BB8347138AE4D02088 /* Pods-PhaseUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhaseUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PhaseUITests/Pods-PhaseUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -415,6 +423,8 @@
 				810935892059BD5800A95B30 /* SearchView.swift */,
 				8109358B2059BD6500A95B30 /* CreateNewPostView.swift */,
 				8791DFDA2060171F00337CA3 /* FollowersView.swift */,
+				81DD11C12061BC8A00A9AD1A /* CameraView.swift */,
+				81DD11C32061BC9400A9AD1A /* CapturedImageView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -432,6 +442,8 @@
 				810935772059BB9200A95B30 /* EditProfileViewController.swift */,
 				810935792059BBD300A95B30 /* SearchViewController.swift */,
 				8109357B2059BBF600A95B30 /* CreateNewPostViewController.swift */,
+				81DD11BF2061BC6A00A9AD1A /* CameraViewController.swift */,
+				81DD11BD2061BC4100A9AD1A /* CameraPreviewViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -811,6 +823,7 @@
 				81AB8AB7205AF8EA00A98AFB /* GridViewProtocol.swift in Sources */,
 				81AB8A96205AD42900A98AFB /* ProfileTableViewCell.swift in Sources */,
 				8134CEFE205B72E000A146B1 /* HomeFeedCollectionViewCell.swift in Sources */,
+				81DD11C22061BC8A00A9AD1A /* CameraView.swift in Sources */,
 				81AB8AB9205AF99100A98AFB /* CollectionViewLayout.swift in Sources */,
 				8109358A2059BD5800A95B30 /* SearchView.swift in Sources */,
 				810935CB205C454000A95B30 /* ForgotPasswordViewController.swift in Sources */,
@@ -850,6 +863,8 @@
 				81C1F86E2060ABAE0037BF42 /* UIColor+RGB.swift in Sources */,
 				81AB8ABF205AFA7C00A98AFB /* DB.swift in Sources */,
 				81AB8AC2205AFB0500A98AFB /* Animator.swift in Sources */,
+				81DD11BE2061BC4100A9AD1A /* CameraPreviewViewController.swift in Sources */,
+				81DD11C02061BC6A00A9AD1A /* CameraViewController.swift in Sources */,
 				8134CF0820615EF200A146B1 /* CreateAccountView.swift in Sources */,
 				81AB8ACF205AFDBF00A98AFB /* DetailNavigationViewController.swift in Sources */,
 				810935C9205C452A00A95B30 /* ConfirmAccountViewController.swift in Sources */,
@@ -861,6 +876,7 @@
 				F48DA6BF20588F17006E4FFC /* Post.swift in Sources */,
 				F48DA6BD20588ACD006E4FFC /* User.swift in Sources */,
 				81CFD3F62058824700DDD630 /* Models.swift in Sources */,
+				81DD11C42061BC9500A9AD1A /* CapturedImageView.swift in Sources */,
 				810935D2205C45E000A95B30 /* ForgotPasswordView.swift in Sources */,
 				81AB8AB0205AF75D00A98AFB /* UIViewController+Extensions.swift in Sources */,
 			);
