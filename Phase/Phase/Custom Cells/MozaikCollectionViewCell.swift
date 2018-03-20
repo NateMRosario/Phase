@@ -11,6 +11,8 @@ import UIKit
 class MozaikCollectionViewCell: UICollectionViewCell {
 
     @IBOutlet weak var mozaik: UIImageView!
+    @IBOutlet weak var howManyMoreLabel: UILabel!
+    @IBOutlet weak var isVideo: UIImageView!
     
     override func awakeFromNib() {
         super.awakeFromNib()

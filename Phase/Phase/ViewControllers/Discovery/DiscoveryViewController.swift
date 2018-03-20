@@ -63,7 +63,7 @@ class DiscoveryViewController: UIViewController {
         searchBar.textField?.textColor = .gray
         navigationItem.titleView = searchBar
         navigationController?.navigationBar.disableShadow()
-        navigationController?.navigationBar.tintColor = UIColor.white
+//        navigationController?.navigationBar.tintColor = UIColor.white
 //                navigationController?.hidesBarsOnSwipe = true // Only use if can get it to hide and appear smooth
         navigationController?.barHideOnSwipeGestureRecognizer.setTranslation(CGPoint.zero, in: view)
     }

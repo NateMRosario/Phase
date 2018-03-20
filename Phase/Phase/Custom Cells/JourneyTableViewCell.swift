@@ -62,23 +62,30 @@ extension JourneyTableViewCell: UICollectionViewDelegate {
 extension JourneyTableViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
     
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ADMozaikLayoutCell", for: indexPath) as UICollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ADMozaikLayoutCell", for: indexPath) as! MozaikCollectionViewCell
 //        let sectionLabel: UILabel = cell.viewWithTag(1001) as! UILabel
 //        sectionLabel.text = "\(indexPath.section)"
+        if indexPath.row < 3 {
         let imageView: UIImageView = cell.viewWithTag(1000) as! UIImageView
         imageView.image = UIImage(named: "\((indexPath as NSIndexPath).item % ADMozaikCollectionViewLayoutExampleImagesCount)")
+            cell.howManyMoreLabel.text = ""
+        } else {
+            cell.mozaik.backgroundColor = UIColor.lightGray
+            cell.howManyMoreLabel.text = "32 More"
+            cell.isVideo.image = nil
+        }
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 3
+        return 4
     }
 }
 
 extension JourneyTableViewCell: ADMozaikLayoutDelegate {
     func collectonView(_ collectionView: UICollectionView, mozaik layoyt: ADMozaikLayout, geometryInfoFor section: ADMozaikLayoutSection) -> ADMozaikLayoutSectionGeometryInfo {
         let rowHeight: CGFloat = collectionView.bounds.height / 2 - 10
-        let width = UIScreen.main.bounds.width / 4 - 10
+        let width = UIScreen.main.bounds.width / 4 - 14
         let columns = [ADMozaikLayoutColumn(width: width), ADMozaikLayoutColumn(width: width), ADMozaikLayoutColumn(width: width), ADMozaikLayoutColumn(width: width)]
         let geometryInfo = ADMozaikLayoutSectionGeometryInfo(rowHeight: rowHeight,
                                                              columns: columns,
