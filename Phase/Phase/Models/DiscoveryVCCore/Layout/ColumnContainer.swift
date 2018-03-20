@@ -12,7 +12,7 @@ class ColumnContainer {
     private var columns = [Column]()
     private var configuration: CollectionViewLayout.Configuration
     
-    init(configuration: CollectionViewLayout.Configuration) {
+    init(number: Int, configuration: CollectionViewLayout.Configuration) {
         self.configuration = configuration
         columns = [Column]()
         (0..<configuration.numberOfColumns).forEach{

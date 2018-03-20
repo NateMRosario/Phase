@@ -23,6 +23,9 @@ class TabsViewController: UITabBarController {
         let discoverVC = UINavigationController(rootViewController: DiscoveryViewController.instantiate(withStoryboard: "Discover"))
         discoverVC.tabBarItem.title = "Discover"
         
-        self.setViewControllers([discoverVC, profileVC], animated: true)
+        let homeVC = UINavigationController(rootViewController: HomeViewController.instantiate(withStoryboard: "HomeFeed"))
+        homeVC.tabBarItem.title = "Home"
+        
+        self.setViewControllers([homeVC, discoverVC, profileVC], animated: true)
     }
 }

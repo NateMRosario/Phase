@@ -15,13 +15,16 @@ protocol CollectionViewDelegateLayout: class {
 class CollectionViewLayout: UICollectionViewLayout {
     
     struct Configuration {
-        let numberOfColumns = 2
+        var numberOfColumns: Int
         let minimumInterItemSpacing: CGFloat = 16
         let minimumLineSpacing: CGFloat = 16
-        let sectionInsets = UIEdgeInsets(top: 4, left: 16, bottom: 16, right: 16) // CollectionView Insets
+        var sectionInsets = UIEdgeInsets(top: 4, left: 16, bottom: 16, right: 16) // CollectionView Insets
         
+        init(numberOfColumns: Int) {
+            self.numberOfColumns = numberOfColumns
+        }
         var itemWidth: CGFloat {
-            return (UIScreen.main.bounds.width - minimumLineSpacing - sectionInsets.left - sectionInsets.right) / 2
+            return (UIScreen.main.bounds.width - minimumLineSpacing - sectionInsets.left - sectionInsets.right) / CGFloat(numberOfColumns)
         }
         
         func itemHeight(rawItemSize: CGSize) -> CGFloat {
@@ -30,17 +33,25 @@ class CollectionViewLayout: UICollectionViewLayout {
         }
     }
     
+    var number = 1
     weak var delegate: CollectionViewDelegateLayout?
-    private var configuration = Configuration()
+    private var configuration = Configuration(numberOfColumns: 0)
     private var columnContainer: ColumnContainer
     
-    override init() {
-        columnContainer = ColumnContainer(configuration: configuration)
+    init(number: Int) {
+        self.number = number
+        self.configuration = Configuration(numberOfColumns: number)
+        if number == 1 {
+            configuration.sectionInsets.right = 0
+        } else {
+            configuration.sectionInsets.right = 16
+        }
+        columnContainer = ColumnContainer(number: number, configuration: configuration)
         super.init()
     }
     
     required init?(coder aDecoder: NSCoder) {
-        columnContainer = ColumnContainer(configuration: configuration)
+        columnContainer = ColumnContainer(number: 0, configuration: configuration)
         super.init(coder: aDecoder)
     }
     
@@ -71,3 +82,8 @@ class CollectionViewLayout: UICollectionViewLayout {
         return CGSize(width: width, height: height)
     }
 }
+protocol CollectionViewDelegateLayout2: class {
+    func sizeForItemAt(indexPath: IndexPath) -> CGSize
+}
+
+
