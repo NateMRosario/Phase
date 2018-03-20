@@ -15,7 +15,7 @@ class TabsViewController: UITabBarController {
         self.tabBar.tintColor = UIColor.white
         
         // Profile VC
-        let profileVC = ProfileViewController.storyboardInstance()
+        let profileVC = ProfileViewController.instantiate(withStoryboard: "Main")
         profileVC.tabBarItem = UITabBarItem()
         profileVC.tabBarItem.title = "Profile"
         
