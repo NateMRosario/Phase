@@ -70,38 +70,38 @@ struct ImageAPIClient {
     }
 }
 
-struct Collection: Codable {
+struct Journey: Codable {
     let user: String
     let dateCreated: String
     let isOriginal: Bool
-    let inspiredBy: String // Collection ID
+    let inspiredBy: String // Journey ID
     let postCount: Int
-    let posts: [String] // Post IDs
+    let posts: [String] // Event IDs
     let numberOfWatchers: Int
     let collectionsInspired: [String]
 }
 
-struct Post: Codable {
+struct Event: Codable {
     let user: String
     let dateCreated: String
-    let collecion: String
+    let collecion: String // Journey ID
     let linkToMedia: String
     let caption: String
     let numberOfLikes: Int
     let numberOfViews: Int
-    let viewers: [String]
+    let viewers: [String] // User IDs
 }
 
-struct User: Codable {
+struct AppUser: Codable {
     let dateCreated: String
     let username: String
     let numberOfCollections: Int
-    let collections: [String]
-    let peopleFollowed: [String]
+    let collections: [String] // Journey IDs
+    let peopleFollowed: [String] // User IDs
     let collectionsFollowed: [String]
     let followerCount: Int
     let watcherCount: Int
-    let hasViewed: [String]
-    let isWatching: [String]
+    let hasViewed: [String] // Event IDs
+    let isWatching: [String] // Journey IDs
     let isPremium: Bool
 }
