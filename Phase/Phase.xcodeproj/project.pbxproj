@@ -67,6 +67,7 @@
 		81C1F87D2060AC410037BF42 /* DiscoverDetail.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81C1F87A2060AC410037BF42 /* DiscoverDetail.storyboard */; };
 		81C1F87E2060AC410037BF42 /* Discover.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81C1F87B2060AC410037BF42 /* Discover.storyboard */; };
 		81C1F87F2060AC410037BF42 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81C1F87C2060AC410037BF42 /* Main.storyboard */; };
+		81C279CF20616D3900DB1825 /* DiscoveryNavViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C279CE20616D3900DB1825 /* DiscoveryNavViewController.swift */; };
 		81C9EE152058795200C27016 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C9EE142058795200C27016 /* AppDelegate.swift */; };
 		81C9EE1C2058795200C27016 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81C9EE1B2058795200C27016 /* Assets.xcassets */; };
 		81C9EE1F2058795200C27016 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81C9EE1D2058795200C27016 /* LaunchScreen.storyboard */; };
@@ -163,6 +164,7 @@
 		81C1F87A2060AC410037BF42 /* DiscoverDetail.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = DiscoverDetail.storyboard; sourceTree = "<group>"; };
 		81C1F87B2060AC410037BF42 /* Discover.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Discover.storyboard; sourceTree = "<group>"; };
 		81C1F87C2060AC410037BF42 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
+		81C279CE20616D3900DB1825 /* DiscoveryNavViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryNavViewController.swift; sourceTree = "<group>"; };
 		81C9EE112058795200C27016 /* Phase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Phase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81C9EE142058795200C27016 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		81C9EE1B2058795200C27016 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -318,6 +320,7 @@
 				81AB8AC6205AFBD700A98AFB /* DiscoveryViewController.swift */,
 				81AB8ACC205AFD8C00A98AFB /* DetailViewController.swift */,
 				81AB8ACE205AFDBF00A98AFB /* DetailNavigationViewController.swift */,
+				81C279CE20616D3900DB1825 /* DiscoveryNavViewController.swift */,
 			);
 			path = Discovery;
 			sourceTree = "<group>";
@@ -837,6 +840,7 @@
 				810935842059BCDD00A95B30 /* ActivityView.swift in Sources */,
 				810935D8206010F600A95B30 /* AuthNavigationController.swift in Sources */,
 				81C9EE152058795200C27016 /* AppDelegate.swift in Sources */,
+				81C279CF20616D3900DB1825 /* DiscoveryNavViewController.swift in Sources */,
 				81DC9F022058B210005F2724 /* ProfileViewController.swift in Sources */,
 				8109357C2059BBF600A95B30 /* CreateNewPostViewController.swift in Sources */,
 				810935742059BAAC00A95B30 /* ActivityViewController.swift in Sources */,
@@ -1018,11 +1022,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = XYLS53SA6G;
+				DEVELOPMENT_TEAM = KSNU4DN7MY;
 				INFOPLIST_FILE = "$(SRCROOT)/Phase/SupportingFiles/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = clintmejia.Phase;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tyzhaoac.Phase;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1035,11 +1039,11 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = XYLS53SA6G;
+				DEVELOPMENT_TEAM = KSNU4DN7MY;
 				INFOPLIST_FILE = "$(SRCROOT)/Phase/SupportingFiles/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = clintmejia.Phase;
+				PRODUCT_BUNDLE_IDENTIFIER = com.tyzhaoac.Phase;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";

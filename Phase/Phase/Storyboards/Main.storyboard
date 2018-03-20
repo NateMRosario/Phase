@@ -20,6 +20,7 @@
         <scene sceneID="8DG-r0-7XQ">
             <objects>
                 <tabBarController id="PbR-VI-BV9" customClass="TabsViewController" customModule="Phase" customModuleProvider="target" sceneMemberID="viewController">
+                    <nil key="simulatedTopBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="s2h-DU-1SB">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -222,7 +223,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="4mN-fu-s4R" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-143.19999999999999" y="-99.01477832512316"/>
+            <point key="canvasLocation" x="-764" y="-99"/>
         </scene>
     </scenes>
     <resources>

@@ -20,7 +20,7 @@ class TabsViewController: UITabBarController {
         profileVC.tabBarItem.title = "Profile"
         
         // Discover/Search VC
-        let discoverVC = UINavigationController(rootViewController: DiscoveryViewController.instantiate(withStoryboard: "Discover"))
+        let discoverVC = DiscoveryNavViewController(rootViewController: DiscoveryViewController.instantiate(withStoryboard: "Discover"))
         discoverVC.tabBarItem.title = "Discover"
         
         // HomeFeed VC

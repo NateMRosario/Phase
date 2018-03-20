@@ -13,7 +13,7 @@
         <!--Item-->
         <scene sceneID="pNj-vh-ot1">
             <objects>
-                <navigationController id="Fhm-lf-h23" sceneMemberID="viewController">
+                <navigationController id="Fhm-lf-h23" customClass="DetailNavigationViewController" customModule="Phase" customModuleProvider="target" sceneMemberID="viewController">
                     <tabBarItem key="tabBarItem" title="Item" id="EdV-ZH-jNH"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="fjf-OB-oBg">
                         <rect key="frame" x="0.0" y="20" width="375" height="44"/>
