@@ -118,6 +118,20 @@ class ActivityView: UIView {
         return button
     }()
     
+    lazy var followerOneImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "7-R5CLfl_400x400")
+        imageView.contentMode = .scaleAspectFit
+        imageView.layer.masksToBounds = true
+        imageView.clipsToBounds = true
+        imageView.layer.borderWidth = 0.5
+        imageView.layer.borderColor = UIColor.gray.cgColor
+        return imageView
+    }()
+    
+    // MARK: - Constants
+    let followersView = FollowersView()
+    
     // MARK: - Initializers
     override init(frame: CGRect) {
         super.init(frame: UIScreen.main.bounds)
@@ -143,26 +157,29 @@ class ActivityView: UIView {
         setupTimepostedLabel()
         setupActivityCollectionView()
         setupSubscribeButton()
-        //        setupActivityHashTagLabel()
-        //        setupActivityDescriptionLabel()
+        setupActivityHashTagLabel()
+        setupActivityDescriptionLabel()
+//        setupFollowerOneImageView()
     }
     
     // profileImageView corner radius implementation
     override func layoutSubviews() {
         super.layoutSubviews()
         profileImageView.layer.cornerRadius = profileImageView.bounds.width/2.0
+        followerOneImageView.layer.cornerRadius = followerOneImageView.bounds.width/2.0
     }
     
     // collectionView layer attributes implementation
     private func setCollectionViewAttributes() {
         activityCollectionView.addBorder(toSide: .top, withColor: UIColor.gray.cgColor, andThickness: 0.5)
+        activityCollectionView.addBorder(toSide: .bottom, withColor: UIColor.gray.cgColor, andThickness: 0.5)
     }
     
     private func setupActivityHeaderLabel() {
         addSubview(activityHeaderLabel)
         activityHeaderLabel.snp.makeConstraints { (make) in
             make.leading.equalTo(self).offset(8)
-            make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(8)
+            make.top.equalTo(self).offset(8)
         }
     }
     
@@ -197,7 +214,7 @@ class ActivityView: UIView {
             make.leading.equalTo(self)
             make.trailing.equalTo(self)
             make.top.equalTo(profileImageView.snp.bottom).offset(10)
-            make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom)
+            make.height.equalTo(snp.height).multipliedBy(0.7)
         }
     }
     
@@ -212,24 +229,36 @@ class ActivityView: UIView {
     private func setupActivityHashTagLabel() {
         addSubview(activityHashTagLabel)
         activityHashTagLabel.snp.makeConstraints { (make) in
-            make.leading.equalTo(self)
-            make.trailing.equalTo(self)
-            make.top.equalTo(safeAreaLayoutGuide.snp.top)
-            make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom)
+            make.leading.equalTo(self).offset(8)
+            make.top.equalTo(activityCollectionView.snp.bottom).offset(10)
         }
     }
     
     private func setupActivityDescriptionLabel() {
         addSubview(activityDescriptionLabel)
         activityDescriptionLabel.snp.makeConstraints { (make) in
-            make.leading.equalTo(self)
-            make.trailing.equalTo(self)
-            make.top.equalTo(safeAreaLayoutGuide.snp.top)
-            make.bottom.equalTo(safeAreaLayoutGuide.snp.bottom)
+            make.leading.equalTo(self).offset(10)
+            make.top.equalTo(activityHashTagLabel.snp.bottom).offset(8)
         }
     }
     
+    public func sizeFollowerImagesBased(on highestFollowerCount: Int, and usersFollowers: Int) -> Double {
+        let percentage = Double(usersFollowers / highestFollowerCount)
+        return percentage
+    }
     
+//    private func setupFollowerOneImageView() {
+//        addSubview(followerOneImageView)
+//        followerOneImageView.snp.makeConstraints { (make) in
+//            make.leading.equalTo(self).offset(8)
+//            make.top.equalTo(activityDescriptionLabel.snp.bottom).offset(20)
+//            make.height.equalTo(snp.height).multipliedBy(0.15)
+//            make.width.equalTo(followerOneImageView.snp.height)
+//        }
+//    }
+//
+//
+
 }
 
 

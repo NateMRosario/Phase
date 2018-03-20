@@ -13,29 +13,30 @@ class ActivityViewController: UIViewController {
     
     // MARK: - Testbed
     private var testArray = [Post]()
-
+    
     // MARK: - Constants
     private let activityView = ActivityView()
+    private let followersView = FollowersView()
     
     // MARK: - Init (Dependency injection)
-//    init(list: List){
-//        self.shoppingList = list
-//        super.init(nibName: nil, bundle: nil)
-//    }
-//
-//    required init?(coder aDecoder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
+    //    init(list: List){
+    //        self.shoppingList = list
+    //        super.init(nibName: nil, bundle: nil)
+    //    }
+    //
+    //    required init?(coder aDecoder: NSCoder) {
+    //        fatalError("init(coder:) has not been implemented")
+    //    }
     
     // MARK: - Life cycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.brown
+        self.view.backgroundColor = UIColor.white
         self.activityView.activityCollectionView.dataSource = self
         self.activityView.activityCollectionView.delegate = self
         setupView()
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -44,13 +45,28 @@ class ActivityViewController: UIViewController {
     // MARK: - Functions
     private func setupView() {
         setupActivityView()
+        setupFollowersView()
     }
-
+    
     // MARK: - Contraints
     private func setupActivityView() {
         self.view.addSubview(activityView)
         activityView.snp.makeConstraints { (make) in
             make.edges.equalTo(view.safeAreaLayoutGuide.snp.edges)
+            make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
+            make.leading.equalTo(view.snp.leading)
+            make.trailing.equalTo(view.snp.trailing)
+            make.height.equalTo(view.snp.height).multipliedBy(0.7)
+        }
+    }
+    
+    private func setupFollowersView() {
+        self.view.addSubview(followersView)
+        followersView.snp.makeConstraints { (make) in
+            make.top.equalTo(activityView.snp.bottom)
+            make.leading.equalTo(view.snp.leading)
+            make.trailing.equalTo(view.snp.trailing)
+            make.bottom.equalTo(view.snp.bottom)
         }
     }
     

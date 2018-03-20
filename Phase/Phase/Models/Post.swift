@@ -15,4 +15,5 @@ class Post: Codable {
     var captions: String
     var postText: String
     var hashTag: [String]
+    var followers: Int
 }
