@@ -241,6 +241,11 @@ class ActivityView: UIView {
             make.top.equalTo(activityHashTagLabel.snp.bottom).offset(8)
         }
     }
+    
+    public func sizeFollowerImagesBased(on highestFollowerCount: Int, and usersFollowers: Int) -> Double {
+        let percentage = Double(usersFollowers / highestFollowerCount)
+        return percentage
+    }
 
 }
 
