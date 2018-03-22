@@ -39,6 +39,7 @@ class ActivityViewController: UIViewController {
         self.activityView.activityCollectionView.dataSource = self
         self.activityView.activityCollectionView.delegate = self
         self.activityView.delegate = self
+        self.followersView.delegate = self
         setupView()
     }
     
@@ -125,5 +126,17 @@ extension ActivityViewController: ActivityViewDelegate {
     func activityDescriptionLabelTapped() {
 
     }
+    
+}
+
+extension ActivityViewController: FollowersViewDelegate {
+    func followerImageViewTapped() {
+    
+    }
+    
+    func moreFollowersButtonTapped() {
+        
+    }
+    
     
 }
