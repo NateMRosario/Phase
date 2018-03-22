@@ -168,7 +168,7 @@ extension ProfileViewController: UITableViewDataSource {
         )
         segmentioView.selectedSegmentioIndex = selectedSegmentioIndex()
         segmentioView.valueDidChange = { [weak self] _, segmentIndex in
-            print(segmentIndex)
+            print(segmentIndex) //TODO
         }
         v.addSubview(segmentioView)
         v.addSubview(line)

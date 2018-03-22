@@ -61,13 +61,11 @@ extension JourneyTableViewCell: UICollectionViewDelegate {
 
 extension JourneyTableViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ADMozaikLayoutCell", for: indexPath) as! MozaikCollectionViewCell
-//        let sectionLabel: UILabel = cell.viewWithTag(1001) as! UILabel
-//        sectionLabel.text = "\(indexPath.section)"
         if indexPath.row < 3 {
-        let imageView: UIImageView = cell.viewWithTag(1000) as! UIImageView
-        imageView.image = UIImage(named: "\((indexPath as NSIndexPath).item % ADMozaikCollectionViewLayoutExampleImagesCount)")
+            let imageView: UIImageView = cell.viewWithTag(1000) as! UIImageView
+            imageView.image = UIImage(named: "\((indexPath as NSIndexPath).item % ADMozaikCollectionViewLayoutExampleImagesCount)")
             cell.howManyMoreLabel.text = ""
         } else {
             cell.mozaik.backgroundColor = UIColor.lightGray

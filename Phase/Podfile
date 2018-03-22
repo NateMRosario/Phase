@@ -18,6 +18,7 @@ target 'Phase' do
   pod 'AWSDynamoDB'
   pod 'ADMozaicCollectionViewLayout', '~> 4.0'
   pod 'Segmentio'
+  pod 'DGElasticPullToRefresh'
   
   target 'PhaseTests' do
     inherit! :search_paths

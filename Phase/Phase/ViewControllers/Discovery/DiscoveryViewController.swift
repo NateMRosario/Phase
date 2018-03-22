@@ -7,8 +7,19 @@
 //
 
 import UIKit
+import DGElasticPullToRefresh
 
 class DiscoveryViewController: UIViewController {
+    
+    @IBOutlet dynamic private(set) weak var collectionView: UICollectionView! {
+        didSet {
+            collectionView.dataSource = self
+            collectionView.delegate = self
+            layout.delegate = self
+            collectionView.setCollectionViewLayout(layout, animated: false)
+            collectionView.register(cellTypes: DiscoverCollectionViewCell.self)
+        }
+    }
     
     let urls = [
         "https://images.unsplash.com/photo-1520824247747-126a95298fe3?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjF9&s=e74039124f299f828767e569585b1dd0",
@@ -23,8 +34,6 @@ class DiscoveryViewController: UIViewController {
     ]
 
     fileprivate(set) var selectedIndexPath = IndexPath(item: 0, section: 0)
-    
-
     fileprivate var layout = CollectionViewLayout(number: 2)
     fileprivate var contents = [UIImage]() {
         didSet {
@@ -33,21 +42,26 @@ class DiscoveryViewController: UIViewController {
         }
     }
     
-    @IBOutlet dynamic private(set) weak var collectionView: UICollectionView! {
-        didSet {
-            collectionView.dataSource = self
-            collectionView.delegate = self
-            layout.delegate = self
-            collectionView.setCollectionViewLayout(layout, animated: false)
-            collectionView.register(cellTypes: DiscoverCollectionViewCell.self)
-        }
-    }
+    lazy fileprivate var loadingView: DGElasticPullToRefreshLoadingViewCircle = {
+        let lv = DGElasticPullToRefreshLoadingViewCircle()
+        return lv
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         initNavigationBar()
         fetchContents()
+        
+        self.collectionView.alwaysBounceVertical = true
+        loadingView.tintColor = UIColor(red: 78/255.0, green: 221/255.0, blue: 200/255.0, alpha: 1.0)
+        collectionView.dg_addPullToRefreshWithActionHandler({ [weak self] () -> Void in
+            
+            self?.collectionView.dg_stopLoading()
+            }, loadingView: loadingView)
+        let img = #imageLiteral(resourceName: "085 October Silence").crop(toWidth: UIScreen.main.bounds.width, toHeight: UIScreen.main.bounds.width)!
+        collectionView.dg_setPullToRefreshFillColor(UIColor(patternImage: img))
+        collectionView.dg_setPullToRefreshBackgroundColor(collectionView.backgroundColor!)
     }
     
     override func didReceiveMemoryWarning() {
@@ -77,6 +91,10 @@ class DiscoveryViewController: UIViewController {
 //            self?.contents = contents
 //            self?.collectionView.reloadData()
 //        }
+    }
+    
+    deinit {
+        collectionView.dg_removePullToRefresh()
     }
 }
 
