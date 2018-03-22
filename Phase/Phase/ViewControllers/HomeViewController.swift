@@ -27,9 +27,12 @@ class HomeViewController: UIViewController {
             homeCollectionView.setCollectionViewLayout(layout, animated: false)
         }
     }
+    let loading = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        loading.color = UIColor.red
+
         homeCollectionView.backgroundColor = ColorPalette.grayChateau
         
 //        fetchContents()
@@ -54,13 +57,30 @@ class HomeViewController: UIViewController {
             self?.homeCollectionView.reloadData()
         }
     }
+    
+    deinit {
+        homeCollectionView.dg_removePullToRefresh()
+        print("deinit")
+    }
 }
 extension HomeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return contents.count
+        return contents.count + 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        if indexPath.item == contents.count{
+            let cell = homeCollectionView.dequeueReusableCell(withReuseIdentifier: "loading", for: indexPath)
+            cell.addSubview(loading)
+            loading.snp.makeConstraints({ (make) in
+                make.centerX.equalTo(cell.contentView.snp.centerX)
+                make.centerY.equalTo(cell.contentView.snp.centerY)
+            })
+            loading.startAnimating()
+            return cell
+        }
+        
         let cell = collectionView.dequeueReusableCell(with: HomeFeedCollectionViewCell.self, for: indexPath)
         let content = contents[indexPath.row]
         cell.set(image: contents[indexPath.row])
@@ -87,17 +107,21 @@ extension HomeViewController: UICollectionViewDataSource {
             break
         }
     }
-    ///
+    //
 }
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     //TODO:
 }
+
 extension HomeViewController: CollectionViewDelegateLayout {
-    func numberOfColumns() -> Int {
+    private func numberOfColumns() -> Int {
         return 1
     }
     
-    func sizeForItemAt(indexPath: IndexPath) -> CGSize {
+    internal func sizeForItemAt(indexPath: IndexPath) -> CGSize {
+        if indexPath.item == contents.count{
+            return CGSize(width: configure.itemWidth,height: 100)
+        }
         let image = contents[indexPath.row]
         let width = configure.itemWidth
         let height = width / image.size.width * image.size.height + 49
@@ -105,5 +129,16 @@ extension HomeViewController: CollectionViewDelegateLayout {
     }
 }
 
+extension HomeViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        navigationController?.setToolbarHidden(true, animated: true)
+    }
+    
+    func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.item == contents.count{
+            // loadMoreData()
+        }
+    }
+}
 
 

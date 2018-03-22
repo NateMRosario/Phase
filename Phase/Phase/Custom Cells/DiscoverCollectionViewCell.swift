@@ -10,13 +10,7 @@ import UIKit
 
 class DiscoverCollectionViewCell: UICollectionViewCell {
     
-    @IBOutlet dynamic fileprivate(set) weak var contentImageView: UIImageView! {
-        didSet {
-//            contentImageView.layer.cornerRadius = 8
-            contentImageView.layer.masksToBounds = true
-        }
-    }
-    
+    @IBOutlet dynamic fileprivate(set) weak var contentImageView: UIImageView!
     @IBOutlet weak var profileImage: UIImageView! {
         didSet {
             profileImage.layer.cornerRadius = profileImage.bounds.height / 2
@@ -25,7 +19,6 @@ class DiscoverCollectionViewCell: UICollectionViewCell {
         }
     }
     @IBOutlet weak var content3: UIImageView!
-    
     @IBOutlet weak var extraWhiteSpace: UIView! {
         didSet {
             extraWhiteSpace.layer.shadowOpacity = 0.5
@@ -45,7 +38,6 @@ class DiscoverCollectionViewCell: UICollectionViewCell {
             stackViewContainer.clipsToBounds = true
         }
     }
-    
     public func set(image: UIImage) {
         let num = arc4random_uniform(3)
         
@@ -71,14 +63,14 @@ class DiscoverCollectionViewCell: UICollectionViewCell {
     }
     @IBOutlet weak var stackView: UIStackView! {
         didSet {
-            stackView.layer.cornerRadius = 8
-            stackView.clipsToBounds = true
+            //stackView.layer.cornerRadius = 8
+            //stackView.clipsToBounds = true
         }
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.contentView.layer.cornerRadius = 8
+        //self.contentView.layer.cornerRadius = 8
     }
 }
 
@@ -87,7 +79,7 @@ extension DiscoverCollectionViewCell: GridViewProtocol {
     func snapShotForTransition() -> UIView {
         let snapShotView = UIImageView(image: contentImageView.image)
         snapShotView.frame = CGRect.init(x: 0, y: 0, width: contentImageView.frame.width, height: contentImageView.frame.height * CGFloat(3))
-        snapShotView.layer.masksToBounds = contentImageView.layer.masksToBounds
+//        snapShotView.layer.masksToBounds = contentImageView.layer.masksToBounds
         snapShotView.layer.cornerRadius = contentImageView.layer.cornerRadius
         snapShotView.contentMode = .scaleAspectFill
         return snapShotView
