@@ -78,6 +78,7 @@
 		81C9EE1F2058795200C27016 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81C9EE1D2058795200C27016 /* LaunchScreen.storyboard */; };
 		81C9EE2A2058795300C27016 /* PhaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C9EE292058795300C27016 /* PhaseTests.swift */; };
 		81C9EE352058795300C27016 /* PhaseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C9EE342058795300C27016 /* PhaseUITests.swift */; };
+		81CA1BCB206356A900EF7B8E /* Date+TimeAgoDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CA1BCA206356A900EF7B8E /* Date+TimeAgoDisplay.swift */; };
 		81CFD3F62058824700DDD630 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CFD3F52058824700DDD630 /* Models.swift */; };
 		81DC9F022058B210005F2724 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81DC9F012058B210005F2724 /* ProfileViewController.swift */; };
 		81DD11BE2061BC4100A9AD1A /* CameraPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81DD11BD2061BC4100A9AD1A /* CameraPreviewViewController.swift */; };
@@ -186,6 +187,7 @@
 		81C9EE302058795300C27016 /* PhaseUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PhaseUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		81C9EE342058795300C27016 /* PhaseUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhaseUITests.swift; sourceTree = "<group>"; };
 		81C9EE362058795300C27016 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		81CA1BCA206356A900EF7B8E /* Date+TimeAgoDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+TimeAgoDisplay.swift"; sourceTree = "<group>"; };
 		81CFD3F52058824700DDD630 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		81DC9F012058B210005F2724 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		81DD11BD2061BC4100A9AD1A /* CameraPreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CameraPreviewViewController.swift; path = Phase/ViewControllers/CameraPreviewViewController.swift; sourceTree = SOURCE_ROOT; };
@@ -411,6 +413,7 @@
 				F48DA6BC20588ACD006E4FFC /* User.swift */,
 				F48DA6BE20588F17006E4FFC /* Post.swift */,
 				F48DA6C020589024006E4FFC /* Comment.swift */,
+				81CA1BCA206356A900EF7B8E /* Date+TimeAgoDisplay.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -849,6 +852,7 @@
 				8791DFDB2060171F00337CA3 /* FollowersView.swift in Sources */,
 				F4D34A7A205C482C00F4D50D /* ActivityCollectionViewCell.swift in Sources */,
 				81C1F8702060ABAE0037BF42 /* ColorPalette.swift in Sources */,
+				81CA1BCB206356A900EF7B8E /* Date+TimeAgoDisplay.swift in Sources */,
 				810935CD205C454E00A95B30 /* ConfirmForgotPasswordViewController.swift in Sources */,
 				81AB8AAA205AF6BE00A98AFB /* Array+Extensions.swift in Sources */,
 				81AB8ABB205AF9DD00A98AFB /* Column.swift in Sources */,
