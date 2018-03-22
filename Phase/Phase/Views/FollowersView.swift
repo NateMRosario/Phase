@@ -114,6 +114,7 @@ class FollowersView: UIView {
         followerThreeImageView.layer.cornerRadius = followerThreeImageView.bounds.width/2.0
         followerFourImageView.layer.cornerRadius = followerFourImageView.bounds.width/2.0
         followerFiveImageView.layer.cornerRadius = followerFiveImageView.bounds.width/2.0
+    }
     
     public func getResizePercentage(usersFollowers: Int, userWithHighestFollowers: Int) -> Double {
         let percentage = Double(usersFollowers) / Double(userWithHighestFollowers)
