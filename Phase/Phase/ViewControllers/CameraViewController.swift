@@ -125,7 +125,6 @@ class CameraViewController: UIViewController {
         if let currentInput = captureSession.inputs.first {
             captureSession.removeInput(currentInput)
         }
-        
         do {
             let captureDeviceInput = try AVCaptureDeviceInput(device: currentCamera!)
             captureSession.addInput(captureDeviceInput)

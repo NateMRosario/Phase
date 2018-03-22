@@ -28,7 +28,7 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        homeCollectionView.backgroundColor = .lightGray
+        homeCollectionView.backgroundColor = ColorPalette.grayChateau
         
 //        fetchContents()
     }
