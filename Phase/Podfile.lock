@@ -1,5 +1,5 @@
 PODS:
-  - ADMozaicCollectionViewLayout (4.0.4)
+  - ADMozaicCollectionViewLayout (4.0.3)
   - AMPopTip (3.1.4)
   - AWSAuthCore (2.6.12):
     - AWSCore (= 2.6.12)
@@ -46,7 +46,7 @@ DEPENDENCIES:
   - SnapKit
 
 SPEC CHECKSUMS:
-  ADMozaicCollectionViewLayout: 3145a65a65e5f1f5dc22dd31b2e9a03407259adf
+  ADMozaicCollectionViewLayout: bdb593a4d53cfc66fca9de5f406d1ae45b0f7404
   AMPopTip: 74c343e06fb7cd859fa2bd672e45edb97836f1b0
   AWSAuthCore: 55376d5a47c2b5cefdd3f78d247e0a5496fc25c4
   AWSCognitoAuth: 4e5874323836782cba292364e88e0909b78087ae
