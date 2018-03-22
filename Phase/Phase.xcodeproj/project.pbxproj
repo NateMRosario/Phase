@@ -20,7 +20,6 @@
 		810935862059BCE800A95B30 /* FollowsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810935852059BCE800A95B30 /* FollowsView.swift */; };
 		810935882059BD2400A95B30 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810935872059BD2400A95B30 /* EditProfileView.swift */; };
 		8109358A2059BD5800A95B30 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810935892059BD5800A95B30 /* SearchView.swift */; };
-		8109358C2059BD6500A95B30 /* CreateNewPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8109358B2059BD6500A95B30 /* CreateNewPostView.swift */; };
 		810935C9205C452A00A95B30 /* ConfirmAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810935C8205C452A00A95B30 /* ConfirmAccountViewController.swift */; };
 		810935CB205C454000A95B30 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810935CA205C454000A95B30 /* ForgotPasswordViewController.swift */; };
 		810935CD205C454E00A95B30 /* ConfirmForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810935CC205C454E00A95B30 /* ConfirmForgotPasswordViewController.swift */; };
@@ -35,6 +34,7 @@
 		8134CF02205C4A4F00A146B1 /* HomeFeedCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8134CF01205C4A4F00A146B1 /* HomeFeedCollectionViewCell.xib */; };
 		8134CF0620615EE700A146B1 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8134CF0520615EE700A146B1 /* LoginView.swift */; };
 		8134CF0820615EF200A146B1 /* CreateAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8134CF0720615EF200A146B1 /* CreateAccountView.swift */; };
+		8180F5A320634CF100859650 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81DD11C12061BC8A00A9AD1A /* CameraView.swift */; };
 		81AB8A96205AD42900A98AFB /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AB8A95205AD42900A98AFB /* ProfileTableViewCell.swift */; };
 		81AB8A98205AEE3B00A98AFB /* TabsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AB8A97205AEE3B00A98AFB /* TabsViewController.swift */; };
 		81AB8A9B205AF64800A98AFB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AB8A9A205AF64800A98AFB /* Constants.swift */; };
@@ -68,11 +68,17 @@
 		81C1F87E2060AC410037BF42 /* Discover.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81C1F87B2060AC410037BF42 /* Discover.storyboard */; };
 		81C1F87F2060AC410037BF42 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81C1F87C2060AC410037BF42 /* Main.storyboard */; };
 		81C279CF20616D3900DB1825 /* DiscoveryNavViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C279CE20616D3900DB1825 /* DiscoveryNavViewController.swift */; };
+		81C279D32061933300DB1825 /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C279D02061933300DB1825 /* CameraViewController.swift */; };
+		81C279D8206193E200DB1825 /* CapturedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C279D6206193E200DB1825 /* CapturedImageView.swift */; };
+		81C279DA206193ED00DB1825 /* CreateNewPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8109358B2059BD6500A95B30 /* CreateNewPostView.swift */; };
+		81C279DC2061F74B00DB1825 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81C279DB2061F74B00DB1825 /* Login.storyboard */; };
+		81C279DE20634A6C00DB1825 /* NewPost.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81C279DD20634A6C00DB1825 /* NewPost.storyboard */; };
 		81C9EE152058795200C27016 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C9EE142058795200C27016 /* AppDelegate.swift */; };
 		81C9EE1C2058795200C27016 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81C9EE1B2058795200C27016 /* Assets.xcassets */; };
 		81C9EE1F2058795200C27016 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81C9EE1D2058795200C27016 /* LaunchScreen.storyboard */; };
 		81C9EE2A2058795300C27016 /* PhaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C9EE292058795300C27016 /* PhaseTests.swift */; };
 		81C9EE352058795300C27016 /* PhaseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C9EE342058795300C27016 /* PhaseUITests.swift */; };
+		81CA1BCB206356A900EF7B8E /* Date+TimeAgoDisplay.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CA1BCA206356A900EF7B8E /* Date+TimeAgoDisplay.swift */; };
 		81CFD3F62058824700DDD630 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CFD3F52058824700DDD630 /* Models.swift */; };
 		81DC9F022058B210005F2724 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81DC9F012058B210005F2724 /* ProfileViewController.swift */; };
 		81DD11BE2061BC4100A9AD1A /* CameraPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81DD11BD2061BC4100A9AD1A /* CameraPreviewViewController.swift */; };
@@ -170,6 +176,10 @@
 		81C1F87B2060AC410037BF42 /* Discover.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Discover.storyboard; sourceTree = "<group>"; };
 		81C1F87C2060AC410037BF42 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		81C279CE20616D3900DB1825 /* DiscoveryNavViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryNavViewController.swift; sourceTree = "<group>"; };
+		81C279D02061933300DB1825 /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CameraViewController.swift; path = Phase/ViewControllers/CameraViewController.swift; sourceTree = SOURCE_ROOT; };
+		81C279D6206193E200DB1825 /* CapturedImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CapturedImageView.swift; sourceTree = "<group>"; };
+		81C279DB2061F74B00DB1825 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
+		81C279DD20634A6C00DB1825 /* NewPost.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewPost.storyboard; sourceTree = "<group>"; };
 		81C9EE112058795200C27016 /* Phase.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Phase.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		81C9EE142058795200C27016 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		81C9EE1B2058795200C27016 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -181,10 +191,10 @@
 		81C9EE302058795300C27016 /* PhaseUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = PhaseUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		81C9EE342058795300C27016 /* PhaseUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhaseUITests.swift; sourceTree = "<group>"; };
 		81C9EE362058795300C27016 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		81CA1BCA206356A900EF7B8E /* Date+TimeAgoDisplay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+TimeAgoDisplay.swift"; sourceTree = "<group>"; };
 		81CFD3F52058824700DDD630 /* Models.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Models.swift; sourceTree = "<group>"; };
 		81DC9F012058B210005F2724 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		81DD11BD2061BC4100A9AD1A /* CameraPreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CameraPreviewViewController.swift; path = Phase/ViewControllers/CameraPreviewViewController.swift; sourceTree = SOURCE_ROOT; };
-		81DD11BF2061BC6A00A9AD1A /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		81DD11C12061BC8A00A9AD1A /* CameraView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
 		81DD11C32061BC9400A9AD1A /* CapturedImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CapturedImageView.swift; sourceTree = "<group>"; };
 		8791270A206341BC00888326 /* ActivityCarouselViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityCarouselViewController.swift; sourceTree = "<group>"; };
@@ -409,6 +419,7 @@
 				F48DA6BC20588ACD006E4FFC /* User.swift */,
 				F48DA6BE20588F17006E4FFC /* Post.swift */,
 				F48DA6C020589024006E4FFC /* Comment.swift */,
+				81CA1BCA206356A900EF7B8E /* Date+TimeAgoDisplay.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -419,14 +430,14 @@
 				8134CF0520615EE700A146B1 /* LoginView.swift */,
 				8134CF0720615EF200A146B1 /* CreateAccountView.swift */,
 				810935CE205C45B700A95B30 /* Auth */,
+				81DD11C12061BC8A00A9AD1A /* CameraView.swift */,
+				81C279D6206193E200DB1825 /* CapturedImageView.swift */,
 				810935832059BCDD00A95B30 /* ActivityView.swift */,
 				810935852059BCE800A95B30 /* FollowsView.swift */,
 				810935872059BD2400A95B30 /* EditProfileView.swift */,
 				810935892059BD5800A95B30 /* SearchView.swift */,
 				8109358B2059BD6500A95B30 /* CreateNewPostView.swift */,
 				8791DFDA2060171F00337CA3 /* FollowersView.swift */,
-				81DD11C12061BC8A00A9AD1A /* CameraView.swift */,
-				81DD11C32061BC9400A9AD1A /* CapturedImageView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -438,13 +449,13 @@
 				81AB8A97205AEE3B00A98AFB /* TabsViewController.swift */,
 				81DC9F012058B210005F2724 /* ProfileViewController.swift */,
 				810935C7205C436300A95B30 /* Auth */,
+				81C279D02061933300DB1825 /* CameraViewController.swift */,
 				810935712059BA8400A95B30 /* HomeViewController.swift */,
 				810935732059BAAC00A95B30 /* ActivityViewController.swift */,
 				810935752059BB0D00A95B30 /* FollowsViewController.swift */,
 				810935772059BB9200A95B30 /* EditProfileViewController.swift */,
 				810935792059BBD300A95B30 /* SearchViewController.swift */,
 				8109357B2059BBF600A95B30 /* CreateNewPostViewController.swift */,
-				81DD11BF2061BC6A00A9AD1A /* CameraViewController.swift */,
 				81DD11BD2061BC4100A9AD1A /* CameraPreviewViewController.swift */,
 				8791270A206341BC00888326 /* ActivityCarouselViewController.swift */,
 			);
@@ -470,6 +481,8 @@
 				81C1F87B2060AC410037BF42 /* Discover.storyboard */,
 				81C1F87A2060AC410037BF42 /* DiscoverDetail.storyboard */,
 				81C1F87C2060AC410037BF42 /* Main.storyboard */,
+				81C279DB2061F74B00DB1825 /* Login.storyboard */,
+				81C279DD20634A6C00DB1825 /* NewPost.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -614,7 +627,9 @@
 				81C1F87D2060AC410037BF42 /* DiscoverDetail.storyboard in Resources */,
 				81C1F87F2060AC410037BF42 /* Main.storyboard in Resources */,
 				81C9EE1C2058795200C27016 /* Assets.xcassets in Resources */,
+				81C279DE20634A6C00DB1825 /* NewPost.storyboard in Resources */,
 				81C1F8782060AC240037BF42 /* MozaikCollectionViewCell.xib in Resources */,
+				81C279DC2061F74B00DB1825 /* Login.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -719,6 +734,7 @@
 				"${BUILT_PRODUCTS_DIR}/AWSMobileClient/AWSMobileClient.framework",
 				"${BUILT_PRODUCTS_DIR}/AWSUserPoolsSignIn/AWSUserPoolsSignIn.framework",
 				"${BUILT_PRODUCTS_DIR}/BetterSegmentedControl/BetterSegmentedControl.framework",
+				"${BUILT_PRODUCTS_DIR}/DGElasticPullToRefresh/DGElasticPullToRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/Material/Material.framework",
 				"${BUILT_PRODUCTS_DIR}/Motion/Motion.framework",
 				"${BUILT_PRODUCTS_DIR}/Segmentio/Segmentio.framework",
@@ -738,6 +754,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSMobileClient.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSUserPoolsSignIn.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BetterSegmentedControl.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DGElasticPullToRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Material.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Motion.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Segmentio.framework",
@@ -819,14 +836,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8180F5A320634CF100859650 /* CameraView.swift in Sources */,
+				8109357C2059BBF600A95B30 /* CreateNewPostViewController.swift in Sources */,
+				81C279DA206193ED00DB1825 /* CreateNewPostView.swift in Sources */,
 				81AB8AAE205AF72A00A98AFB /* UICollectionView+Extensions.swift in Sources */,
 				81AB8A9B205AF64800A98AFB /* Constants.swift in Sources */,
 				810935882059BD2400A95B30 /* EditProfileView.swift in Sources */,
-				8109358C2059BD6500A95B30 /* CreateNewPostView.swift in Sources */,
 				81AB8AB7205AF8EA00A98AFB /* GridViewProtocol.swift in Sources */,
 				81AB8A96205AD42900A98AFB /* ProfileTableViewCell.swift in Sources */,
 				8134CEFE205B72E000A146B1 /* HomeFeedCollectionViewCell.swift in Sources */,
-				81DD11C22061BC8A00A9AD1A /* CameraView.swift in Sources */,
 				81AB8AB9205AF99100A98AFB /* CollectionViewLayout.swift in Sources */,
 				8109358A2059BD5800A95B30 /* SearchView.swift in Sources */,
 				810935CB205C454000A95B30 /* ForgotPasswordViewController.swift in Sources */,
@@ -843,6 +861,7 @@
 				8791DFDB2060171F00337CA3 /* FollowersView.swift in Sources */,
 				F4D34A7A205C482C00F4D50D /* ActivityCollectionViewCell.swift in Sources */,
 				81C1F8702060ABAE0037BF42 /* ColorPalette.swift in Sources */,
+				81CA1BCB206356A900EF7B8E /* Date+TimeAgoDisplay.swift in Sources */,
 				810935CD205C454E00A95B30 /* ConfirmForgotPasswordViewController.swift in Sources */,
 				8791270B206341BC00888326 /* ActivityCarouselViewController.swift in Sources */,
 				81AB8AAA205AF6BE00A98AFB /* Array+Extensions.swift in Sources */,
@@ -859,17 +878,17 @@
 				81C9EE152058795200C27016 /* AppDelegate.swift in Sources */,
 				81C279CF20616D3900DB1825 /* DiscoveryNavViewController.swift in Sources */,
 				81DC9F022058B210005F2724 /* ProfileViewController.swift in Sources */,
-				8109357C2059BBF600A95B30 /* CreateNewPostViewController.swift in Sources */,
 				810935742059BAAC00A95B30 /* ActivityViewController.swift in Sources */,
 				8109356E2059BA5B00A95B30 /* LoginViewController.swift in Sources */,
+				81C279D32061933300DB1825 /* CameraViewController.swift in Sources */,
 				810935722059BA8400A95B30 /* HomeViewController.swift in Sources */,
 				81AB8AAC205AF6F600A98AFB /* CALayer+Extensions.swift in Sources */,
 				81C1F86E2060ABAE0037BF42 /* UIColor+RGB.swift in Sources */,
 				81AB8ABF205AFA7C00A98AFB /* DB.swift in Sources */,
 				81AB8AC2205AFB0500A98AFB /* Animator.swift in Sources */,
 				81DD11BE2061BC4100A9AD1A /* CameraPreviewViewController.swift in Sources */,
-				81DD11C02061BC6A00A9AD1A /* CameraViewController.swift in Sources */,
 				8134CF0820615EF200A146B1 /* CreateAccountView.swift in Sources */,
+				81C279D8206193E200DB1825 /* CapturedImageView.swift in Sources */,
 				81AB8ACF205AFDBF00A98AFB /* DetailNavigationViewController.swift in Sources */,
 				810935C9205C452A00A95B30 /* ConfirmAccountViewController.swift in Sources */,
 				81AB8ACA205AFC7A00A98AFB /* DiscoverCollectionViewCell.swift in Sources */,
@@ -880,7 +899,6 @@
 				F48DA6BF20588F17006E4FFC /* Post.swift in Sources */,
 				F48DA6BD20588ACD006E4FFC /* User.swift in Sources */,
 				81CFD3F62058824700DDD630 /* Models.swift in Sources */,
-				81DD11C42061BC9500A9AD1A /* CapturedImageView.swift in Sources */,
 				810935D2205C45E000A95B30 /* ForgotPasswordView.swift in Sources */,
 				81AB8AB0205AF75D00A98AFB /* UIViewController+Extensions.swift in Sources */,
 			);
@@ -1044,7 +1062,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KSNU4DN7MY;
 				INFOPLIST_FILE = "$(SRCROOT)/Phase/SupportingFiles/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tyzhaoac.Phase;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -1061,7 +1079,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KSNU4DN7MY;
 				INFOPLIST_FILE = "$(SRCROOT)/Phase/SupportingFiles/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.tyzhaoac.Phase;
 				PRODUCT_NAME = "$(TARGET_NAME)";

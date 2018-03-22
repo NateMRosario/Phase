@@ -7,12 +7,14 @@
 //
 
 import UIKit
+import DGElasticPullToRefresh
 
 class HomeViewController: UIViewController {
     
     //TODO: Add character limit
     fileprivate var layout = CollectionViewLayout(number: 1)
     let configure = CollectionViewLayout.Configuration(numberOfColumns: 1)
+    fileprivate let loadingView = DGElasticPullToRefreshLoadingViewCircle()
     
     fileprivate var contents = [#imageLiteral(resourceName: "nostalgic1"), #imageLiteral(resourceName: "nostalgic2"), #imageLiteral(resourceName: "nostalgic3"), #imageLiteral(resourceName: "nostalgic4")]
     
@@ -28,9 +30,18 @@ class HomeViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        homeCollectionView.backgroundColor = .lightGray
+        homeCollectionView.backgroundColor = ColorPalette.grayChateau
         
 //        fetchContents()
+        self.homeCollectionView.alwaysBounceVertical = true
+        loadingView.tintColor = UIColor(red: 78/255.0, green: 221/255.0, blue: 200/255.0, alpha: 1.0)
+        homeCollectionView.dg_addPullToRefreshWithActionHandler({ [weak self] () -> Void in
+            //DO THINGS
+            self?.homeCollectionView.dg_stopLoading()
+            }, loadingView: loadingView)
+        let img = #imageLiteral(resourceName: "085 October Silence").crop(toWidth: UIScreen.main.bounds.width, toHeight: UIScreen.main.bounds.width)!
+        homeCollectionView.dg_setPullToRefreshFillColor(UIColor(patternImage: img))
+        homeCollectionView.dg_setPullToRefreshBackgroundColor(homeCollectionView.backgroundColor!)
     }
     
     private func setupNavbar() {
@@ -43,7 +54,6 @@ class HomeViewController: UIViewController {
             self?.homeCollectionView.reloadData()
         }
     }
-    
 }
 extension HomeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

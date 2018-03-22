@@ -18,6 +18,7 @@ PODS:
     - AWSAuthCore (= 2.6.12)
     - AWSCognitoIdentityProvider (= 2.6.12)
   - BetterSegmentedControl (0.9)
+  - DGElasticPullToRefresh (1.1)
   - Material (2.13.6):
     - Material/Core (= 2.13.6)
   - Material/Core (2.13.6):
@@ -38,6 +39,7 @@ DEPENDENCIES:
   - AWSMobileClient
   - AWSUserPoolsSignIn
   - BetterSegmentedControl (~> 0.9)
+  - DGElasticPullToRefresh
   - Material
   - Segmentio
   - SkyFloatingLabelTextField (~> 3.0)
@@ -55,12 +57,13 @@ SPEC CHECKSUMS:
   AWSMobileClient: 5972fea7b8b7a9eae8790386700b8a7f330f8ee3
   AWSUserPoolsSignIn: a731c43b295ac7d4cf9647c655ce580b3ced9397
   BetterSegmentedControl: 40b2b6a08bbc59663149624d1b5235efa8d43a3c
+  DGElasticPullToRefresh: 28f11a6026302a90f8ffebbc6e24748e584dddd3
   Material: ef704dcc1bced32ab7c91ece2ba734da557e3f36
   Motion: 9f74d115d7f72bb5380a8e3cde2f8a1fc898ac36
   Segmentio: 1607fba3b42230f5f91e997d1a3f337f1176674c
   SkyFloatingLabelTextField: 703aa1420b697392b1e7dba25571180dde018477
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
 
-PODFILE CHECKSUM: 70e6c694a594d3c68ebcbcc14c1f84b8aebe005b
+PODFILE CHECKSUM: d00de3909b7779d9c2d04346aa3e32024dbad16c
 
 COCOAPODS: 1.4.0

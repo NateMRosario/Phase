@@ -20,7 +20,11 @@ class TabsViewController: UITabBarController {
         profileVC.tabBarItem.title = "Profile"
         
         //Camera View Controller
-        let cameraVC = CameraViewController()
+        func newCollectionButtonPressed() {
+            
+        }
+        
+        let cameraVC = UINavigationController(rootViewController: CameraViewController())
         cameraVC.tabBarItem = UITabBarItem(title: "Camera", image: #imageLiteral(resourceName: "camera"), selectedImage: #imageLiteral(resourceName: "camera"))
         
         // Discover/Search VC
