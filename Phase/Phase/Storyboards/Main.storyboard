@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="PbR-VI-BV9">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina5_9" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -19,7 +19,7 @@
         <!--Tabs View Controller-->
         <scene sceneID="8DG-r0-7XQ">
             <objects>
-                <tabBarController id="PbR-VI-BV9" customClass="TabsViewController" customModule="Phase" customModuleProvider="target" sceneMemberID="viewController">
+                <tabBarController storyboardIdentifier="TabsViewController" id="PbR-VI-BV9" customClass="TabsViewController" customModule="Phase" customModuleProvider="target" sceneMemberID="viewController">
                     <nil key="simulatedTopBarMetrics"/>
                     <tabBar key="tabBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="s2h-DU-1SB">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="49"/>

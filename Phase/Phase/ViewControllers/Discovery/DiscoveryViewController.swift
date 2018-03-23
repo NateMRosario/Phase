@@ -165,7 +165,7 @@ extension DiscoveryViewController: CollectionViewDelegateLayout {
         let image = contents[indexPath.row]
         let width = CollectionViewLayout.Configuration(numberOfColumns: numberOfColumns(indexPath: indexPath)).itemWidth
         let height = width / image.size.width * image.size.height + 79 // 79 = Cell's clear space below image
-        return CGSize(width: width, height: max(height, width / image.size.height * image.size.height + 79))
+        return CGSize(width: width, height: max(height, width / image.size.height * image.size.height + 79 + 40))
     }
 }
 

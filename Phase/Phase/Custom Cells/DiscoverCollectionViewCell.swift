@@ -10,7 +10,6 @@ import UIKit
 
 class DiscoverCollectionViewCell: UICollectionViewCell {
     
-    @IBOutlet dynamic fileprivate(set) weak var contentImageView: UIImageView!
     @IBOutlet weak var profileImage: UIImageView! {
         didSet {
             profileImage.layer.cornerRadius = profileImage.bounds.height / 2
@@ -39,34 +38,48 @@ class DiscoverCollectionViewCell: UICollectionViewCell {
     
     lazy var stackImageView: UIImageView = {
         let siv = UIImageView()
+        siv.contentMode = .scaleAspectFill
+        siv.clipsToBounds = true
         return siv
     }()
     
     lazy var stackImageView2: UIImageView = {
         let siv = UIImageView()
+        siv.contentMode = .scaleAspectFill
+        siv.clipsToBounds = true
+        return siv
+    }()
+    
+    lazy var stackImageView3: UIImageView = {
+        let siv = UIImageView()
+        siv.contentMode = .scaleAspectFill
+        siv.clipsToBounds = true
         return siv
     }()
     
     public func set(image: UIImage) {
-        let num = arc4random_uniform(3)
+        let num = arc4random_uniform(5)
         
         // if image view is not nil stackView. content distribution = fill proportional else fill by equal distribution
 
         if num == 1 {
-            contentImageView.image = image
             profileImage.image = image
-            stackView.insertSubview(stackImageView, at: 1)
-            stackView.insertSubview(stackImageView2, at: 2)
+            stackView.insertArrangedSubview(stackImageView, at: 0)
+            stackView.insertArrangedSubview(stackImageView2, at: 1)
+            stackView.insertArrangedSubview(stackImageView3, at: 2)
             stackImageView.image = image
             stackImageView2.image = image
+            stackImageView3.image = image
         }
-        else if num == 2 {
-            contentImageView.image = image
-            stackView.insertArrangedSubview(stackImageView, at: 1)
+        else if num == 2 || num == 4 {
+            stackView.insertArrangedSubview(stackImageView, at: 0)
+            stackView.insertArrangedSubview(stackImageView2, at: 1)
             profileImage.image = image
             stackImageView.image = image
+            stackImageView2.image = image
         } else {
-            contentImageView.image = image
+            stackView.insertArrangedSubview(stackImageView, at: 0)
+            stackImageView.image = image
             profileImage.image = image
         }
     }
@@ -80,10 +93,10 @@ class DiscoverCollectionViewCell: UICollectionViewCell {
 extension DiscoverCollectionViewCell: GridViewProtocol {
     // TODO: MAKE THE SNAPSHOT VIEW == DiscoverCollectionViewNib
     func snapShotForTransition() -> UIView {
-        let snapShotView = UIImageView(image: contentImageView.image)
-        snapShotView.frame = CGRect.init(x: 0, y: 0, width: contentImageView.frame.width, height: contentImageView.frame.height * CGFloat(3))
+        let snapShotView = UIImageView(image: stackImageView.image)
+        snapShotView.frame = CGRect.init(x: 0, y: 0, width: stackImageView.frame.width, height: stackImageView.frame.height * CGFloat(3))
 //        snapShotView.layer.masksToBounds = contentImageView.layer.masksToBounds
-        snapShotView.layer.cornerRadius = contentImageView.layer.cornerRadius
+        snapShotView.layer.cornerRadius = stackImageView.layer.cornerRadius
         snapShotView.contentMode = .scaleAspectFill
         return snapShotView
     }
