@@ -31,10 +31,14 @@ class TabsViewController: UITabBarController {
         let homeVC = UINavigationController(rootViewController: HomeViewController.instantiate(withStoryboard: "HomeFeed"))
         homeVC.tabBarItem.title = "Home"
         
-        // Login VC
+         //Login VC
         let loginVC = UINavigationController(rootViewController: LoginViewController())
         loginVC.tabBarItem.title = "Auth"
         
-        self.setViewControllers([homeVC, discoverVC, cameraVC, profileVC, loginVC], animated: true)
+        let followerVC = FollowsViewController()
+        followerVC.tabBarItem = UITabBarItem(title: "Follows", image: nil, selectedImage: nil)
+        
+        
+        self.setViewControllers([homeVC, discoverVC, cameraVC, profileVC, loginVC, followerVC], animated: true)
     }
 }
