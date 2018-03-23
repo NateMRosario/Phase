@@ -41,6 +41,8 @@
 		81817A4220655FE700CA7044 /* ActiveLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81817A3D20655FE600CA7044 /* ActiveLabel.swift */; };
 		81817A4320655FE700CA7044 /* ActiveType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81817A3E20655FE700CA7044 /* ActiveType.swift */; };
 		81817A4420655FE700CA7044 /* RegexParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81817A3F20655FE700CA7044 /* RegexParser.swift */; };
+		81817A472065941C00CA7044 /* NewPost.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81817A462065941C00CA7044 /* NewPost.storyboard */; };
+		81817A49206596CD00CA7044 /* NewPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81817A48206596CD00CA7044 /* NewPostViewController.swift */; };
 		81AB8A96205AD42900A98AFB /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AB8A95205AD42900A98AFB /* ProfileTableViewCell.swift */; };
 		81AB8A98205AEE3B00A98AFB /* TabsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AB8A97205AEE3B00A98AFB /* TabsViewController.swift */; };
 		81AB8A9B205AF64800A98AFB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AB8A9A205AF64800A98AFB /* Constants.swift */; };
@@ -157,6 +159,8 @@
 		81817A3D20655FE600CA7044 /* ActiveLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActiveLabel.swift; sourceTree = "<group>"; };
 		81817A3E20655FE700CA7044 /* ActiveType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActiveType.swift; sourceTree = "<group>"; };
 		81817A3F20655FE700CA7044 /* RegexParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegexParser.swift; sourceTree = "<group>"; };
+		81817A462065941C00CA7044 /* NewPost.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewPost.storyboard; sourceTree = "<group>"; };
+		81817A48206596CD00CA7044 /* NewPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostViewController.swift; sourceTree = "<group>"; };
 		81AB8A95205AD42900A98AFB /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		81AB8A97205AEE3B00A98AFB /* TabsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabsViewController.swift; sourceTree = "<group>"; };
 		81AB8A9A205AF64800A98AFB /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -510,6 +514,7 @@
 				81DD11BD2061BC4100A9AD1A /* CameraPreviewViewController.swift */,
 				8791270A206341BC00888326 /* ActivityCarouselViewController.swift */,
 				81817A392064CAAE00CA7044 /* SearchVCs */,
+				81817A48206596CD00CA7044 /* NewPostViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -535,6 +540,7 @@
 				81C1F87C2060AC410037BF42 /* Main.storyboard */,
 				81C279DB2061F74B00DB1825 /* Login.storyboard */,
 				81CA1BE4206442E600EF7B8E /* SearchVCs.storyboard */,
+				81817A462065941C00CA7044 /* NewPost.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -678,6 +684,7 @@
 				81C1F8792060AC240037BF42 /* JourneyTableViewCell.xib in Resources */,
 				81C1F87D2060AC410037BF42 /* DiscoverDetail.storyboard in Resources */,
 				81C1F87F2060AC410037BF42 /* Main.storyboard in Resources */,
+				81817A472065941C00CA7044 /* NewPost.storyboard in Resources */,
 				81C9EE1C2058795200C27016 /* Assets.xcassets in Resources */,
 				81CA1BE5206442E600EF7B8E /* SearchVCs.storyboard in Resources */,
 				81C1F8782060AC240037BF42 /* MozaikCollectionViewCell.xib in Resources */,
@@ -907,6 +914,7 @@
 				810935CB205C454000A95B30 /* ForgotPasswordViewController.swift in Sources */,
 				810935862059BCE800A95B30 /* FollowsView.swift in Sources */,
 				81C1F8772060AC240037BF42 /* MozaikCollectionViewCell.swift in Sources */,
+				81817A49206596CD00CA7044 /* NewPostViewController.swift in Sources */,
 				81C1F86D2060ABAE0037BF42 /* UIFont+ExampleFonts.swift in Sources */,
 				810935702059BA7600A95B30 /* CreateAccountViewController.swift in Sources */,
 				81AB8ACD205AFD8C00A98AFB /* DetailViewController.swift in Sources */,
