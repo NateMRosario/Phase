@@ -36,6 +36,11 @@
 		8134CF0820615EF200A146B1 /* CreateAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8134CF0720615EF200A146B1 /* CreateAccountView.swift */; };
 		8180F5A320634CF100859650 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81DD11C12061BC8A00A9AD1A /* CameraView.swift */; };
 		81817A382064BADE00CA7044 /* OnboardingLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81817A372064BADE00CA7044 /* OnboardingLoginViewController.swift */; };
+		81817A4020655FE700CA7044 /* StringTrimExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81817A3B20655FE600CA7044 /* StringTrimExtension.swift */; };
+		81817A4120655FE700CA7044 /* ActiveBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81817A3C20655FE600CA7044 /* ActiveBuilder.swift */; };
+		81817A4220655FE700CA7044 /* ActiveLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81817A3D20655FE600CA7044 /* ActiveLabel.swift */; };
+		81817A4320655FE700CA7044 /* ActiveType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81817A3E20655FE700CA7044 /* ActiveType.swift */; };
+		81817A4420655FE700CA7044 /* RegexParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81817A3F20655FE700CA7044 /* RegexParser.swift */; };
 		81AB8A96205AD42900A98AFB /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AB8A95205AD42900A98AFB /* ProfileTableViewCell.swift */; };
 		81AB8A98205AEE3B00A98AFB /* TabsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AB8A97205AEE3B00A98AFB /* TabsViewController.swift */; };
 		81AB8A9B205AF64800A98AFB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AB8A9A205AF64800A98AFB /* Constants.swift */; };
@@ -146,6 +151,12 @@
 		8134CF0520615EE700A146B1 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginView.swift; path = Auth/LoginView.swift; sourceTree = "<group>"; };
 		8134CF0720615EF200A146B1 /* CreateAccountView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreateAccountView.swift; path = Auth/CreateAccountView.swift; sourceTree = "<group>"; };
 		81817A372064BADE00CA7044 /* OnboardingLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingLoginViewController.swift; sourceTree = "<group>"; };
+		81817A3A20655FE600CA7044 /* ActiveLabel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ActiveLabel.h; sourceTree = "<group>"; };
+		81817A3B20655FE600CA7044 /* StringTrimExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StringTrimExtension.swift; sourceTree = "<group>"; };
+		81817A3C20655FE600CA7044 /* ActiveBuilder.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActiveBuilder.swift; sourceTree = "<group>"; };
+		81817A3D20655FE600CA7044 /* ActiveLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActiveLabel.swift; sourceTree = "<group>"; };
+		81817A3E20655FE700CA7044 /* ActiveType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActiveType.swift; sourceTree = "<group>"; };
+		81817A3F20655FE700CA7044 /* RegexParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegexParser.swift; sourceTree = "<group>"; };
 		81AB8A95205AD42900A98AFB /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		81AB8A97205AEE3B00A98AFB /* TabsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabsViewController.swift; sourceTree = "<group>"; };
 		81AB8A9A205AF64800A98AFB /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -297,6 +308,19 @@
 			path = SearchVCs;
 			sourceTree = "<group>";
 		};
+		81817A4520658C8400CA7044 /* HashTags+Mentions+ShortUrls */ = {
+			isa = PBXGroup;
+			children = (
+				81817A3C20655FE600CA7044 /* ActiveBuilder.swift */,
+				81817A3A20655FE600CA7044 /* ActiveLabel.h */,
+				81817A3D20655FE600CA7044 /* ActiveLabel.swift */,
+				81817A3E20655FE700CA7044 /* ActiveType.swift */,
+				81817A3F20655FE700CA7044 /* RegexParser.swift */,
+				81817A3B20655FE600CA7044 /* StringTrimExtension.swift */,
+			);
+			path = "HashTags+Mentions+ShortUrls";
+			sourceTree = "<group>";
+		};
 		81AB8A94205AD2CB00A98AFB /* Custom Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -406,6 +430,7 @@
 		81C9EE132058795200C27016 /* Phase */ = {
 			isa = PBXGroup;
 			children = (
+				81817A4520658C8400CA7044 /* HashTags+Mentions+ShortUrls */,
 				81C1F8712060ABBA0037BF42 /* Segmentio Builder */,
 				81CFD3EE2058817900DDD630 /* Models */,
 				81CFD3EF2058818A00DDD630 /* Views */,
@@ -869,6 +894,7 @@
 				81817A382064BADE00CA7044 /* OnboardingLoginViewController.swift in Sources */,
 				8109357C2059BBF600A95B30 /* CreateNewPostViewController.swift in Sources */,
 				81C279DA206193ED00DB1825 /* CreateNewPostView.swift in Sources */,
+				81817A4020655FE700CA7044 /* StringTrimExtension.swift in Sources */,
 				81AB8AAE205AF72A00A98AFB /* UICollectionView+Extensions.swift in Sources */,
 				81AB8A9B205AF64800A98AFB /* Constants.swift in Sources */,
 				810935882059BD2400A95B30 /* EditProfileView.swift in Sources */,
@@ -886,6 +912,7 @@
 				81AB8ACD205AFD8C00A98AFB /* DetailViewController.swift in Sources */,
 				81AB8AC7205AFBD700A98AFB /* DiscoveryViewController.swift in Sources */,
 				8109357A2059BBD300A95B30 /* SearchViewController.swift in Sources */,
+				81817A4220655FE700CA7044 /* ActiveLabel.swift in Sources */,
 				81C1F86F2060ABAE0037BF42 /* SegmentioBuilder.swift in Sources */,
 				81C1F8762060AC240037BF42 /* JourneyTableViewCell.swift in Sources */,
 				81AB8AB2205AF77C00A98AFB /* UISearchBar+Extensions.swift in Sources */,
@@ -913,7 +940,9 @@
 				81CA1BE3206442C100EF7B8E /* TopViewController.swift in Sources */,
 				8109356E2059BA5B00A95B30 /* LoginViewController.swift in Sources */,
 				81C279D32061933300DB1825 /* CameraViewController.swift in Sources */,
+				81817A4420655FE700CA7044 /* RegexParser.swift in Sources */,
 				810935722059BA8400A95B30 /* HomeViewController.swift in Sources */,
+				81817A4320655FE700CA7044 /* ActiveType.swift in Sources */,
 				81AB8AAC205AF6F600A98AFB /* CALayer+Extensions.swift in Sources */,
 				81C1F86E2060ABAE0037BF42 /* UIColor+RGB.swift in Sources */,
 				81AB8ABF205AFA7C00A98AFB /* DB.swift in Sources */,
@@ -921,6 +950,7 @@
 				81DD11BE2061BC4100A9AD1A /* CameraPreviewViewController.swift in Sources */,
 				81CA1BE92064435600EF7B8E /* JourneyViewController.swift in Sources */,
 				8134CF0820615EF200A146B1 /* CreateAccountView.swift in Sources */,
+				81817A4120655FE700CA7044 /* ActiveBuilder.swift in Sources */,
 				81C279D8206193E200DB1825 /* CapturedImageView.swift in Sources */,
 				81AB8ACF205AFDBF00A98AFB /* DetailNavigationViewController.swift in Sources */,
 				810935C9205C452A00A95B30 /* ConfirmAccountViewController.swift in Sources */,
