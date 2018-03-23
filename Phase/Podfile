@@ -19,6 +19,7 @@ target 'Phase' do
   pod 'ADMozaicCollectionViewLayout', '~> 4.0'
   pod 'Segmentio'
   pod 'DGElasticPullToRefresh'
+  pod 'PageMenu'
   
   target 'PhaseTests' do
     inherit! :search_paths

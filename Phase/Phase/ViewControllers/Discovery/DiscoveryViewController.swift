@@ -56,6 +56,8 @@ class DiscoveryViewController: UIViewController {
         tl.color = .white
         return tl
     }()
+    let searchBar = UISearchBar()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -80,15 +82,24 @@ class DiscoveryViewController: UIViewController {
     
     private func initNavigationBar() {
         guard let navigationBarFrame = navigationController?.navigationBar.bounds else { return }
-        let searchBar = UISearchBar(frame: navigationBarFrame)
+        searchBar.frame = navigationBarFrame
         searchBar.placeholder = "Search"
         searchBar.textField?.backgroundColor = UIColor(white: 0.95, alpha: 1)
         searchBar.textField?.font = UIFont.systemFont(ofSize: 15, weight: .bold)
         searchBar.textField?.attributedPlaceholder = NSAttributedString(string: searchBar.placeholder ?? "", attributes: [.foregroundColor: UIColor.lightGray])
         searchBar.textField?.textColor = .gray
+        searchBar.textField?.isEnabled = false
+        searchBar.delegate = self
+        searchBar.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(pushToSearchVC)))
+        
         navigationItem.titleView = searchBar
+        navigationItem.backButton.title = ""
+        navigationItem.backBarButtonItem?.title = ""
 //        navigationController?.navigationBar.disableShadow()
 //        navigationController?.navigationBar.tintColor = UIColor.white
+    }
+    @objc func pushToSearchVC() {
+        present(UINavigationController(rootViewController: SearchViewController.instantiate(withStoryboard: "SearchVCs")), animated: false, completion: nil)
     }
     
     private func fetchContents() {
@@ -156,4 +167,8 @@ extension DiscoveryViewController: CollectionViewDelegateLayout {
         let height = width / image.size.width * image.size.height + 79 // 79 = Cell's clear space below image
         return CGSize(width: width, height: max(height, width / image.size.height * image.size.height + 79))
     }
+}
+
+extension DiscoveryViewController: UISearchBarDelegate {
+
 }

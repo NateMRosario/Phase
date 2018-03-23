@@ -18,7 +18,6 @@ class DiscoverCollectionViewCell: UICollectionViewCell {
             profileImage.layer.borderWidth = 2
         }
     }
-    @IBOutlet weak var content3: UIImageView!
     @IBOutlet weak var extraWhiteSpace: UIView! {
         didSet {
             extraWhiteSpace.layer.shadowOpacity = 0.5
@@ -31,13 +30,23 @@ class DiscoverCollectionViewCell: UICollectionViewCell {
             bottomWhiteSpace.layer.cornerRadius = 8
         }
     }
-    @IBOutlet weak var contentTwo: UIImageView!
     @IBOutlet weak var stackViewContainer: UIView! {
         didSet {
             stackViewContainer.layer.cornerRadius = 10
             stackViewContainer.clipsToBounds = true
         }
     }
+    
+    lazy var stackImageView: UIImageView = {
+        let siv = UIImageView()
+        return siv
+    }()
+    
+    lazy var stackImageView2: UIImageView = {
+        let siv = UIImageView()
+        return siv
+    }()
+    
     public func set(image: UIImage) {
         let num = arc4random_uniform(3)
         
@@ -46,31 +55,25 @@ class DiscoverCollectionViewCell: UICollectionViewCell {
         if num == 1 {
             contentImageView.image = image
             profileImage.image = image
-            contentTwo.image = image
-            content3.image = image
+            stackView.insertSubview(stackImageView, at: 1)
+            stackView.insertSubview(stackImageView2, at: 2)
+            stackImageView.image = image
+            stackImageView2.image = image
         }
         else if num == 2 {
             contentImageView.image = image
+            stackView.insertArrangedSubview(stackImageView, at: 1)
             profileImage.image = image
-            content3.image = image
-            contentTwo.image = nil
+            stackImageView.image = image
         } else {
             contentImageView.image = image
             profileImage.image = image
-            content3.image = nil
-            contentTwo.image = nil
         }
     }
-    @IBOutlet weak var stackView: UIStackView! {
-        didSet {
-            //stackView.layer.cornerRadius = 8
-            //stackView.clipsToBounds = true
-        }
-    }
+    @IBOutlet weak var stackView: UIStackView!
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        //self.contentView.layer.cornerRadius = 8
     }
 }
 
