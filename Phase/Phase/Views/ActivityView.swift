@@ -142,7 +142,7 @@ class ActivityView: UIView {
     }()
     
     // MARK: - Constants
-    let followersView = FollowersView()
+//    let followersView = FollowersView()
     
     // MARK: - Initializers
     override init(frame: CGRect) {
@@ -280,10 +280,10 @@ class ActivityView: UIView {
         }
     }
     
-    public func sizeFollowerImagesBased(on highestFollowerCount: Int, and usersFollowers: Int) -> Double {
-        let percentage = Double(usersFollowers / highestFollowerCount)
-        return percentage
-    }
+//    public func sizeFollowerImagesBased(on highestFollowerCount: Int, and usersFollowers: Int) -> Double {
+//        let percentage = Double(usersFollowers / highestFollowerCount)
+//        return percentage
+//    }
 
 }
 

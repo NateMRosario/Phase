@@ -22,26 +22,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var rememberDeviceCompletionSource: AWSTaskCompletionSource<NSNumber>?
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-
-        // setup service configuration
-        let serviceConfiguration = AWSServiceConfiguration(region: CognitoIdentityUserPoolRegion, credentialsProvider: nil)
-        
-        // create pool configuration
-        let poolConfiguration = AWSCognitoIdentityUserPoolConfiguration(clientId: CognitoIdentityUserPoolAppClientId,
-                                                                        clientSecret: CognitoIdentityUserPoolAppClientSecret,
-                                                                        poolId: CognitoIdentityUserPoolId)
-        
-        // initialize user pool client
-        AWSCognitoIdentityUserPool.register(with: serviceConfiguration, userPoolConfiguration: poolConfiguration, forKey: AWSCognitoUserPoolsSignInProviderKey)
-        
-        // fetch the user pool client we initialized in above step
-        let pool = AWSCognitoIdentityUserPool(forKey: AWSCognitoUserPoolsSignInProviderKey)
-        self.storyboard = UIStoryboard(name: "Main", bundle: nil)
-        pool.delegate = self
-        
-        return AWSMobileClient.sharedInstance().interceptApplication(
-            application,
-            didFinishLaunchingWithOptions: launchOptions)
+//
+//        // setup service configuration
+//        let serviceConfiguration = AWSServiceConfiguration(region: CognitoIdentityUserPoolRegion, credentialsProvider: nil)
+//
+//        // create pool configuration
+//        let poolConfiguration = AWSCognitoIdentityUserPoolConfiguration(clientId: CognitoIdentityUserPoolAppClientId,
+//                                                                        clientSecret: CognitoIdentityUserPoolAppClientSecret,
+//                                                                        poolId: CognitoIdentityUserPoolId)
+//
+//        // initialize user pool client
+//        AWSCognitoIdentityUserPool.register(with: serviceConfiguration, userPoolConfiguration: poolConfiguration, forKey: AWSCognitoUserPoolsSignInProviderKey)
+//
+//        // fetch the user pool client we initialized in above step
+//        let pool = AWSCognitoIdentityUserPool(forKey: AWSCognitoUserPoolsSignInProviderKey)
+//        self.storyboard = UIStoryboard(name: "Main", bundle: nil)
+//        pool.delegate = self
+//
+//        return AWSMobileClient.sharedInstance().interceptApplication(
+//            application,
+//            didFinishLaunchingWithOptions: launchOptions)
+        let carousel = ActivityCarouselViewController()
+        window = UIWindow(frame: UIScreen.main.bounds)
+        window?.rootViewController = carousel
+        window?.makeKeyAndVisible()
+        return true
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
