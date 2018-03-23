@@ -32,8 +32,6 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         loading.color = UIColor.red
-
-        homeCollectionView.backgroundColor = ColorPalette.grayChateau
         
 //        fetchContents()
         self.homeCollectionView.alwaysBounceVertical = true

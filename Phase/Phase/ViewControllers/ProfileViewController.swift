@@ -57,8 +57,8 @@ class ProfileViewController: UIViewController, UITableViewDelegate {
         let biv = UIImageView()
         biv.alpha = 0.0
         biv.contentMode = .scaleAspectFill
-        biv.backgroundColor = ColorPalette.appBlue
-//        biv.image = #imageLiteral(resourceName: "Manhattan").blur(radius: 10, tintColor: UIColor.clear, saturationDeltaFactor: 1)
+//        biv.backgroundColor = ColorPalette.appBlue
+        biv.image = #imageLiteral(resourceName: "085 October Silence").blur(radius: 10, tintColor: UIColor.clear, saturationDeltaFactor: 1)
         return biv
     }()
     

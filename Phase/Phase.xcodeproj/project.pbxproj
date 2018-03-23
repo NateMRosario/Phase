@@ -286,6 +286,17 @@
 			path = Onboarding;
 			sourceTree = "<group>";
 		};
+		81817A392064CAAE00CA7044 /* SearchVCs */ = {
+			isa = PBXGroup;
+			children = (
+				810935792059BBD300A95B30 /* SearchViewController.swift */,
+				81CA1BE2206442C100EF7B8E /* TopViewController.swift */,
+				81CA1BE62064432600EF7B8E /* PeopleViewController.swift */,
+				81CA1BE82064435600EF7B8E /* JourneyViewController.swift */,
+			);
+			path = SearchVCs;
+			sourceTree = "<group>";
+		};
 		81AB8A94205AD2CB00A98AFB /* Custom Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -470,13 +481,10 @@
 				810935732059BAAC00A95B30 /* ActivityViewController.swift */,
 				810935752059BB0D00A95B30 /* FollowsViewController.swift */,
 				810935772059BB9200A95B30 /* EditProfileViewController.swift */,
-				810935792059BBD300A95B30 /* SearchViewController.swift */,
 				8109357B2059BBF600A95B30 /* CreateNewPostViewController.swift */,
 				81DD11BD2061BC4100A9AD1A /* CameraPreviewViewController.swift */,
 				8791270A206341BC00888326 /* ActivityCarouselViewController.swift */,
-				81CA1BE2206442C100EF7B8E /* TopViewController.swift */,
-				81CA1BE62064432600EF7B8E /* PeopleViewController.swift */,
-				81CA1BE82064435600EF7B8E /* JourneyViewController.swift */,
+				81817A392064CAAE00CA7044 /* SearchVCs */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
