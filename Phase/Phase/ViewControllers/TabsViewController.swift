@@ -36,9 +36,9 @@ class TabsViewController: UITabBarController {
         homeVC.tabBarItem.title = "Home"
         
         // Login VC
-        let loginVC = UINavigationController(rootViewController: LoginViewController())
-        loginVC.tabBarItem.title = "Auth"
+        let notificationVC = NotificationsViewController.instantiate(withStoryboard: "Notifications")
+        notificationVC.tabBarItem.title = "Notifications"
         
-        self.setViewControllers([homeVC, discoverVC, cameraVC, profileVC, loginVC], animated: true)
+        self.setViewControllers([homeVC, discoverVC, cameraVC, notificationVC, profileVC], animated: true)
     }
 }
