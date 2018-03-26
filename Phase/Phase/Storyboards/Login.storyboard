@@ -246,6 +246,10 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Din-M7-jhL"/>
                     </view>
+                    <connections>
+                        <outlet property="passwordTF" destination="qyz-o0-SQF" id="BUo-df-fLD"/>
+                        <outlet property="userLoginInfoTF" destination="qEe-w3-dYh" id="TI9-bf-a9p"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ggT-9O-foc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
