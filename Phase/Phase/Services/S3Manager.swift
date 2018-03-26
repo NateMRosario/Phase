@@ -13,6 +13,8 @@ class S3Manager {
     static let shared = S3Manager()
     private init() {}
     
+    let transferUtility = AWSS3TransferUtility.default()
+
     func uploadData() {
         
         let data: Data = Data() // Data to be uploaded
@@ -31,8 +33,6 @@ class S3Manager {
                 // On failed uploads, `error` contains the error object.
             })
         }
-        
-        let transferUtility = AWSS3TransferUtility.default()
         
         transferUtility.uploadData(data,
                                    bucket: "YourBucket",
@@ -67,7 +67,6 @@ class S3Manager {
             })
         }
         
-        let transferUtility = AWSS3TransferUtility.default()
         transferUtility.downloadData(
             fromBucket: "YourBucket",
             key: "YourFileName",
