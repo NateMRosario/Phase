@@ -10,6 +10,9 @@ import UIKit
 
 class OnboardingLoginViewController: UIViewController {
     
+    @IBAction func backButton(_ sender: UIButton) {
+        dismiss(animated: true)
+    }
     @IBAction func loginButtonPressed(_ sender: UIButton) {
         guard let userInfo = userLoginInfoTF.text else { return }
         guard let password = passwordTF.text else { return }
@@ -39,8 +42,10 @@ class OnboardingLoginViewController: UIViewController {
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         if let touch = touches.first {
-            userLoginInfoTF.resignFirstResponder()
-            passwordTF.resignFirstResponder()
+            DispatchQueue.main.async {
+                self.userLoginInfoTF.resignFirstResponder()
+                self.passwordTF.resignFirstResponder()
+            }
         }
     }
 }

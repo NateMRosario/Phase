@@ -14,7 +14,6 @@ class ForgotPassViewController: UIViewController {
         self.dismiss(animated: true, completion: nil)
     }
     @IBOutlet weak var emailTextField: UITextField!
-    
     @IBAction func sendResetEmailButton(_ sender: UIButton) {
         guard let userInfo = emailTextField.text else {return}
         CognitoManager.shared.forgotPassword(username: userInfo)
@@ -30,6 +29,14 @@ class ForgotPassViewController: UIViewController {
     
     deinit {
         print("ForgotPassViewController")
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if let touch = touches.first {
+            DispatchQueue.main.async {
+                self.emailTextField.resignFirstResponder()
+            }
+        }
     }
 }
 

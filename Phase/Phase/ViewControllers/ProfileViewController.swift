@@ -169,15 +169,15 @@ extension ProfileViewController: UITableViewDataSource {
             segmentioView: segmentioView,
             segmentioStyle: segmentioStyle
         )
-        segmentioView.selectedSegmentioIndex = selectedSegmentioIndex()
-        segmentioView.valueDidChange = { [weak self] _, segmentIndex in
-            print(segmentIndex) //TODO
-        }
+//        segmentioView.selectedSegmentioIndex = selectedSegmentioIndex()
+//        segmentioView.valueDidChange = { [weak self] _, segmentIndex in
+//            print(segmentIndex) //TODO
+//        }
         v.addSubview(segmentioView)
         v.addSubview(line)
-        segmentioView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
-        }
+//        segmentioView.snp.makeConstraints { (make) in
+//            make.edges.equalToSuperview()
+//        }
         
         return v
     }

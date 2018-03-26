@@ -16,11 +16,7 @@ class DynamoDBManager {
     
     let mapper = AWSDynamoDBObjectMapper.default()
     
-<<<<<<< HEAD
     func createJourney() {
-=======
-//    func createJourney() {
->>>>>>> d00147f71ef4ee18f36c402105a06972ee0f780f
 //
 //        let newJourney: Journey = Journey()
 //        newJourney._journeyId
@@ -52,13 +48,7 @@ class DynamoDBManager {
 //            }
 //            return nil
 //        }
-<<<<<<< HEAD
-        
-=======
-    
->>>>>>> d00147f71ef4ee18f36c402105a06972ee0f780f
-        
-        
+
         //        mapper.load(Test.self, hashKey: "3123123", rangeKey: nil).continueWith { (task) -> Any? in
         //            if let error = task.error {
         //                print(error)
@@ -73,5 +63,6 @@ class DynamoDBManager {
 //
 //    }
 //
+    }
 }
 
