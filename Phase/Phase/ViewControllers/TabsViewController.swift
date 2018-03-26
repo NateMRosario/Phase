@@ -12,6 +12,11 @@ class TabsViewController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        presentingViewController?.dismiss(animated: false, completion: { () in
+            print("yo")
+        })
+        
         self.tabBar.barTintColor = UIColor.white
                 
         // Profile VC

@@ -205,7 +205,7 @@
                                 </constraints>
                             </stackView>
                             <button opaque="NO" alpha="0.90000000000000002" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="y2y-Ti-YSl">
-                                <rect key="frame" x="227" y="20" width="132" height="33"/>
+                                <rect key="frame" x="227" y="36" width="132" height="33"/>
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="17"/>
                                 <state key="normal" title="Create Account">
                                     <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -221,7 +221,7 @@
                             <constraint firstItem="F4p-hD-dcy" firstAttribute="top" secondItem="Pwl-Pq-N5p" secondAttribute="top" id="4EJ-XW-bE6"/>
                             <constraint firstItem="zpO-A9-yN5" firstAttribute="bottom" secondItem="Din-M7-jhL" secondAttribute="bottom" id="5lK-tM-8Zg"/>
                             <constraint firstItem="sd1-HP-ijs" firstAttribute="centerX" secondItem="Pwl-Pq-N5p" secondAttribute="centerX" id="7KA-1N-2xD"/>
-                            <constraint firstItem="y2y-Ti-YSl" firstAttribute="top" secondItem="Din-M7-jhL" secondAttribute="top" id="8pp-5T-Oca"/>
+                            <constraint firstItem="y2y-Ti-YSl" firstAttribute="top" secondItem="Din-M7-jhL" secondAttribute="top" constant="16" id="8pp-5T-Oca"/>
                             <constraint firstItem="hgE-Ez-Rd5" firstAttribute="top" secondItem="Pwl-Pq-N5p" secondAttribute="top" id="AIo-rU-NJs"/>
                             <constraint firstItem="SdL-ap-3jV" firstAttribute="leading" secondItem="Din-M7-jhL" secondAttribute="leading" id="Bfj-hF-T7w"/>
                             <constraint firstItem="zpO-A9-yN5" firstAttribute="height" secondItem="SdL-ap-3jV" secondAttribute="height" id="GRb-82-CX7"/>
@@ -249,7 +249,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ggT-9O-foc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-340" y="251"/>
+            <point key="canvasLocation" x="-340" y="634"/>
         </scene>
         <!--View Controller-->
         <scene sceneID="lte-2x-oy1">
@@ -330,9 +330,9 @@
                                         </constraints>
                                     </stackView>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aXD-7e-Utk">
-                                        <rect key="frame" x="16" y="20" width="114" height="33"/>
+                                        <rect key="frame" x="16" y="36" width="95" height="33"/>
                                         <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="17"/>
-                                        <state key="normal" title="Back to Login">
+                                        <state key="normal" title="Go to Login">
                                             <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
                                         <connections>
@@ -361,7 +361,7 @@
                                     <constraint firstItem="FNr-a3-q70" firstAttribute="leading" secondItem="x4a-Cg-wsq" secondAttribute="leading" constant="16" id="GLe-63-PgZ"/>
                                     <constraint firstItem="PS5-Km-0ix" firstAttribute="trailing" secondItem="x4a-Cg-wsq" secondAttribute="trailing" id="H9Y-4b-Qsx"/>
                                     <constraint firstItem="TEy-hA-CgM" firstAttribute="top" secondItem="i12-wB-xY9" secondAttribute="bottom" constant="16" id="Pip-d7-yEg"/>
-                                    <constraint firstItem="aXD-7e-Utk" firstAttribute="top" secondItem="x4a-Cg-wsq" secondAttribute="top" id="Pkf-vd-uQI"/>
+                                    <constraint firstItem="aXD-7e-Utk" firstAttribute="top" secondItem="x4a-Cg-wsq" secondAttribute="top" constant="16" id="Pkf-vd-uQI"/>
                                     <constraint firstItem="aXD-7e-Utk" firstAttribute="leading" secondItem="x4a-Cg-wsq" secondAttribute="leading" constant="16" id="VND-dp-4Vz"/>
                                     <constraint firstItem="cUJ-eK-zj0" firstAttribute="bottom" secondItem="x4a-Cg-wsq" secondAttribute="bottom" id="XWZ-Me-8gm"/>
                                     <constraint firstItem="TEy-hA-CgM" firstAttribute="leading" secondItem="x4a-Cg-wsq" secondAttribute="leading" id="ZM3-N4-7yM"/>
@@ -391,12 +391,12 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8ue-9H-CnC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="530" y="251"/>
+            <point key="canvasLocation" x="-340" y="-74"/>
         </scene>
-        <!--View Controller-->
+        <!--Forgot Pass View Controller-->
         <scene sceneID="0jP-SP-Guu">
             <objects>
-                <viewController id="QWl-Bc-PcJ" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ForgotPassViewController" id="QWl-Bc-PcJ" customClass="ForgotPassViewController" customModule="Phase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="CWW-NQ-Wdp">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -424,6 +424,9 @@
                                 <state key="normal" title="Send Password Reset">
                                     <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
+                                <connections>
+                                    <action selector="sendResetEmailButton:" destination="QWl-Bc-PcJ" eventType="touchUpInside" id="7UV-Q7-Qap"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="PHASE" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9KL-sH-wgl">
                                 <rect key="frame" x="16" y="123.5" width="343" height="87.5"/>
@@ -438,13 +441,13 @@
                                 <textInputTraits key="textInputTraits"/>
                             </textField>
                             <button opaque="NO" alpha="0.89999997615814209" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cTR-wa-158">
-                                <rect key="frame" x="16" y="20" width="114" height="33"/>
+                                <rect key="frame" x="16" y="36" width="114" height="33"/>
                                 <fontDescription key="fontDescription" type="system" weight="heavy" pointSize="17"/>
                                 <state key="normal" title="Back to Login">
                                     <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
-                                    <segue destination="W9w-zo-pD7" kind="show" id="hTR-ER-x6q"/>
+                                    <action selector="backToLogin:" destination="QWl-Bc-PcJ" eventType="touchUpInside" id="iwU-7f-dJg"/>
                                 </connections>
                             </button>
                         </subviews>
@@ -468,15 +471,18 @@
                             <constraint firstItem="cTR-wa-158" firstAttribute="leading" secondItem="Wcw-bb-RIR" secondAttribute="leading" constant="16" id="n3m-19-AX9"/>
                             <constraint firstItem="Nan-Rn-Pa5" firstAttribute="bottom" secondItem="Wcw-bb-RIR" secondAttribute="bottom" id="rnP-DU-3cB"/>
                             <constraint firstItem="Nan-Rn-Pa5" firstAttribute="trailing" secondItem="Wcw-bb-RIR" secondAttribute="trailing" id="uot-uJ-Nd8"/>
-                            <constraint firstItem="cTR-wa-158" firstAttribute="top" secondItem="Wcw-bb-RIR" secondAttribute="top" id="yx5-8B-i1j"/>
+                            <constraint firstItem="cTR-wa-158" firstAttribute="top" secondItem="Wcw-bb-RIR" secondAttribute="top" constant="16" id="yx5-8B-i1j"/>
                             <constraint firstItem="Wcw-bb-RIR" firstAttribute="trailing" secondItem="9KL-sH-wgl" secondAttribute="trailing" constant="16" id="zuK-ml-Vsf"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Wcw-bb-RIR"/>
                     </view>
+                    <connections>
+                        <outlet property="emailTextField" destination="3O2-Wk-pqC" id="Y7j-dB-6lk"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Tj-hj-rJn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-340" y="982.75862068965523"/>
+            <point key="canvasLocation" x="463" y="634"/>
         </scene>
     </scenes>
     <resources>
@@ -484,6 +490,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="uiX-LO-tCt"/>
-        <segue reference="G7a-cN-RiB"/>
+        <segue reference="a59-Ah-QJU"/>
     </inferredMetricsTieBreakers>
 </document>

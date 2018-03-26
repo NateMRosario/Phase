@@ -43,6 +43,7 @@
 		81817A4420655FE700CA7044 /* RegexParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81817A3F20655FE700CA7044 /* RegexParser.swift */; };
 		81817A472065941C00CA7044 /* NewPost.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81817A462065941C00CA7044 /* NewPost.storyboard */; };
 		81817A49206596CD00CA7044 /* NewPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81817A48206596CD00CA7044 /* NewPostViewController.swift */; };
+		818DBB292066C54300B91990 /* ForgotPassViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 818DBB282066C54300B91990 /* ForgotPassViewController.swift */; };
 		81AB8A96205AD42900A98AFB /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AB8A95205AD42900A98AFB /* ProfileTableViewCell.swift */; };
 		81AB8A98205AEE3B00A98AFB /* TabsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AB8A97205AEE3B00A98AFB /* TabsViewController.swift */; };
 		81AB8A9B205AF64800A98AFB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AB8A9A205AF64800A98AFB /* Constants.swift */; };
@@ -161,6 +162,7 @@
 		81817A3F20655FE700CA7044 /* RegexParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegexParser.swift; sourceTree = "<group>"; };
 		81817A462065941C00CA7044 /* NewPost.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = NewPost.storyboard; sourceTree = "<group>"; };
 		81817A48206596CD00CA7044 /* NewPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPostViewController.swift; sourceTree = "<group>"; };
+		818DBB282066C54300B91990 /* ForgotPassViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForgotPassViewController.swift; sourceTree = "<group>"; };
 		81AB8A95205AD42900A98AFB /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		81AB8A97205AEE3B00A98AFB /* TabsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabsViewController.swift; sourceTree = "<group>"; };
 		81AB8A9A205AF64800A98AFB /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -297,6 +299,7 @@
 			isa = PBXGroup;
 			children = (
 				81817A372064BADE00CA7044 /* OnboardingLoginViewController.swift */,
+				818DBB282066C54300B91990 /* ForgotPassViewController.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -906,6 +909,7 @@
 				81AB8A9B205AF64800A98AFB /* Constants.swift in Sources */,
 				810935882059BD2400A95B30 /* EditProfileView.swift in Sources */,
 				81AB8AB7205AF8EA00A98AFB /* GridViewProtocol.swift in Sources */,
+				818DBB292066C54300B91990 /* ForgotPassViewController.swift in Sources */,
 				81AB8A96205AD42900A98AFB /* ProfileTableViewCell.swift in Sources */,
 				8134CEFE205B72E000A146B1 /* HomeFeedCollectionViewCell.swift in Sources */,
 				81AB8AB9205AF99100A98AFB /* CollectionViewLayout.swift in Sources */,
