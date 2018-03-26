@@ -14,7 +14,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate {
     
     @IBOutlet weak var segmentedViewTop: NSLayoutConstraint!
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var atDisplayNameLabel: UILabel!
+    @IBOutlet weak var username: UILabel!
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var profileView: UIView!
     @IBOutlet weak var handleLabel: UILabel!
@@ -38,6 +38,9 @@ class ProfileViewController: UIViewController, UITableViewDelegate {
     }
     @IBAction func editProfileButtonPressed(_ sender: UIButton) {
         //TODO: Present settingsVC
+    }
+    @IBOutlet weak var subscribeButton: UIButton!
+    @IBAction func subscribeButtonPressed(_ sender: UIButton) {
     }
     
     // At this offset the Header stops its transformations
