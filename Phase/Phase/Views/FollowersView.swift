@@ -10,6 +10,9 @@ import UIKit
 
 class FollowersView: UIView {
     
+    // Custom Delegate
+    weak var delegate: FollowersViewDelegate?
+    
     // MARK: - Lazy Properties
     lazy var followerOneImageView: UIImageView = {
         let imageView = UIImageView()
@@ -19,6 +22,7 @@ class FollowersView: UIView {
         imageView.clipsToBounds = true
         imageView.layer.borderWidth = 0.5
         imageView.layer.borderColor = UIColor.gray.cgColor
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(followerImageViewTapped))
         return imageView
     }()
     
@@ -30,6 +34,7 @@ class FollowersView: UIView {
         imageView.clipsToBounds = true
         imageView.layer.borderWidth = 0.5
         imageView.layer.borderColor = UIColor.gray.cgColor
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(followerImageViewTapped))
         return imageView
     }()
     
@@ -41,6 +46,7 @@ class FollowersView: UIView {
         imageView.clipsToBounds = true
         imageView.layer.borderWidth = 0.5
         imageView.layer.borderColor = UIColor.gray.cgColor
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(followerImageViewTapped))
         return imageView
     }()
     
@@ -52,6 +58,7 @@ class FollowersView: UIView {
         imageView.clipsToBounds = true
         imageView.layer.borderWidth = 0.5
         imageView.layer.borderColor = UIColor.gray.cgColor
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(followerImageViewTapped))
         return imageView
     }()
     
@@ -63,6 +70,7 @@ class FollowersView: UIView {
         imageView.clipsToBounds = true
         imageView.layer.borderWidth = 0.5
         imageView.layer.borderColor = UIColor.gray.cgColor
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(followerImageViewTapped))
         return imageView
     }()
     
@@ -76,6 +84,7 @@ class FollowersView: UIView {
         button.titleLabel?.minimumScaleFactor = 2
         button.contentEdgeInsets = UIEdgeInsetsMake(8, 8, 8, 8)
         button.clipsToBounds = true
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(moreFollowersButtonTapped))
         return button
     }()
     
@@ -121,6 +130,17 @@ class FollowersView: UIView {
         return percentage
     }
     
+    @objc public func followerImageViewTapped(sender: UIImageView, target:UIViewController) {
+        print("followerImageViewTapped")
+        delegate?.followerImageViewTapped()
+    }
+    
+    @objc public func moreFollowersButtonTapped(sender: UIImageView, target:UIViewController) {
+        print("moreFollowersButtonTapped")
+        delegate?.moreFollowersButtonTapped()
+    }
+    
+    // MARK: - Constraints
     private func setupFollowerOneImageView() {
         addSubview(followerOneImageView)
         followerOneImageView.snp.makeConstraints { (make) in
@@ -181,5 +201,9 @@ class FollowersView: UIView {
         }
     }
     
-    
+}
+
+protocol FollowersViewDelegate: class {
+    func followerImageViewTapped()
+    func moreFollowersButtonTapped()
 }

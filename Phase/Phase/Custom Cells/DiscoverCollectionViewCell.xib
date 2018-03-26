@@ -23,20 +23,8 @@
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="zd8-Jp-r1f">
                         <rect key="frame" x="0.0" y="0.0" width="227" height="410"/>
                         <subviews>
-                            <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" axis="vertical" distribution="fillProportionally" translatesAutoresizingMaskIntoConstraints="NO" id="eMe-yL-bbD">
+                            <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFill" axis="vertical" distribution="fillProportionally" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eMe-yL-bbD">
                                 <rect key="frame" x="0.0" y="0.0" width="227" height="400"/>
-                                <subviews>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="749" translatesAutoresizingMaskIntoConstraints="NO" id="HWh-f4-vir">
-                                        <rect key="frame" x="0.0" y="0.0" width="227" height="133.5"/>
-                                        <color key="backgroundColor" white="0.71999999999999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                    </imageView>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="YMS-hV-ioS">
-                                        <rect key="frame" x="0.0" y="133.5" width="227" height="133"/>
-                                    </imageView>
-                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2Lb-jb-Nh5">
-                                        <rect key="frame" x="0.0" y="266.5" width="227" height="133.5"/>
-                                    </imageView>
-                                </subviews>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -135,9 +123,6 @@
             <size key="customSize" width="227" height="469"/>
             <connections>
                 <outlet property="bottomWhiteSpace" destination="A8f-wf-ygt" id="fcA-Ay-nzs"/>
-                <outlet property="content3" destination="2Lb-jb-Nh5" id="OJm-Rj-Djq"/>
-                <outlet property="contentImageView" destination="HWh-f4-vir" id="eH0-JS-kAs"/>
-                <outlet property="contentTwo" destination="YMS-hV-ioS" id="1dS-cw-x1B"/>
                 <outlet property="extraWhiteSpace" destination="sFF-oM-fGJ" id="iCe-i2-0Ub"/>
                 <outlet property="profileImage" destination="lwW-B6-mzy" id="des-Rh-vOW"/>
                 <outlet property="stackView" destination="eMe-yL-bbD" id="WaG-9i-g3p"/>

@@ -16,8 +16,11 @@ target 'Phase' do
   pod 'AWSCognitoAuth'
   pod 'AWSUserPoolsSignIn'
   pod 'AWSDynamoDB'
+  pod 'AWSS3'
   pod 'ADMozaicCollectionViewLayout', '~> 4.0'
   pod 'Segmentio'
+  pod 'DGElasticPullToRefresh'
+  pod 'PageMenu'
   
   target 'PhaseTests' do
     inherit! :search_paths

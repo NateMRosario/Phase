@@ -44,7 +44,7 @@ class CollectionViewLayout: UICollectionViewLayout {
         if number == 1 {
             configuration.sectionInsets.right = 0
         } else {
-            configuration.sectionInsets.right = 16
+            configuration.sectionInsets.right = 8
         }
         columnContainer = ColumnContainer(number: number, configuration: configuration)
         super.init()

@@ -35,7 +35,7 @@ class CameraViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setupNav()
         setupCaptureSession()
         view.addSubview(cameraView)
         setupDevices()
@@ -61,6 +61,14 @@ class CameraViewController: UIViewController {
     }
     
     //MARK:- Functions
+    func setupNav() {
+        let newJourneyButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewJourney(_:)))
+        self.navigationItem.rightBarButtonItem = newJourneyButton
+    }
+    
+    @objc func addNewJourney(_ sender: UIBarButtonItem) {
+        
+    }
     
     // This function sets up a switch to change the camera in use depending on current position when called.
     private func setUpCaptureSessionInput(position: AVCaptureDevice.Position) {
@@ -125,7 +133,6 @@ class CameraViewController: UIViewController {
         if let currentInput = captureSession.inputs.first {
             captureSession.removeInput(currentInput)
         }
-        
         do {
             let captureDeviceInput = try AVCaptureDeviceInput(device: currentCamera!)
             captureSession.addInput(captureDeviceInput)
