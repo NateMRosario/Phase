@@ -48,6 +48,8 @@
 		81817A4320655FE700CA7044 /* ActiveType.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81817A3E20655FE700CA7044 /* ActiveType.swift */; };
 		81817A4420655FE700CA7044 /* RegexParser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81817A3F20655FE700CA7044 /* RegexParser.swift */; };
 		818DBB6620694FBC00B91990 /* ActiveLabel.h in Sources */ = {isa = PBXBuildFile; fileRef = 81817A3A20655FE600CA7044 /* ActiveLabel.h */; };
+		818DBB6A206980A500B91990 /* NotificationsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 818DBB69206980A500B91990 /* NotificationsViewController.swift */; };
+		818DBB6C206980B400B91990 /* Notifications.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 818DBB6B206980B400B91990 /* Notifications.storyboard */; };
 		81AB8A96205AD42900A98AFB /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AB8A95205AD42900A98AFB /* ProfileTableViewCell.swift */; };
 		81AB8A98205AEE3B00A98AFB /* TabsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AB8A97205AEE3B00A98AFB /* TabsViewController.swift */; };
 		81AB8A9B205AF64800A98AFB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AB8A9A205AF64800A98AFB /* Constants.swift */; };
@@ -170,6 +172,8 @@
 		81817A3D20655FE600CA7044 /* ActiveLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActiveLabel.swift; sourceTree = "<group>"; };
 		81817A3E20655FE700CA7044 /* ActiveType.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActiveType.swift; sourceTree = "<group>"; };
 		81817A3F20655FE700CA7044 /* RegexParser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegexParser.swift; sourceTree = "<group>"; };
+		818DBB69206980A500B91990 /* NotificationsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationsViewController.swift; sourceTree = "<group>"; };
+		818DBB6B206980B400B91990 /* Notifications.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Notifications.storyboard; sourceTree = "<group>"; };
 		81AB8A95205AD42900A98AFB /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		81AB8A97205AEE3B00A98AFB /* TabsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabsViewController.swift; sourceTree = "<group>"; };
 		81AB8A9A205AF64800A98AFB /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -545,6 +549,7 @@
 				81DD11BD2061BC4100A9AD1A /* CameraPreviewViewController.swift */,
 				8791270A206341BC00888326 /* ActivityCarouselViewController.swift */,
 				81817A392064CAAE00CA7044 /* SearchVCs */,
+				818DBB69206980A500B91990 /* NotificationsViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -570,6 +575,7 @@
 				81C1F87C2060AC410037BF42 /* Main.storyboard */,
 				81C279DB2061F74B00DB1825 /* Login.storyboard */,
 				81CA1BE4206442E600EF7B8E /* SearchVCs.storyboard */,
+				818DBB6B206980B400B91990 /* Notifications.storyboard */,
 			);
 			path = Storyboards;
 			sourceTree = "<group>";
@@ -709,6 +715,7 @@
 				81AB8ACB205AFC7A00A98AFB /* DiscoverCollectionViewCell.xib in Resources */,
 				8134CF02205C4A4F00A146B1 /* HomeFeedCollectionViewCell.xib in Resources */,
 				81C9EE1C2058795200C27016 /* Assets.xcassets in Resources */,
+				818DBB6C206980B400B91990 /* Notifications.storyboard in Resources */,
 				8134CF00205C47EB00A146B1 /* HomeFeed.storyboard in Resources */,
 				81C1F8792060AC240037BF42 /* JourneyTableViewCell.xib in Resources */,
 				81C1F87D2060AC410037BF42 /* DiscoverDetail.storyboard in Resources */,
@@ -974,6 +981,7 @@
 				810935D8206010F600A95B30 /* AuthNavigationController.swift in Sources */,
 				81C9EE152058795200C27016 /* AppDelegate.swift in Sources */,
 				81C279CF20616D3900DB1825 /* DiscoveryNavViewController.swift in Sources */,
+				818DBB6A206980A500B91990 /* NotificationsViewController.swift in Sources */,
 				8128B47C206951B2009E0629 /* Event.swift in Sources */,
 				81DC9F022058B210005F2724 /* ProfileViewController.swift in Sources */,
 				810935742059BAAC00A95B30 /* ActivityViewController.swift in Sources */,
