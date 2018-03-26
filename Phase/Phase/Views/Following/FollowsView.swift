@@ -12,7 +12,7 @@ class FollowsView: UIView {
     
     lazy var pagingCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        let cv = UICollectionView(frame: frame, collectionViewLayout: layout)
+        let cv = UICollectionView(frame: UIScreen.main.bounds, collectionViewLayout: layout)
         cv.backgroundColor = .white
         layout.scrollDirection = .horizontal
         layout.minimumLineSpacing = 0
@@ -63,4 +63,5 @@ extension UIColor {
         )
     }
 }
+
 

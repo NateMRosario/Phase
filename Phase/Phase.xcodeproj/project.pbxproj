@@ -34,11 +34,13 @@
 		810DF96F2064051200B426BB /* FollowsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810DF96E2064051200B426BB /* FollowsCollectionViewCell.swift */; };
 		810DF97120640EE700B426BB /* MenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810DF97020640EE700B426BB /* MenuBar.swift */; };
 		810DF9742064172100B426BB /* MenuCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810DF9732064172100B426BB /* MenuCollectionCell.swift */; };
+		810DF97B2065572800B426BB /* FollowingTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810DF97A2065572800B426BB /* FollowingTableCell.swift */; };
 		8134CEFE205B72E000A146B1 /* HomeFeedCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8134CEFD205B72E000A146B1 /* HomeFeedCollectionViewCell.swift */; };
 		8134CF00205C47EB00A146B1 /* HomeFeed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8134CEFF205C47EB00A146B1 /* HomeFeed.storyboard */; };
 		8134CF02205C4A4F00A146B1 /* HomeFeedCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8134CF01205C4A4F00A146B1 /* HomeFeedCollectionViewCell.xib */; };
 		8134CF0620615EE700A146B1 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8134CF0520615EE700A146B1 /* LoginView.swift */; };
 		8134CF0820615EF200A146B1 /* CreateAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8134CF0720615EF200A146B1 /* CreateAccountView.swift */; };
+		8187A145206589EC004DB6C2 /* FollowingTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8187A144206589EC004DB6C2 /* FollowingTableCell.xib */; };
 		81AB8A96205AD42900A98AFB /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AB8A95205AD42900A98AFB /* ProfileTableViewCell.swift */; };
 		81AB8A98205AEE3B00A98AFB /* TabsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AB8A97205AEE3B00A98AFB /* TabsViewController.swift */; };
 		81AB8A9B205AF64800A98AFB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AB8A9A205AF64800A98AFB /* Constants.swift */; };
@@ -139,11 +141,13 @@
 		810DF96E2064051200B426BB /* FollowsCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowsCollectionViewCell.swift; sourceTree = "<group>"; };
 		810DF97020640EE700B426BB /* MenuBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuBar.swift; sourceTree = "<group>"; };
 		810DF9732064172100B426BB /* MenuCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCollectionCell.swift; sourceTree = "<group>"; };
+		810DF97A2065572800B426BB /* FollowingTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowingTableCell.swift; sourceTree = "<group>"; };
 		8134CEFD205B72E000A146B1 /* HomeFeedCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeFeedCollectionViewCell.swift; sourceTree = "<group>"; };
 		8134CEFF205C47EB00A146B1 /* HomeFeed.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HomeFeed.storyboard; sourceTree = "<group>"; };
 		8134CF01205C4A4F00A146B1 /* HomeFeedCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeFeedCollectionViewCell.xib; sourceTree = "<group>"; };
 		8134CF0520615EE700A146B1 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginView.swift; path = Auth/LoginView.swift; sourceTree = "<group>"; };
 		8134CF0720615EF200A146B1 /* CreateAccountView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreateAccountView.swift; path = Auth/CreateAccountView.swift; sourceTree = "<group>"; };
+		8187A144206589EC004DB6C2 /* FollowingTableCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FollowingTableCell.xib; sourceTree = "<group>"; };
 		81AB8A95205AD42900A98AFB /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		81AB8A97205AEE3B00A98AFB /* TabsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabsViewController.swift; sourceTree = "<group>"; };
 		81AB8A9A205AF64800A98AFB /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -282,6 +286,8 @@
 			children = (
 				810DF96E2064051200B426BB /* FollowsCollectionViewCell.swift */,
 				810DF9732064172100B426BB /* MenuCollectionCell.swift */,
+				810DF97A2065572800B426BB /* FollowingTableCell.swift */,
+				8187A144206589EC004DB6C2 /* FollowingTableCell.xib */,
 			);
 			path = FollowingCells;
 			sourceTree = "<group>";
@@ -446,13 +452,13 @@
 				8134CF0720615EF200A146B1 /* CreateAccountView.swift */,
 				810935CE205C45B700A95B30 /* Auth */,
 				810935832059BCDD00A95B30 /* ActivityView.swift */,
-				810DF97220640EF400B426BB /* Following */,
 				810935872059BD2400A95B30 /* EditProfileView.swift */,
 				810935892059BD5800A95B30 /* SearchView.swift */,
 				8109358B2059BD6500A95B30 /* CreateNewPostView.swift */,
 				8791DFDA2060171F00337CA3 /* FollowersView.swift */,
 				81DD11C12061BC8A00A9AD1A /* CameraView.swift */,
 				81DD11C32061BC9400A9AD1A /* CapturedImageView.swift */,
+				810DF97220640EF400B426BB /* Following */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -639,6 +645,7 @@
 				81C1F87D2060AC410037BF42 /* DiscoverDetail.storyboard in Resources */,
 				81C1F87F2060AC410037BF42 /* Main.storyboard in Resources */,
 				81C9EE1C2058795200C27016 /* Assets.xcassets in Resources */,
+				8187A145206589EC004DB6C2 /* FollowingTableCell.xib in Resources */,
 				81C1F8782060AC240037BF42 /* MozaikCollectionViewCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -908,6 +915,7 @@
 				F48DA6BD20588ACD006E4FFC /* User.swift in Sources */,
 				81CFD3F62058824700DDD630 /* Models.swift in Sources */,
 				81DD11C42061BC9500A9AD1A /* CapturedImageView.swift in Sources */,
+				810DF97B2065572800B426BB /* FollowingTableCell.swift in Sources */,
 				810935D2205C45E000A95B30 /* ForgotPasswordView.swift in Sources */,
 				81AB8AB0205AF75D00A98AFB /* UIViewController+Extensions.swift in Sources */,
 				810DF96F2064051200B426BB /* FollowsCollectionViewCell.swift in Sources */,

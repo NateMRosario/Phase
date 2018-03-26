@@ -20,8 +20,11 @@ class MenuBar: UIView {
     }()
     
     var followsVC: FollowsViewController?
+    let menuNames = ["Following", "Followers"]
     
-    let menuNames = ["Subscribed", "Following", "Subscribers", "Followers"]
+    ///Four tabs - User and Journeys
+//    let menuNames = ["Subscribed", "Following", "Subscribers", "Followers"]
+    
     let selectedIndexPath = IndexPath(row: 0, section: 0) //Starting position for the menuBar
     
     override init(frame: CGRect) {
@@ -58,7 +61,7 @@ class MenuBar: UIView {
         horizontalBarLeftConstraint = horizontalBarView.leftAnchor.constraint(equalTo: self.leftAnchor)
         horizontalBarLeftConstraint.isActive = true
         horizontalBarView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-        horizontalBarView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.25).isActive = true
+        horizontalBarView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 0.50).isActive = true // Number of tabs: 0.5 = 2, 0.25 = 4
         horizontalBarView.heightAnchor.constraint(equalToConstant: 4).isActive = true
         
         
@@ -80,10 +83,10 @@ extension MenuBar : UICollectionViewDataSource {
 }
 extension MenuBar: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        followsVC?.scrollToMenuIndex(menuIndex: indexPath.item)
+        followsVC?.scrollToMenuIndex(menuIndex: indexPath.item)        
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: frame.width / 4, height: frame.height)
+        return CGSize(width: frame.width / 2, height: frame.height)
     }
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return 0
