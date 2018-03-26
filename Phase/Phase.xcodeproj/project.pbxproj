@@ -306,7 +306,6 @@
 				81C1F8732060AC240037BF42 /* MozaikCollectionViewCell.swift */,
 				81C1F8742060AC240037BF42 /* MozaikCollectionViewCell.xib */,
 				810DF96C2062A64C00B426BB /* FollowsTableViewCell.swift */,
-				810DF9752064172800B426BB /* FollowingCells */,
 			);
 			path = "Custom Cells";
 			sourceTree = "<group>";
@@ -458,7 +457,6 @@
 				8791DFDA2060171F00337CA3 /* FollowersView.swift */,
 				81DD11C12061BC8A00A9AD1A /* CameraView.swift */,
 				81DD11C32061BC9400A9AD1A /* CapturedImageView.swift */,
-				810DF97220640EF400B426BB /* Following */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -472,7 +470,6 @@
 				810935C7205C436300A95B30 /* Auth */,
 				810935712059BA8400A95B30 /* HomeViewController.swift */,
 				810935732059BAAC00A95B30 /* ActivityViewController.swift */,
-				810935752059BB0D00A95B30 /* FollowsViewController.swift */,
 				810935772059BB9200A95B30 /* EditProfileViewController.swift */,
 				810935792059BBD300A95B30 /* SearchViewController.swift */,
 				8109357B2059BBF600A95B30 /* CreateNewPostViewController.swift */,
@@ -489,6 +486,9 @@
 				81C9EE1B2058795200C27016 /* Assets.xcassets */,
 				810935D520600D6600A95B30 /* awsconfiguration.json */,
 				81C9EE202058795200C27016 /* Info.plist */,
+				810935752059BB0D00A95B30 /* FollowsViewController.swift */,
+				810DF97220640EF400B426BB /* Following */,
+				810DF9752064172800B426BB /* FollowingCells */,
 			);
 			path = SupportingFiles;
 			sourceTree = "<group>";
