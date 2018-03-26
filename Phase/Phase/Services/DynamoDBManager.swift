@@ -14,38 +14,40 @@ class DynamoDBManager {
     static let shared = DynamoDBManager()
     private init() {}
     
+    let mapper = AWSDynamoDBObjectMapper.default()
+    
     func createJourney() {
         
-        let mapper = AWSDynamoDBObjectMapper.default()
+        let newJourney: Journey = Journey()
+        newJourney._journeyId
+        newJourney._creationDate
+        newJourney._isOriginal = true
         
-        //let newTest: Test = Test()
-//        newTest._userId = UUID.init().uuidString
-//        newTest._foo = "please work!"
         
-//        mapper.save(newTest).continueWith { (task) -> Any? in
-//            if let error = task.error {
-//                print(error)
-//            } else {
-//                print("success")
-//                print(task.result?.description)
-//                let exp = AWSDynamoDBScanExpression()
-//                exp.limit = 10
-//
-//                mapper.scan(Test.self, expression: exp).continueWith { (task) -> Any? in
-//                    if let error = task.error {
-//                        print(error)
-//                    } else if let output = task.result {
-//                        for test in output.items {
-//                            print(test)
-//                        }
-//                    }
-//                    return nil
-//                }
-//
-//
-//            }
-//            return nil
-//        }
+        mapper.save(newTest).continueWith { (task) -> Any? in
+            if let error = task.error {
+                print(error)
+            } else {
+                print("success")
+                print(task.result?.description)
+                let exp = AWSDynamoDBScanExpression()
+                exp.limit = 10
+
+                mapper.scan(Test.self, expression: exp).continueWith { (task) -> Any? in
+                    if let error = task.error {
+                        print(error)
+                    } else if let output = task.result {
+                        for test in output.items {
+                            print(test)
+                        }
+                    }
+                    return nil
+                }
+
+
+            }
+            return nil
+        }
         
         
         
