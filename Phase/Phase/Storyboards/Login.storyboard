@@ -197,7 +197,7 @@
                                         <rect key="frame" x="0.0" y="62" width="281" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                        <textInputTraits key="textInputTraits"/>
+                                        <textInputTraits key="textInputTraits" enablesReturnKeyAutomatically="YES"/>
                                     </textField>
                                 </subviews>
                                 <constraints>
@@ -255,10 +255,10 @@
             </objects>
             <point key="canvasLocation" x="-340" y="634"/>
         </scene>
-        <!--View Controller-->
+        <!--Sign Up View Controller-->
         <scene sceneID="lte-2x-oy1">
             <objects>
-                <viewController id="HE9-cW-86C" sceneMemberID="viewController">
+                <viewController id="HE9-cW-86C" customClass="SignUpViewController" customModule="Phase" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="Dao-MH-Sxw">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -289,6 +289,9 @@
                                         <state key="normal" title="SIGN UP">
                                             <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         </state>
+                                        <connections>
+                                            <action selector="signUp:" destination="HE9-cW-86C" eventType="touchUpInside" id="41H-NF-mMU"/>
+                                        </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cUJ-eK-zj0">
                                         <rect key="frame" x="0.0" y="627" width="375" height="40"/>
@@ -308,7 +311,7 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="32" translatesAutoresizingMaskIntoConstraints="NO" id="Eit-l9-an6">
-                                        <rect key="frame" x="47" y="243" width="281" height="154"/>
+                                        <rect key="frame" x="47" y="243" width="281" height="216"/>
                                         <subviews>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Tzd-Fm-U8x">
                                                 <rect key="frame" x="0.0" y="0.0" width="281" height="30"/>
@@ -324,6 +327,12 @@
                                             </textField>
                                             <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="EqA-38-avp">
                                                 <rect key="frame" x="0.0" y="124" width="281" height="30"/>
+                                                <nil key="textColor"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <textInputTraits key="textInputTraits"/>
+                                            </textField>
+                                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Onf-gW-aSe">
+                                                <rect key="frame" x="0.0" y="186" width="281" height="30"/>
                                                 <nil key="textColor"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                 <textInputTraits key="textInputTraits"/>
@@ -392,6 +401,12 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Cos-Ve-a41"/>
                     </view>
+                    <connections>
+                        <outlet property="email" destination="mQ6-6G-Rx4" id="OJr-aF-cLh"/>
+                        <outlet property="fullName" destination="EqA-38-avp" id="ULX-Xl-kZV"/>
+                        <outlet property="password" destination="Onf-gW-aSe" id="Bd4-fO-fHw"/>
+                        <outlet property="userName" destination="Tzd-Fm-U8x" id="t0d-vi-d2F"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8ue-9H-CnC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
