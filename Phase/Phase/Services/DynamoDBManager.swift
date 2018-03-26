@@ -19,50 +19,24 @@ class DynamoDBManager {
     func createJourney() {
         
         let newJourney: Journey = Journey()
-        newJourney._journeyId
-        newJourney._creationDate
+        newJourney._journeyId = UUID().uuidString
+        newJourney._creationDate = Date().timeIntervalSinceReferenceDate as NSNumber
         newJourney._isOriginal = true
         
-        
-        mapper.save(newTest).continueWith { (task) -> Any? in
-            if let error = task.error {
+        mapper.save(newJourney) { (error) in
+            if let error = error {
                 print(error)
             } else {
-                print("success")
-                print(task.result?.description)
-                let exp = AWSDynamoDBScanExpression()
-                exp.limit = 10
-
-                mapper.scan(Test.self, expression: exp).continueWith { (task) -> Any? in
-                    if let error = task.error {
-                        print(error)
-                    } else if let output = task.result {
-                        for test in output.items {
-                            print(test)
-                        }
-                    }
-                    return nil
-                }
-
-
+                print("success creating journey")
             }
-            return nil
         }
         
-        
-        
-        //        mapper.load(Test.self, hashKey: "3123123", rangeKey: nil).continueWith { (task) -> Any? in
-        //            if let error = task.error {
-        //                print(error)
-        //            } else {
-        //                print(task.result?.description)
-        //            }
-        //            return nil
-        //        }
-        
-        
-        
+    }
+    
+    func updateJourney() {
         
     }
+    
+    
     
 }

@@ -27,6 +27,11 @@ class CognitoManager {
     var pool: AWSCognitoIdentityUserPool!
     var user: AWSCognitoIdentityUser?
     
+    func isUserSignedIn() -> Bool {
+        user = pool.getUser()
+        return user!.isSignedIn
+    }
+    
     func signUp(username: String, email: String, password: String, completion: @escaping (Error?) -> Void) {
         
         let emailAttribute = AWSCognitoIdentityUserAttributeType(name: "email", value: email)
@@ -67,7 +72,6 @@ class CognitoManager {
                 print(error)
             } else {
                 print(task.result?.description() ?? "user get details success block reached")
-                DynamoDBManager.shared.createJourney()
             }
             return nil
         })
@@ -85,7 +89,15 @@ class CognitoManager {
     
     func forgotPassword(username: String) {
         user = pool.getUser(username)
-
+        user?.forgotPassword().continueWith(block: { (task) -> Any? in
+            if let error = task.error {
+                print(error)
+                
+            } else {
+                print(task.result?.description() ?? "forgot password success block reached")
+            }
+            return nil
+        })
     }
     
 }
