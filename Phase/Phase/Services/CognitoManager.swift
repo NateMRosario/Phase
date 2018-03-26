@@ -27,35 +27,41 @@ class CognitoManager {
     var pool: AWSCognitoIdentityUserPool!
     var user: AWSCognitoIdentityUser?
     
-    func signUp(username: String, email: String, password: String) {
+    func signUp(username: String, email: String, password: String, completion: @escaping (Error?) -> Void) {
         
         let emailAttribute = AWSCognitoIdentityUserAttributeType(name: "email", value: email)
         
         pool.signUp(username, password: password, userAttributes: [emailAttribute], validationData: nil).continueWith { (task) -> Any? in
             if let error = task.error {
                 print(error)
+                completion(error)
             } else {
                 print(task.result?.description ?? "pool sign up success block reached")
+                completion(nil)
             }
             return nil
         }
     }
     
-    func signIn(username: String, password: String) {
+    func signIn(username: String, password: String, completion: @escaping (Error?) -> Void) {
         user = pool.getUser()
         
         user?.getSession(username, password: password, validationData: nil)
             .continueWith(block: { (task) -> Any? in
                 if let error = task.error {
                     print(error)
+                    completion(error)
                 } else {
                     print(task.result?.description ?? "sign in success block reached")
+                    completion(nil)
                 }
                 return nil
             })
-        
-        print(user?.username ?? "no username")
-        
+    }
+    
+    func getDetails() {
+        user = pool.getUser()
+
         user?.getDetails().continueOnSuccessWith(block: { (task) -> Any? in
             if let error = task.error {
                 print(error)
@@ -67,9 +73,19 @@ class CognitoManager {
         })
     }
     
+    func verify(username: String, code: String) {
+        user = pool.getUser(username)
+        user?.confirmSignUp(code)
+    }
+    
     func signOut() {
         user = pool.getUser()
         user?.signOut()
+    }
+    
+    func forgotPassword(username: String) {
+        user = pool.getUser(username)
+
     }
     
 }
