@@ -22,7 +22,9 @@ class OnboardingLoginViewController: UIViewController {
             if let error = error {
                 self.showAlert(title: "Error", message: "\(error.localizedDescription)")
             } else {
-                self.present(TabsViewController.instantiate(withStoryboard: "Main"), animated: true, completion: nil)
+                DispatchQueue.main.async {
+                    self.present(TabsViewController.instantiate(withStoryboard: "Main"), animated: true, completion: nil)
+                }
             }
         }
     }

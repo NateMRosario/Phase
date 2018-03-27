@@ -12,12 +12,12 @@ import SnapKit
 class EventViewController: UIViewController {
     
     // MARK: - Properties
-    var posts = [Post]() {
-        didSet {
-            dump(posts)
-            eventView.eventCollectionView.reloadData()
-        }
-    }
+//    var posts = [Post]() {
+//        didSet {
+//            dump(posts)
+//            eventView.eventCollectionView.reloadData()
+//        }
+//    }
     
     private let eventView = EventView()
     private let followersView = FollowersView()
