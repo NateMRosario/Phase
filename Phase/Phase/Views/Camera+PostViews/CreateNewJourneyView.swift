@@ -9,7 +9,7 @@
 import UIKit
 import Material
 
-class AddJourneyView: UIView {
+class CreateNewJourneyView: UIView {
     
     lazy var headerBackground: UIImageView = {
         let header = UIImageView()
