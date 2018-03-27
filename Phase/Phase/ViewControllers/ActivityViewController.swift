@@ -11,14 +11,6 @@ import SnapKit
 
 class ActivityViewController: UIViewController {
     
-    // MARK: - Properties
-    var posts = [Post]() {
-        didSet {
-            dump(posts)
-            activityView.activityCollectionView.reloadData()
-        }
-    }
-    
     private let activityView = ActivityView()
     private let followersView = FollowersView()
     
