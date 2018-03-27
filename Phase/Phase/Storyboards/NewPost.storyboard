@@ -6,7 +6,6 @@
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
-        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -19,42 +18,43 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="5Mm-FH-NSn">
-                                <rect key="frame" x="47" y="152" width="281" height="30"/>
-                                <nil key="textColor"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                <textInputTraits key="textInputTraits"/>
-                            </textField>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DBN-bY-aIC">
-                                <rect key="frame" x="164" y="198" width="46" height="30"/>
+                                <rect key="frame" x="164" y="318.5" width="46" height="30"/>
                                 <state key="normal" title="Button"/>
                                 <connections>
                                     <action selector="postButton:" destination="ufx-wr-gDl" eventType="touchUpInside" id="e4R-wq-Oou"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hni-4x-HYe" customClass="ActiveLabel" customModule="Phase" customModuleProvider="target">
-                                <rect key="frame" x="46.5" y="190" width="281" height="0.0"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="asfadf" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hni-4x-HYe" customClass="ActiveLabel" customModule="Phase" customModuleProvider="target">
+                                <rect key="frame" x="163" y="289.5" width="48" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="uCr-WP-5Qf">
+                                <rect key="frame" x="16" y="70" width="343" height="209.5"/>
+                                <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                         <constraints>
-                            <constraint firstItem="5Mm-FH-NSn" firstAttribute="width" secondItem="x7F-3m-aCe" secondAttribute="width" multiplier="0.75" id="4yj-of-SSj"/>
-                            <constraint firstItem="hni-4x-HYe" firstAttribute="width" secondItem="5Mm-FH-NSn" secondAttribute="width" id="Hci-0U-YDk"/>
-                            <constraint firstItem="hni-4x-HYe" firstAttribute="top" secondItem="5Mm-FH-NSn" secondAttribute="bottom" constant="8" id="QWh-cJ-X6k"/>
-                            <constraint firstItem="5Mm-FH-NSn" firstAttribute="centerX" secondItem="x7F-3m-aCe" secondAttribute="centerX" id="Udq-bD-jro"/>
+                            <constraint firstItem="uCr-WP-5Qf" firstAttribute="top" secondItem="wf7-Ur-Cwt" secondAttribute="top" constant="50" id="1es-fd-SaM"/>
+                            <constraint firstItem="uCr-WP-5Qf" firstAttribute="centerX" secondItem="x7F-3m-aCe" secondAttribute="centerX" id="1vS-bQ-9mQ"/>
+                            <constraint firstItem="uCr-WP-5Qf" firstAttribute="leading" secondItem="wf7-Ur-Cwt" secondAttribute="leading" constant="16" id="5Uh-ON-fN1"/>
                             <constraint firstItem="DBN-bY-aIC" firstAttribute="centerX" secondItem="x7F-3m-aCe" secondAttribute="centerX" id="Unv-AP-KHb"/>
-                            <constraint firstItem="5Mm-FH-NSn" firstAttribute="centerY" secondItem="x7F-3m-aCe" secondAttribute="centerY" multiplier="0.5" id="bWk-zF-bKz"/>
+                            <constraint firstItem="wf7-Ur-Cwt" firstAttribute="trailing" secondItem="uCr-WP-5Qf" secondAttribute="trailing" constant="16" id="Y74-IG-bqj"/>
+                            <constraint firstItem="hni-4x-HYe" firstAttribute="top" secondItem="uCr-WP-5Qf" secondAttribute="bottom" constant="10" id="gUT-Z8-eMN"/>
                             <constraint firstItem="hni-4x-HYe" firstAttribute="centerX" secondItem="x7F-3m-aCe" secondAttribute="centerX" id="rWg-he-38j"/>
                             <constraint firstItem="DBN-bY-aIC" firstAttribute="top" secondItem="hni-4x-HYe" secondAttribute="bottom" constant="8" id="sQy-YT-2QG"/>
+                            <constraint firstItem="DBN-bY-aIC" firstAttribute="centerY" secondItem="x7F-3m-aCe" secondAttribute="centerY" id="wOm-98-dxD"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="wf7-Ur-Cwt"/>
                     </view>
                     <connections>
                         <outlet property="label" destination="hni-4x-HYe" id="x1R-pM-zuu"/>
-                        <outlet property="textfield" destination="5Mm-FH-NSn" id="ZSq-PD-1Bf"/>
+                        <outlet property="textView" destination="uCr-WP-5Qf" id="aIc-kn-Uaz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jUE-sv-s8c" userLabel="First Responder" sceneMemberID="firstResponder"/>
