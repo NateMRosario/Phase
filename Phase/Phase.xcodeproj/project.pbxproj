@@ -82,13 +82,14 @@
 		81CFD3F62058824700DDD630 /* Models.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81CFD3F52058824700DDD630 /* Models.swift */; };
 		81DC9F022058B210005F2724 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81DC9F012058B210005F2724 /* ProfileViewController.swift */; };
 		81DD11BE2061BC4100A9AD1A /* CameraPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81DD11BD2061BC4100A9AD1A /* CameraPreviewViewController.swift */; };
-		8791270B206341BC00888326 /* ActivityCarouselViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8791270A206341BC00888326 /* ActivityCarouselViewController.swift */; };
 		8791DFDB2060171F00337CA3 /* FollowersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8791DFDA2060171F00337CA3 /* FollowersView.swift */; };
 		C6B46A8543265BAEF66E0411 /* Pods_PhaseTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E71635C053C1F5A36A0E3E9 /* Pods_PhaseTests.framework */; };
 		EAB9DF6080B0DDD7A709CE05 /* Pods_PhaseUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77732BF92135231E852C350B /* Pods_PhaseUITests.framework */; };
 		F404878C20657904009039AF /* CarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F404878B20657904009039AF /* CarouselView.swift */; };
-		F404878E20658908009039AF /* CarouselCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F404878D20658908009039AF /* CarouselCell.swift */; };
-		F404879120658D65009039AF /* CarouselFlowLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = F404879020658D65009039AF /* CarouselFlowLayout.swift */; };
+		F4882840206943930008A656 /* ActivityCarouselViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F488283F206943930008A656 /* ActivityCarouselViewController.swift */; };
+		F4882845206943C40008A656 /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = F4882844206943C40008A656 /* iCarousel.m */; };
+		F4882847206955690008A656 /* ActivityCommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4882846206955690008A656 /* ActivityCommentTableViewCell.swift */; };
+		F4882849206980CC0008A656 /* ActivityCommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4882848206980CC0008A656 /* ActivityCommentView.swift */; };
 		F48DA6BD20588ACD006E4FFC /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48DA6BC20588ACD006E4FFC /* User.swift */; };
 		F48DA6BF20588F17006E4FFC /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48DA6BE20588F17006E4FFC /* Post.swift */; };
 		F48DA6C120589024006E4FFC /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48DA6C020589024006E4FFC /* Comment.swift */; };
@@ -196,15 +197,18 @@
 		81DC9F012058B210005F2724 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		81DD11BD2061BC4100A9AD1A /* CameraPreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CameraPreviewViewController.swift; path = Phase/ViewControllers/CameraPreviewViewController.swift; sourceTree = SOURCE_ROOT; };
 		81DD11C12061BC8A00A9AD1A /* CameraView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraView.swift; sourceTree = "<group>"; };
-		8791270A206341BC00888326 /* ActivityCarouselViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityCarouselViewController.swift; sourceTree = "<group>"; };
 		8791DFDA2060171F00337CA3 /* FollowersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowersView.swift; sourceTree = "<group>"; };
 		9E534A5BA8A8AA1BD6106D54 /* Pods-PhaseTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhaseTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PhaseTests/Pods-PhaseTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B9EA73BB8347138AE4D02088 /* Pods-PhaseUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhaseUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PhaseUITests/Pods-PhaseUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		CDBD6CF13FB8FF84C3DB0F83 /* Pods-PhaseUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhaseUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PhaseUITests/Pods-PhaseUITests.release.xcconfig"; sourceTree = "<group>"; };
 		DEE8D0B9C3C33D7DFA205C39 /* Pods-PhaseTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhaseTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PhaseTests/Pods-PhaseTests.release.xcconfig"; sourceTree = "<group>"; };
 		F404878B20657904009039AF /* CarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselView.swift; sourceTree = "<group>"; };
-		F404878D20658908009039AF /* CarouselCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselCell.swift; sourceTree = "<group>"; };
-		F404879020658D65009039AF /* CarouselFlowLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselFlowLayout.swift; sourceTree = "<group>"; };
+		F488283F206943930008A656 /* ActivityCarouselViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityCarouselViewController.swift; sourceTree = "<group>"; };
+		F4882842206943C30008A656 /* Phase-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Phase-Bridging-Header.h"; sourceTree = "<group>"; };
+		F4882843206943C40008A656 /* iCarousel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCarousel.h; sourceTree = "<group>"; };
+		F4882844206943C40008A656 /* iCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCarousel.m; sourceTree = "<group>"; };
+		F4882846206955690008A656 /* ActivityCommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityCommentTableViewCell.swift; sourceTree = "<group>"; };
+		F4882848206980CC0008A656 /* ActivityCommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityCommentView.swift; sourceTree = "<group>"; };
 		F48DA6BC20588ACD006E4FFC /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		F48DA6BE20588F17006E4FFC /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		F48DA6C020589024006E4FFC /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
@@ -287,7 +291,7 @@
 				81C1F8752060AC240037BF42 /* JourneyTableViewCell.xib */,
 				81C1F8732060AC240037BF42 /* MozaikCollectionViewCell.swift */,
 				81C1F8742060AC240037BF42 /* MozaikCollectionViewCell.xib */,
-				F404878D20658908009039AF /* CarouselCell.swift */,
+				F4882846206955690008A656 /* ActivityCommentTableViewCell.swift */,
 			);
 			path = "Custom Cells";
 			sourceTree = "<group>";
@@ -384,8 +388,8 @@
 		81C9EE132058795200C27016 /* Phase */ = {
 			isa = PBXGroup;
 			children = (
+				F48828412069439D0008A656 /* iCarousel */,
 				81C1F8712060ABBA0037BF42 /* Segmentio Builder */,
-				F404878F20658CE6009039AF /* Layouts */,
 				81CFD3EE2058817900DDD630 /* Models */,
 				81CFD3EF2058818A00DDD630 /* Views */,
 				81AB8A94205AD2CB00A98AFB /* Custom Cells */,
@@ -443,6 +447,7 @@
 				8109358B2059BD6500A95B30 /* CreateNewPostView.swift */,
 				8791DFDA2060171F00337CA3 /* FollowersView.swift */,
 				F404878B20657904009039AF /* CarouselView.swift */,
+				F4882848206980CC0008A656 /* ActivityCommentView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -462,7 +467,7 @@
 				810935792059BBD300A95B30 /* SearchViewController.swift */,
 				8109357B2059BBF600A95B30 /* CreateNewPostViewController.swift */,
 				81DD11BD2061BC4100A9AD1A /* CameraPreviewViewController.swift */,
-				8791270A206341BC00888326 /* ActivityCarouselViewController.swift */,
+				F488283F206943930008A656 /* ActivityCarouselViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -505,12 +510,14 @@
 			name = Pods;
 			sourceTree = "<group>";
 		};
-		F404878F20658CE6009039AF /* Layouts */ = {
+		F48828412069439D0008A656 /* iCarousel */ = {
 			isa = PBXGroup;
 			children = (
-				F404879020658D65009039AF /* CarouselFlowLayout.swift */,
+				F4882843206943C40008A656 /* iCarousel.h */,
+				F4882844206943C40008A656 /* iCarousel.m */,
+				F4882842206943C30008A656 /* Phase-Bridging-Header.h */,
 			);
-			path = Layouts;
+			path = iCarousel;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -590,6 +597,7 @@
 				TargetAttributes = {
 					81C9EE102058795200C27016 = {
 						CreatedOnToolsVersion = 9.2;
+						LastSwiftMigration = 0920;
 						ProvisioningStyle = Automatic;
 					};
 					81C9EE242058795300C27016 = {
@@ -853,6 +861,7 @@
 				8109357C2059BBF600A95B30 /* CreateNewPostViewController.swift in Sources */,
 				81C279DA206193ED00DB1825 /* CreateNewPostView.swift in Sources */,
 				81AB8AAE205AF72A00A98AFB /* UICollectionView+Extensions.swift in Sources */,
+				F4882840206943930008A656 /* ActivityCarouselViewController.swift in Sources */,
 				81AB8A9B205AF64800A98AFB /* Constants.swift in Sources */,
 				810935882059BD2400A95B30 /* EditProfileView.swift in Sources */,
 				81AB8AB7205AF8EA00A98AFB /* GridViewProtocol.swift in Sources */,
@@ -875,8 +884,8 @@
 				F4D34A7A205C482C00F4D50D /* ActivityCollectionViewCell.swift in Sources */,
 				81C1F8702060ABAE0037BF42 /* ColorPalette.swift in Sources */,
 				81CA1BCB206356A900EF7B8E /* Date+TimeAgoDisplay.swift in Sources */,
+				F4882845206943C40008A656 /* iCarousel.m in Sources */,
 				810935CD205C454E00A95B30 /* ConfirmForgotPasswordViewController.swift in Sources */,
-				8791270B206341BC00888326 /* ActivityCarouselViewController.swift in Sources */,
 				81AB8AAA205AF6BE00A98AFB /* Array+Extensions.swift in Sources */,
 				81AB8ABB205AF9DD00A98AFB /* Column.swift in Sources */,
 				810935D4205C45F000A95B30 /* ConfirmForgotPasswordView.swift in Sources */,
@@ -888,7 +897,6 @@
 				81AB8AB4205AF7AB00A98AFB /* UINavigationBar+Extensions.swift in Sources */,
 				810935842059BCDD00A95B30 /* ActivityView.swift in Sources */,
 				810935D8206010F600A95B30 /* AuthNavigationController.swift in Sources */,
-				F404879120658D65009039AF /* CarouselFlowLayout.swift in Sources */,
 				81C9EE152058795200C27016 /* AppDelegate.swift in Sources */,
 				81C279CF20616D3900DB1825 /* DiscoveryNavViewController.swift in Sources */,
 				81DC9F022058B210005F2724 /* ProfileViewController.swift in Sources */,
@@ -898,6 +906,7 @@
 				810935722059BA8400A95B30 /* HomeViewController.swift in Sources */,
 				F404878C20657904009039AF /* CarouselView.swift in Sources */,
 				81AB8AAC205AF6F600A98AFB /* CALayer+Extensions.swift in Sources */,
+				F4882847206955690008A656 /* ActivityCommentTableViewCell.swift in Sources */,
 				81C1F86E2060ABAE0037BF42 /* UIColor+RGB.swift in Sources */,
 				81AB8ABF205AFA7C00A98AFB /* DB.swift in Sources */,
 				81AB8AC2205AFB0500A98AFB /* Animator.swift in Sources */,
@@ -911,11 +920,11 @@
 				8134CF0620615EE700A146B1 /* LoginView.swift in Sources */,
 				810935782059BB9200A95B30 /* EditProfileViewController.swift in Sources */,
 				F48DA6C120589024006E4FFC /* Comment.swift in Sources */,
+				F4882849206980CC0008A656 /* ActivityCommentView.swift in Sources */,
 				F48DA6BF20588F17006E4FFC /* Post.swift in Sources */,
 				F48DA6BD20588ACD006E4FFC /* User.swift in Sources */,
 				81CFD3F62058824700DDD630 /* Models.swift in Sources */,
 				810935D2205C45E000A95B30 /* ForgotPasswordView.swift in Sources */,
-				F404878E20658908009039AF /* CarouselCell.swift in Sources */,
 				81AB8AB0205AF75D00A98AFB /* UIViewController+Extensions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1075,6 +1084,7 @@
 			baseConfigurationReference = 605B3EA013314F78CA5F88DA /* Pods-Phase.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = XYLS53SA6G;
 				INFOPLIST_FILE = "$(SRCROOT)/Phase/SupportingFiles/Info.plist";
@@ -1082,6 +1092,8 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = blahblahblah.Phase;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Phase/iCarousel/Phase-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -1092,6 +1104,7 @@
 			baseConfigurationReference = FB898E9F3A3E362DE3BD876E /* Pods-Phase.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = XYLS53SA6G;
 				INFOPLIST_FILE = "$(SRCROOT)/Phase/SupportingFiles/Info.plist";
@@ -1099,6 +1112,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = blahblahblah.Phase;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Phase/iCarousel/Phase-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
