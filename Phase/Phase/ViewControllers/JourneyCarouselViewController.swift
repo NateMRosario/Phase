@@ -1,5 +1,5 @@
 //
-//  ActivityCarouselViewController.swift
+//  JourneyCarouselViewController.swift
 //  Phase
 //
 //  Created by Clint Mejia on 3/26/18.
@@ -9,16 +9,16 @@
 import UIKit
 import SnapKit
 
-class ActivityCarouselViewController: UIViewController {
+class JourneyCarouselViewController: UIViewController {
     
     // MARK: - Testbed properties
     var items: [Int] = []
     var post: [Int] = [1,2,3]
     
     // MARK: - Properties
-    private let carouselView = CarouselView()
-    private let activityCommentView = ActivityCommentView()
-    private let cellID = "ActivityCommentTableViewCell"
+    private let journeyCarouselView = JourneyCarouselView()
+    private let journeyCommentView = JourneyCommentView()
+    private let cellID = "JourneyCommentTableViewCell"
     
     // MARK: - Init (Dependency injection)
 //    init(list: List){
@@ -34,16 +34,16 @@ class ActivityCarouselViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.red
-        self.carouselView.carouselCollectionView.delegate = self
-        self.carouselView.carouselCollectionView.dataSource = self
-        self.activityCommentView.activityCommentTableView.delegate = self
-        self.activityCommentView.activityCommentTableView.dataSource = self
+        self.journeyCarouselView.carouselCollectionView.delegate = self
+        self.journeyCarouselView.carouselCollectionView.dataSource = self
+        self.journeyCommentView.journeyCommentTableView.delegate = self
+        self.journeyCommentView.journeyCommentTableView.dataSource = self
         setupView()
-        setActivityCommentViewZAxis()
-        self.activityCommentView.activityCommentTableView.layer.borderWidth = 1
-        self.activityCommentView.activityCommentTableView.layer.cornerRadius = 10
-        self.activityCommentView.activityCommentTableView.layer.masksToBounds = true
-        self.activityCommentView.activityCommentTableView.clipsToBounds = true
+        setJourneyCommentViewZAxis()
+        self.journeyCommentView.journeyCommentTableView.layer.borderWidth = 1
+        self.journeyCommentView.journeyCommentTableView.layer.cornerRadius = 10
+        self.journeyCommentView.journeyCommentTableView.layer.masksToBounds = true
+        self.journeyCommentView.journeyCommentTableView.clipsToBounds = true
     }
     
     // MARK: - Functions
@@ -53,23 +53,23 @@ class ActivityCarouselViewController: UIViewController {
     }
     
     private func setupView() {
-        setupCarouselView()
-        setupActivityCommentView()
+        setupJourneyCarouselView()
+        setupJourneyCommentView()
         for i in 0 ... 99 {
             items.append(i)
         }
     }
     
-    private func setActivityCommentViewZAxis() {
-        view.bringSubview(toFront: activityCommentView)
+    private func setJourneyCommentViewZAxis() {
+        view.bringSubview(toFront: journeyCommentView)
     }
 
     private func getPost() {}
     
     // MARK: - Contraints
-    private func setupCarouselView() {
-        self.view.addSubview(carouselView)
-        carouselView.snp.makeConstraints { (make) in
+    private func setupJourneyCarouselView() {
+        self.view.addSubview(journeyCarouselView)
+        journeyCarouselView.snp.makeConstraints { (make) in
             make.top.equalTo(self.view.safeAreaLayoutGuide)
             make.leading.equalTo(self.view.snp.leading)
             make.trailing.equalTo(self.view.snp.trailing)
@@ -78,9 +78,9 @@ class ActivityCarouselViewController: UIViewController {
         }
     }
     
-    func setupActivityCommentView() {
-        self.view.addSubview(activityCommentView)
-        activityCommentView.snp.makeConstraints { (make) in
+    func setupJourneyCommentView() {
+        self.view.addSubview(journeyCommentView)
+        journeyCommentView.snp.makeConstraints { (make) in
             make.width.equalTo(view.snp.width).multipliedBy(0.9)
             make.bottom.equalTo(view.snp.bottom).offset(-10)
             make.centerX.equalTo(view.snp.centerX)
@@ -91,7 +91,7 @@ class ActivityCarouselViewController: UIViewController {
 }
 
 // MARK: - iCarouselDataSource
-extension ActivityCarouselViewController: iCarouselDataSource {
+extension JourneyCarouselViewController: iCarouselDataSource {
     func numberOfItems(in carousel: iCarousel) -> Int {
         return 10
     }
@@ -124,7 +124,7 @@ extension ActivityCarouselViewController: iCarouselDataSource {
 }
 
 // MARK: - iCarouselDelegate
-extension ActivityCarouselViewController: iCarouselDelegate {
+extension JourneyCarouselViewController: iCarouselDelegate {
     func carousel(_ carousel: iCarousel, valueFor option: iCarouselOption, withDefault value: CGFloat) -> CGFloat {
         if (option == .spacing) {
             return value * 1.1
@@ -135,19 +135,19 @@ extension ActivityCarouselViewController: iCarouselDelegate {
 }
 
 // MARK: - UITableViewDelegate
-extension ActivityCarouselViewController: UITableViewDelegate {
+extension JourneyCarouselViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     }
 }
 
 // MARK: - UITableViewDataSource
-extension ActivityCarouselViewController: UITableViewDataSource {
+extension JourneyCarouselViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 10
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! ActivityCommentTableViewCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! JourneyCommentTableViewCell
         cell.layer.cornerRadius = 10
         cell.layer.masksToBounds = true
         cell.clipsToBounds = true

@@ -11,12 +11,12 @@
 		8109356E2059BA5B00A95B30 /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8109356D2059BA5B00A95B30 /* LoginViewController.swift */; };
 		810935702059BA7600A95B30 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8109356F2059BA7600A95B30 /* CreateAccountViewController.swift */; };
 		810935722059BA8400A95B30 /* HomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810935712059BA8400A95B30 /* HomeViewController.swift */; };
-		810935742059BAAC00A95B30 /* ActivityViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810935732059BAAC00A95B30 /* ActivityViewController.swift */; };
+		810935742059BAAC00A95B30 /* EventViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810935732059BAAC00A95B30 /* EventViewController.swift */; };
 		810935762059BB0D00A95B30 /* FollowsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810935752059BB0D00A95B30 /* FollowsViewController.swift */; };
 		810935782059BB9200A95B30 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810935772059BB9200A95B30 /* EditProfileViewController.swift */; };
 		8109357A2059BBD300A95B30 /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810935792059BBD300A95B30 /* SearchViewController.swift */; };
 		8109357C2059BBF600A95B30 /* CreateNewPostViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8109357B2059BBF600A95B30 /* CreateNewPostViewController.swift */; };
-		810935842059BCDD00A95B30 /* ActivityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810935832059BCDD00A95B30 /* ActivityView.swift */; };
+		810935842059BCDD00A95B30 /* EventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810935832059BCDD00A95B30 /* EventView.swift */; };
 		810935862059BCE800A95B30 /* FollowsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810935852059BCE800A95B30 /* FollowsView.swift */; };
 		810935882059BD2400A95B30 /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810935872059BD2400A95B30 /* EditProfileView.swift */; };
 		8109358A2059BD5800A95B30 /* SearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810935892059BD5800A95B30 /* SearchView.swift */; };
@@ -110,15 +110,15 @@
 		8791DFDB2060171F00337CA3 /* FollowersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8791DFDA2060171F00337CA3 /* FollowersView.swift */; };
 		C6B46A8543265BAEF66E0411 /* Pods_PhaseTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E71635C053C1F5A36A0E3E9 /* Pods_PhaseTests.framework */; };
 		EAB9DF6080B0DDD7A709CE05 /* Pods_PhaseUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77732BF92135231E852C350B /* Pods_PhaseUITests.framework */; };
-		F404878C20657904009039AF /* CarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F404878B20657904009039AF /* CarouselView.swift */; };
-		F4882840206943930008A656 /* ActivityCarouselViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F488283F206943930008A656 /* ActivityCarouselViewController.swift */; };
-		F4882847206955690008A656 /* ActivityCommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4882846206955690008A656 /* ActivityCommentTableViewCell.swift */; };
-		F4882849206980CC0008A656 /* ActivityCommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4882848206980CC0008A656 /* ActivityCommentView.swift */; };
+		F404878C20657904009039AF /* JourneyCarouselView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F404878B20657904009039AF /* JourneyCarouselView.swift */; };
+		F4882840206943930008A656 /* JourneyCarouselViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F488283F206943930008A656 /* JourneyCarouselViewController.swift */; };
+		F4882847206955690008A656 /* JourneyCommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4882846206955690008A656 /* JourneyCommentTableViewCell.swift */; };
+		F4882849206980CC0008A656 /* JourneyCommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4882848206980CC0008A656 /* JourneyCommentView.swift */; };
 		F4882856206A95130008A656 /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = F4882854206A95120008A656 /* iCarousel.m */; };
 		F48DA6BD20588ACD006E4FFC /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48DA6BC20588ACD006E4FFC /* User.swift */; };
 		F48DA6BF20588F17006E4FFC /* Post.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48DA6BE20588F17006E4FFC /* Post.swift */; };
 		F48DA6C120589024006E4FFC /* Comment.swift in Sources */ = {isa = PBXBuildFile; fileRef = F48DA6C020589024006E4FFC /* Comment.swift */; };
-		F4D34A7A205C482C00F4D50D /* ActivityCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D34A79205C482C00F4D50D /* ActivityCollectionViewCell.swift */; };
+		F4D34A7A205C482C00F4D50D /* EventCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D34A79205C482C00F4D50D /* EventCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -145,12 +145,12 @@
 		8109356D2059BA5B00A95B30 /* LoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoginViewController.swift; sourceTree = "<group>"; };
 		8109356F2059BA7600A95B30 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
 		810935712059BA8400A95B30 /* HomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewController.swift; sourceTree = "<group>"; };
-		810935732059BAAC00A95B30 /* ActivityViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityViewController.swift; sourceTree = "<group>"; };
+		810935732059BAAC00A95B30 /* EventViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventViewController.swift; sourceTree = "<group>"; };
 		810935752059BB0D00A95B30 /* FollowsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowsViewController.swift; sourceTree = "<group>"; };
 		810935772059BB9200A95B30 /* EditProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		810935792059BBD300A95B30 /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		8109357B2059BBF600A95B30 /* CreateNewPostViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateNewPostViewController.swift; sourceTree = "<group>"; };
-		810935832059BCDD00A95B30 /* ActivityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityView.swift; sourceTree = "<group>"; };
+		810935832059BCDD00A95B30 /* EventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventView.swift; sourceTree = "<group>"; };
 		810935852059BCE800A95B30 /* FollowsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowsView.swift; sourceTree = "<group>"; };
 		810935872059BD2400A95B30 /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
 		810935892059BD5800A95B30 /* SearchView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchView.swift; sourceTree = "<group>"; };
@@ -252,17 +252,17 @@
 		B9EA73BB8347138AE4D02088 /* Pods-PhaseUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhaseUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PhaseUITests/Pods-PhaseUITests.debug.xcconfig"; sourceTree = "<group>"; };
 		CDBD6CF13FB8FF84C3DB0F83 /* Pods-PhaseUITests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhaseUITests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PhaseUITests/Pods-PhaseUITests.release.xcconfig"; sourceTree = "<group>"; };
 		DEE8D0B9C3C33D7DFA205C39 /* Pods-PhaseTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhaseTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-PhaseTests/Pods-PhaseTests.release.xcconfig"; sourceTree = "<group>"; };
-		F404878B20657904009039AF /* CarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CarouselView.swift; sourceTree = "<group>"; };
-		F488283F206943930008A656 /* ActivityCarouselViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityCarouselViewController.swift; sourceTree = "<group>"; };
-		F4882846206955690008A656 /* ActivityCommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityCommentTableViewCell.swift; sourceTree = "<group>"; };
-		F4882848206980CC0008A656 /* ActivityCommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityCommentView.swift; sourceTree = "<group>"; };
+		F404878B20657904009039AF /* JourneyCarouselView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyCarouselView.swift; sourceTree = "<group>"; };
+		F488283F206943930008A656 /* JourneyCarouselViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyCarouselViewController.swift; sourceTree = "<group>"; };
+		F4882846206955690008A656 /* JourneyCommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyCommentTableViewCell.swift; sourceTree = "<group>"; };
+		F4882848206980CC0008A656 /* JourneyCommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyCommentView.swift; sourceTree = "<group>"; };
 		F4882853206A95120008A656 /* iCarousel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCarousel.h; sourceTree = "<group>"; };
 		F4882854206A95120008A656 /* iCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCarousel.m; sourceTree = "<group>"; };
 		F4882855206A95120008A656 /* Phase-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Phase-Bridging-Header.h"; sourceTree = "<group>"; };
 		F48DA6BC20588ACD006E4FFC /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		F48DA6BE20588F17006E4FFC /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		F48DA6C020589024006E4FFC /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
-		F4D34A79205C482C00F4D50D /* ActivityCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityCollectionViewCell.swift; sourceTree = "<group>"; };
+		F4D34A79205C482C00F4D50D /* EventCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCollectionViewCell.swift; sourceTree = "<group>"; };
 		FB898E9F3A3E362DE3BD876E /* Pods-Phase.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Phase.release.xcconfig"; path = "Pods/Target Support Files/Pods-Phase/Pods-Phase.release.xcconfig"; sourceTree = "<group>"; };
 		FE00CE277B7AB4A621DE7AA9 /* Pods_Phase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Phase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -391,12 +391,12 @@
 				81AB8AC9205AFC7A00A98AFB /* DiscoverCollectionViewCell.xib */,
 				8134CEFD205B72E000A146B1 /* HomeFeedCollectionViewCell.swift */,
 				8134CF01205C4A4F00A146B1 /* HomeFeedCollectionViewCell.xib */,
-				F4D34A79205C482C00F4D50D /* ActivityCollectionViewCell.swift */,
+				F4D34A79205C482C00F4D50D /* EventCollectionViewCell.swift */,
 				81C1F8722060AC240037BF42 /* JourneyTableViewCell.swift */,
 				81C1F8752060AC240037BF42 /* JourneyTableViewCell.xib */,
 				81C1F8732060AC240037BF42 /* MozaikCollectionViewCell.swift */,
 				81C1F8742060AC240037BF42 /* MozaikCollectionViewCell.xib */,
-				F4882846206955690008A656 /* ActivityCommentTableViewCell.swift */,
+				F4882846206955690008A656 /* JourneyCommentTableViewCell.swift */,
 			);
 			path = "Custom Cells";
 			sourceTree = "<group>";
@@ -550,14 +550,14 @@
 				810935CE205C45B700A95B30 /* Auth */,
 				81DD11C12061BC8A00A9AD1A /* CameraView.swift */,
 				81C279D6206193E200DB1825 /* CapturedImageView.swift */,
-				810935832059BCDD00A95B30 /* ActivityView.swift */,
+				810935832059BCDD00A95B30 /* EventView.swift */,
 				810935852059BCE800A95B30 /* FollowsView.swift */,
 				810935872059BD2400A95B30 /* EditProfileView.swift */,
 				810935892059BD5800A95B30 /* SearchView.swift */,
 				8109358B2059BD6500A95B30 /* CreateNewPostView.swift */,
 				8791DFDA2060171F00337CA3 /* FollowersView.swift */,
-				F404878B20657904009039AF /* CarouselView.swift */,
-				F4882848206980CC0008A656 /* ActivityCommentView.swift */,
+				F404878B20657904009039AF /* JourneyCarouselView.swift */,
+				F4882848206980CC0008A656 /* JourneyCommentView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -572,12 +572,12 @@
 				810935C7205C436300A95B30 /* Auth */,
 				81C279D02061933300DB1825 /* CameraViewController.swift */,
 				810935712059BA8400A95B30 /* HomeViewController.swift */,
-				810935732059BAAC00A95B30 /* ActivityViewController.swift */,
+				810935732059BAAC00A95B30 /* EventViewController.swift */,
 				810935752059BB0D00A95B30 /* FollowsViewController.swift */,
 				810935772059BB9200A95B30 /* EditProfileViewController.swift */,
 				8109357B2059BBF600A95B30 /* CreateNewPostViewController.swift */,
 				81DD11BD2061BC4100A9AD1A /* CameraPreviewViewController.swift */,
-				F488283F206943930008A656 /* ActivityCarouselViewController.swift */,
+				F488283F206943930008A656 /* JourneyCarouselViewController.swift */,
 				81817A392064CAAE00CA7044 /* SearchVCs */,
 				818DBB69206980A500B91990 /* NotificationsViewController.swift */,
 				81817A48206596CD00CA7044 /* NewPostViewController.swift */,
@@ -987,7 +987,7 @@
 				81C279DA206193ED00DB1825 /* CreateNewPostView.swift in Sources */,
 				81817A4020655FE700CA7044 /* StringTrimExtension.swift in Sources */,
 				81AB8AAE205AF72A00A98AFB /* UICollectionView+Extensions.swift in Sources */,
-				F4882840206943930008A656 /* ActivityCarouselViewController.swift in Sources */,
+				F4882840206943930008A656 /* JourneyCarouselViewController.swift in Sources */,
 				81AB8A9B205AF64800A98AFB /* Constants.swift in Sources */,
 				810935882059BD2400A95B30 /* EditProfileView.swift in Sources */,
 				81AB8AB7205AF8EA00A98AFB /* GridViewProtocol.swift in Sources */,
@@ -1012,7 +1012,7 @@
 				81C1F8762060AC240037BF42 /* JourneyTableViewCell.swift in Sources */,
 				81AB8AB2205AF77C00A98AFB /* UISearchBar+Extensions.swift in Sources */,
 				8791DFDB2060171F00337CA3 /* FollowersView.swift in Sources */,
-				F4D34A7A205C482C00F4D50D /* ActivityCollectionViewCell.swift in Sources */,
+				F4D34A7A205C482C00F4D50D /* EventCollectionViewCell.swift in Sources */,
 				81C1F8702060ABAE0037BF42 /* ColorPalette.swift in Sources */,
 				81CA1BCB206356A900EF7B8E /* Date+TimeAgoDisplay.swift in Sources */,
 				810935CD205C454E00A95B30 /* ConfirmForgotPasswordViewController.swift in Sources */,
@@ -1027,7 +1027,7 @@
 				810935762059BB0D00A95B30 /* FollowsViewController.swift in Sources */,
 				810935DA2061503800A95B30 /* CognitoConstants.swift in Sources */,
 				81AB8AB4205AF7AB00A98AFB /* UINavigationBar+Extensions.swift in Sources */,
-				810935842059BCDD00A95B30 /* ActivityView.swift in Sources */,
+				810935842059BCDD00A95B30 /* EventView.swift in Sources */,
 				810935D8206010F600A95B30 /* AuthNavigationController.swift in Sources */,
 				81115E012069C3940052C9E1 /* UIColor+Hex.swift in Sources */,
 				81C9EE152058795200C27016 /* AppDelegate.swift in Sources */,
@@ -1035,7 +1035,7 @@
 				818DBB6A206980A500B91990 /* NotificationsViewController.swift in Sources */,
 				8128B47C206951B2009E0629 /* Event.swift in Sources */,
 				81DC9F022058B210005F2724 /* ProfileViewController.swift in Sources */,
-				810935742059BAAC00A95B30 /* ActivityViewController.swift in Sources */,
+				810935742059BAAC00A95B30 /* EventViewController.swift in Sources */,
 				81CA1BE3206442C100EF7B8E /* TopViewController.swift in Sources */,
 				8109356E2059BA5B00A95B30 /* LoginViewController.swift in Sources */,
 				81C279D32061933300DB1825 /* CameraViewController.swift in Sources */,
@@ -1044,10 +1044,10 @@
 				8128B47A206951B2009E0629 /* Journey.swift in Sources */,
 				8128B47320694815009E0629 /* DynamoDBManager.swift in Sources */,
 				810935722059BA8400A95B30 /* HomeViewController.swift in Sources */,
-				F404878C20657904009039AF /* CarouselView.swift in Sources */,
+				F404878C20657904009039AF /* JourneyCarouselView.swift in Sources */,
 				81817A4320655FE700CA7044 /* ActiveType.swift in Sources */,
 				81AB8AAC205AF6F600A98AFB /* CALayer+Extensions.swift in Sources */,
-				F4882847206955690008A656 /* ActivityCommentTableViewCell.swift in Sources */,
+				F4882847206955690008A656 /* JourneyCommentTableViewCell.swift in Sources */,
 				81C1F86E2060ABAE0037BF42 /* UIColor+RGB.swift in Sources */,
 				81AB8ABF205AFA7C00A98AFB /* DB.swift in Sources */,
 				81AB8AC2205AFB0500A98AFB /* Animator.swift in Sources */,
@@ -1066,7 +1066,7 @@
 				810935782059BB9200A95B30 /* EditProfileViewController.swift in Sources */,
 				81CA1BE72064432600EF7B8E /* PeopleViewController.swift in Sources */,
 				F48DA6C120589024006E4FFC /* Comment.swift in Sources */,
-				F4882849206980CC0008A656 /* ActivityCommentView.swift in Sources */,
+				F4882849206980CC0008A656 /* JourneyCommentView.swift in Sources */,
 				F48DA6BF20588F17006E4FFC /* Post.swift in Sources */,
 				F48DA6BD20588ACD006E4FFC /* User.swift in Sources */,
 				81CFD3F62058824700DDD630 /* Models.swift in Sources */,

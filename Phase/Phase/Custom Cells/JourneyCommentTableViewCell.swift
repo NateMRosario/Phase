@@ -1,5 +1,5 @@
 //
-//  ActivityCommentTableViewCell.swift
+//  JourneyCommentTableViewCell.swift
 //  Phase
 //
 //  Created by Clint Mejia on 3/26/18.
@@ -9,10 +9,10 @@
 import UIKit
 import SnapKit
 
-class ActivityCommentTableViewCell: UITableViewCell {
+class JourneyCommentTableViewCell: UITableViewCell {
     
     // MARK: - Delegate
-        weak var delegate: ActivityCommentTableCellDelegate?
+        weak var delegate: JourneyCommentTableCellDelegate?
     
     //    private var post: Post!
     
@@ -147,7 +147,7 @@ class ActivityCommentTableViewCell: UITableViewCell {
 }
 
 // MARK: - Custom Delegate
-protocol ActivityCommentTableCellDelegate: class {
+protocol JourneyCommentTableCellDelegate: class {
     func profileImageTapped()
     func replyButtonTapped()
 }

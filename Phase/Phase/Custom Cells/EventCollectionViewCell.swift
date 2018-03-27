@@ -1,5 +1,5 @@
 //
-//  ActivityCollectionViewCell.swift
+//  EventCollectionViewCell.swift
 //  Phase
 //
 //  Created by Clint Mejia on 3/16/18.
@@ -9,10 +9,10 @@
 import UIKit
 import SnapKit
 
-class ActivityCollectionViewCell: UICollectionViewCell {
+class EventCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Outlets
-    lazy var activityImageView: UIImageView = {
+    lazy var eventImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image =  UIImage(named: "g")
         imageView.contentMode = .scaleAspectFit
@@ -41,7 +41,7 @@ class ActivityCollectionViewCell: UICollectionViewCell {
     
     // MARK: - Functions
     func setupViews() {
-        setupActivityImageView()
+        setupEventImageView()
     }
     
 //    public func configureCell(with activity: Activity) {
@@ -49,9 +49,9 @@ class ActivityCollectionViewCell: UICollectionViewCell {
 //    }
     
     // Contraints
-    private func setupActivityImageView() {
-        addSubview(activityImageView)
-        activityImageView.snp.makeConstraints { (make) in
+    private func setupEventImageView() {
+        addSubview(eventImageView)
+        eventImageView.snp.makeConstraints { (make) in
             make.edges.equalTo(self)
         }
     }

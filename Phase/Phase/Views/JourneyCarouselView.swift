@@ -1,5 +1,5 @@
 //
-//  CarouselView.swift
+//  JourneyCarouselView.swift
 //  Phase
 //
 //  Created by Clint Mejia on 3/23/18.
@@ -9,7 +9,7 @@
 import UIKit
 import SnapKit
 
-class CarouselView: UIView {
+class JourneyCarouselView: UIView {
     
     // Cell Identifier
     let collectionViewCellID = "CarouselCell"

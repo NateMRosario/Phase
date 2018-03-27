@@ -30,16 +30,16 @@ extension UIView {
     }
 }
 
-class ActivityView: UIView {
+class EventView: UIView {
     
     // Custom Delegate
-    weak var delegate: ActivityViewDelegate?
+    weak var delegate: EventViewDelegate?
     
     // Cell Identifier
-    let collectionViewCellID = "ActivityCollectionViewCell"
+    let collectionViewCellID = "EventCollectionViewCell"
     
     // MARK: - Lazy variables
-    lazy var activityCollectionView: UICollectionView = {
+    lazy var eventCollectionView: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
         layout.scrollDirection = .horizontal
         let collectionView = UICollectionView(frame: self.bounds, collectionViewLayout: layout)
@@ -53,11 +53,11 @@ class ActivityView: UIView {
         layout.minimumInteritemSpacing = cellSpacing
         layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         collectionView.backgroundColor = UIColor.gray
-        collectionView.register(ActivityCollectionViewCell.self, forCellWithReuseIdentifier: collectionViewCellID)
+        collectionView.register(EventCollectionViewCell.self, forCellWithReuseIdentifier: collectionViewCellID)
         return collectionView
     }()
     
-    lazy var activityHeaderLabel: UILabel = {
+    lazy var eventHeaderLabel: UILabel = {
         let label = UILabel()
         label.text = "Activity"
         label.textAlignment = .left
@@ -97,25 +97,25 @@ class ActivityView: UIView {
         return label
     }()
     
-    lazy var activityHashTagLabel: UILabel = {
+    lazy var eventHashTagLabel: UILabel = {
         let label = UILabel()
         label.text = "#100DaysOfCode"
         label.textAlignment = .left
         label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         label.textColor = UIColor.darkGray
         label.isUserInteractionEnabled = true
-        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(activityHashTagLabelTapped))
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(eventHashTagLabelTapped))
         return label
     }()
     
-    lazy var activityDescriptionLabel: UILabel = {
+    lazy var eventDescriptionLabel: UILabel = {
         let label = UILabel()
         label.text = "This is my 51st day of the challenge!"
         label.textAlignment = .left
         label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         label.textColor = UIColor.darkGray
         label.isUserInteractionEnabled = true
-        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(activityDescriptionLabelTapped))
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(eventDescriptionLabelTapped))
         return label
     }()
     
@@ -163,14 +163,14 @@ class ActivityView: UIView {
     
     // MARK: - Functions
     private func setupViews() {
-        setupActivityHeaderLabel()
+        setupEventHeaderLabel()
         setupProfileImageView()
         setupUsernameLabel()
         setupTimepostedLabel()
-        setupActivityCollectionView()
+        setupEventCollectionView()
         setupSubscribeButton()
-        setupActivityHashTagLabel()
-        setupActivityDescriptionLabel()
+        setupEventHashTagLabel()
+        setupEventDescriptionLabel()
 //        setupFollowerOneImageView()
     }
     
@@ -183,8 +183,8 @@ class ActivityView: UIView {
     
     // collectionView layer attributes implementation
     private func setCollectionViewAttributes() {
-        activityCollectionView.addBorder(toSide: .top, withColor: UIColor.gray.cgColor, andThickness: 0.5)
-        activityCollectionView.addBorder(toSide: .bottom, withColor: UIColor.gray.cgColor, andThickness: 0.5)
+        eventCollectionView.addBorder(toSide: .top, withColor: UIColor.gray.cgColor, andThickness: 0.5)
+        eventCollectionView.addBorder(toSide: .bottom, withColor: UIColor.gray.cgColor, andThickness: 0.5)
     }
     
     @objc public func profileImageTapped(sender: UIImageView, target:UIViewController) {
@@ -202,20 +202,20 @@ class ActivityView: UIView {
         delegate?.userNameLabelTapped()
     }
     
-    @objc public func activityHashTagLabelTapped(sender: UIImageView, target:UIViewController) {
-        print("activityHashTagLabelTapped")
-        delegate?.activityHashTagLabelTapped()
+    @objc public func eventHashTagLabelTapped(sender: UIImageView, target:UIViewController) {
+        print("eventHashTagLabelTapped")
+        delegate?.eventHashTagLabelTapped()
     }
     
-    @objc public func activityDescriptionLabelTapped(sender: UIImageView, target:UIViewController) {
-        print("activityDescriptionLabelTapped")
-        delegate?.activityDescriptionLabelTapped()
+    @objc public func eventDescriptionLabelTapped(sender: UIImageView, target:UIViewController) {
+        print("eventDescriptionLabelTapped")
+        delegate?.eventDescriptionLabelTapped()
     }
     
     // MARK: - Constraints
-    private func setupActivityHeaderLabel() {
-        addSubview(activityHeaderLabel)
-        activityHeaderLabel.snp.makeConstraints { (make) in
+    private func setupEventHeaderLabel() {
+        addSubview(eventHeaderLabel)
+        eventHeaderLabel.snp.makeConstraints { (make) in
             make.leading.equalTo(self).offset(8)
             make.top.equalTo(self).offset(8)
         }
@@ -225,7 +225,7 @@ class ActivityView: UIView {
         addSubview(profileImageView)
         profileImageView.snp.makeConstraints { (make) in
             make.leading.equalTo(self).offset(8)
-            make.top.equalTo(activityHeaderLabel.snp.bottom).offset(10)
+            make.top.equalTo(eventHeaderLabel.snp.bottom).offset(10)
             make.height.equalTo(snp.height).multipliedBy(0.08)
             make.width.equalTo(profileImageView.snp.height)
         }
@@ -246,9 +246,9 @@ class ActivityView: UIView {
         }
     }
     
-    private func setupActivityCollectionView() {
-        addSubview(activityCollectionView)
-        activityCollectionView.snp.makeConstraints { (make) in
+    private func setupEventCollectionView() {
+        addSubview(eventCollectionView)
+        eventCollectionView.snp.makeConstraints { (make) in
             make.leading.equalTo(self)
             make.trailing.equalTo(self)
             make.top.equalTo(profileImageView.snp.bottom).offset(10)
@@ -259,24 +259,24 @@ class ActivityView: UIView {
     private func setupSubscribeButton() {
         addSubview(subscribeButton)
         subscribeButton.snp.makeConstraints { (make) in
-            make.trailing.equalTo(activityCollectionView.snp.trailing).offset(-10)
-            make.top.equalTo(activityCollectionView.snp.top).offset(10)
+            make.trailing.equalTo(eventCollectionView.snp.trailing).offset(-10)
+            make.top.equalTo(eventCollectionView.snp.top).offset(10)
         }
     }
     
-    private func setupActivityHashTagLabel() {
-        addSubview(activityHashTagLabel)
-        activityHashTagLabel.snp.makeConstraints { (make) in
+    private func setupEventHashTagLabel() {
+        addSubview(eventHashTagLabel)
+        eventHashTagLabel.snp.makeConstraints { (make) in
             make.leading.equalTo(self).offset(8)
-            make.top.equalTo(activityCollectionView.snp.bottom).offset(10)
+            make.top.equalTo(eventCollectionView.snp.bottom).offset(10)
         }
     }
     
-    private func setupActivityDescriptionLabel() {
-        addSubview(activityDescriptionLabel)
-        activityDescriptionLabel.snp.makeConstraints { (make) in
+    private func setupEventDescriptionLabel() {
+        addSubview(eventDescriptionLabel)
+        eventDescriptionLabel.snp.makeConstraints { (make) in
             make.leading.equalTo(self).offset(10)
-            make.top.equalTo(activityHashTagLabel.snp.bottom).offset(8)
+            make.top.equalTo(eventHashTagLabel.snp.bottom).offset(8)
         }
     }
     
@@ -288,12 +288,12 @@ class ActivityView: UIView {
 }
 
 
-protocol ActivityViewDelegate: class {
+protocol EventViewDelegate: class {
     func profileImagePressed()
     func subscribeButtonPressed()
     func userNameLabelTapped()
-    func activityHashTagLabelTapped()
-    func activityDescriptionLabelTapped()
+    func eventHashTagLabelTapped()
+    func eventDescriptionLabelTapped()
 }
 
 

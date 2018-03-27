@@ -1,5 +1,5 @@
 //
-//  ActivityCommentView.swift
+//  JourneyCommentView.swift
 //  Phase
 //
 //  Created by Clint Mejia on 3/26/18.
@@ -9,18 +9,35 @@
 import UIKit
 import SnapKit
 
-class ActivityCommentView: UIView {
+class JourneyCommentView: UIView {
     
     // MARK: - TableViewCell Identifier
-    let cellID = "ActivityCommentTableViewCell"
+    let cellID = "JourneyCommentTableViewCell"
     
     // MARK: - Delegate
     weak var delegate: PostCommentDelegate?
     
     // MARK: - Lazy variables
-    lazy var activityCommentTableView: UITableView = {
+    lazy var commentStackView: UIStackView = {
+        let stackView = UIStackView()
+        return stackView
+    }()
+    
+    lazy var journeyProfileImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "g")
+        imageView.contentMode = .scaleAspectFit
+        imageView.layer.masksToBounds = true
+        imageView.clipsToBounds = true
+        imageView.layer.borderWidth = 0.5
+        imageView.layer.borderColor = UIColor.gray.cgColor
+        imageView.layer.cornerRadius = bounds.width / 2
+        return imageView
+    }()
+    
+    lazy var journeyCommentTableView: UITableView = {
         let tableView = UITableView()
-        tableView.register(ActivityCommentTableViewCell.self, forCellReuseIdentifier: cellID)
+        tableView.register(JourneyCommentTableViewCell.self, forCellReuseIdentifier: cellID)
         tableView.backgroundColor = .yellow
         return tableView
     }()
@@ -110,9 +127,9 @@ class ActivityCommentView: UIView {
     }
     
     private func setupActivityCommentTableView() {
-        addSubview(activityCommentTableView)
+        addSubview(journeyCommentTableView)
         
-        activityCommentTableView.snp.makeConstraints { (make) in
+        journeyCommentTableView.snp.makeConstraints { (make) in
             make.top.equalTo(self)
             make.leading.equalTo(self)
             make.trailing.equalTo(self)

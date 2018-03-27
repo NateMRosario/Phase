@@ -1,5 +1,5 @@
 //
-//  ActivityViewController.swift
+//  EventViewController.swift
 //  Phase
 //
 //  Created by Reiaz Gafar on 3/14/18.
@@ -9,17 +9,17 @@
 import UIKit
 import SnapKit
 
-class ActivityViewController: UIViewController {
+class EventViewController: UIViewController {
     
     // MARK: - Properties
     var posts = [Post]() {
         didSet {
             dump(posts)
-            activityView.activityCollectionView.reloadData()
+            eventView.eventCollectionView.reloadData()
         }
     }
     
-    private let activityView = ActivityView()
+    private let eventView = EventView()
     private let followersView = FollowersView()
     
     // MARK: - Init (Dependency injection)
@@ -36,9 +36,9 @@ class ActivityViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.white
-        self.activityView.activityCollectionView.dataSource = self
-        self.activityView.activityCollectionView.delegate = self
-        self.activityView.delegate = self
+        self.eventView.eventCollectionView.dataSource = self
+        self.eventView.eventCollectionView.delegate = self
+        self.eventView.delegate = self
         self.followersView.delegate = self
         setupView()
     }
@@ -50,7 +50,7 @@ class ActivityViewController: UIViewController {
     
     // MARK: - Functions
     private func setupView() {
-        setupActivityView()
+        setupEventView()
         setupFollowersView()
     }
     
@@ -58,9 +58,9 @@ class ActivityViewController: UIViewController {
     
     
     // MARK: - Contraints
-    private func setupActivityView() {
-        self.view.addSubview(activityView)
-        activityView.snp.makeConstraints { (make) in
+    private func setupEventView() {
+        self.view.addSubview(eventView)
+        eventView.snp.makeConstraints { (make) in
             make.edges.equalTo(view.safeAreaLayoutGuide.snp.edges)
             make.top.equalTo(view.safeAreaLayoutGuide.snp.top)
             make.leading.equalTo(view.snp.leading)
@@ -72,7 +72,7 @@ class ActivityViewController: UIViewController {
     private func setupFollowersView() {
         self.view.addSubview(followersView)
         followersView.snp.makeConstraints { (make) in
-            make.top.equalTo(activityView.snp.bottom)
+            make.top.equalTo(eventView.snp.bottom)
             make.leading.equalTo(view.snp.leading)
             make.trailing.equalTo(view.snp.trailing)
             make.bottom.equalTo(view.snp.bottom)
@@ -81,24 +81,24 @@ class ActivityViewController: UIViewController {
     
 }
 
-extension ActivityViewController: UICollectionViewDataSource {
+extension EventViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 10
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: activityView.collectionViewCellID, for: indexPath) as! ActivityCollectionViewCell
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: eventView.collectionViewCellID, for: indexPath) as! EventCollectionViewCell
         return cell
     }
 }
 
-extension ActivityViewController: UICollectionViewDelegate {
+extension EventViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         return
     }
 }
 
-extension ActivityViewController: UICollectionViewDelegateFlowLayout {
+extension EventViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let itemWidth: CGFloat = collectionView.bounds.width
         let itemHeight: CGFloat = collectionView.bounds.height
@@ -106,7 +106,7 @@ extension ActivityViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-extension ActivityViewController: ActivityViewDelegate {
+extension EventViewController: EventViewDelegate {
     func profileImagePressed() {
     
     }
@@ -119,17 +119,17 @@ extension ActivityViewController: ActivityViewDelegate {
     
     }
     
-    func activityHashTagLabelTapped() {
+    func eventHashTagLabelTapped() {
 
     }
     
-    func activityDescriptionLabelTapped() {
+    func eventDescriptionLabelTapped() {
 
     }
     
 }
 
-extension ActivityViewController: FollowersViewDelegate {
+extension EventViewController: FollowersViewDelegate {
     func followerImageViewTapped() {
     
     }
