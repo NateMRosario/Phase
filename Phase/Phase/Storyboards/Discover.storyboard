@@ -26,7 +26,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Ju6-bJ-MwB" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-308" y="133"/>
+            <point key="canvasLocation" x="-481" y="133"/>
         </scene>
         <!--Discovery View Controller-->
         <scene sceneID="i07-ES-8bW">
@@ -45,7 +45,16 @@
                                     <size key="footerReferenceSize" width="0.0" height="0.0"/>
                                     <inset key="sectionInset" minX="0.0" minY="0.0" maxX="0.0" maxY="0.0"/>
                                 </collectionViewFlowLayout>
-                                <cells/>
+                                <cells>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" reuseIdentifier="loading" id="ykF-ZQ-7WB">
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="50" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </view>
+                                    </collectionViewCell>
+                                </cells>
                             </collectionView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -57,14 +66,14 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="IFP-OP-Gvs"/>
                     </view>
-                    <navigationItem key="navigationItem" id="1bI-HM-YD5"/>
+                    <navigationItem key="navigationItem" largeTitleDisplayMode="never" id="1bI-HM-YD5"/>
                     <connections>
                         <outlet property="collectionView" destination="JRI-uf-n4g" id="DAH-Pu-Mhu"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="BMA-zZ-sdL" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="456.80000000000001" y="132.68365817091455"/>
+            <point key="canvasLocation" x="214" y="133"/>
         </scene>
     </scenes>
 </document>
