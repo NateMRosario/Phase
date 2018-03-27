@@ -67,7 +67,7 @@ class CameraViewController: UIViewController {
     }
     
     @objc func addNewJourney(_ sender: UIBarButtonItem) {
-        
+        navigationController?.pushViewController(NewPostViewController.instantiate(withStoryboard: "NewPost"), animated: true)
     }
     
     // This function sets up a switch to change the camera in use depending on current position when called.

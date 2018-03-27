@@ -14,7 +14,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate {
     
     @IBOutlet weak var segmentedViewTop: NSLayoutConstraint!
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var atDisplayNameLabel: UILabel!
+    @IBOutlet weak var username: UILabel!
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var profileView: UIView!
     @IBOutlet weak var handleLabel: UILabel!
@@ -38,6 +38,9 @@ class ProfileViewController: UIViewController, UITableViewDelegate {
     }
     @IBAction func editProfileButtonPressed(_ sender: UIButton) {
         //TODO: Present settingsVC
+    }
+    @IBOutlet weak var subscribeButton: UIButton!
+    @IBAction func subscribeButtonPressed(_ sender: UIButton) {
     }
     
     // At this offset the Header stops its transformations
@@ -166,15 +169,15 @@ extension ProfileViewController: UITableViewDataSource {
             segmentioView: segmentioView,
             segmentioStyle: segmentioStyle
         )
-        segmentioView.selectedSegmentioIndex = selectedSegmentioIndex()
-        segmentioView.valueDidChange = { [weak self] _, segmentIndex in
-            print(segmentIndex) //TODO
-        }
+//        segmentioView.selectedSegmentioIndex = selectedSegmentioIndex()
+//        segmentioView.valueDidChange = { [weak self] _, segmentIndex in
+//            print(segmentIndex) //TODO
+//        }
         v.addSubview(segmentioView)
         v.addSubview(line)
-        segmentioView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
-        }
+//        segmentioView.snp.makeConstraints { (make) in
+//            make.edges.equalToSuperview()
+//        }
         
         return v
     }
