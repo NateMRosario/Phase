@@ -10,9 +10,7 @@ import UIKit
 import ADMozaicCollectionViewLayout
 
 class JourneyTableViewCell: UITableViewCell {
-    
-    fileprivate let ADMozaikCollectionViewLayoutExampleImagesCount = 22
-    
+
     let pics = [#imageLiteral(resourceName: "a"),#imageLiteral(resourceName: "b"),#imageLiteral(resourceName: "c"),#imageLiteral(resourceName: "d"),#imageLiteral(resourceName: "e"),#imageLiteral(resourceName: "f")]
 
     @IBOutlet weak var containter: UIView! {
@@ -31,7 +29,6 @@ class JourneyTableViewCell: UITableViewCell {
             collectionView.dataSource = self
             collectionView.register(MozaikCollectionViewCell.self, forCellWithReuseIdentifier: "ADMozaikLayoutCell")
             collectionView.register(UINib.init(nibName: "MozaikCollectionViewCell", bundle: nil), forCellWithReuseIdentifier: "ADMozaikLayoutCell")
-            collectionView.layer.cornerRadius = 10
         }
     }
     
@@ -61,13 +58,11 @@ extension JourneyTableViewCell: UICollectionViewDelegate {
 
 extension JourneyTableViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-    
+        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ADMozaikLayoutCell", for: indexPath) as! MozaikCollectionViewCell
-//        let sectionLabel: UILabel = cell.viewWithTag(1001) as! UILabel
-//        sectionLabel.text = "\(indexPath.section)"
         if indexPath.row < 3 {
-        let imageView: UIImageView = cell.viewWithTag(1000) as! UIImageView
-        imageView.image = UIImage(named: "\((indexPath as NSIndexPath).item % ADMozaikCollectionViewLayoutExampleImagesCount)")
+            let imageView: UIImageView = cell.viewWithTag(1000) as! UIImageView
+            imageView.image = pics[indexPath.row]
             cell.howManyMoreLabel.text = ""
         } else {
             cell.mozaik.backgroundColor = UIColor.lightGray
@@ -84,7 +79,7 @@ extension JourneyTableViewCell: UICollectionViewDataSource {
 
 extension JourneyTableViewCell: ADMozaikLayoutDelegate {
     func collectonView(_ collectionView: UICollectionView, mozaik layoyt: ADMozaikLayout, geometryInfoFor section: ADMozaikLayoutSection) -> ADMozaikLayoutSectionGeometryInfo {
-        let rowHeight: CGFloat = collectionView.bounds.height / 2 - 10
+        let rowHeight: CGFloat = UIScreen.main.bounds.width / 4 - 14
         let width = UIScreen.main.bounds.width / 4 - 14
         let columns = [ADMozaikLayoutColumn(width: width), ADMozaikLayoutColumn(width: width), ADMozaikLayoutColumn(width: width), ADMozaikLayoutColumn(width: width)]
         let geometryInfo = ADMozaikLayoutSectionGeometryInfo(rowHeight: rowHeight,

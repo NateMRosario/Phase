@@ -14,7 +14,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate {
     
     @IBOutlet weak var segmentedViewTop: NSLayoutConstraint!
     @IBOutlet weak var nameLabel: UILabel!
-    @IBOutlet weak var atDisplayNameLabel: UILabel!
+    @IBOutlet weak var username: UILabel!
     @IBOutlet weak var headerView: UIView!
     @IBOutlet weak var profileView: UIView!
     @IBOutlet weak var handleLabel: UILabel!
@@ -39,6 +39,9 @@ class ProfileViewController: UIViewController, UITableViewDelegate {
     @IBAction func editProfileButtonPressed(_ sender: UIButton) {
         //TODO: Present settingsVC
     }
+    @IBOutlet weak var subscribeButton: UIButton!
+    @IBAction func subscribeButtonPressed(_ sender: UIButton) {
+    }
     
     // At this offset the Header stops its transformations
     private let headerStopOffset:CGFloat = 200 - 64
@@ -49,16 +52,13 @@ class ProfileViewController: UIViewController, UITableViewDelegate {
         }
     }
     
-    // SEGMENTIO
-    var segmentioStyle = SegmentioStyle.imageOverLabel
-    
     // Sticky header and fake nav bar
     lazy var headerBlurImageView: UIImageView = {
         let biv = UIImageView()
         biv.alpha = 0.0
         biv.contentMode = .scaleAspectFill
-        biv.backgroundColor = ColorPalette.appBlue
-//        biv.image = #imageLiteral(resourceName: "Manhattan").blur(radius: 10, tintColor: UIColor.clear, saturationDeltaFactor: 1)
+//        biv.backgroundColor = ColorPalette.appBlue
+        biv.image = #imageLiteral(resourceName: "085 October Silence").blur(radius: 10, tintColor: UIColor.clear, saturationDeltaFactor: 1)
         return biv
     }()
     
@@ -87,6 +87,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.contentInset = UIEdgeInsetsMake(headerView.frame.height, 0, 0, 0)
+        tableView.separatorStyle = .none
         //setupSettingsButton()
     }
     override func viewWillAppear(_ animated: Bool) {
@@ -156,27 +157,27 @@ extension ProfileViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let v = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
-        let line = UIView(frame: CGRect(x: 0, y: 50, width: UIScreen.main.bounds.width, height: 1))
-        line.backgroundColor = ColorPalette.whiteSmoke
-        
-        // SegmentedController in section header
-        let segmentioView = Segmentio()
-        SegmentioBuilder.buildSegmentioView(
-            segmentioView: segmentioView,
-            segmentioStyle: segmentioStyle
-        )
-        segmentioView.selectedSegmentioIndex = selectedSegmentioIndex()
-        segmentioView.valueDidChange = { [weak self] _, segmentIndex in
-            print(segmentIndex)
+        if section == 0 {
+            let v = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
+            let line = UIView(frame: CGRect(x: 0, y: 50, width: UIScreen.main.bounds.width, height: 1))
+            line.backgroundColor = ColorPalette.whiteSmoke
+            
+            // SegmentedController in section header
+            let segmentioView = Segmentio()
+            SegmentioBuilder.buildSegmentioView(segmentioView: segmentioView, segmentioStyle: .onlyLabel)
+            segmentioView.selectedSegmentioIndex = selectedSegmentioIndex()
+            segmentioView.valueDidChange = { [weak self] _, segmentIndex in
+                print(segmentIndex) //TODO
+            }
+            v.addSubview(segmentioView)
+            v.addSubview(line)
+            segmentioView.snp.makeConstraints({ (make) in
+                make.edges.equalTo(v.snp.edges)
+            })
+            
+            return v
         }
-        v.addSubview(segmentioView)
-        v.addSubview(line)
-        segmentioView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
-        }
-        
-        return v
+        return UIView()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -190,6 +191,7 @@ extension ProfileViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "JourneyCell", for: indexPath) as! JourneyTableViewCell
+        
         return cell
     }
 }

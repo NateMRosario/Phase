@@ -11,10 +11,14 @@ import SnapKit
 
 class ActivityViewController: UIViewController {
     
-    // MARK: - Testbed
-    private var testArray = [Post]()
+    // MARK: - Properties
+    var posts = [Post]() {
+        didSet {
+            dump(posts)
+            activityView.activityCollectionView.reloadData()
+        }
+    }
     
-    // MARK: - Constants
     private let activityView = ActivityView()
     private let followersView = FollowersView()
     
@@ -34,6 +38,8 @@ class ActivityViewController: UIViewController {
         self.view.backgroundColor = UIColor.white
         self.activityView.activityCollectionView.dataSource = self
         self.activityView.activityCollectionView.delegate = self
+        self.activityView.delegate = self
+        self.followersView.delegate = self
         setupView()
     }
     
@@ -47,6 +53,9 @@ class ActivityViewController: UIViewController {
         setupActivityView()
         setupFollowersView()
     }
+    
+    private func getPost() {}
+    
     
     // MARK: - Contraints
     private func setupActivityView() {
@@ -73,7 +82,6 @@ class ActivityViewController: UIViewController {
 }
 
 extension ActivityViewController: UICollectionViewDataSource {
-    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return 10
     }
@@ -85,16 +93,50 @@ extension ActivityViewController: UICollectionViewDataSource {
 }
 
 extension ActivityViewController: UICollectionViewDelegate {
-    
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         return
     }
 }
 
-extension ProfileViewController: UICollectionViewDelegateFlowLayout {
+extension ActivityViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         let itemWidth: CGFloat = collectionView.bounds.width
         let itemHeight: CGFloat = collectionView.bounds.height
         return CGSize(width: itemWidth, height: itemHeight)
     }
+}
+
+extension ActivityViewController: ActivityViewDelegate {
+    func profileImagePressed() {
+    
+    }
+    
+    func subscribeButtonPressed() {
+    
+    }
+    
+    func userNameLabelTapped() {
+    
+    }
+    
+    func activityHashTagLabelTapped() {
+
+    }
+    
+    func activityDescriptionLabelTapped() {
+
+    }
+    
+}
+
+extension ActivityViewController: FollowersViewDelegate {
+    func followerImageViewTapped() {
+    
+    }
+    
+    func moreFollowersButtonTapped() {
+        
+    }
+    
+    
 }

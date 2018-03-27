@@ -9,6 +9,7 @@
 import UIKit
 import SnapKit
 
+// Selective border extension - top, bottom, leading or trailing.
 extension UIView {
     enum ViewSide {
         case left, right, top, bottom
@@ -30,6 +31,9 @@ extension UIView {
 }
 
 class ActivityView: UIView {
+    
+    // Custom Delegate
+    weak var delegate: ActivityViewDelegate?
     
     // Cell Identifier
     let collectionViewCellID = "ActivityCollectionViewCell"
@@ -69,6 +73,7 @@ class ActivityView: UIView {
         imageView.clipsToBounds = true
         imageView.layer.borderWidth = 0.5
         imageView.layer.borderColor = UIColor.gray.cgColor
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(profileImageTapped))
         return imageView
     }()
     
@@ -78,6 +83,8 @@ class ActivityView: UIView {
         label.textAlignment = .left
         label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         label.textColor = UIColor.darkGray
+        label.isUserInteractionEnabled = true
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(userNameLabelTapped))
         return label
     }()
     
@@ -96,6 +103,8 @@ class ActivityView: UIView {
         label.textAlignment = .left
         label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         label.textColor = UIColor.darkGray
+        label.isUserInteractionEnabled = true
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(activityHashTagLabelTapped))
         return label
     }()
     
@@ -105,6 +114,8 @@ class ActivityView: UIView {
         label.textAlignment = .left
         label.font = UIFont.systemFont(ofSize: 14, weight: .regular)
         label.textColor = UIColor.darkGray
+        label.isUserInteractionEnabled = true
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(activityDescriptionLabelTapped))
         return label
     }()
     
@@ -115,6 +126,7 @@ class ActivityView: UIView {
         button.setTitleColor(UIColor.white, for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 11)
         button.contentEdgeInsets = UIEdgeInsetsMake(5, 8, 5, 8)
+        button.addTarget(self, action: #selector(subscribeButtonPressed), for: .touchUpInside)
         return button
     }()
     
@@ -175,6 +187,32 @@ class ActivityView: UIView {
         activityCollectionView.addBorder(toSide: .bottom, withColor: UIColor.gray.cgColor, andThickness: 0.5)
     }
     
+    @objc public func profileImageTapped(sender: UIImageView, target:UIViewController) {
+        print("profile image delegate")
+        delegate?.profileImagePressed()
+    }
+    
+    @objc public func subscribeButtonPressed(sender: UIImageView, target:UIViewController) {
+        print("userName delegate")
+        delegate?.subscribeButtonPressed()
+    }
+    
+    @objc public func userNameLabelTapped(sender: UIImageView, target:UIViewController) {
+        print("userNameLabelTapped")
+        delegate?.userNameLabelTapped()
+    }
+    
+    @objc public func activityHashTagLabelTapped(sender: UIImageView, target:UIViewController) {
+        print("activityHashTagLabelTapped")
+        delegate?.activityHashTagLabelTapped()
+    }
+    
+    @objc public func activityDescriptionLabelTapped(sender: UIImageView, target:UIViewController) {
+        print("activityDescriptionLabelTapped")
+        delegate?.activityDescriptionLabelTapped()
+    }
+    
+    // MARK: - Constraints
     private func setupActivityHeaderLabel() {
         addSubview(activityHeaderLabel)
         activityHeaderLabel.snp.makeConstraints { (make) in
@@ -249,5 +287,13 @@ class ActivityView: UIView {
 
 }
 
+
+protocol ActivityViewDelegate: class {
+    func profileImagePressed()
+    func subscribeButtonPressed()
+    func userNameLabelTapped()
+    func activityHashTagLabelTapped()
+    func activityDescriptionLabelTapped()
+}
 
 

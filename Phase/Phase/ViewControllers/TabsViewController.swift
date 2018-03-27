@@ -12,6 +12,11 @@ class TabsViewController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        presentingViewController?.dismiss(animated: false, completion: { () in
+            print("yo")
+        })
+        
         self.tabBar.barTintColor = UIColor.white
                 
         // Profile VC
@@ -20,11 +25,15 @@ class TabsViewController: UITabBarController {
         profileVC.tabBarItem.title = "Profile"
         
         //Camera View Controller
-        let cameraVC = CameraViewController()
+        func newCollectionButtonPressed() {
+            
+        }
+        
+        let cameraVC = UINavigationController(rootViewController: CameraViewController())
         cameraVC.tabBarItem = UITabBarItem(title: "Camera", image: #imageLiteral(resourceName: "camera"), selectedImage: #imageLiteral(resourceName: "camera"))
         
         // Discover/Search VC
-        let discoverVC = UINavigationController(rootViewController: DiscoveryViewController.instantiate(withStoryboard: "Discover"))
+        let discoverVC = DiscoveryNavViewController(rootViewController: DiscoveryViewController.instantiate(withStoryboard: "Discover"))
         discoverVC.tabBarItem.title = "Discover"
         
         // HomeFeed VC
@@ -32,9 +41,9 @@ class TabsViewController: UITabBarController {
         homeVC.tabBarItem.title = "Home"
         
         // Login VC
-        let loginVC = UINavigationController(rootViewController: LoginViewController())
-        loginVC.tabBarItem.title = "Auth"
+        let notificationVC = NotificationsViewController.instantiate(withStoryboard: "Notifications")
+        notificationVC.tabBarItem.title = "Notifications"
         
-        self.setViewControllers([homeVC, discoverVC, cameraVC, profileVC, loginVC], animated: true)
+        self.setViewControllers([homeVC, discoverVC, cameraVC, notificationVC, profileVC], animated: true)
     }
 }
