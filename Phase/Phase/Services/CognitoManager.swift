@@ -26,6 +26,11 @@ class CognitoManager {
     
     var pool: AWSCognitoIdentityUserPool!
     var user: AWSCognitoIdentityUser?
+    var userId: String? {
+        didSet {
+            print(userId ?? "no userId")
+        }
+    }
     
     func isUserSignedIn() -> Bool {
         user = pool.getUser()
@@ -59,19 +64,29 @@ class CognitoManager {
                 } else {
                     print(task.result?.description ?? "sign in success block reached")
                     completion(nil)
+                    self.getDetails(user: self.user)
                 }
                 return nil
             })
     }
     
-    func getDetails() {
-        user = pool.getUser()
-
+    func getDetails(user: AWSCognitoIdentityUser?) {
         user?.getDetails().continueOnSuccessWith(block: { (task) -> Any? in
             if let error = task.error {
                 print(error)
             } else {
-                print(task.result?.description() ?? "user get details success block reached")
+                if let result = task.result {
+                    print(result.description())
+                    let attributes = result.userAttributes
+                    for attribute in attributes! {
+                        if let name = attribute.name, let value = attribute.value {
+                            if name == "sub" {
+                                self.userId = value
+                            }
+                        }
+                    }
+
+                }
             }
             return nil
         })

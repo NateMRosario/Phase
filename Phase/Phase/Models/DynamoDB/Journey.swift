@@ -20,35 +20,42 @@ class Journey: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
     
     var _journeyId: String?
     var _creationDate: NSNumber?
+    var _description: String?
     var _eventCount: NSNumber?
     var _events: Set<String>?
+    var _hashtags: Set<String>?
     var _inspiredBy: String?
     var _isOriginal: NSNumber?
     var _journeysInspired: Set<String>?
     var _numberOfWatchers: NSNumber?
+    var _title: String?
     var _userId: String?
     
     class func dynamoDBTableName() -> String {
-
+        
         return "phase-mobilehub-529604760-Journey"
     }
     
     class func hashKeyAttribute() -> String {
-
+        
         return "_journeyId"
     }
     
     override class func jsonKeyPathsByPropertyKey() -> [AnyHashable: Any] {
         return [
-               "_journeyId" : "journeyId",
-               "_creationDate" : "creationDate",
-               "_eventCount" : "eventCount",
-               "_events" : "events",
-               "_inspiredBy" : "inspiredBy",
-               "_isOriginal" : "isOriginal",
-               "_journeysInspired" : "journeysInspired",
-               "_numberOfWatchers" : "numberOfWatchers",
-               "_userId" : "userId",
+            "_journeyId" : "journeyId",
+            "_creationDate" : "creationDate",
+            "_description" : "description",
+            "_eventCount" : "eventCount",
+            "_events" : "events",
+            "_hashtags" : "hashtags",
+            "_inspiredBy" : "inspiredBy",
+            "_isOriginal" : "isOriginal",
+            "_journeysInspired" : "journeysInspired",
+            "_numberOfWatchers" : "numberOfWatchers",
+            "_title" : "title",
+            "_userId" : "userId",
         ]
     }
 }
+
