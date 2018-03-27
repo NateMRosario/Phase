@@ -15,25 +15,45 @@ class JourneyCarouselViewController: UIViewController {
     var items: [Int] = []
     var post: [Int] = [1,2,3]
     
+    var hideTopView = false
+    var hideMiddleView = false
+    var hideBottomView = false
+    
     // MARK: - Properties
     private let journeyCarouselView = JourneyCarouselView()
+    private let journeyHeaderView = JourneyHeaderView()
     private let journeyCommentView = JourneyCommentView()
+    private let journeyAddCommentView = JourneyAddCommentVIew()
+    
     private let cellID = "JourneyCommentTableViewCell"
     
     // MARK: - Init (Dependency injection)
-//    init(list: List){
-//        self.journey = post
-//        super.init(nibName: nil, bundle: nil)
-//    }
-//
-//    required init?(coder aDecoder: NSCoder) {
-//        fatalError("init(coder:) has not been implemented")
-//    }
+    //    init(list: List){
+    //        self.journey = post
+    //        super.init(nibName: nil, bundle: nil)
+    //    }
+    //
+    //    required init?(coder aDecoder: NSCoder) {
+    //        fatalError("init(coder:) has not been implemented")
+    //    }
+    
+    // MARK: - Lazy Variable
+    lazy var journeyCommentStackView: UIStackView = {
+        let stackView = UIStackView()
+        stackView.axis = .vertical
+        stackView.distribution = .fillProportionally
+        stackView.alignment = .leading
+        stackView.spacing = 8.0
+        stackView.backgroundColor = UIColor.orange
+        stackView.translatesAutoresizingMaskIntoConstraints = false
+        return stackView
+    }()
+    
     
     // MARK: - Life cycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.red
+        self.view.backgroundColor = UIColor.cyan
         self.journeyCarouselView.carouselCollectionView.delegate = self
         self.journeyCarouselView.carouselCollectionView.dataSource = self
         self.journeyCommentView.journeyCommentTableView.delegate = self
@@ -48,26 +68,56 @@ class JourneyCarouselViewController: UIViewController {
     }
     
     private func setupView() {
-        setupJourneyCarouselView()
-        setupJourneyCommentView()
-        setJourneyCommentViewZAxis()
-        roundTableViewCorners()
         for i in 0 ... 99 {
             items.append(i)
+            setupJourneyCarouselView()
+            setupJourneyCommentStackView()
+            //        setupJourneyCommentStackView()
+            setJourneyCommentStackViewAttributes()
+            setJourneyCommentStackViewZAxis()
         }
     }
     
-    private func setJourneyCommentViewZAxis() {
-        view.bringSubview(toFront: journeyCommentView)
+    private func setJourneyCommentStackViewZAxis() {
+        view.bringSubview(toFront: journeyCommentStackView)
     }
     
-    private func roundTableViewCorners() {
-        self.journeyCommentView.journeyCommentTableView.layer.borderWidth = 1
-        self.journeyCommentView.journeyCommentTableView.layer.cornerRadius = 10
-        self.journeyCommentView.journeyCommentTableView.layer.masksToBounds = true
-        self.journeyCommentView.journeyCommentTableView.clipsToBounds = true
+    private func setJourneyCommentStackViewAttributes() {
+        //        journeyCommentStackView.addArrangedSubview(journeyHeaderView)
+        journeyCommentStackView.addArrangedSubview(journeyCommentView)
+        //        journeyCommentStackView.addArrangedSubview(journeyAddCommentView)
+        journeyCommentStackView.translatesAutoresizingMaskIntoConstraints = false
+        journeyCommentStackView.layer.borderWidth = 1
+        journeyCommentStackView.layer.cornerRadius = 10
+        journeyCommentStackView.layer.masksToBounds = true
+        journeyCommentStackView.clipsToBounds = true
     }
-
+    
+    private func setViewsForStackView() {
+    }
+    
+    
+    
+    //    a.backgroundColor = UIColor.red
+    //    a.widthAnchor.constraint(equalToConstant: 200).isActive = true
+    //    let aHeight = a.heightAnchor.constraint(equalToConstant: 120)
+    //    aHeight.isActive = true
+    //    aHeight.priority = 999
+    //
+    //    let bHeight = b.heightAnchor.constraint(equalToConstant: 120)
+    //    bHeight.isActive = true
+    //    bHeight.priority = 999
+    //    b.backgroundColor = UIColor.green
+    //    b.widthAnchor.constraint(equalToConstant: 200).isActive = true
+    //
+    //    view.addSubview(stackView)
+    //    stackView.backgroundColor = UIColor.blue
+    //    stackView.addArrangedSubview(a)
+    //    stackView.addArrangedSubview(b)
+    //    stackView.axis = .vertical
+    //    stackView.distribution = .equalSpacing
+    //    stackView.translatesAutoresizingMaskIntoConstraints = false
+    
     private func getPost() {}
     
     // MARK: - Contraints
@@ -82,13 +132,13 @@ class JourneyCarouselViewController: UIViewController {
         }
     }
     
-    func setupJourneyCommentView() {
-        self.view.addSubview(journeyCommentView)
-        journeyCommentView.snp.makeConstraints { (make) in
+    func setupJourneyCommentStackView() {
+        self.view.addSubview(journeyCommentStackView)
+        journeyCommentStackView.snp.makeConstraints { (make) in
             make.width.equalTo(view.snp.width).multipliedBy(0.9)
             make.bottom.equalTo(view.snp.bottom).offset(-10)
             make.centerX.equalTo(view.snp.centerX)
-            make.height.equalTo(view.snp.height).multipliedBy(0.25)
+            make.height.equalTo(view.snp.height).multipliedBy(0.45)
         }
     }
     
@@ -158,4 +208,22 @@ extension JourneyCarouselViewController: UITableViewDataSource {
         
         return cell
     }
+}
+
+extension UIStackView {
+    
+    convenience init(axis:UILayoutConstraintAxis, spacing:CGFloat) {
+        self.init()
+        self.axis = axis
+        self.spacing = spacing
+        self.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    func anchorStackView(toView view:UIView, anchorX:NSLayoutXAxisAnchor, equalAnchorX:NSLayoutXAxisAnchor, anchorY:NSLayoutYAxisAnchor, equalAnchorY:NSLayoutYAxisAnchor) {
+        view.addSubview(self)
+        anchorX.constraint(equalTo: equalAnchorX).isActive = true
+        anchorY.constraint(equalTo: equalAnchorY).isActive = true
+        
+    }
+    
 }

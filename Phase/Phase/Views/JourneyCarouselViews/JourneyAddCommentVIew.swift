@@ -1,48 +1,26 @@
 //
-//  JourneyCommentView.swift
+//  JourneyAddCommentVIew.swift
 //  Phase
 //
-//  Created by Clint Mejia on 3/26/18.
+//  Created by Clint Mejia on 3/27/18.
 //  Copyright © 2018 Reiaz Gafar. All rights reserved.
 //
 
 import UIKit
 import SnapKit
 
-class JourneyCommentView: UIView {
-    
-    // MARK: - TableViewCell Identifier
-    let cellID = "JourneyCommentTableViewCell"
+// MARK: - Custom Delegate
+protocol JourneyPostACommentDelegate: class {
+    func postButtonTapped()
+}
+
+class JourneyAddCommentVIew: UIView {
     
     // MARK: - Delegate
-    weak var delegate: PostCommentDelegate?
-    
+    weak var delegate: JourneyPostACommentDelegate?
+
     // MARK: - Lazy variables
-    lazy var commentStackView: UIStackView = {
-        let stackView = UIStackView()
-        return stackView
-    }()
-    
-    lazy var journeyProfileImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "g")
-        imageView.contentMode = .scaleAspectFit
-        imageView.layer.masksToBounds = true
-        imageView.clipsToBounds = true
-        imageView.layer.borderWidth = 0.5
-        imageView.layer.borderColor = UIColor.gray.cgColor
-        imageView.layer.cornerRadius = bounds.width / 2
-        return imageView
-    }()
-    
-    lazy var journeyCommentTableView: UITableView = {
-        let tableView = UITableView()
-        tableView.register(JourneyCommentTableViewCell.self, forCellReuseIdentifier: cellID)
-        tableView.backgroundColor = .yellow
-        return tableView
-    }()
-    
-    lazy var profileImageView: UIImageView = {
+    lazy var commentProfileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "g")
         imageView.contentMode = .scaleAspectFit
@@ -61,7 +39,7 @@ class JourneyCommentView: UIView {
         button.titleLabel?.textAlignment = .center
         button.setTitleColor(UIColor.red, for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 11)
-//        button.contentEdgeInsets = UIEdgeInsetsMake(2, 2, 2, 2)
+        //        button.contentEdgeInsets = UIEdgeInsetsMake(2, 2, 2, 2)
         button.addTarget(self, action: #selector(postButtonTapped), for: .touchUpInside)
         return button
     }()
@@ -78,8 +56,8 @@ class JourneyCommentView: UIView {
         textfield.layoutEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
         return textfield
     }()
-    
-    // MARK: - Initializers
+
+        // MARK: - Initializers
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
@@ -91,21 +69,19 @@ class JourneyCommentView: UIView {
     }
     
     private func commonInit() {
-        backgroundColor = UIColor.clear
+        backgroundColor = UIColor.blue
         setupViews()
     }
-    
     
     // MARK: - Functions
     override func layoutSubviews() {
         super.layoutSubviews()
-        profileImageView.layer.cornerRadius = profileImageView.bounds.width/2.0
+        commentProfileImageView.layer.cornerRadius = commentProfileImageView.bounds.width/2.0
         commentTextField.addPadding(UITextField.PaddingSide.left(8))
     }
     
     private func setupViews() {
-        setupProfileImageView()
-        setupActivityCommentTableView()
+        setupCommentProfileImageView()
         setupCommentTextField()
         addSubview(postButton)
     }
@@ -116,44 +92,26 @@ class JourneyCommentView: UIView {
     }
     
     // MARK: - Constraints
-    private func setupProfileImageView() {
-        addSubview(profileImageView)
-        profileImageView.snp.makeConstraints { (make) in
+    private func setupCommentProfileImageView() {
+        addSubview(commentProfileImageView)
+        commentProfileImageView.snp.makeConstraints { (make) in
             make.width.equalTo(self).multipliedBy(0.09)
-            make.height.equalTo(profileImageView.snp.width)
+            make.height.equalTo(commentProfileImageView.snp.width)
             make.bottom.equalTo(self).offset(-8)
             make.leading.equalTo(self).offset(8)
-        }
-    }
-    
-    private func setupActivityCommentTableView() {
-        addSubview(journeyCommentTableView)
-        
-        journeyCommentTableView.snp.makeConstraints { (make) in
-            make.top.equalTo(self)
-            make.leading.equalTo(self)
-            make.trailing.equalTo(self)
-            make.bottom.equalTo(profileImageView.snp.top).offset(-8)
         }
     }
     
     private func setupCommentTextField() {
         addSubview(commentTextField)
         commentTextField.snp.makeConstraints { (make) in
-            make.leading.equalTo(profileImageView.snp.trailing).offset(8)
+            make.leading.equalTo(commentProfileImageView.snp.trailing).offset(8)
             make.trailing.equalTo(self).offset(-8)
-            make.height.equalTo(profileImageView.snp.height)
-            make.bottom.equalTo(profileImageView.snp.bottom)
+            make.height.equalTo(commentProfileImageView.snp.height)
+            make.bottom.equalTo(commentProfileImageView.snp.bottom)
         }
     }
-    
 }
-
-// MARK: - Custom Delegate
-protocol PostCommentDelegate: class {
-    func postButtonTapped()
-}
-
 
 extension UITextField {
     
@@ -192,3 +150,4 @@ extension UITextField {
         }
     }
 }
+

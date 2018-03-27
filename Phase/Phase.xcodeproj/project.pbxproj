@@ -126,6 +126,8 @@
 		F4882849206980CC0008A656 /* JourneyCommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4882848206980CC0008A656 /* JourneyCommentView.swift */; };
 		F4882856206A95130008A656 /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = F4882854206A95120008A656 /* iCarousel.m */; };
 		F49638FA206ABD0A002D62E7 /* JourneyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F49638F9206ABD09002D62E7 /* JourneyTableViewCell.xib */; };
+		F49638FE206AC795002D62E7 /* JourneyAddCommentVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49638FD206AC795002D62E7 /* JourneyAddCommentVIew.swift */; };
+		F4963900206AC7EB002D62E7 /* JourneyHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49638FF206AC7EB002D62E7 /* JourneyHeaderView.swift */; };
 		F4D34A7A205C482C00F4D50D /* EventCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D34A79205C482C00F4D50D /* EventCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
@@ -288,6 +290,8 @@
 		F48DA6BE20588F17006E4FFC /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		F48DA6C020589024006E4FFC /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		F49638F9206ABD09002D62E7 /* JourneyTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JourneyTableViewCell.xib; sourceTree = "<group>"; };
+		F49638FD206AC795002D62E7 /* JourneyAddCommentVIew.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyAddCommentVIew.swift; sourceTree = "<group>"; };
+		F49638FF206AC7EB002D62E7 /* JourneyHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyHeaderView.swift; sourceTree = "<group>"; };
 		F4D34A79205C482C00F4D50D /* EventCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCollectionViewCell.swift; sourceTree = "<group>"; };
 		FB898E9F3A3E362DE3BD876E /* Pods-Phase.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Phase.release.xcconfig"; path = "Pods/Target Support Files/Pods-Phase/Pods-Phase.release.xcconfig"; sourceTree = "<group>"; };
 		FE00CE277B7AB4A621DE7AA9 /* Pods_Phase.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Phase.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -688,8 +692,7 @@
 				810935892059BD5800A95B30 /* SearchView.swift */,
 				8123777E206A9E7400A6BC02 /* Camera+PostViews */,
 				8791DFDA2060171F00337CA3 /* FollowersView.swift */,
-				F404878B20657904009039AF /* JourneyCarouselView.swift */,
-				F4882848206980CC0008A656 /* JourneyCommentView.swift */,
+				F49638FC206AC705002D62E7 /* JourneyCarouselViews */,
 				817C6EEB2069AB9D00010EDF /* Following */,
 			);
 			path = Views;
@@ -765,6 +768,17 @@
 				F4882855206A95120008A656 /* Phase-Bridging-Header.h */,
 			);
 			path = iCarousel;
+			sourceTree = "<group>";
+		};
+		F49638FC206AC705002D62E7 /* JourneyCarouselViews */ = {
+			isa = PBXGroup;
+			children = (
+				F404878B20657904009039AF /* JourneyCarouselView.swift */,
+				F4882848206980CC0008A656 /* JourneyCommentView.swift */,
+				F49638FD206AC795002D62E7 /* JourneyAddCommentVIew.swift */,
+				F49638FF206AC7EB002D62E7 /* JourneyHeaderView.swift */,
+			);
+			path = JourneyCarouselViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1137,6 +1151,7 @@
 				F418308E206AB89100466705 /* JourneyTableViewCell.swift in Sources */,
 				81AB8ACD205AFD8C00A98AFB /* DetailViewController.swift in Sources */,
 				81AB8AC7205AFBD700A98AFB /* DiscoveryViewController.swift in Sources */,
+				F4963900206AC7EB002D62E7 /* JourneyHeaderView.swift in Sources */,
 				8109357A2059BBD300A95B30 /* SearchViewController.swift in Sources */,
 				81817A4220655FE700CA7044 /* ActiveLabel.swift in Sources */,
 				8128B4752069481E009E0629 /* S3Manager.swift in Sources */,
@@ -1185,6 +1200,7 @@
 				8128B47320694815009E0629 /* DynamoDBManager.swift in Sources */,
 				810935722059BA8400A95B30 /* HomeViewController.swift in Sources */,
 				F404878C20657904009039AF /* JourneyCarouselView.swift in Sources */,
+				F49638FE206AC795002D62E7 /* JourneyAddCommentVIew.swift in Sources */,
 				81817A4320655FE700CA7044 /* ActiveType.swift in Sources */,
 				81AB8AAC205AF6F600A98AFB /* CALayer+Extensions.swift in Sources */,
 				F4882847206955690008A656 /* JourneyCommentTableViewCell.swift in Sources */,
