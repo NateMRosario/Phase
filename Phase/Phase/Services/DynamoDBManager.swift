@@ -10,13 +10,13 @@ import Foundation
 import AWSCore
 import AWSDynamoDB
 
-//class DynamoDBManager {
-//    static let shared = DynamoDBManager()
-//    private init() {}
-//
-//    let mapper = AWSDynamoDBObjectMapper.default()
-//
-//    func createJourney() {
+class DynamoDBManager {
+    static let shared = DynamoDBManager()
+    private init() {}
+    
+    let mapper = AWSDynamoDBObjectMapper.default()
+    
+    func createJourney() {
 //
 //        let newJourney: Journey = Journey()
 //        newJourney._journeyId
@@ -48,22 +48,22 @@ import AWSDynamoDB
 //            }
 //            return nil
 //        }
-//
-//
-//
-//        //        mapper.load(Test.self, hashKey: "3123123", rangeKey: nil).continueWith { (task) -> Any? in
-//        //            if let error = task.error {
-//        //                print(error)
-//        //            } else {
-//        //                print(task.result?.description)
-//        //            }
-//        //            return nil
-//        //        }
-//
-//
-//
+
+        //        mapper.load(Test.self, hashKey: "3123123", rangeKey: nil).continueWith { (task) -> Any? in
+        //            if let error = task.error {
+        //                print(error)
+        //            } else {
+        //                print(task.result?.description)
+        //            }
+        //            return nil
+        //        }
+        
+        
+        
 //
 //    }
 //
-//}
+    }
+}
+
 

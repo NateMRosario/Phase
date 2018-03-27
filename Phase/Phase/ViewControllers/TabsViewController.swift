@@ -12,6 +12,11 @@ class TabsViewController: UITabBarController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        presentingViewController?.dismiss(animated: false, completion: { () in
+            print("yo")
+        })
+        
         self.tabBar.barTintColor = UIColor.white
                 
         // Profile VC
@@ -35,10 +40,10 @@ class TabsViewController: UITabBarController {
         let homeVC = UINavigationController(rootViewController: HomeViewController.instantiate(withStoryboard: "HomeFeed"))
         homeVC.tabBarItem.title = "Home"
         
-         //Login VC
-        let loginVC = UINavigationController(rootViewController: LoginViewController())
-        loginVC.tabBarItem.title = "Auth"
+        // Login VC
+        let notificationVC = NotificationsViewController.instantiate(withStoryboard: "Notifications")
+        notificationVC.tabBarItem.title = "Notifications"
         
-        self.setViewControllers([homeVC, discoverVC, cameraVC, profileVC, loginVC], animated: true)
+        self.setViewControllers([homeVC, discoverVC, cameraVC, notificationVC, profileVC], animated: true)
     }
 }
