@@ -27,32 +27,35 @@ class AppUser: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
     var _journeys: Set<String>?
     var _journeysFollowed: Set<String>?
     var _numberOfJourneys: NSNumber?
+    var _profileImage: String?
     var _usersFollowed: Set<String>?
     var _watcherCount: NSNumber?
     
     class func dynamoDBTableName() -> String {
-
+        
         return "phase-mobilehub-529604760-AppUser"
     }
     
     class func hashKeyAttribute() -> String {
-
+        
         return "_userId"
     }
     
     override class func jsonKeyPathsByPropertyKey() -> [AnyHashable: Any] {
         return [
-               "_userId" : "userId",
-               "_creationDate" : "creationDate",
-               "_eventsViewed" : "eventsViewed",
-               "_followerCount" : "followerCount",
-               "_isPremium" : "isPremium",
-               "_isWatching" : "isWatching",
-               "_journeys" : "journeys",
-               "_journeysFollowed" : "journeysFollowed",
-               "_numberOfJourneys" : "numberOfJourneys",
-               "_usersFollowed" : "usersFollowed",
-               "_watcherCount" : "watcherCount",
+            "_userId" : "userId",
+            "_creationDate" : "creationDate",
+            "_eventsViewed" : "eventsViewed",
+            "_followerCount" : "followerCount",
+            "_isPremium" : "isPremium",
+            "_isWatching" : "isWatching",
+            "_journeys" : "journeys",
+            "_journeysFollowed" : "journeysFollowed",
+            "_numberOfJourneys" : "numberOfJourneys",
+            "_profileImage" : "profileImage",
+            "_usersFollowed" : "usersFollowed",
+            "_watcherCount" : "watcherCount",
         ]
     }
 }
+
