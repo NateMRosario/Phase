@@ -29,6 +29,8 @@
 		810935D620600D6600A95B30 /* awsconfiguration.json in Resources */ = {isa = PBXBuildFile; fileRef = 810935D520600D6600A95B30 /* awsconfiguration.json */; };
 		810935D8206010F600A95B30 /* AuthNavigationController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810935D7206010F600A95B30 /* AuthNavigationController.swift */; };
 		810935DA2061503800A95B30 /* CognitoConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810935D92061503800A95B30 /* CognitoConstants.swift */; };
+		81115DFF2069C1970052C9E1 /* WelcomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81115DFE2069C1970052C9E1 /* WelcomeViewController.swift */; };
+		81115E012069C3940052C9E1 /* UIColor+Hex.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81115E002069C3940052C9E1 /* UIColor+Hex.swift */; };
 		8128B47120694808009E0629 /* CognitoManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8128B47020694808009E0629 /* CognitoManager.swift */; };
 		8128B47320694815009E0629 /* DynamoDBManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8128B47220694815009E0629 /* DynamoDBManager.swift */; };
 		8128B4752069481E009E0629 /* S3Manager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8128B4742069481E009E0629 /* S3Manager.swift */; };
@@ -158,6 +160,8 @@
 		810935D520600D6600A95B30 /* awsconfiguration.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = awsconfiguration.json; sourceTree = "<group>"; };
 		810935D7206010F600A95B30 /* AuthNavigationController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthNavigationController.swift; sourceTree = "<group>"; };
 		810935D92061503800A95B30 /* CognitoConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CognitoConstants.swift; sourceTree = "<group>"; };
+		81115DFE2069C1970052C9E1 /* WelcomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WelcomeViewController.swift; sourceTree = "<group>"; };
+		81115E002069C3940052C9E1 /* UIColor+Hex.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Hex.swift"; sourceTree = "<group>"; };
 		8128B47020694808009E0629 /* CognitoManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CognitoManager.swift; sourceTree = "<group>"; };
 		8128B47220694815009E0629 /* DynamoDBManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamoDBManager.swift; sourceTree = "<group>"; };
 		8128B4742069481E009E0629 /* S3Manager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = S3Manager.swift; sourceTree = "<group>"; };
@@ -340,6 +344,7 @@
 				81817A372064BADE00CA7044 /* OnboardingLoginViewController.swift */,
 				818DBB6720695C7A00B91990 /* SignUpViewController.swift */,
 				818DBB282066C54300B91990 /* ForgotPassViewController.swift */,
+				81115DFE2069C1970052C9E1 /* WelcomeViewController.swift */,
 			);
 			path = Onboarding;
 			sourceTree = "<group>";
@@ -520,6 +525,7 @@
 				F48DA6BE20588F17006E4FFC /* Post.swift */,
 				F48DA6C020589024006E4FFC /* Comment.swift */,
 				81CA1BCA206356A900EF7B8E /* Date+TimeAgoDisplay.swift */,
+				81115E002069C3940052C9E1 /* UIColor+Hex.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -846,6 +852,7 @@
 				"${BUILT_PRODUCTS_DIR}/Material/Material.framework",
 				"${BUILT_PRODUCTS_DIR}/Motion/Motion.framework",
 				"${BUILT_PRODUCTS_DIR}/PageMenu/PageMenu.framework",
+				"${BUILT_PRODUCTS_DIR}/Pastel/Pastel.framework",
 				"${BUILT_PRODUCTS_DIR}/Segmentio/Segmentio.framework",
 				"${BUILT_PRODUCTS_DIR}/SkyFloatingLabelTextField/SkyFloatingLabelTextField.framework",
 				"${BUILT_PRODUCTS_DIR}/SnapKit/SnapKit.framework",
@@ -868,6 +875,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Material.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Motion.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PageMenu.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Pastel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Segmentio.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SkyFloatingLabelTextField.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SnapKit.framework",
@@ -989,12 +997,14 @@
 				818DBB6820695C7A00B91990 /* SignUpViewController.swift in Sources */,
 				81AB8ABD205AFA1000A98AFB /* ColumnContainer.swift in Sources */,
 				81AB8AC4205AFB4200A98AFB /* AnimateDiscoverToDetailVC.swift in Sources */,
+				81115DFF2069C1970052C9E1 /* WelcomeViewController.swift in Sources */,
 				810935D0205C45D200A95B30 /* ConfirmAccountView.swift in Sources */,
 				810935762059BB0D00A95B30 /* FollowsViewController.swift in Sources */,
 				810935DA2061503800A95B30 /* CognitoConstants.swift in Sources */,
 				81AB8AB4205AF7AB00A98AFB /* UINavigationBar+Extensions.swift in Sources */,
 				810935842059BCDD00A95B30 /* ActivityView.swift in Sources */,
 				810935D8206010F600A95B30 /* AuthNavigationController.swift in Sources */,
+				81115E012069C3940052C9E1 /* UIColor+Hex.swift in Sources */,
 				81C9EE152058795200C27016 /* AppDelegate.swift in Sources */,
 				81C279CF20616D3900DB1825 /* DiscoveryNavViewController.swift in Sources */,
 				818DBB6A206980A500B91990 /* NotificationsViewController.swift in Sources */,

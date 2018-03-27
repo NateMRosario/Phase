@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Pastel
 
 class ForgotPassViewController: UIViewController {
 
@@ -21,6 +22,20 @@ class ForgotPassViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let pastelView = PastelView(frame: view.bounds)
+        
+        // Custom Direction
+        pastelView.startPastelPoint = .topLeft
+        pastelView.endPastelPoint = .bottomRight
+        
+        // Custom Duration
+        pastelView.animationDuration = 3.0
+        
+        // Custom Color
+        pastelView.setColors(HexStringToUIColor.appGradient)
+        
+        pastelView.startAnimation()
+        view.insertSubview(pastelView, at: 0)
     }
 
     override func didReceiveMemoryWarning() {

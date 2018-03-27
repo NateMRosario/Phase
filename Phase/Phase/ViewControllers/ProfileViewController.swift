@@ -52,9 +52,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate {
         }
     }
     
-    // SEGMENTIO
-    var segmentioStyle = SegmentioStyle.imageOverLabel
-    
     // Sticky header and fake nav bar
     lazy var headerBlurImageView: UIImageView = {
         let biv = UIImageView()
@@ -159,27 +156,27 @@ extension ProfileViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let v = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
-        let line = UIView(frame: CGRect(x: 0, y: 50, width: UIScreen.main.bounds.width, height: 1))
-        line.backgroundColor = ColorPalette.whiteSmoke
-        
-        // SegmentedController in section header
-        let segmentioView = Segmentio()
-        SegmentioBuilder.buildSegmentioView(
-            segmentioView: segmentioView,
-            segmentioStyle: segmentioStyle
-        )
-//        segmentioView.selectedSegmentioIndex = selectedSegmentioIndex()
-//        segmentioView.valueDidChange = { [weak self] _, segmentIndex in
-//            print(segmentIndex) //TODO
-//        }
-        v.addSubview(segmentioView)
-        v.addSubview(line)
-//        segmentioView.snp.makeConstraints { (make) in
-//            make.edges.equalToSuperview()
-//        }
-        
-        return v
+        if section == 0 {
+            let v = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
+            let line = UIView(frame: CGRect(x: 0, y: 50, width: UIScreen.main.bounds.width, height: 1))
+            line.backgroundColor = ColorPalette.whiteSmoke
+            
+            // SegmentedController in section header
+            let segmentioView = Segmentio()
+            SegmentioBuilder.buildSegmentioView(segmentioView: segmentioView, segmentioStyle: .onlyLabel)
+            segmentioView.selectedSegmentioIndex = selectedSegmentioIndex()
+            segmentioView.valueDidChange = { [weak self] _, segmentIndex in
+                print(segmentIndex) //TODO
+            }
+            v.addSubview(segmentioView)
+            v.addSubview(line)
+            segmentioView.snp.makeConstraints({ (make) in
+                make.edges.equalTo(v.snp.edges)
+            })
+            
+            return v
+        }
+        return UIView()
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -193,6 +190,7 @@ extension ProfileViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "JourneyCell", for: indexPath) as! JourneyTableViewCell
+        
         return cell
     }
 }

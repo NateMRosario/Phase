@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Pastel
 
 class SignUpViewController: UIViewController {
     
@@ -39,16 +40,29 @@ class SignUpViewController: UIViewController {
     }
     
     let customType = ActiveType.custom(pattern: "\\sTERMS OF USE\\b")
-    let customType2 = ActiveType.custom(pattern: "\\sPRIVATE POLICY\\b")
+    let customType2 = ActiveType.custom(pattern: "\\sPRIVACY POLICY\\b")
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let pastelView = PastelView(frame: view.bounds)
+        
+        // Custom Direction
+        pastelView.startPastelPoint = .topLeft
+        pastelView.endPastelPoint = .bottomRight
+        
+        // Custom Color
+        pastelView.setColors(HexStringToUIColor.appGradient)
+        
+        pastelView.startAnimation()
+        view.insertSubview(pastelView, at: 0)
+        
         termsAndPP.enabledTypes.append(customType)
         termsAndPP.enabledTypes.append(customType2)
         
         termsAndPP.customize { (label) in
-            label.text = "BY SIGNING UP, YOU AGREE TO OUR TERMS OF USE AND PRIVATE POLICY"
+            label.text = "BY SIGNING UP, YOU AGREE TO OUR TERMS OF USE AND PRIVACY POLICY"
+
             label.handleCustomTap(for: customType) { _ in self.showAlert(title: "Terms of Use", message: "It's ya boi")}
             label.handleCustomTap(for: customType2) { _ in self.showAlert(title: "Private Policy", message: "ayye lmfao")}
             
@@ -58,6 +72,7 @@ class SignUpViewController: UIViewController {
             label.configureLinkAttribute = { (type, attributes, isSelected) in
                 var atts = attributes
                 atts[NSAttributedStringKey.font] = isSelected ? UIFont.boldSystemFont(ofSize:13 ) : UIFont.boldSystemFont(ofSize: 13)
+                atts[NSAttributedStringKey.underlineStyle] = 1
                 return atts
             }
         }
@@ -67,3 +82,4 @@ class SignUpViewController: UIViewController {
         super.didReceiveMemoryWarning()
     }
 }
+

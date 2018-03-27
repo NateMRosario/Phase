@@ -21,6 +21,7 @@ target 'Phase' do
   pod 'Segmentio'
   pod 'DGElasticPullToRefresh'
   pod 'PageMenu'
+  pod 'Pastel'
   
   target 'PhaseTests' do
     inherit! :search_paths
