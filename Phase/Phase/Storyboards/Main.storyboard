@@ -211,7 +211,7 @@
                                 </prototypes>
                             </tableView>
                         </subviews>
-                        <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                        <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="uMB-7s-yx5" firstAttribute="bottom" secondItem="7Gr-2i-Syk" secondAttribute="bottom" id="2Li-Ks-i60"/>
                             <constraint firstItem="7Gr-2i-Syk" firstAttribute="top" secondItem="FrX-n9-WZp" secondAttribute="top" id="45d-Vb-Im7"/>

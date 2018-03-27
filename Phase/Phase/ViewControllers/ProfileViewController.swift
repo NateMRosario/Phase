@@ -87,6 +87,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.contentInset = UIEdgeInsetsMake(headerView.frame.height, 0, 0, 0)
+        tableView.separatorStyle = .none
         //setupSettingsButton()
     }
     override func viewWillAppear(_ animated: Bool) {

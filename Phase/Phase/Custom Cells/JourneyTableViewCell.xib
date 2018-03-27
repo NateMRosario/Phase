@@ -80,6 +80,7 @@
                                 <collectionViewLayout key="collectionViewLayout" id="qUu-rA-qK8" customClass="ADMozaikLayout" customModule="ADMozaicCollectionViewLayout"/>
                             </collectionView>
                         </subviews>
+                        <color key="backgroundColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstAttribute="bottom" secondItem="SUQ-Bq-3bH" secondAttribute="bottom" id="0dw-NL-Dy1"/>
                             <constraint firstAttribute="trailing" secondItem="SUQ-Bq-3bH" secondAttribute="trailing" id="4Vf-MT-6xy"/>
