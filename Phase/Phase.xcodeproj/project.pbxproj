@@ -330,8 +330,7 @@
 				817C6EE32069AB7E00010EDF /* FollowsCollectionViewCell.swift */,
 				817C6EE62069AB7E00010EDF /* MenuCollectionCell.swift */,
 			);
-			name = FollowingCells;
-			path = FollowingCell;
+			path = FollowingCells;
 			sourceTree = "<group>";
 		};
 		817C6EEB2069AB9D00010EDF /* Following */ = {
@@ -340,8 +339,7 @@
 				817C6EED2069ABB000010EDF /* FollowsView.swift */,
 				817C6EEC2069ABB000010EDF /* MenuBar.swift */,
 			);
-			name = Following;
-			path = "New Group";
+			path = Following;
 			sourceTree = "<group>";
 		};
 		81817A342064BAA000CA7044 /* Onboarding */ = {
