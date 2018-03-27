@@ -1,36 +1,37 @@
 PODS:
-  - ADMozaicCollectionViewLayout (4.0.3)
-  - AMPopTip (3.1.4)
-  - AWSAuthCore (2.6.12):
-    - AWSCore (= 2.6.12)
-  - AWSCognitoAuth (2.6.12):
+  - ADMozaicCollectionViewLayout (4.0.4)
+  - AMPopTip (3.2.1)
+  - AWSAuthCore (2.6.13):
+    - AWSCore (= 2.6.13)
+  - AWSCognitoAuth (2.6.13):
     - AWSCognitoIdentityProviderASF (= 1.0.1)
-  - AWSCognitoIdentityProvider (2.6.12):
+  - AWSCognitoIdentityProvider (2.6.13):
     - AWSCognitoIdentityProviderASF (= 1.0.1)
-    - AWSCore (= 2.6.12)
+    - AWSCore (= 2.6.13)
   - AWSCognitoIdentityProviderASF (1.0.1)
-  - AWSCore (2.6.12)
-  - AWSDynamoDB (2.6.12):
-    - AWSCore (= 2.6.12)
-  - AWSMobileClient (2.6.12):
-    - AWSAuthCore (= 2.6.12)
-  - AWSS3 (2.6.12):
-    - AWSCore (= 2.6.12)
-  - AWSUserPoolsSignIn (2.6.12):
-    - AWSAuthCore (= 2.6.12)
-    - AWSCognitoIdentityProvider (= 2.6.12)
+  - AWSCore (2.6.13)
+  - AWSDynamoDB (2.6.13):
+    - AWSCore (= 2.6.13)
+  - AWSMobileClient (2.6.13):
+    - AWSAuthCore (= 2.6.13)
+  - AWSS3 (2.6.13):
+    - AWSCore (= 2.6.13)
+  - AWSUserPoolsSignIn (2.6.13):
+    - AWSAuthCore (= 2.6.13)
+    - AWSCognitoIdentityProvider (= 2.6.13)
   - BetterSegmentedControl (0.9)
   - DGElasticPullToRefresh (1.1)
-  - Material (2.13.6):
-    - Material/Core (= 2.13.6)
-  - Material/Core (2.13.6):
+  - Material (2.14.0):
+    - Material/Core (= 2.14.0)
+  - Material/Core (2.14.0):
     - Motion (~> 1.3.0)
   - Motion (1.3.5):
     - Motion/Core (= 1.3.5)
   - Motion/Core (1.3.5)
   - PageMenu (2.0.0)
+  - Pastel (0.4.0)
   - Segmentio (3.0)
-  - SkyFloatingLabelTextField (3.4.0)
+  - SkyFloatingLabelTextField (3.4.1)
   - SnapKit (4.0.0)
 
 DEPENDENCIES:
@@ -46,31 +47,33 @@ DEPENDENCIES:
   - DGElasticPullToRefresh
   - Material
   - PageMenu
+  - Pastel
   - Segmentio
   - SkyFloatingLabelTextField (~> 3.0)
   - SnapKit
 
 SPEC CHECKSUMS:
-  ADMozaicCollectionViewLayout: bdb593a4d53cfc66fca9de5f406d1ae45b0f7404
-  AMPopTip: 74c343e06fb7cd859fa2bd672e45edb97836f1b0
-  AWSAuthCore: 55376d5a47c2b5cefdd3f78d247e0a5496fc25c4
-  AWSCognitoAuth: 4e5874323836782cba292364e88e0909b78087ae
-  AWSCognitoIdentityProvider: 2b7f74c4d6b63c9e5a3ba55db7453e997afa0566
+  ADMozaicCollectionViewLayout: 3145a65a65e5f1f5dc22dd31b2e9a03407259adf
+  AMPopTip: 31251008f2c00cbc0a3d2b18520f277c5b5ab4da
+  AWSAuthCore: 821990b7fc2febe5ed5eb42199ea55ee22ac911d
+  AWSCognitoAuth: ab606147f4a32d2206af89d686e2d76a3702a397
+  AWSCognitoIdentityProvider: c532434167c99ec42126447a83c6a2f2ea18f678
   AWSCognitoIdentityProviderASF: f94f1a502e72ef3d0a1de93e10bf7a79c8698118
-  AWSCore: d0d6e4f6831754aaf98058d2306a016ae71510fe
-  AWSDynamoDB: a1626a8e025a12fa71723da8eee0c1ff51da5dc0
-  AWSMobileClient: 5972fea7b8b7a9eae8790386700b8a7f330f8ee3
-  AWSS3: c35608e0cdd5172f9e1d943221fd5fde01c5f749
-  AWSUserPoolsSignIn: a731c43b295ac7d4cf9647c655ce580b3ced9397
+  AWSCore: 5da797bc476188fdaf00dec134fa18d84708eca9
+  AWSDynamoDB: 36abff7ce93fcadad2c4dc6f729d8716c933adf2
+  AWSMobileClient: bf1c341c91f82eda8f757cd96dc0cbb3d1f0b768
+  AWSS3: 7c178c82c2e648559b7075a663335055327dd4f5
+  AWSUserPoolsSignIn: 6d5a7dedeac2e3f2a84d7c838a5df85aa386f1c7
   BetterSegmentedControl: 40b2b6a08bbc59663149624d1b5235efa8d43a3c
   DGElasticPullToRefresh: 28f11a6026302a90f8ffebbc6e24748e584dddd3
-  Material: ef704dcc1bced32ab7c91ece2ba734da557e3f36
+  Material: c5bea030f57d4b903c5284200bb612d571c9ec03
   Motion: 9f74d115d7f72bb5380a8e3cde2f8a1fc898ac36
   PageMenu: 9c38fd7e0d9ef4b1408320f55bb907bbc0e538dc
+  Pastel: 7fa5e26123b3dbe11f7ed255654bf37100b199a5
   Segmentio: 1607fba3b42230f5f91e997d1a3f337f1176674c
-  SkyFloatingLabelTextField: 703aa1420b697392b1e7dba25571180dde018477
+  SkyFloatingLabelTextField: 8085f20f57f74a00cfcae58099299faa1a971035
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
 
-PODFILE CHECKSUM: 47431650c1ce25a4081cafe2cf70628225491605
+PODFILE CHECKSUM: ff4687afc09ddc0b3b05110ebe090beed63fb484
 
 COCOAPODS: 1.4.0

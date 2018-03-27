@@ -22,6 +22,7 @@ class FollowersView: UIView {
         imageView.clipsToBounds = true
         imageView.layer.borderWidth = 0.5
         imageView.layer.borderColor = UIColor.gray.cgColor
+        imageView.tag = 0
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(followerImageViewTapped))
         return imageView
     }()
@@ -34,6 +35,7 @@ class FollowersView: UIView {
         imageView.clipsToBounds = true
         imageView.layer.borderWidth = 0.5
         imageView.layer.borderColor = UIColor.gray.cgColor
+        imageView.tag = 1
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(followerImageViewTapped))
         return imageView
     }()
@@ -46,6 +48,7 @@ class FollowersView: UIView {
         imageView.clipsToBounds = true
         imageView.layer.borderWidth = 0.5
         imageView.layer.borderColor = UIColor.gray.cgColor
+        imageView.tag = 2
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(followerImageViewTapped))
         return imageView
     }()
@@ -58,6 +61,7 @@ class FollowersView: UIView {
         imageView.clipsToBounds = true
         imageView.layer.borderWidth = 0.5
         imageView.layer.borderColor = UIColor.gray.cgColor
+        imageView.tag = 3
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(followerImageViewTapped))
         return imageView
     }()
@@ -70,6 +74,7 @@ class FollowersView: UIView {
         imageView.clipsToBounds = true
         imageView.layer.borderWidth = 0.5
         imageView.layer.borderColor = UIColor.gray.cgColor
+        imageView.tag = 4
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(followerImageViewTapped))
         return imageView
     }()
@@ -201,6 +206,14 @@ class FollowersView: UIView {
         }
     }
     
+//    public func configureFollowersView() {
+//        followerOneImageView.image =
+//        followerTwoImageView.image =
+//        followerThreeImageView.image =
+//        followerFourImageView.image =
+//        followerFiveImageView.image =
+//        moreFollowersButton.titleLabel?.text = ""
+//    }
 }
 
 protocol FollowersViewDelegate: class {
