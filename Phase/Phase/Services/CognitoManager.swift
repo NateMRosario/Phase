@@ -67,7 +67,7 @@ class CognitoManager {
                 print(error)
             } else {
                 print(task.result?.description() ?? "user get details success block reached")
-                DynamoDBManager.shared.createJourney()
+//                DynamoDBManager.shared.createJourney()
             }
             return nil
         })

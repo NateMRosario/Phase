@@ -39,6 +39,13 @@
 		8134CF02205C4A4F00A146B1 /* HomeFeedCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8134CF01205C4A4F00A146B1 /* HomeFeedCollectionViewCell.xib */; };
 		8134CF0620615EE700A146B1 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8134CF0520615EE700A146B1 /* LoginView.swift */; };
 		8134CF0820615EF200A146B1 /* CreateAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8134CF0720615EF200A146B1 /* CreateAccountView.swift */; };
+		817C6EDD2069A99500010EDF /* FollowsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817C6EDC2069A99500010EDF /* FollowsViewController.swift */; };
+		817C6EE72069AB7E00010EDF /* FollowsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817C6EE32069AB7E00010EDF /* FollowsCollectionViewCell.swift */; };
+		817C6EE82069AB7E00010EDF /* FollowingTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817C6EE42069AB7E00010EDF /* FollowingTableCell.swift */; };
+		817C6EE92069AB7E00010EDF /* FollowingTableCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 817C6EE52069AB7E00010EDF /* FollowingTableCell.xib */; };
+		817C6EEA2069AB7E00010EDF /* MenuCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817C6EE62069AB7E00010EDF /* MenuCollectionCell.swift */; };
+		817C6EEE2069ABB000010EDF /* MenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817C6EEC2069ABB000010EDF /* MenuBar.swift */; };
+		817C6EEF2069ABB000010EDF /* FollowsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817C6EED2069ABB000010EDF /* FollowsView.swift */; };
 		8180F5A320634CF100859650 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81DD11C12061BC8A00A9AD1A /* CameraView.swift */; };
 		81817A382064BADE00CA7044 /* OnboardingLoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81817A372064BADE00CA7044 /* OnboardingLoginViewController.swift */; };
 		81AB8A96205AD42900A98AFB /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AB8A95205AD42900A98AFB /* ProfileTableViewCell.swift */; };
@@ -155,6 +162,13 @@
 		8134CF01205C4A4F00A146B1 /* HomeFeedCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HomeFeedCollectionViewCell.xib; sourceTree = "<group>"; };
 		8134CF0520615EE700A146B1 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginView.swift; path = Auth/LoginView.swift; sourceTree = "<group>"; };
 		8134CF0720615EF200A146B1 /* CreateAccountView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreateAccountView.swift; path = Auth/CreateAccountView.swift; sourceTree = "<group>"; };
+		817C6EDC2069A99500010EDF /* FollowsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FollowsViewController.swift; path = Phase/ViewControllers/FollowsViewController.swift; sourceTree = SOURCE_ROOT; };
+		817C6EE32069AB7E00010EDF /* FollowsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FollowsCollectionViewCell.swift; path = "Phase/Custom Cells/FollowingCells/FollowsCollectionViewCell.swift"; sourceTree = SOURCE_ROOT; };
+		817C6EE42069AB7E00010EDF /* FollowingTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FollowingTableCell.swift; path = "Phase/Custom Cells/FollowingCells/FollowingTableCell.swift"; sourceTree = SOURCE_ROOT; };
+		817C6EE52069AB7E00010EDF /* FollowingTableCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FollowingTableCell.xib; path = "Phase/Custom Cells/FollowingCells/FollowingTableCell.xib"; sourceTree = SOURCE_ROOT; };
+		817C6EE62069AB7E00010EDF /* MenuCollectionCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuCollectionCell.swift; path = "Phase/Custom Cells/FollowingCells/MenuCollectionCell.swift"; sourceTree = SOURCE_ROOT; };
+		817C6EEC2069ABB000010EDF /* MenuBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MenuBar.swift; path = Phase/Views/Following/MenuBar.swift; sourceTree = SOURCE_ROOT; };
+		817C6EED2069ABB000010EDF /* FollowsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FollowsView.swift; path = Phase/Views/Following/FollowsView.swift; sourceTree = SOURCE_ROOT; };
 		81817A372064BADE00CA7044 /* OnboardingLoginViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingLoginViewController.swift; sourceTree = "<group>"; };
 		81AB8A95205AD42900A98AFB /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		81AB8A97205AEE3B00A98AFB /* TabsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabsViewController.swift; sourceTree = "<group>"; };
@@ -308,6 +322,28 @@
 			path = DynamoDB;
 			sourceTree = "<group>";
 		};
+		817C6EE22069AB4F00010EDF /* FollowingCells */ = {
+			isa = PBXGroup;
+			children = (
+				817C6EE42069AB7E00010EDF /* FollowingTableCell.swift */,
+				817C6EE52069AB7E00010EDF /* FollowingTableCell.xib */,
+				817C6EE32069AB7E00010EDF /* FollowsCollectionViewCell.swift */,
+				817C6EE62069AB7E00010EDF /* MenuCollectionCell.swift */,
+			);
+			name = FollowingCells;
+			path = FollowingCell;
+			sourceTree = "<group>";
+		};
+		817C6EEB2069AB9D00010EDF /* Following */ = {
+			isa = PBXGroup;
+			children = (
+				817C6EED2069ABB000010EDF /* FollowsView.swift */,
+				817C6EEC2069ABB000010EDF /* MenuBar.swift */,
+			);
+			name = Following;
+			path = "New Group";
+			sourceTree = "<group>";
+		};
 		81817A342064BAA000CA7044 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
@@ -341,6 +377,7 @@
 				81C1F8732060AC240037BF42 /* MozaikCollectionViewCell.swift */,
 				81C1F8742060AC240037BF42 /* MozaikCollectionViewCell.xib */,
 				810DF96C2062A64C00B426BB /* FollowsTableViewCell.swift */,
+				817C6EE22069AB4F00010EDF /* FollowingCells */,
 			);
 			path = "Custom Cells";
 			sourceTree = "<group>";
@@ -496,6 +533,7 @@
 				810935892059BD5800A95B30 /* SearchView.swift */,
 				8109358B2059BD6500A95B30 /* CreateNewPostView.swift */,
 				8791DFDA2060171F00337CA3 /* FollowersView.swift */,
+				817C6EEB2069AB9D00010EDF /* Following */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -515,6 +553,7 @@
 				8109357B2059BBF600A95B30 /* CreateNewPostViewController.swift */,
 				81DD11BD2061BC4100A9AD1A /* CameraPreviewViewController.swift */,
 				8791270A206341BC00888326 /* ActivityCarouselViewController.swift */,
+				817C6EDC2069A99500010EDF /* FollowsViewController.swift */,
 				81817A392064CAAE00CA7044 /* SearchVCs */,
 			);
 			path = ViewControllers;
@@ -686,6 +725,7 @@
 				81C1F87F2060AC410037BF42 /* Main.storyboard in Resources */,
 				81C9EE1C2058795200C27016 /* Assets.xcassets in Resources */,
 				81CA1BE5206442E600EF7B8E /* SearchVCs.storyboard in Resources */,
+				817C6EE92069AB7E00010EDF /* FollowingTableCell.xib in Resources */,
 				81C1F8782060AC240037BF42 /* MozaikCollectionViewCell.xib in Resources */,
 				81C279DC2061F74B00DB1825 /* Login.storyboard in Resources */,
 			);
@@ -910,6 +950,7 @@
 				8134CEFE205B72E000A146B1 /* HomeFeedCollectionViewCell.swift in Sources */,
 				81AB8AB9205AF99100A98AFB /* CollectionViewLayout.swift in Sources */,
 				81CA1BCD206423F600EF7B8E /* CacheService.swift in Sources */,
+				817C6EEA2069AB7E00010EDF /* MenuCollectionCell.swift in Sources */,
 				8109358A2059BD5800A95B30 /* SearchView.swift in Sources */,
 				810935CB205C454000A95B30 /* ForgotPasswordViewController.swift in Sources */,
 				81C1F8772060AC240037BF42 /* MozaikCollectionViewCell.swift in Sources */,
@@ -921,6 +962,7 @@
 				8128B4752069481E009E0629 /* S3Manager.swift in Sources */,
 				81C1F86F2060ABAE0037BF42 /* SegmentioBuilder.swift in Sources */,
 				81C1F8762060AC240037BF42 /* JourneyTableViewCell.swift in Sources */,
+				817C6EDD2069A99500010EDF /* FollowsViewController.swift in Sources */,
 				81AB8AB2205AF77C00A98AFB /* UISearchBar+Extensions.swift in Sources */,
 				8791DFDB2060171F00337CA3 /* FollowersView.swift in Sources */,
 				F4D34A7A205C482C00F4D50D /* ActivityCollectionViewCell.swift in Sources */,
@@ -930,11 +972,13 @@
 				8791270B206341BC00888326 /* ActivityCarouselViewController.swift in Sources */,
 				81AB8AAA205AF6BE00A98AFB /* Array+Extensions.swift in Sources */,
 				81AB8ABB205AF9DD00A98AFB /* Column.swift in Sources */,
+				817C6EEE2069ABB000010EDF /* MenuBar.swift in Sources */,
 				810935D4205C45F000A95B30 /* ConfirmForgotPasswordView.swift in Sources */,
 				81AB8ABD205AFA1000A98AFB /* ColumnContainer.swift in Sources */,
 				81AB8AC4205AFB4200A98AFB /* AnimateDiscoverToDetailVC.swift in Sources */,
 				810DF96D2062A64C00B426BB /* FollowsTableViewCell.swift in Sources */,
 				810935D0205C45D200A95B30 /* ConfirmAccountView.swift in Sources */,
+				817C6EE82069AB7E00010EDF /* FollowingTableCell.swift in Sources */,
 				810935DA2061503800A95B30 /* CognitoConstants.swift in Sources */,
 				81AB8AB4205AF7AB00A98AFB /* UINavigationBar+Extensions.swift in Sources */,
 				810935842059BCDD00A95B30 /* ActivityView.swift in Sources */,
@@ -956,12 +1000,14 @@
 				81AB8ABF205AFA7C00A98AFB /* DB.swift in Sources */,
 				81AB8AC2205AFB0500A98AFB /* Animator.swift in Sources */,
 				81DD11BE2061BC4100A9AD1A /* CameraPreviewViewController.swift in Sources */,
+				817C6EEF2069ABB000010EDF /* FollowsView.swift in Sources */,
 				81CA1BE92064435600EF7B8E /* JourneyViewController.swift in Sources */,
 				8134CF0820615EF200A146B1 /* CreateAccountView.swift in Sources */,
 				81C279D8206193E200DB1825 /* CapturedImageView.swift in Sources */,
 				8128B47B206951B2009E0629 /* AppUser.swift in Sources */,
 				81AB8ACF205AFDBF00A98AFB /* DetailNavigationViewController.swift in Sources */,
 				810935C9205C452A00A95B30 /* ConfirmAccountViewController.swift in Sources */,
+				817C6EE72069AB7E00010EDF /* FollowsCollectionViewCell.swift in Sources */,
 				81AB8ACA205AFC7A00A98AFB /* DiscoverCollectionViewCell.swift in Sources */,
 				81AB8A98205AEE3B00A98AFB /* TabsViewController.swift in Sources */,
 				8134CF0620615EE700A146B1 /* LoginView.swift in Sources */,
@@ -1067,7 +1113,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -1118,7 +1164,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -1134,9 +1180,9 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KSNU4DN7MY;
 				INFOPLIST_FILE = "$(SRCROOT)/Phase/SupportingFiles/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.tyzhaoac.Phase;
+				PRODUCT_BUNDLE_IDENTIFIER = nyc.c4Q.AC4.3.Phase;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1151,9 +1197,9 @@
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = KSNU4DN7MY;
 				INFOPLIST_FILE = "$(SRCROOT)/Phase/SupportingFiles/Info.plist";
-				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
+				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.tyzhaoac.Phase;
+				PRODUCT_BUNDLE_IDENTIFIER = nyc.c4Q.AC4.3.Phase;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 4.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -1202,7 +1248,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3V32EPY5YP;
+				DEVELOPMENT_TEAM = YSC9J43G64;
 				INFOPLIST_FILE = PhaseUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.reiazgafar.PhaseUITests;
@@ -1219,7 +1265,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3V32EPY5YP;
+				DEVELOPMENT_TEAM = YSC9J43G64;
 				INFOPLIST_FILE = PhaseUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.reiazgafar.PhaseUITests;
