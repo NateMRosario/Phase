@@ -32,24 +32,6 @@ class JourneyCarouselView: UIView {
         return slider
     }()
     
-    //    lazy var activityCollectionView: UICollectionView = {
-    //        let layout = CollectionViewFlowLayout()
-    //        layout.scrollDirection = .horizontal
-    //        let collectionView = UICollectionView(frame: self.bounds, collectionViewLayout: layout)
-    //        let screenHeight: CGFloat = UIScreen.main.bounds.height
-    //        let screenWidth: CGFloat = UIScreen.main.bounds.width
-    //        let cellSpacing: CGFloat = 8
-    //        let numberOfCells: CGFloat = 3
-    //        let numberOfSpaces: CGFloat = numberOfCells
-    //        layout.itemSize = CGSize(width: (screenWidth - (cellSpacing * numberOfSpaces)) / (numberOfCells + 0.5), height: screenHeight * 0.11)
-    //        layout.minimumLineSpacing = cellSpacing
-    //        layout.minimumInteritemSpacing = cellSpacing
-    //        layout.sectionInset = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-    //        collectionView.backgroundColor = UIColor.gray
-    //        collectionView.register(CarouselCell.self, forCellWithReuseIdentifier: collectionViewCellID)
-    //        return collectionView
-    //    }()
-    
     // MARK: - Initializers
     override init(frame: CGRect) {
         super.init(frame: UIScreen.main.bounds)

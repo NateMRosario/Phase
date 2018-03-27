@@ -39,11 +39,6 @@ class JourneyCarouselViewController: UIViewController {
         self.journeyCommentView.journeyCommentTableView.delegate = self
         self.journeyCommentView.journeyCommentTableView.dataSource = self
         setupView()
-        setJourneyCommentViewZAxis()
-        self.journeyCommentView.journeyCommentTableView.layer.borderWidth = 1
-        self.journeyCommentView.journeyCommentTableView.layer.cornerRadius = 10
-        self.journeyCommentView.journeyCommentTableView.layer.masksToBounds = true
-        self.journeyCommentView.journeyCommentTableView.clipsToBounds = true
     }
     
     // MARK: - Functions
@@ -55,6 +50,8 @@ class JourneyCarouselViewController: UIViewController {
     private func setupView() {
         setupJourneyCarouselView()
         setupJourneyCommentView()
+        setJourneyCommentViewZAxis()
+        roundTableViewCorners()
         for i in 0 ... 99 {
             items.append(i)
         }
@@ -62,6 +59,13 @@ class JourneyCarouselViewController: UIViewController {
     
     private func setJourneyCommentViewZAxis() {
         view.bringSubview(toFront: journeyCommentView)
+    }
+    
+    private func roundTableViewCorners() {
+        self.journeyCommentView.journeyCommentTableView.layer.borderWidth = 1
+        self.journeyCommentView.journeyCommentTableView.layer.cornerRadius = 10
+        self.journeyCommentView.journeyCommentTableView.layer.masksToBounds = true
+        self.journeyCommentView.journeyCommentTableView.clipsToBounds = true
     }
 
     private func getPost() {}
