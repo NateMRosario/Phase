@@ -18,15 +18,30 @@ class CameraView: UIView {
     
     lazy var buttonContainerBackground: UIImageView = {
         let bc = UIImageView()
-        bc.image = #imageLiteral(resourceName: "Electric Violet")
+        bc.image = #imageLiteral(resourceName: "October Silence")
+        return bc
+    }()
+    
+    lazy var containerView: UIView = {
+        let bc = UIView()
+        bc.backgroundColor = .white
+        bc.layer.opacity = 0.45
         return bc
     }()
     
     lazy var buttonContainer: UIView = {
         let bc = UIView()
-        bc.backgroundColor = .black
-        bc.layer.opacity = 0.6
+        bc.backgroundColor = .clear
         return bc
+    }()
+    
+    lazy var chooseImageButton: UIButton = {
+        let button = UIButton()
+        button.setImage(#imageLiteral(resourceName: "selectImage"), for: .normal)
+        button.backgroundColor = .clear
+        button.layer.cornerRadius = 2
+        button.layer.masksToBounds = true
+        return button
     }()
     
     lazy var shutterButton: UIButton = {
@@ -38,13 +53,25 @@ class CameraView: UIView {
         return button
     }()
     
-    lazy var switchCamera: UIButton = {
+    lazy var switchCameraButton: UIButton = {
         let button = UIButton()
-        button.setImage(#imageLiteral(resourceName: "switchCameraButton"), for: .normal) //get image assets and change image
+        button.setImage(#imageLiteral(resourceName: "switchCameraButton"), for: .normal)
         button.backgroundColor = .clear
         button.layer.cornerRadius = 2
         button.layer.masksToBounds = true
         return button
+    }()
+    
+    let cameraCellID = "CameraCell"
+    
+    // MARK: - Lazy variables
+    lazy var photoCollectionView: UICollectionView = {
+        let layout = UICollectionViewFlowLayout()
+        layout.scrollDirection = .horizontal
+        let collectionView = UICollectionView(frame: frame, collectionViewLayout: layout)
+        collectionView.backgroundColor = UIColor.clear
+        collectionView.register(CameraCell.self, forCellWithReuseIdentifier: cameraCellID)
+        return collectionView
     }()
     
     required init?(coder aDecoder: NSCoder) {
@@ -65,10 +92,12 @@ class CameraView: UIView {
     private func setupViews() {
         setupPreviewLayerContainer()
         setupButtonContainerBackground()
+        setupContainerView()
         setupButtonContainer()
+        setupChooseImageButton()
         setupShutterButton()
         setupSwitchCameraButton()
-        
+        setupPhotoCollectionView()
     }
     
     private func setupPreviewLayerContainer(){
@@ -91,13 +120,35 @@ class CameraView: UIView {
             ])
     }
     
+    private func setupContainerView() {
+        addSubview(containerView)
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            containerView.topAnchor.constraint(equalTo: buttonContainerBackground.safeAreaLayoutGuide.topAnchor),
+            containerView.widthAnchor.constraint(equalTo: buttonContainerBackground.safeAreaLayoutGuide.widthAnchor, multiplier: 1),
+            containerView.bottomAnchor.constraint(equalTo: buttonContainerBackground.safeAreaLayoutGuide.bottomAnchor)
+            ])
+    }
+    
     private func setupButtonContainer() {
         addSubview(buttonContainer)
         buttonContainer.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            buttonContainer.topAnchor.constraint(equalTo: buttonContainerBackground.topAnchor),
-            buttonContainer.widthAnchor.constraint(equalTo: buttonContainerBackground.safeAreaLayoutGuide.widthAnchor, multiplier: 1),
-            buttonContainer.bottomAnchor.constraint(equalTo: buttonContainerBackground.safeAreaLayoutGuide.bottomAnchor)
+            buttonContainer.topAnchor.constraint(equalTo: containerView.topAnchor),
+            buttonContainer.widthAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.widthAnchor, multiplier: 1),
+            buttonContainer.heightAnchor.constraint(equalTo: containerView.heightAnchor, multiplier: 0.33),
+            buttonContainer.centerXAnchor.constraint(equalTo: containerView.centerXAnchor)
+            ])
+    }
+    
+    private func setupChooseImageButton() {
+        addSubview(chooseImageButton)
+        chooseImageButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            chooseImageButton.leadingAnchor.constraint(equalTo: buttonContainer.safeAreaLayoutGuide.leadingAnchor, constant: 30),
+            chooseImageButton.heightAnchor.constraint(equalTo: buttonContainer.heightAnchor, multiplier: 0.6),
+            chooseImageButton.widthAnchor.constraint(equalTo: chooseImageButton.heightAnchor, multiplier: 1),
+            chooseImageButton.centerYAnchor.constraint(equalTo: buttonContainer.centerYAnchor)
             ])
     }
     
@@ -105,26 +156,34 @@ class CameraView: UIView {
         addSubview(shutterButton)
         shutterButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            shutterButton.topAnchor.constraint(equalTo: buttonContainer.safeAreaLayoutGuide.topAnchor, constant: 10),
-//            shutterButton.bottomAnchor.constraint(equalTo: buttonContainer.safeAreaLayoutGuide.bottomAnchor, constant: -5),
-            shutterButton.heightAnchor.constraint(equalTo: buttonContainer.heightAnchor, multiplier: 0.3),
+            shutterButton.heightAnchor.constraint(equalTo: buttonContainer.heightAnchor, multiplier: 1),
             shutterButton.widthAnchor.constraint(equalTo: shutterButton.heightAnchor, multiplier: 1),
-            shutterButton.centerXAnchor.constraint(equalTo: buttonContainer.safeAreaLayoutGuide.centerXAnchor)
-
+            shutterButton.centerXAnchor.constraint(equalTo: buttonContainer.safeAreaLayoutGuide.centerXAnchor),
+            shutterButton.centerYAnchor.constraint(equalTo: buttonContainer.centerYAnchor)
             ])
     }
     
     private func setupSwitchCameraButton() {
-        addSubview(switchCamera)
-        switchCamera.translatesAutoresizingMaskIntoConstraints = false
+        addSubview(switchCameraButton)
+        switchCameraButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            switchCamera.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor, constant: 10),
-            switchCamera.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor, constant: -10),
-            switchCamera.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor, multiplier: 0.08),
-            switchCamera.widthAnchor.constraint(equalTo: heightAnchor, multiplier: 0.08)
+            switchCameraButton.trailingAnchor.constraint(equalTo: buttonContainer.safeAreaLayoutGuide.trailingAnchor, constant: -30),
+            switchCameraButton.heightAnchor.constraint(equalTo: buttonContainer.heightAnchor, multiplier: 0.8),
+            switchCameraButton.widthAnchor.constraint(equalTo: switchCameraButton.heightAnchor, multiplier: 1),
+            switchCameraButton.centerYAnchor.constraint(equalTo: buttonContainer.centerYAnchor)
             ])
     }
 
+    private func setupPhotoCollectionView() {
+        addSubview(photoCollectionView)
+        photoCollectionView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            photoCollectionView.topAnchor.constraint(equalTo: buttonContainer.bottomAnchor, constant: 8),
+            photoCollectionView.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 1),
+            photoCollectionView.heightAnchor.constraint(equalTo: containerView.heightAnchor, multiplier: 0.66),
+            photoCollectionView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            ])
+    }
     
 }
 
