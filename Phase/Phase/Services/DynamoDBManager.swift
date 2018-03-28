@@ -137,9 +137,7 @@ extension DynamoDBManager {
                 completion(nil)
             }
         }
-        
     }
-
 }
 
 // MARK: - Event Methods

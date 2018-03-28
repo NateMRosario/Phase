@@ -41,6 +41,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.storyboard = UIStoryboard(name: "Main", bundle: nil)
         pool.delegate = self
 
+        if CognitoManager.shared.isUserSignedIn() {
+            window = UIWindow(frame: UIScreen.main.bounds)
+            window?.rootViewController = TabsViewController.instantiate(withStoryboard: "Main")
+            window?.makeKeyAndVisible()
+        }
+        
         return AWSMobileClient.sharedInstance().interceptApplication(
             application,
             didFinishLaunchingWithOptions: launchOptions)

@@ -20,6 +20,9 @@ PODS:
     - AWSAuthCore (= 2.6.13)
     - AWSCognitoIdentityProvider (= 2.6.13)
   - BetterSegmentedControl (0.9)
+  - Chatto (3.3.0)
+  - ChattoAdditions (3.3.0):
+    - Chatto
   - DGElasticPullToRefresh (1.1)
   - Material (2.14.0):
     - Material/Core (= 2.14.0)
@@ -44,6 +47,8 @@ DEPENDENCIES:
   - AWSS3
   - AWSUserPoolsSignIn
   - BetterSegmentedControl (~> 0.9)
+  - Chatto (= 3.3.0)
+  - ChattoAdditions (= 3.3.0)
   - DGElasticPullToRefresh
   - Material
   - PageMenu
@@ -65,6 +70,8 @@ SPEC CHECKSUMS:
   AWSS3: 7c178c82c2e648559b7075a663335055327dd4f5
   AWSUserPoolsSignIn: 6d5a7dedeac2e3f2a84d7c838a5df85aa386f1c7
   BetterSegmentedControl: 40b2b6a08bbc59663149624d1b5235efa8d43a3c
+  Chatto: d9f67acd6230f08323a51a11c4b639d40c1f8d99
+  ChattoAdditions: 9ee09ac09a89d8c0aa3dc87019e3a22efb2cbac6
   DGElasticPullToRefresh: 28f11a6026302a90f8ffebbc6e24748e584dddd3
   Material: c5bea030f57d4b903c5284200bb612d571c9ec03
   Motion: 9f74d115d7f72bb5380a8e3cde2f8a1fc898ac36
@@ -74,6 +81,6 @@ SPEC CHECKSUMS:
   SkyFloatingLabelTextField: 8085f20f57f74a00cfcae58099299faa1a971035
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
 
-PODFILE CHECKSUM: ff4687afc09ddc0b3b05110ebe090beed63fb484
+PODFILE CHECKSUM: c5427b35709ff7619f786f76de3135ff1a281059
 
 COCOAPODS: 1.4.0
