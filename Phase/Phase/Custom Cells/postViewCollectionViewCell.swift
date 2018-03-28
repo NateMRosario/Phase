@@ -22,16 +22,18 @@ class JourneyCollectionViewCell: UICollectionViewCell {
     lazy var journeyNameLabel: UILabel = {
        let label = UILabel()
         label.numberOfLines = 0
-        label.font = UIFont.systemFont(ofSize: 8, weight: .regular)
+        label.text = "Journey Name jdfkfjyghmmklo yhcgfxbcghvj"
+        label.font = UIFont.systemFont(ofSize: 9, weight: .regular)
         label.textAlignment = .center
-        label.backgroundColor = .black
-        label.textColor = .white
+        label.backgroundColor = .white
+        label.textColor = .black
         return label
     }()
     
     lazy var selectedJourneyLayer: UIImageView = {
         let sl = UIImageView()
         sl.layer.opacity = 0.5
+        sl.backgroundColor = .white
         sl.image = #imageLiteral(resourceName: "checked")
         sl.contentMode = .scaleAspectFit
         sl.isHidden = true
@@ -41,8 +43,8 @@ class JourneyCollectionViewCell: UICollectionViewCell {
     // MARK: - Initializers
     override init(frame: CGRect) {
         super.init(frame: UIScreen.main.bounds)
-        self.layer.masksToBounds = true
-        self.layer.cornerRadius = 10
+//        self.layer.masksToBounds = true
+//        self.layer.cornerRadius = 10
         commonInit()
         setupViews()
     }
@@ -82,7 +84,7 @@ class JourneyCollectionViewCell: UICollectionViewCell {
         addSubview(journeyNameLabel)
         journeyNameLabel.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            journeyNameLabel.topAnchor.constraint(equalTo: journeyImageView.bottomAnchor, constant: 4),
+            journeyNameLabel.topAnchor.constraint(equalTo: journeyImageView.bottomAnchor, constant: 1),
             journeyNameLabel.widthAnchor.constraint(equalTo: journeyImageView.widthAnchor, multiplier: 1),
             journeyNameLabel.centerXAnchor.constraint(equalTo: centerXAnchor)
             ])

@@ -13,7 +13,7 @@ class CapturedImageView: UIView {
     lazy var cancelButton: UIButton = {
         let cancel = UIButton()
         cancel.setImage(#imageLiteral(resourceName: "back"), for: .normal)
-        cancel.layer.opacity = 0.7
+        cancel.layer.opacity = 1
         cancel.layer.cornerRadius = 20
         cancel.layer.masksToBounds = true
         return cancel
@@ -22,9 +22,9 @@ class CapturedImageView: UIView {
     lazy var postButton: UIButton = {
         let post = UIButton()
         post.setTitle("Post", for: .normal)
-        post.setTitleColor(.blue, for: .normal)
+        post.setTitleColor(.white, for: .normal)
         post.backgroundColor = .clear
-        post.layer.borderColor = UIColor.black.cgColor
+        post.layer.borderColor = UIColor.white.cgColor
         post.layer.borderWidth = 1
         post.layer.cornerRadius = 17
         post.layer.masksToBounds = true
@@ -70,6 +70,7 @@ class CapturedImageView: UIView {
         tv.text = "Insert caption here."
         tv.layer.borderWidth = 1
         tv.layer.borderColor = UIColor.black.cgColor
+        tv.textColor = .lightGray
         tv.layer.cornerRadius = 6
         tv.layer.masksToBounds = true
         return tv
@@ -243,8 +244,8 @@ class CapturedImageView: UIView {
         postTextView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             postTextView.topAnchor.constraint(equalTo: journeyNameLabel.bottomAnchor, constant: 8),
-            postTextView.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor),
-            postTextView.heightAnchor.constraint(equalTo: postTextView.widthAnchor, multiplier: 0.4),
+            postTextView.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, multiplier: 0.96),
+            postTextView.heightAnchor.constraint(equalTo: postTextView.widthAnchor, multiplier: 0.24),
             postTextView.centerXAnchor.constraint(equalTo: contentView.centerXAnchor)
             ])
     }
