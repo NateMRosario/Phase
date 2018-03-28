@@ -56,7 +56,11 @@ extension LoginViewController {
         var hashtags = Set<String>()
         hashtags.insert("#kawaii")
         
-        DynamoDBManager.shared.createJourney(title: "My first journey", description: "onii-chan~~", hashtags: hashtags)
+        DynamoDBManager.shared.createJourney(title: "My first journey", description: "onii-chan~~", hashtags: hashtags, completion: {(error) in
+            
+            // HANDLE ERROR
+            
+        })
         
         
         
