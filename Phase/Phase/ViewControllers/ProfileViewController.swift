@@ -153,13 +153,13 @@ class ProfileViewController: UIViewController, UITableViewDelegate {
 //MARK: - TABLEVIEW DATASOURCE
 extension ProfileViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 50
+        return 40
     }
     
     func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 0 {
-            let v = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 50))
-            let line = UIView(frame: CGRect(x: 0, y: 50, width: UIScreen.main.bounds.width, height: 1))
+            let v = UIView(frame: CGRect(x: 0, y: 0, width: UIScreen.main.bounds.width, height: 40))
+            let line = UIView(frame: CGRect(x: 0, y: 40, width: UIScreen.main.bounds.width, height: 1))
             line.backgroundColor = ColorPalette.whiteSmoke
             
             // SegmentedController in section header

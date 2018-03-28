@@ -24,9 +24,13 @@ class SignUpViewController: UIViewController {
         
         CognitoManager.shared.signUp(username: userName, email: email, password: password) { (error) in
             if let error = error {
-                self.showAlert(title: "Error", message: "\(error.localizedDescription)")
+                DispatchQueue.main.async {
+                    self.showAlert(title: "Error", message: "\(error.localizedDescription)")
+                }
             } else {
-                self.showAlert(title: "Success", message: "Signed Up! Please check your email to verify.")
+                DispatchQueue.main.async {
+                    self.showAlert(title: "Success", message: "Signed Up! Please check your email to verify.")
+                }
             }
         }
     }

@@ -11,6 +11,10 @@ import DGElasticPullToRefresh
 
 class HomeViewController: UIViewController {
     
+    @IBAction func goToChat(_ sender: UIBarButtonItem) {
+        present(UINavigationController(rootViewController: ChatExamplesViewController()), animated: true)
+    }
+    
     //TODO: Add character limit
     fileprivate var layout = CollectionViewLayout(number: 1)
     let configure = CollectionViewLayout.Configuration(numberOfColumns: 1)

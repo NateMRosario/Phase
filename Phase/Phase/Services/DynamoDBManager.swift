@@ -122,9 +122,7 @@ extension DynamoDBManager {
         mapper.remove(journeyToDelete) { (error) in
             completion(error)
         }
-        
     }
-
 }
 
 // MARK: - Event Methods
