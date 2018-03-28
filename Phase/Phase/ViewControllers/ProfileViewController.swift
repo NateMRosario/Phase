@@ -12,6 +12,20 @@ import Segmentio
 
 class ProfileViewController: UIViewController, UITableViewDelegate {
     
+    @IBAction func goToUserSocialDetail(_ sender: UIButton) {
+        switch sender.tag {
+        case 0:
+            present(UINavigationController(rootViewController: FollowsViewController()), animated: true, completion: nil)
+        case 1:
+            present(UINavigationController(rootViewController: FollowsViewController()), animated: true, completion: nil)
+        case 2:
+            present(UINavigationController(rootViewController: FollowsViewController()), animated: true, completion: nil)
+        case 3:
+            present(UINavigationController(rootViewController: FollowsViewController()), animated: true, completion: nil)
+        default:
+            break
+        }
+    }
     @IBOutlet weak var segmentedViewTop: NSLayoutConstraint!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var username: UILabel!
