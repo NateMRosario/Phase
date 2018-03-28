@@ -8,10 +8,15 @@
 
 import UIKit
 
+protocol AddNewJourneyViewDelegate: class {
+    func createdNewJourney()
+}
+
 class AddJourneyViewController: UIViewController {
     
     let addJourneyView = CreateNewJourneyView()
     let imagePreview = CapturedImageView()
+    weak var delegate: AddNewJourneyViewDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +43,6 @@ class AddJourneyViewController: UIViewController {
             
         })
         imagePreview.saveButton.isEnabled = true
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: true)
     }
 }

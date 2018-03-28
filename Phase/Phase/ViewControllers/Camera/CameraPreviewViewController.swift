@@ -20,8 +20,11 @@ class PreviewViewController: UIViewController {
     
     //var mediaType: MediaType
     
+    let addNewJourneyDelegate = AddJourneyViewController()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        addNewJourneyDelegate.delegate = self
         view.addSubview(imagePreview)
         self.imagePreview.postCollectionView.delegate = self
         self.imagePreview.postCollectionView.dataSource = self
@@ -138,5 +141,11 @@ extension PreviewViewController: UITextViewDelegate {
 
     func textViewDidEndEditing(_ textView: UITextView) {
         imagePreview.postTextView.resignFirstResponder()
+    }
+}
+
+extension PreviewViewController: AddNewJourneyViewDelegate {
+    func createdNewJourney() {
+        // SET COLLECTIONVIEW CELL
     }
 }

@@ -48,7 +48,13 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="kWC-vK-xhD"/>
                     </view>
-                    <navigationItem key="navigationItem" title="PHASE" id="VRF-nk-n8f"/>
+                    <navigationItem key="navigationItem" title="PHASE" id="VRF-nk-n8f">
+                        <barButtonItem key="rightBarButtonItem" systemItem="reply" id="zKC-yF-ZMV">
+                            <connections>
+                                <action selector="goToChat:" destination="wfV-qa-guN" id="Rxk-8q-wwJ"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="homeCollectionView" destination="TZO-gF-Zzu" id="7pk-0w-BXp"/>
                     </connections>
