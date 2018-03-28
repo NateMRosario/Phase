@@ -157,7 +157,6 @@ extension DynamoDBManager {
         newEvent._media = ""
         // CALL STORAGE MANAGER AND THEN SET MEDIA LINKS
         
-        
         mapper.save(newEvent) { (error) in
             if let error = error {
                 completion(error)
@@ -180,8 +179,6 @@ extension DynamoDBManager {
                 completion(event, nil)
             }
         }
-        
-        
         
     }
     

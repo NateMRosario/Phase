@@ -128,17 +128,19 @@ class CognitoManager {
         user?.signOut()
     }
     
-    func forgotPassword(username: String) {
+    func forgotPassword(username: String, completion: @escaping (Error?) -> Void) {
         user = pool.getUser(username)
         user?.forgotPassword().continueWith(block: { (task) -> Any? in
             if let error = task.error {
-                print(error)
-                
+                completion(error)
             } else {
                 print(task.result?.description() ?? "forgot password success block reached")
+                completion(nil)
             }
             return nil
         })
     }
+    
+    
     
 }
