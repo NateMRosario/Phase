@@ -32,6 +32,7 @@
 		8113D4C42061ABE400D31332 /* CameraCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8113D4C32061ABE400D31332 /* CameraCell.swift */; };
 		8113D4C820659A1B00D31332 /* postViewCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8113D4C720659A1B00D31332 /* postViewCollectionViewCell.swift */; };
 		8113D4CA2065CE2700D31332 /* PostViewAddJourneyCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8113D4C92065CE2700D31332 /* PostViewAddJourneyCollectionViewCell.swift */; };
+		811BDB1B206C380D0050EBA3 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811BDB1A206C380D0050EBA3 /* Alert.swift */; };
 		8123777B206A9AAA00A6BC02 /* AddJourneyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8123777A206A9AAA00A6BC02 /* AddJourneyViewController.swift */; };
 		8123777D206A9B0D00A6BC02 /* CreateAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8123777C206A9B0C00A6BC02 /* CreateAccountView.swift */; };
 		81237788206AA03300A6BC02 /* CameraPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81237786206AA03300A6BC02 /* CameraPreviewViewController.swift */; };
@@ -201,6 +202,7 @@
 		8113D4C32061ABE400D31332 /* CameraCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CameraCell.swift; sourceTree = "<group>"; };
 		8113D4C720659A1B00D31332 /* postViewCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = postViewCollectionViewCell.swift; sourceTree = "<group>"; };
 		8113D4C92065CE2700D31332 /* PostViewAddJourneyCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PostViewAddJourneyCollectionViewCell.swift; sourceTree = "<group>"; };
+		811BDB1A206C380D0050EBA3 /* Alert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		8123777A206A9AAA00A6BC02 /* AddJourneyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddJourneyViewController.swift; sourceTree = "<group>"; };
 		8123777C206A9B0C00A6BC02 /* CreateAccountView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccountView.swift; sourceTree = "<group>"; };
 		81237786206AA03300A6BC02 /* CameraPreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraPreviewViewController.swift; sourceTree = "<group>"; };
@@ -485,6 +487,7 @@
 			children = (
 				81CA1BCA206356A900EF7B8E /* Date+TimeAgoDisplay.swift */,
 				81115E002069C3940052C9E1 /* UIColor+Hex.swift */,
+				811BDB1A206C380D0050EBA3 /* Alert.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -1334,6 +1337,7 @@
 				81C368B7206B2ED400A1873E /* DemoChatMessageSender.swift in Sources */,
 				81C368D7206B2EDF00A1873E /* BaseMessageCollectionViewCellAvatarStyle.swift in Sources */,
 				8128B47120694808009E0629 /* CognitoManager.swift in Sources */,
+				811BDB1B206C380D0050EBA3 /* Alert.swift in Sources */,
 				81C368D4206B2EDF00A1873E /* DemoTextMessageHandler.swift in Sources */,
 				8128B47A206951B2009E0629 /* Journey.swift in Sources */,
 				81C368B9206B2ED400A1873E /* DemoChatItemsDecorator.swift in Sources */,
