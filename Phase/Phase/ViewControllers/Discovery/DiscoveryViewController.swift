@@ -7,8 +7,19 @@
 //
 
 import UIKit
+import DGElasticPullToRefresh
 
 class DiscoveryViewController: UIViewController {
+    
+    @IBOutlet dynamic private(set) weak var collectionView: UICollectionView! {
+        didSet {
+            collectionView.dataSource = self
+            collectionView.delegate = self
+            layout.delegate = self
+            collectionView.setCollectionViewLayout(layout, animated: false)
+            collectionView.register(cellTypes: DiscoverCollectionViewCell.self)
+        }
+    }
     
     let urls = [
         "https://images.unsplash.com/photo-1520824247747-126a95298fe3?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjF9&s=e74039124f299f828767e569585b1dd0",
@@ -23,31 +34,46 @@ class DiscoveryViewController: UIViewController {
     ]
 
     fileprivate(set) var selectedIndexPath = IndexPath(item: 0, section: 0)
-    
-
     fileprivate var layout = CollectionViewLayout(number: 2)
     fileprivate var contents = [UIImage]() {
         didSet {
             print(contents.count)
-            self.collectionView.reloadData()
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
         }
     }
     
-    @IBOutlet dynamic private(set) weak var collectionView: UICollectionView! {
-        didSet {
-            collectionView.dataSource = self
-            collectionView.delegate = self
-            layout.delegate = self
-            collectionView.setCollectionViewLayout(layout, animated: false)
-            collectionView.register(cellTypes: DiscoverCollectionViewCell.self)
-        }
-    }
+    // Loading Indicators
+    lazy fileprivate var loadingView: DGElasticPullToRefreshLoadingViewCircle = {
+        let lv = DGElasticPullToRefreshLoadingViewCircle()
+        return lv
+    }()
+    
+    lazy var tailLoading: UIActivityIndicatorView = {
+        let tl = UIActivityIndicatorView()
+        tl.activityIndicatorViewStyle = .whiteLarge
+        tl.color = .white
+        return tl
+    }()
+    let searchBar = UISearchBar()
+
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         initNavigationBar()
         fetchContents()
+        
+        self.collectionView.alwaysBounceVertical = true
+        loadingView.tintColor = UIColor(red: 78/255.0, green: 221/255.0, blue: 200/255.0, alpha: 1.0)
+        collectionView.dg_addPullToRefreshWithActionHandler({ [weak self] () -> Void in
+            
+            self?.collectionView.dg_stopLoading()
+            }, loadingView: loadingView)
+        let img = #imageLiteral(resourceName: "085 October Silence").crop(toWidth: UIScreen.main.bounds.width, toHeight: UIScreen.main.bounds.width)!
+        collectionView.dg_setPullToRefreshFillColor(UIColor(patternImage: img))
+        collectionView.dg_setPullToRefreshBackgroundColor(collectionView.backgroundColor!)
     }
     
     override func didReceiveMemoryWarning() {
@@ -56,17 +82,24 @@ class DiscoveryViewController: UIViewController {
     
     private func initNavigationBar() {
         guard let navigationBarFrame = navigationController?.navigationBar.bounds else { return }
-        let searchBar = UISearchBar(frame: navigationBarFrame)
+        searchBar.frame = navigationBarFrame
         searchBar.placeholder = "Search"
         searchBar.textField?.backgroundColor = UIColor(white: 0.95, alpha: 1)
         searchBar.textField?.font = UIFont.systemFont(ofSize: 15, weight: .bold)
         searchBar.textField?.attributedPlaceholder = NSAttributedString(string: searchBar.placeholder ?? "", attributes: [.foregroundColor: UIColor.lightGray])
         searchBar.textField?.textColor = .gray
+        searchBar.textField?.isEnabled = false
+        searchBar.delegate = self
+        searchBar.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(pushToSearchVC)))
+        
         navigationItem.titleView = searchBar
-        navigationController?.navigationBar.disableShadow()
+        navigationItem.backButton.title = ""
+        navigationItem.backBarButtonItem?.title = ""
+//        navigationController?.navigationBar.disableShadow()
 //        navigationController?.navigationBar.tintColor = UIColor.white
-//                navigationController?.hidesBarsOnSwipe = true // Only use if can get it to hide and appear smooth
-        navigationController?.barHideOnSwipeGestureRecognizer.setTranslation(CGPoint.zero, in: view)
+    }
+    @objc func pushToSearchVC() {
+        present(UINavigationController(rootViewController: SearchViewController.instantiate(withStoryboard: "SearchVCs")), animated: false, completion: nil)
     }
     
     private func fetchContents() {
@@ -78,14 +111,30 @@ class DiscoveryViewController: UIViewController {
 //            self?.collectionView.reloadData()
 //        }
     }
+    
+    deinit {
+        collectionView.dg_removePullToRefresh()
+        print("deinit")
+    }
 }
 
 extension DiscoveryViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return contents.count
+        return contents.count + 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        if indexPath.item == contents.count{
+            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "loading", for: indexPath)
+            cell.addSubview(tailLoading)
+            tailLoading.snp.makeConstraints({ (make) in
+                make.centerX.equalTo(cell.contentView.snp.centerX)
+                make.centerY.equalTo(cell.contentView.snp.centerY)
+            })
+            tailLoading.startAnimating()
+            return cell
+        }
+        
         let cell = collectionView.dequeueReusableCell(with: DiscoverCollectionViewCell.self, for: indexPath)
         cell.set(image: contents[indexPath.row])
         return cell
@@ -102,14 +151,24 @@ extension DiscoveryViewController: UICollectionViewDelegate {
 }
 
 extension DiscoveryViewController: CollectionViewDelegateLayout {
-    func numberOfColumns() -> Int {
+    func numberOfColumns(indexPath: IndexPath) -> Int {
+        if indexPath.item == contents.count {
+            return 1
+        }
         return 2
     }
     
     func sizeForItemAt(indexPath: IndexPath) -> CGSize {
+        if indexPath.item == contents.count{
+             return CGSize(width: UIScreen.main.bounds.width, height: 100)
+        }
         let image = contents[indexPath.row]
-        let width = CollectionViewLayout.Configuration(numberOfColumns: 2) .itemWidth
+        let width = CollectionViewLayout.Configuration(numberOfColumns: numberOfColumns(indexPath: indexPath)).itemWidth
         let height = width / image.size.width * image.size.height + 79 // 79 = Cell's clear space below image
-        return CGSize(width: width, height: max(height, width / image.size.height * image.size.height + 79))
+        return CGSize(width: width, height: max(height, width / image.size.height * image.size.height + 79 + 40))
     }
+}
+
+extension DiscoveryViewController: UISearchBarDelegate {
+
 }

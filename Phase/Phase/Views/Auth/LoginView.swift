@@ -56,6 +56,9 @@ class LoginView: UIView {
         textField.iconMarginBottom = 2
         textField.iconRotationDegrees = 0 // rotate it 90 degrees
         textField.iconMarginLeft = 6
+        
+        textField.text = "reiaz"
+        
         return textField
     }()
     
@@ -109,6 +112,8 @@ class LoginView: UIView {
         textField.iconMarginBottom = 2 // more precise icon positioning. Usually needed to tweak on a per font basis.
         textField.iconRotationDegrees = 0 // rotate it 90 degrees
         textField.iconMarginLeft = 6
+        
+        textField.text = "Test123456!"
         
         return textField
     }()

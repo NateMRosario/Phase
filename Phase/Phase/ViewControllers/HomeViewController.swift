@@ -7,12 +7,18 @@
 //
 
 import UIKit
+import DGElasticPullToRefresh
 
 class HomeViewController: UIViewController {
+    
+    @IBAction func goToChat(_ sender: UIBarButtonItem) {
+        present(UINavigationController(rootViewController: ChatExamplesViewController()), animated: true)
+    }
     
     //TODO: Add character limit
     fileprivate var layout = CollectionViewLayout(number: 1)
     let configure = CollectionViewLayout.Configuration(numberOfColumns: 1)
+    fileprivate let loadingView = DGElasticPullToRefreshLoadingViewCircle()
     
     fileprivate var contents = [#imageLiteral(resourceName: "nostalgic1"), #imageLiteral(resourceName: "nostalgic2"), #imageLiteral(resourceName: "nostalgic3"), #imageLiteral(resourceName: "nostalgic4")]
     
@@ -25,12 +31,22 @@ class HomeViewController: UIViewController {
             homeCollectionView.setCollectionViewLayout(layout, animated: false)
         }
     }
+    let loading = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        homeCollectionView.backgroundColor = .lightGray
+        loading.color = UIColor.red
         
 //        fetchContents()
+        self.homeCollectionView.alwaysBounceVertical = true
+        loadingView.tintColor = UIColor(red: 78/255.0, green: 221/255.0, blue: 200/255.0, alpha: 1.0)
+        homeCollectionView.dg_addPullToRefreshWithActionHandler({ [weak self] () -> Void in
+            //DO THINGS
+            self?.homeCollectionView.dg_stopLoading()
+            }, loadingView: loadingView)
+        let img = #imageLiteral(resourceName: "085 October Silence").crop(toWidth: UIScreen.main.bounds.width, toHeight: UIScreen.main.bounds.width)!
+        homeCollectionView.dg_setPullToRefreshFillColor(UIColor(patternImage: img))
+        homeCollectionView.dg_setPullToRefreshBackgroundColor(homeCollectionView.backgroundColor!)
     }
     
     private func setupNavbar() {
@@ -44,13 +60,29 @@ class HomeViewController: UIViewController {
         }
     }
     
+    deinit {
+        homeCollectionView.dg_removePullToRefresh()
+        print("deinit")
+    }
 }
 extension HomeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return contents.count
+        return contents.count + 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        if indexPath.item == contents.count{
+            let cell = homeCollectionView.dequeueReusableCell(withReuseIdentifier: "loading", for: indexPath)
+            cell.addSubview(loading)
+            loading.snp.makeConstraints({ (make) in
+                make.centerX.equalTo(cell.contentView.snp.centerX)
+                make.centerY.equalTo(cell.contentView.snp.centerY)
+            })
+            loading.startAnimating()
+            return cell
+        }
+        
         let cell = collectionView.dequeueReusableCell(with: HomeFeedCollectionViewCell.self, for: indexPath)
         let content = contents[indexPath.row]
         cell.set(image: contents[indexPath.row])
@@ -77,17 +109,21 @@ extension HomeViewController: UICollectionViewDataSource {
             break
         }
     }
-    ///
+    //
 }
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     //TODO:
 }
+
 extension HomeViewController: CollectionViewDelegateLayout {
-    func numberOfColumns() -> Int {
+    private func numberOfColumns() -> Int {
         return 1
     }
     
-    func sizeForItemAt(indexPath: IndexPath) -> CGSize {
+    internal func sizeForItemAt(indexPath: IndexPath) -> CGSize {
+        if indexPath.item == contents.count{
+            return CGSize(width: configure.itemWidth,height: 100)
+        }
         let image = contents[indexPath.row]
         let width = configure.itemWidth
         let height = width / image.size.width * image.size.height + 49
@@ -95,5 +131,16 @@ extension HomeViewController: CollectionViewDelegateLayout {
     }
 }
 
+extension HomeViewController: UIScrollViewDelegate {
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        navigationController?.setToolbarHidden(true, animated: true)
+    }
+    
+    func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
+        if indexPath.item == contents.count{
+            // loadMoreData()
+        }
+    }
+}
 
 

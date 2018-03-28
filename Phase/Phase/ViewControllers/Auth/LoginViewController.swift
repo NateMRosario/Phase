@@ -39,21 +39,34 @@ extension LoginViewController {
     }
 
     @objc private func signInButtonTapped() {
-        if (self.loginView.usernameTextField.text != nil && self.loginView.passwordTextField.text != nil) {
-            let authDetails = AWSCognitoIdentityPasswordAuthenticationDetails(username: self.loginView.usernameTextField.text!, password: self.loginView.passwordTextField.text! )
-            self.passwordAuthenticationCompletion?.set(result: authDetails)
-        } else {
-            let alertController = UIAlertController(title: "Missing information",
-                                                    message: "Please enter a valid user name and password",
-                                                    preferredStyle: .alert)
-            let retryAction = UIAlertAction(title: "Retry", style: .default, handler: nil)
-            alertController.addAction(retryAction)
-        }
+        
+        print(CognitoManager.shared.isUserSignedIn())
+        
+        CognitoManager.shared.signIn(username: loginView.usernameTextField.text!, password: loginView.passwordTextField.text!, completion: { (error) in
+            if let error = error {
+                print(error)
+            }
+        })
+        
+
     }
     
     @objc private func createAccountButtonTapped() {
-        let createAccountViewController = CreateAccountViewController()
-        navigationController?.pushViewController(createAccountViewController, animated: true)
+        
+        var hashtags = Set<String>()
+        hashtags.insert("#kawaii")
+        
+        DynamoDBManager.shared.createJourney(title: "My first journey", description: "onii-chan~~", hashtags: hashtags, completion: {(error) in
+            
+            // HANDLE ERROR
+            
+        })
+        
+        
+        
+        
+//        let createAccountViewController = CreateAccountViewController()
+//        navigationController?.pushViewController(createAccountViewController, animated: true)
     }
     
     @objc private func forgotPasswordButtonTapped() {

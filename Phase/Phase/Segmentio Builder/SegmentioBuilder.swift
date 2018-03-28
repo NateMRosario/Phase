@@ -29,9 +29,9 @@ struct SegmentioBuilder {
     
     private static func segmentioContent() -> [SegmentioItem] {
         return [
-            SegmentioItem(title: "Journey", image: nil),
-            SegmentioItem(title: "Collections", image: nil),
-            SegmentioItem(title: "About", image: nil)
+            SegmentioItem(title: "Journeys", image: nil),
+            SegmentioItem(title: "Events", image: nil),
+            SegmentioItem(title: "Likes", image: nil)
         ]
     }
     
@@ -60,7 +60,7 @@ struct SegmentioBuilder {
     }
     
     private static func segmentioStates() -> SegmentioStates {
-        let font = UIFont.exampleAvenirMedium(ofSize: 20)
+        let font = UIFont.boldSystemFont(ofSize: 17)
         return SegmentioStates(
             defaultState: segmentioState(
                 backgroundColor: .clear,
