@@ -55,6 +55,7 @@ class AppUser: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
             "_journeysFollowed" : "journeysFollowed",
             "_numberOfJourneys" : "numberOfJourneys",
             "_profileImage" : "profileImage",
+            "_username" : "username",
             "_usersFollowed" : "usersFollowed",
             "_watcherCount" : "watcherCount",
         ]
