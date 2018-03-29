@@ -50,7 +50,7 @@ class HomeViewController: UIViewController {
     }
     
     private func setupNavbar() {
-        navigationItem.title = "PHASE"
+        navigationItem.title = "Phase"
     }
     
     private func fetchContents() {
@@ -61,7 +61,7 @@ class HomeViewController: UIViewController {
     }
     
     deinit {
-        homeCollectionView.dg_removePullToRefresh()
+        homeCollectionView?.dg_removePullToRefresh()
         print("deinit")
     }
 }

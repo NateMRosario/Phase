@@ -157,16 +157,6 @@
                                             <color key="textColor" red="0.37055522200000002" green="0.37056469920000001" blue="0.37055957319999999" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
                                         </label>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qwf-B0-YE9">
-                                            <rect key="frame" x="327" y="16" width="32" height="32"/>
-                                            <color key="backgroundColor" red="0.83741801979999997" green="0.83743780850000005" blue="0.83742713930000001" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <state key="normal" image="preference">
-                                                <color key="titleColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            </state>
-                                            <connections>
-                                                <segue destination="mr7-mc-nrk" kind="show" id="WaB-gU-M8s"/>
-                                            </connections>
-                                        </button>
                                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1Bn-Vj-qyE">
                                             <rect key="frame" x="0.0" y="231" width="375" height="8"/>
                                             <color key="backgroundColor" red="0.92143100499999997" green="0.92145264149999995" blue="0.92144101860000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -175,16 +165,17 @@
                                             </constraints>
                                         </view>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="R4o-e1-thN">
-                                            <rect key="frame" x="273" y="16" width="70" height="28"/>
+                                            <rect key="frame" x="277" y="16" width="82" height="28"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="28" id="gaP-bc-lI3"/>
-                                                <constraint firstAttribute="width" constant="70" id="ib6-aa-QlY"/>
+                                                <constraint firstAttribute="width" constant="82" id="ib6-aa-QlY"/>
                                             </constraints>
                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                             <state key="normal" title="Follow" backgroundImage="October Silence">
                                                 <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </state>
                                             <connections>
+                                                <action selector="followButtonPressed:" destination="7IL-1D-84Q" eventType="touchUpInside" id="7d1-Pj-oku"/>
                                                 <action selector="subscribeButtonPressed:" destination="7IL-1D-84Q" eventType="touchUpInside" id="Tj0-cE-fAN"/>
                                             </connections>
                                         </button>
@@ -217,6 +208,30 @@
                                                 </button>
                                             </subviews>
                                         </stackView>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qwf-B0-YE9">
+                                            <rect key="frame" x="331" y="16" width="28" height="28"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="28" id="Ldi-Ey-J5g"/>
+                                                <constraint firstAttribute="width" constant="28" id="eMA-jA-JCv"/>
+                                            </constraints>
+                                            <state key="normal" image="Settings">
+                                                <color key="titleColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                            </state>
+                                            <connections>
+                                                <segue destination="mr7-mc-nrk" kind="show" id="WaB-gU-M8s"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Cdr-EA-XwN">
+                                            <rect key="frame" x="16" y="16" width="28" height="28"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="28" id="0WE-EB-UC7"/>
+                                                <constraint firstAttribute="width" constant="28" id="eTW-AV-1df"/>
+                                            </constraints>
+                                            <state key="normal" image="icons8-message"/>
+                                            <connections>
+                                                <action selector="hitUpDMs:" destination="7IL-1D-84Q" eventType="touchUpInside" id="656-Ne-buX"/>
+                                            </connections>
+                                        </button>
                                     </subviews>
                                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
@@ -227,7 +242,7 @@
                                         <constraint firstItem="1Bn-Vj-qyE" firstAttribute="leading" secondItem="4k0-iW-35V" secondAttribute="leading" id="7vR-Nd-wBs"/>
                                         <constraint firstAttribute="trailing" secondItem="1Bn-Vj-qyE" secondAttribute="trailing" id="8Xv-fJ-4lM"/>
                                         <constraint firstItem="Qtq-Xc-jSh" firstAttribute="top" secondItem="W3a-D2-Lbz" secondAttribute="bottom" constant="16" id="CB0-Wb-oLb"/>
-                                        <constraint firstAttribute="trailing" secondItem="R4o-e1-thN" secondAttribute="trailing" constant="32" id="CRs-nc-ulk"/>
+                                        <constraint firstAttribute="trailing" secondItem="R4o-e1-thN" secondAttribute="trailing" constant="16" id="CRs-nc-ulk"/>
                                         <constraint firstItem="W3a-D2-Lbz" firstAttribute="top" secondItem="pxo-Y1-5A6" secondAttribute="bottom" constant="8" id="DHl-za-l33"/>
                                         <constraint firstAttribute="trailing" secondItem="Qtq-Xc-jSh" secondAttribute="trailing" constant="16" id="Dea-KI-RLw"/>
                                         <constraint firstItem="pxo-Y1-5A6" firstAttribute="centerX" secondItem="4k0-iW-35V" secondAttribute="centerX" id="DhL-sT-3Te"/>
@@ -237,8 +252,10 @@
                                         <constraint firstItem="vDW-vr-fvX" firstAttribute="height" secondItem="Qtq-Xc-jSh" secondAttribute="height" id="MpG-3s-iSS"/>
                                         <constraint firstItem="pxo-Y1-5A6" firstAttribute="top" secondItem="gEE-uu-JgQ" secondAttribute="bottom" constant="4" id="Nts-Jj-6Bq"/>
                                         <constraint firstItem="6HT-BU-R4h" firstAttribute="bottom" secondItem="Qtq-Xc-jSh" secondAttribute="bottom" id="NwR-At-B8j"/>
+                                        <constraint firstItem="Cdr-EA-XwN" firstAttribute="leading" secondItem="4k0-iW-35V" secondAttribute="leading" constant="16" id="PYc-Yw-mQ3"/>
                                         <constraint firstAttribute="trailing" secondItem="W3a-D2-Lbz" secondAttribute="trailing" constant="16" id="TcN-DC-RwM"/>
                                         <constraint firstItem="ITn-gl-hqC" firstAttribute="width" secondItem="hIn-Ih-3a9" secondAttribute="width" id="YCg-gi-qxd"/>
+                                        <constraint firstItem="Cdr-EA-XwN" firstAttribute="top" secondItem="4k0-iW-35V" secondAttribute="top" constant="16" id="ZC8-7E-Kvz"/>
                                         <constraint firstItem="qwf-B0-YE9" firstAttribute="top" secondItem="4k0-iW-35V" secondAttribute="top" constant="16" id="cBa-BT-Q0P"/>
                                         <constraint firstItem="jmp-bG-NY2" firstAttribute="top" secondItem="4k0-iW-35V" secondAttribute="top" constant="-50" id="ctd-q2-8iK"/>
                                         <constraint firstItem="W3a-D2-Lbz" firstAttribute="leading" secondItem="4k0-iW-35V" secondAttribute="leading" constant="16" id="gx0-3m-Ni8"/>
@@ -286,9 +303,11 @@
                         <outlet property="bioLabel" destination="W3a-D2-Lbz" id="5g5-YN-MaI"/>
                         <outlet property="constraintHeightHeaderImages" destination="Skf-14-qnR" id="GVL-v3-Wta"/>
                         <outlet property="editProfileButton" destination="qwf-B0-YE9" id="7l1-CX-2VV"/>
+                        <outlet property="followButton" destination="R4o-e1-thN" id="NIl-XS-H9E"/>
                         <outlet property="handleLabel" destination="pxo-Y1-5A6" id="RuH-UA-ym9"/>
                         <outlet property="headerLabel" destination="ffn-Qb-9Bm" id="z9R-U7-VNT"/>
                         <outlet property="headerView" destination="Ee5-qn-1aL" id="wh4-4u-efU"/>
+                        <outlet property="hitUpDM" destination="Cdr-EA-XwN" id="pgd-7t-dZe"/>
                         <outlet property="nameLabel" destination="gEE-uu-JgQ" id="XyS-Ak-mTo"/>
                         <outlet property="profileImage" destination="jmp-bG-NY2" id="7cJ-00-f7Q"/>
                         <outlet property="profileView" destination="4k0-iW-35V" id="pv6-tt-mdl"/>
@@ -556,8 +575,9 @@
     <resources>
         <image name="7-R5CLfl_400x400" width="400" height="400"/>
         <image name="October Silence" width="2400" height="2000"/>
+        <image name="Settings" width="37" height="37"/>
         <image name="icons8-google-images-filled-100 (1)" width="16" height="16"/>
-        <image name="preference" width="32" height="32"/>
+        <image name="icons8-message" width="37" height="37"/>
         <image name="profilePlaceholder" width="16" height="16"/>
     </resources>
 </document>

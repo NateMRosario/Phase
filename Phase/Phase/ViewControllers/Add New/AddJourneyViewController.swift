@@ -38,8 +38,15 @@ class AddJourneyViewController: UIViewController {
         var set = Set<String>()
         set.insert("#yoo")
         DynamoDBManager.shared.createJourney(title: addJourneyView.newJourneyNameTextField.text ?? "", description: addJourneyView.newJourneyDescriptionTextView.text ?? "", hashtags: set, completion: {(error) in
-            
-            // HANDLE ERROR
+            if let error = error {
+                DispatchQueue.main.async {
+                    
+                }
+            } else {
+                DispatchQueue.main.async {
+                    
+                }
+            }
             
         })
         imagePreview.saveButton.isEnabled = true

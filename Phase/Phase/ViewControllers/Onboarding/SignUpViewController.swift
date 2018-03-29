@@ -42,16 +42,8 @@ class SignUpViewController: UIViewController {
         }
     }
     @IBOutlet weak var termsAndPP: ActiveLabel!
-    
-    func showAlert(title: String, message: String) {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "Ok", style: .default) { (alert) in
-            
-        }
-        alertController.addAction(okAction)
-        present(alertController, animated: true, completion: nil)
-    }
-    
+        
+
     let customType = ActiveType.custom(pattern: "\\sTERMS OF USE\\b")
     let customType2 = ActiveType.custom(pattern: "\\sPRIVACY POLICY\\b")
     
@@ -77,7 +69,7 @@ class SignUpViewController: UIViewController {
             label.text = "BY SIGNING UP, YOU AGREE TO OUR TERMS OF USE AND PRIVACY POLICY"
 
             label.handleCustomTap(for: customType) { _ in self.showAlert(title: "Terms of Use", message: "It's ya boi")}
-            label.handleCustomTap(for: customType2) { _ in self.showAlert(title: "Private Policy", message: "ayye lmfao")}
+            label.handleCustomTap(for: customType2) { _ in self.showAlert(title: "Privacy Policy", message: "AYE")}
             
             label.customColor[customType] = UIColor.white
             label.customColor[customType2] = UIColor.white
