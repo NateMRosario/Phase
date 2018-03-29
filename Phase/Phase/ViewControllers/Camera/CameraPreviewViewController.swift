@@ -114,7 +114,7 @@ extension PreviewViewController: UICollectionViewDelegate {
         } else if selectedIndexPath == nil {
             selectedIndexPath = indexPath
         } else {
-            
+            // MARK: - PHONY
             let previousCell =  collectionView.cellForItem(at: selectedIndexPath) as! JourneyCollectionViewCell
             previousCell.selectedJourneyLayer.isHidden = true
             selectedIndexPath = indexPath
