@@ -62,3 +62,4 @@ class AppUser: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
         ]
     }
 }
+
