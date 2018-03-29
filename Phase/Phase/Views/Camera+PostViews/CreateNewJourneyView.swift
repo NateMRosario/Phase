@@ -29,7 +29,7 @@ class CreateNewJourneyView: UIView {
     lazy var cancelButton: UIButton = {
         let cancel = UIButton()
         cancel.setImage(#imageLiteral(resourceName: "back"), for: .normal)
-        cancel.layer.opacity = 0.7
+        cancel.layer.opacity = 1
         cancel.layer.cornerRadius = 20
         cancel.layer.masksToBounds = true
         return cancel
@@ -38,9 +38,9 @@ class CreateNewJourneyView: UIView {
     lazy var createButton: UIButton = {
         let create = UIButton()
         create.setTitle("Create", for: .normal)
-        create.setTitleColor(.blue, for: .normal)
+        create.setTitleColor(.white, for: .normal)
         create.backgroundColor = .clear
-        create.layer.borderColor = UIColor.black.cgColor
+        create.layer.borderColor = UIColor.white.cgColor
         create.layer.borderWidth = 1
         create.layer.cornerRadius = 17
         create.layer.masksToBounds = true
@@ -209,7 +209,7 @@ class CreateNewJourneyView: UIView {
         NSLayoutConstraint.activate([
             newJourneyDescriptionTextView.topAnchor.constraint(equalTo: newJourneyNameTextField.bottomAnchor, constant: 40),
             newJourneyDescriptionTextView.widthAnchor.constraint(equalTo: textEntryView.widthAnchor, multiplier: 1),
-            newJourneyDescriptionTextView.heightAnchor.constraint(equalTo: newJourneyDescriptionTextView.widthAnchor, multiplier: 0.4),
+            newJourneyDescriptionTextView.heightAnchor.constraint(equalTo: newJourneyDescriptionTextView.widthAnchor, multiplier: 0.45),
             newJourneyDescriptionTextView.centerXAnchor.constraint(equalTo: centerXAnchor)
             ])
     }

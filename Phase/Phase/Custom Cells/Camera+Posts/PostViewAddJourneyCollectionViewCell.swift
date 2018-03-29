@@ -22,8 +22,8 @@ class AddJourneyCollectionViewCell: UICollectionViewCell {
     // MARK: - Initializers
     override init(frame: CGRect) {
         super.init(frame: UIScreen.main.bounds)
-        self.layer.masksToBounds = true
-        self.layer.cornerRadius = 10
+//        self.layer.masksToBounds = true
+//        self.layer.cornerRadius = 10
         commonInit()
         setupViews()
     }

@@ -32,13 +32,6 @@ class OnboardingLoginViewController: UIViewController {
     @IBOutlet weak var userLoginInfoTF: UITextField!
     @IBOutlet weak var passwordTF: UITextField!
     
-    func showAlert(title: String, message: String) {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "Ok", style: .default) { (alert) in }
-        alertController.addAction(okAction)
-        present(alertController, animated: true, completion: nil)
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         let pastelView = PastelView(frame: view.bounds)

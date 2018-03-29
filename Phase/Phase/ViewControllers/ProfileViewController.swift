@@ -12,6 +12,22 @@ import Segmentio
 
 class ProfileViewController: UIViewController, UITableViewDelegate {
     
+    @IBAction func hitUpDMs(_ sender: UIButton) {
+    }
+    @IBAction func goToUserSocialDetail(_ sender: UIButton) {
+        switch sender.tag {
+        case 0:
+            present(UINavigationController(rootViewController: FollowsViewController()), animated: true, completion: nil)
+        case 1:
+            present(UINavigationController(rootViewController: FollowsViewController()), animated: true, completion: nil)
+        case 2:
+            present(UINavigationController(rootViewController: FollowsViewController()), animated: true, completion: nil)
+        case 3:
+            present(UINavigationController(rootViewController: FollowsViewController()), animated: true, completion: nil)
+        default:
+            break
+        }
+    }
     @IBOutlet weak var segmentedViewTop: NSLayoutConstraint!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var username: UILabel!
@@ -22,6 +38,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate {
     @IBOutlet weak var segmentedView: UIView!
     @IBOutlet weak var segmentedControl: UISegmentedControl!
     @IBOutlet weak var profileImage: UIImageView!
+    @IBOutlet weak var hitUpDM: UIButton!
     @IBOutlet weak var constraintHeightHeaderImages: NSLayoutConstraint!
     @IBOutlet weak var bioLabel: UILabel!
     @IBOutlet weak var editProfileButton: UIButton! {
@@ -50,6 +67,15 @@ class ProfileViewController: UIViewController, UITableViewDelegate {
         didSet {
             tableView.reloadData()
         }
+    }
+    @IBOutlet weak var followButton: UIButton! {
+        didSet {
+            followButton.layer.cornerRadius = followButton.bounds.height / 2
+            followButton.clipsToBounds = true
+        }
+    }
+    @IBAction func followButtonPressed(_ sender: UIButton) {
+        
     }
     
     // Sticky header and fake nav bar
@@ -89,6 +115,8 @@ class ProfileViewController: UIViewController, UITableViewDelegate {
         tableView.contentInset = UIEdgeInsetsMake(headerView.frame.height, 0, 0, 0)
         tableView.separatorStyle = .none
         //setupSettingsButton()
+        followButton.isHidden = true
+        hitUpDM.isHidden = true
     }
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(true)
@@ -105,11 +133,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate {
         profileImage.borderColor = .white
         profileImage.layer.cornerRadius = profileImage.bounds.height/2
         profileImage.clipsToBounds = true
-        
-        // Header - Edit profile button
-        editProfileButton.layer.borderColor = UIColor.gray.cgColor
-        editProfileButton.layer.borderWidth = 1
-        editProfileButton.layer.cornerRadius = 14
         
         headerView.clipsToBounds = true
         
