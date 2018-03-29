@@ -8,10 +8,15 @@
 
 import UIKit
 
+protocol AddNewJourneyViewDelegate: class {
+    func createdNewJourney()
+}
+
 class AddJourneyViewController: UIViewController {
     
-    let addJourneyView = AddJourneyView()
+    let addJourneyView = CreateNewJourneyView()
     let imagePreview = CapturedImageView()
+    weak var delegate: AddNewJourneyViewDelegate?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -19,9 +24,9 @@ class AddJourneyViewController: UIViewController {
         addJourneyView.cancelButton.addTarget(self,
                                               action: #selector(cancel),
                                               for: .touchUpInside)
-//        addJourneyView.createButton.addTarget(self,
-//                                              action: #selector(create),
-//                                              for: .touchUpInside)
+        addJourneyView.createButton.addTarget(self,
+                                              action: #selector(create),
+                                              for: .touchUpInside)
     }
     
     @objc func cancel() {
@@ -29,8 +34,22 @@ class AddJourneyViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
 
-//    @objc func create() {
-//        imagePreview.saveButton.isEnabled = true
-//        dismiss(animated: true, completion: nil)
-//    }
+    @objc func create() {
+        var set = Set<String>()
+        set.insert("#yoo")
+        DynamoDBManager.shared.createJourney(title: addJourneyView.newJourneyNameTextField.text ?? "", description: addJourneyView.newJourneyDescriptionTextView.text ?? "", hashtags: set, completion: {(error) in
+            if let error = error {
+                DispatchQueue.main.async {
+                    
+                }
+            } else {
+                DispatchQueue.main.async {
+                    
+                }
+            }
+            
+        })
+        imagePreview.saveButton.isEnabled = true
+        dismiss(animated: true)
+    }
 }

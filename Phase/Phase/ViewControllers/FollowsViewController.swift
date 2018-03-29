@@ -29,6 +29,9 @@ class FollowsViewController: UIViewController {
 //    }
     
     override func viewDidLoad() {
+        let navbutton = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(dismissView))
+        navigationController?.navigationBar.topItem?.leftBarButtonItem = navbutton
+        
         super.viewDidLoad()
         view.backgroundColor = .lightGray
         followView.pagingCollectionView.dataSource = self
@@ -37,6 +40,11 @@ class FollowsViewController: UIViewController {
         setupView()
         
     }
+    
+    @objc private func dismissView() {
+        dismiss(animated: true, completion: nil)
+    }
+    
     func scrollToMenuIndex(menuIndex: Int) {
         let indexPath = IndexPath(item: menuIndex, section: 0)
         followView.pagingCollectionView.scrollToItem(at: indexPath, at: .right, animated: true)

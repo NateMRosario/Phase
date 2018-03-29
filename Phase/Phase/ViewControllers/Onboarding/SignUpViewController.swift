@@ -24,20 +24,17 @@ class SignUpViewController: UIViewController {
         
         CognitoManager.shared.signUp(username: userName, email: email, password: password) { (error) in
             if let error = error {
-                self.showAlert(title: "Error", message: "\(error.localizedDescription)")
+                DispatchQueue.main.async {
+                    self.showAlert(title: "Error", message: "\(error.localizedDescription)")
+                }
             } else {
-                self.showAlert(title: "Success", message: "Signed Up! Please check your email to verify.")
+                DispatchQueue.main.async {
+                    self.showAlert(title: "Success", message: "Signed Up! Please check your email to verify.")
+                }
             }
         }
     }
     @IBOutlet weak var termsAndPP: ActiveLabel!
-    
-    func showAlert(title: String, message: String) {
-        let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "Ok", style: .default) { (alert) in }
-        alertController.addAction(okAction)
-        present(alertController, animated: true, completion: nil)
-    }
     
     let customType = ActiveType.custom(pattern: "\\sTERMS OF USE\\b")
     let customType2 = ActiveType.custom(pattern: "\\sPRIVACY POLICY\\b")
@@ -64,7 +61,7 @@ class SignUpViewController: UIViewController {
             label.text = "BY SIGNING UP, YOU AGREE TO OUR TERMS OF USE AND PRIVACY POLICY"
 
             label.handleCustomTap(for: customType) { _ in self.showAlert(title: "Terms of Use", message: "It's ya boi")}
-            label.handleCustomTap(for: customType2) { _ in self.showAlert(title: "Private Policy", message: "ayye lmfao")}
+            label.handleCustomTap(for: customType2) { _ in self.showAlert(title: "Privacy Policy", message: "AYE")}
             
             label.customColor[customType] = UIColor.white
             label.customColor[customType2] = UIColor.white
@@ -80,6 +77,14 @@ class SignUpViewController: UIViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if let _ = touches.first {
+            DispatchQueue.main.async {
+                self.view.endEditing(true)
+            }
+        }
     }
 }
 

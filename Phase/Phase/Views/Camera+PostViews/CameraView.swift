@@ -180,10 +180,9 @@ class CameraView: UIView {
         NSLayoutConstraint.activate([
             photoCollectionView.topAnchor.constraint(equalTo: buttonContainer.bottomAnchor, constant: 8),
             photoCollectionView.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 1),
-            photoCollectionView.heightAnchor.constraint(equalTo: containerView.heightAnchor, multiplier: 0.66),
-            photoCollectionView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor),
+            photoCollectionView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -2),
+            photoCollectionView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor)
             ])
     }
-    
 }
 

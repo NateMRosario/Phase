@@ -99,7 +99,8 @@ class DiscoveryViewController: UIViewController {
 //        navigationController?.navigationBar.tintColor = UIColor.white
     }
     @objc func pushToSearchVC() {
-        present(UINavigationController(rootViewController: SearchViewController.instantiate(withStoryboard: "SearchVCs")), animated: false, completion: nil)
+        present(InSearchViewController(rootViewController:
+            SearchViewController.instantiate(withStoryboard: "SearchVCs")), animated: false)
     }
     
     private func fetchContents() {

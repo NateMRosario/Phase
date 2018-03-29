@@ -45,8 +45,19 @@ class CognitoManager {
             if let error = task.error {
                 print(error)
                 completion(error)
-            } else {
-                print(task.result?.description ?? "pool sign up success block reached")
+            } else if let result = task.result {
+                print("sign up response: \(task.result?.description ?? "pool sign up success block reached")" )
+                
+                self.userId = result.userSub
+                
+                DynamoDBManager.shared.createUser(sub: self.userId!, username: result.user.username!, completion: { (error) in
+                    if let error = error {
+                        completion(error)
+                    } else {
+                        completion(nil)
+                    }
+                })
+                
                 completion(nil)
             }
             return nil
@@ -63,17 +74,22 @@ class CognitoManager {
                     completion(error)
                 } else {
                     print(task.result?.description ?? "sign in success block reached")
-                    completion(nil)
-                    self.getDetails(user: self.user)
+                    self.getDetails(user: self.user, completion: { (error) in
+                        if let error = error {
+                            completion(error)
+                        } else {
+                            completion(nil)
+                        }
+                    })
                 }
                 return nil
             })
     }
     
-    func getDetails(user: AWSCognitoIdentityUser?) {
-        user?.getDetails().continueOnSuccessWith(block: { (task) -> Any? in
+    func getDetails(user: AWSCognitoIdentityUser?, completion: @escaping (Error?) -> Void) {
+        user?.getDetails().continueWith(block: { (task) -> Any? in
             if let error = task.error {
-                print(error)
+                completion(error)
             } else {
                 if let result = task.result {
                     print(result.description())
@@ -82,6 +98,7 @@ class CognitoManager {
                         if let name = attribute.name, let value = attribute.value {
                             if name == "sub" {
                                 self.userId = value
+                                completion(nil)
                             }
                         }
                     }
@@ -102,17 +119,19 @@ class CognitoManager {
         user?.signOut()
     }
     
-    func forgotPassword(username: String) {
+    func forgotPassword(username: String, completion: @escaping (Error?) -> Void) {
         user = pool.getUser(username)
         user?.forgotPassword().continueWith(block: { (task) -> Any? in
             if let error = task.error {
-                print(error)
-                
+                completion(error)
             } else {
                 print(task.result?.description() ?? "forgot password success block reached")
+                completion(nil)
             }
             return nil
         })
     }
+    
+    
     
 }
