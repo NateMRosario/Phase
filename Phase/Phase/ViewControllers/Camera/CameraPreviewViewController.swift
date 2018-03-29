@@ -40,10 +40,10 @@ class PreviewViewController: UIViewController {
         imagePreview.saveButton.addTarget(self,
                                           action: #selector(save),
                                           for: .touchUpInside)
-        //        imagePreview.postButton.addTarget(self,
-        //                                         action: #selector(post),
-        //                                         for: .touchUpInside
-        //        )
+                imagePreview.postButton.addTarget(self,
+                                                 action: #selector(post),
+                                                 for: .touchUpInside
+                )
         
         imagePreview.imagePreviewView.image = image
     }

@@ -16,6 +16,7 @@ class ConfirmAccountViewController: UIViewController {
 
     let confirmAccountView = ConfirmAccountView()
     var sentTo: String?
+    var userName: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,9 +36,17 @@ class ConfirmAccountViewController: UIViewController {
         pastelView.startAnimation()
         view.insertSubview(pastelView, at: 0)
         setupButtons()
+        confirmAccountView.userNameLabel.text = userName
     }
-
-
+    
+    init(username: String) {
+        super.init(nibName: nil, bundle: nil)
+        self.userName = username
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 }
 
 extension ConfirmAccountViewController {

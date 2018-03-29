@@ -29,7 +29,14 @@ class SignUpViewController: UIViewController {
                 }
             } else {
                 DispatchQueue.main.async {
-                    self.showAlert(title: "Success", message: "Signed Up! Please check your email to verify.")
+                    let alertController = UIAlertController(title: "Success", message: "Signed Up! Please check your email to verify.", preferredStyle: .alert)
+                    let okAction = UIAlertAction(title: "Ok", style: .default) { (alert) in
+                        let confirmAccountVC = ConfirmAccountViewController(username: self.userName.text!)
+                        self.present(confirmAccountVC, animated: true, completion: nil)
+                    }
+                    alertController.addAction(okAction)
+                    self.present(alertController, animated: true, completion: nil)
+
                 }
             }
         }
@@ -38,7 +45,9 @@ class SignUpViewController: UIViewController {
     
     func showAlert(title: String, message: String) {
         let alertController = UIAlertController(title: title, message: message, preferredStyle: .alert)
-        let okAction = UIAlertAction(title: "Ok", style: .default) { (alert) in }
+        let okAction = UIAlertAction(title: "Ok", style: .default) { (alert) in
+            
+        }
         alertController.addAction(okAction)
         present(alertController, animated: true, completion: nil)
     }
@@ -84,6 +93,14 @@ class SignUpViewController: UIViewController {
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if let _ = touches.first {
+            DispatchQueue.main.async {
+                self.view.endEditing(true)
+            }
+        }
     }
 }
 

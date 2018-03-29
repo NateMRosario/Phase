@@ -34,6 +34,7 @@ class ConfirmAccountView: UIView {
         textField.autocapitalizationType = .none
         textField.placeholder = "Confirmation Code"
         textField.textColor = .white
+        textField.clearIconButton
         textField.isClearIconButtonEnabled = true
         textField.tintColor = .white // the color of the blinking cursor
         textField.font = UIFont.systemFont(ofSize: 20)
@@ -78,7 +79,7 @@ class ConfirmAccountView: UIView {
     }
     
     private func commonInit() {
-        backgroundColor = .green
+        backgroundColor = .clear
         setupViews()
     }
     
