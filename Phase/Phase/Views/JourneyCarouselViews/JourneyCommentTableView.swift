@@ -1,5 +1,5 @@
 //
-//  JourneyCommentView.swift
+//  JourneyCommentTableView.swift
 //  Phase
 //
 //  Created by Clint Mejia on 3/26/18.
@@ -14,7 +14,11 @@ protocol JourneyCommentDelegate: class {
     func replyButtonTapped()
 }
 
-class JourneyCommentView: UIView {
+class JourneyCommentTableView: UIView {
+    
+    // MARK: - Views
+    let headerViewID = JourneyHeaderView()
+    let footerViewId = JourneyAddCommentVIew()
     
     // MARK: - TableViewCell Identifier
     let cellID = "JourneyCommentTableViewCell"
@@ -41,13 +45,16 @@ class JourneyCommentView: UIView {
         commonInit()
     }
     
+    // MARK: - Functions
     private func commonInit() {
         backgroundColor = UIColor.orange
         setupViews()
     }
     
     private func setupViews() {
-        setupJourneyCommentTableView()
+        setupHeaderViewConstraints()
+        setupJourneyCommentTableViewConstraints()
+        setupFooterViewConstraints()
     }
     
     @objc private func replyButtonTapped() {
@@ -56,10 +63,33 @@ class JourneyCommentView: UIView {
     }
     
     // MARK: - Constraints
-    private func setupJourneyCommentTableView() {
+    private func setupHeaderViewConstraints() {
+        addSubview(headerViewID)
+        headerViewID.snp.makeConstraints { (make) in
+            make.top.equalTo(self)
+            make.width.equalTo(self)
+            make.centerX.equalTo(self)
+            make.height.equalTo(self).multipliedBy(0.15)
+        }
+    }
+    
+    private func setupJourneyCommentTableViewConstraints() {
         addSubview(journeyCommentTableView)
         journeyCommentTableView.snp.makeConstraints { (make) in
-            make.edges.equalTo(self)
+            make.top.equalTo(headerViewID.snp.bottom)
+            make.width.equalTo(self)
+            make.centerX.equalTo(self)
+            make.height.equalTo(self).multipliedBy(0.70)
+        }
+    }
+    
+    private func setupFooterViewConstraints() {
+        addSubview(footerViewId)
+        footerViewId.snp.makeConstraints { (make) in
+            make.bottom.equalTo(self)
+            make.centerX.equalTo(self)
+            make.width.equalTo(self)
+            make.top.equalTo(journeyCommentTableView.snp.bottom)
         }
     }
     

@@ -9,7 +9,7 @@
 import UIKit
 import SnapKit
 
-class JourneyCarouselViewController: UIViewController {
+class JourneyCarouselViewController: UIViewController, UICollisionBehaviorDelegate {
     
     // MARK: - Testbed properties
     var items: [Int] = []
@@ -19,11 +19,32 @@ class JourneyCarouselViewController: UIViewController {
     var hideMiddleView = false
     var hideBottomView = false
     
+    var hideFooterCell = false
+    var hideCommentCell = false
+    
+    // Animation Properties
+    var views = [UIView]()
+    var animator:UIDynamicAnimator!
+    var gravity:UIGravityBehavior!
+    var snap:UISnapBehavior!
+    var previousTouchPoint:CGPoint!
+    var viewDragging = false
+    var viewPinned = false
+    
     // MARK: - Properties
     private let journeyCarouselView = JourneyCarouselView()
-    private let journeyHeaderView = JourneyHeaderView()
-    private let journeyCommentView = JourneyCommentView()
-    private let journeyAddCommentView = JourneyAddCommentVIew()
+    
+    //    private let journeyHeaderView = JourneyHeaderView()
+    //    private let headerCellId = JourneyHeaderTableViewCell()
+    //    private let journeyAddCommentView = JourneyAddCommentVIew()
+    
+    private let footerViewId = JourneyAddCommentVIew()
+    private let headerViewID = JourneyHeaderView()
+    
+    private let journeyCommentTableView = JourneyCommentTableView()
+    private let commentCellId = JourneyCommentTableViewCell()
+    private let footerID = JourneyAddCommentVIew()
+    
     
     private let cellID = "JourneyCommentTableViewCell"
     
@@ -38,27 +59,22 @@ class JourneyCarouselViewController: UIViewController {
     //    }
     
     // MARK: - Lazy Variable
-    lazy var journeyCommentStackView: UIStackView = {
-        let stackView = UIStackView()
-        stackView.axis = .vertical
-        stackView.distribution = .fillProportionally
-        stackView.alignment = .leading
-        stackView.spacing = 8.0
-        stackView.backgroundColor = UIColor.orange
-        stackView.translatesAutoresizingMaskIntoConstraints = false
-        return stackView
-    }()
     
     
     // MARK: - Life cycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupAnimation()
         self.view.backgroundColor = UIColor.cyan
         self.journeyCarouselView.carouselCollectionView.delegate = self
         self.journeyCarouselView.carouselCollectionView.dataSource = self
-        self.journeyCommentView.journeyCommentTableView.delegate = self
-        self.journeyCommentView.journeyCommentTableView.dataSource = self
+//        self.journeyCommentTableView.journeyCommentTableView.delegate = self
+//        self.journeyCommentTableView.journeyCommentTableView.dataSource = self
         setupView()
+        var offset:CGFloat = 250
+        let view = addViewController(atOffset: offset, dataForVC: nil)
+        self.views.append(view!)
+            offset -= 50
     }
     
     // MARK: - Functions
@@ -68,77 +84,183 @@ class JourneyCarouselViewController: UIViewController {
     }
     
     private func setupView() {
-        for i in 0 ... 99 {
-            items.append(i)
-            setupJourneyCarouselView()
-            setupJourneyCommentStackView()
-            //        setupJourneyCommentStackView()
-            setJourneyCommentStackViewAttributes()
-            setJourneyCommentStackViewZAxis()
+        items = Array(0...99)
+        setJourneyCarouselViewConstraints()
+    }
+    
+    private func setupAnimation() {
+        animator = UIDynamicAnimator(referenceView: self.view)
+        gravity = UIGravityBehavior()
+        
+        animator.addBehavior(gravity)
+        gravity.magnitude = 4
+    }
+    
+    func addViewController (atOffset offset:CGFloat, dataForVC data:AnyObject?) -> UIView? {
+        
+        let frameForView = self.view.bounds.offsetBy(dx: 0, dy: self.view.bounds.size.height - offset)
+        
+        let collapsedViewController = JourneyCarouselCollapsedViewController()
+        
+        if let view = collapsedViewController.view {
+            view.frame = frameForView
+            view.layer.cornerRadius = 10
+
+            
+            self.addChildViewController(collapsedViewController)
+            self.view.addSubview(view)
+            collapsedViewController.didMove(toParentViewController: self)
+            
+            
+            
+            let panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(JourneyCarouselViewController.handlePan(gestureRecognizer:)))
+            view.addGestureRecognizer(panGestureRecognizer)
+            
+            
+            let collision = UICollisionBehavior(items: [view])
+            collision.collisionDelegate = self
+            animator.addBehavior(collision)
+            
+            let boundary = view.frame.origin.y + view.frame.size.height
+            
+            // lower boundary
+            var boundaryStart = CGPoint(x: 0, y: boundary)
+            var boundaryEnd = CGPoint(x: self.view.bounds.size.width, y: boundary)
+            collision.addBoundary(withIdentifier: 1 as NSCopying, from: boundaryStart, to: boundaryEnd)
+            
+            
+            // upper boundary
+            boundaryStart = CGPoint(x: 0, y: 0)
+            boundaryEnd = CGPoint(x: self.view.bounds.size.width, y: 0)
+            collision.addBoundary(withIdentifier: 2 as NSCopying as NSCopying, from: boundaryStart, to: boundaryEnd)
+            
+            
+            gravity.addItem(view)
+            
+            
+            let itemBehavior = UIDynamicItemBehavior(items: [view])
+            animator.addBehavior(itemBehavior)
+            
+            return view
+        }
+        return nil
+    }
+    
+    @objc func handlePan (gestureRecognizer:UIPanGestureRecognizer) {
+        
+        let touchPoint = gestureRecognizer.location(in: self.view)
+        let draggedView = gestureRecognizer.view!
+        
+        if gestureRecognizer.state == .began {
+            let dragStartPoint = gestureRecognizer.location(in: draggedView)
+            
+            if dragStartPoint.y < 200 {
+                viewDragging = true
+                previousTouchPoint = touchPoint
+            }
+            
+        } else if gestureRecognizer.state == .changed && viewDragging {
+            let yOffset = previousTouchPoint.y - touchPoint.y
+            
+            draggedView.center = CGPoint(x: draggedView.center.x, y: draggedView.center.y - yOffset)
+            previousTouchPoint = touchPoint
+        }else if gestureRecognizer.state == .ended && viewDragging {
+            
+            pin(view: draggedView)
+            addVelocity(toView: draggedView, fromGestureRecognizer: gestureRecognizer)
+            
+            animator.updateItem(usingCurrentState: draggedView)
+            viewDragging = false
+            
         }
     }
     
-    private func setJourneyCommentStackViewZAxis() {
-        view.bringSubview(toFront: journeyCommentStackView)
+    func pin (view:UIView) {
+        
+        let viewHasReachedPinLocation = view.frame.origin.y < 100
+        
+        if viewHasReachedPinLocation {
+            if !viewPinned {
+                var snapPosition = self.view.center
+                snapPosition.y += 30
+                
+                snap = UISnapBehavior(item: view, snapTo: snapPosition)
+                animator.addBehavior(snap)
+                
+                setVisibility(view: view, alpha: 0)
+                
+                viewPinned = true
+                
+                
+            }
+        }else{
+            if viewPinned {
+                animator.removeBehavior(snap)
+                setVisibility(view: view, alpha: 1)
+                viewPinned = false
+            }
+        }
     }
     
-    private func setJourneyCommentStackViewAttributes() {
-        //        journeyCommentStackView.addArrangedSubview(journeyHeaderView)
-        journeyCommentStackView.addArrangedSubview(journeyCommentView)
-        //        journeyCommentStackView.addArrangedSubview(journeyAddCommentView)
-        journeyCommentStackView.translatesAutoresizingMaskIntoConstraints = false
-        journeyCommentStackView.layer.borderWidth = 1
-        journeyCommentStackView.layer.cornerRadius = 10
-        journeyCommentStackView.layer.masksToBounds = true
-        journeyCommentStackView.clipsToBounds = true
+    func setVisibility (view:UIView, alpha:CGFloat) {
+        for aView in views {
+            if aView != view {
+                aView.alpha = alpha
+            }
+        }
     }
     
-    private func setViewsForStackView() {
+    func addVelocity (toView view:UIView, fromGestureRecognizer panGesture:UIPanGestureRecognizer) {
+        var velocity = panGesture.velocity(in: self.view)
+        velocity.x = 0
+        
+        if let behavior = itemBehavior(forView: view) {
+            behavior.addLinearVelocity(velocity, for: view)
+        }
     }
     
+    func itemBehavior (forView view:UIView) -> UIDynamicItemBehavior? {
+        for behavior in animator.behaviors {
+            if let itemBehavior = behavior as? UIDynamicItemBehavior {
+                if let possibleView = itemBehavior.items.first as? UIView, possibleView == view {
+                    return itemBehavior
+                }
+            }
+        }
+        
+        return nil
+    }
     
-    
-    //    a.backgroundColor = UIColor.red
-    //    a.widthAnchor.constraint(equalToConstant: 200).isActive = true
-    //    let aHeight = a.heightAnchor.constraint(equalToConstant: 120)
-    //    aHeight.isActive = true
-    //    aHeight.priority = 999
-    //
-    //    let bHeight = b.heightAnchor.constraint(equalToConstant: 120)
-    //    bHeight.isActive = true
-    //    bHeight.priority = 999
-    //    b.backgroundColor = UIColor.green
-    //    b.widthAnchor.constraint(equalToConstant: 200).isActive = true
-    //
-    //    view.addSubview(stackView)
-    //    stackView.backgroundColor = UIColor.blue
-    //    stackView.addArrangedSubview(a)
-    //    stackView.addArrangedSubview(b)
-    //    stackView.axis = .vertical
-    //    stackView.distribution = .equalSpacing
-    //    stackView.translatesAutoresizingMaskIntoConstraints = false
+    func collisionBehavior(_ behavior: UICollisionBehavior, beganContactFor item: UIDynamicItem, withBoundaryIdentifier identifier: NSCopying?, at p: CGPoint) {
+        
+        if NSNumber(integerLiteral: 2).isEqual(identifier) {
+            let view = item as! UIView
+            pin(view: view)
+        }
+        
+    }
+//    private func setupjourneyCommentTableView() {
+//        journeyCommentTableView.journeyCommentTableView.tableFooterView = footerViewId
+//        journeyCommentTableView.journeyCommentTableView.tableHeaderView = headerViewID
+//        journeyCommentTableView.journeyCommentTableView.tableHeaderView?.setNeedsLayout()
+//        journeyCommentTableView.journeyCommentTableView.tableHeaderView?.layoutIfNeeded()
+//    }
     
     private func getPost() {}
     
+    private func setTableViewFooter(hidden: Bool) {
+        //        guard hidden == false {
+        
+    }
+    
     // MARK: - Contraints
-    private func setupJourneyCarouselView() {
+    private func setJourneyCarouselViewConstraints() {
         self.view.addSubview(journeyCarouselView)
         journeyCarouselView.snp.makeConstraints { (make) in
             make.top.equalTo(self.view.safeAreaLayoutGuide)
             make.leading.equalTo(self.view.snp.leading)
             make.trailing.equalTo(self.view.snp.trailing)
-            make.height.equalTo(self.view.snp.height).multipliedBy(0.55
-            )
-        }
-    }
-    
-    func setupJourneyCommentStackView() {
-        self.view.addSubview(journeyCommentStackView)
-        journeyCommentStackView.snp.makeConstraints { (make) in
-            make.width.equalTo(view.snp.width).multipliedBy(0.9)
-            make.bottom.equalTo(view.snp.bottom).offset(-10)
-            make.centerX.equalTo(view.snp.centerX)
-            make.height.equalTo(view.snp.height).multipliedBy(0.45)
+            make.height.equalTo(self.view.snp.height).multipliedBy(0.55)
         }
     }
     
@@ -170,11 +292,11 @@ extension JourneyCarouselViewController: iCarouselDataSource {
             label.font = label.font.withSize(50)
             label.tag = 1
             itemView.addSubview(label)
+            
         }
         label.text = "\(items[index])"
         return itemView
     }
-    
 }
 
 // MARK: - iCarouselDelegate
@@ -188,42 +310,25 @@ extension JourneyCarouselViewController: iCarouselDelegate {
     
 }
 
-// MARK: - UITableViewDelegate
-extension JourneyCarouselViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-    }
-}
+//// MARK: - UITableViewDelegate
+//extension JourneyCarouselViewController: UITableViewDelegate {
+//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+//    }
+//}
+//
+//// MARK: - UITableViewDataSource
+//extension JourneyCarouselViewController: UITableViewDataSource {
+//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+//        return 10
+//    }
+//
+//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+//        let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! JourneyCommentTableViewCell
+//        cell.layer.cornerRadius = 10
+//        cell.layer.masksToBounds = true
+//        cell.clipsToBounds = true
+//
+//        return cell
+//    }
+//}
 
-// MARK: - UITableViewDataSource
-extension JourneyCarouselViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! JourneyCommentTableViewCell
-        cell.layer.cornerRadius = 10
-        cell.layer.masksToBounds = true
-        cell.clipsToBounds = true
-        
-        return cell
-    }
-}
-
-extension UIStackView {
-    
-    convenience init(axis:UILayoutConstraintAxis, spacing:CGFloat) {
-        self.init()
-        self.axis = axis
-        self.spacing = spacing
-        self.translatesAutoresizingMaskIntoConstraints = false
-    }
-    
-    func anchorStackView(toView view:UIView, anchorX:NSLayoutXAxisAnchor, equalAnchorX:NSLayoutXAxisAnchor, anchorY:NSLayoutYAxisAnchor, equalAnchorY:NSLayoutYAxisAnchor) {
-        view.addSubview(self)
-        anchorX.constraint(equalTo: equalAnchorX).isActive = true
-        anchorY.constraint(equalTo: equalAnchorY).isActive = true
-        
-    }
-    
-}

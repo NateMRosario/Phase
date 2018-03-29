@@ -121,9 +121,13 @@
 		F4183094206AB90700466705 /* HomeFeedCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4183092206AB90700466705 /* HomeFeedCollectionViewCell.xib */; };
 		F4183097206AB91D00466705 /* DiscoverCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4183095206AB91D00466705 /* DiscoverCollectionViewCell.swift */; };
 		F4183098206AB91D00466705 /* DiscoverCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4183096206AB91D00466705 /* DiscoverCollectionViewCell.xib */; };
+		F4276B47206C0ADC000F872D /* JourneyReplyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4276B46206C0ADB000F872D /* JourneyReplyView.swift */; };
+		F4276B4B206C2568000F872D /* JourneyHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4276B4A206C2568000F872D /* JourneyHeaderTableViewCell.swift */; };
+		F4276B4D206C287D000F872D /* JourneyAddCommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4276B4C206C287D000F872D /* JourneyAddCommentTableViewCell.swift */; };
+		F4385F33206D361500F22C90 /* JourneyCarouselCollapsedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4385F32206D361500F22C90 /* JourneyCarouselCollapsedViewController.swift */; };
 		F4882840206943930008A656 /* JourneyCarouselViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F488283F206943930008A656 /* JourneyCarouselViewController.swift */; };
 		F4882847206955690008A656 /* JourneyCommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4882846206955690008A656 /* JourneyCommentTableViewCell.swift */; };
-		F4882849206980CC0008A656 /* JourneyCommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4882848206980CC0008A656 /* JourneyCommentView.swift */; };
+		F4882849206980CC0008A656 /* JourneyCommentTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4882848206980CC0008A656 /* JourneyCommentTableView.swift */; };
 		F4882856206A95130008A656 /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = F4882854206A95120008A656 /* iCarousel.m */; };
 		F49638FA206ABD0A002D62E7 /* JourneyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F49638F9206ABD09002D62E7 /* JourneyTableViewCell.xib */; };
 		F49638FE206AC795002D62E7 /* JourneyAddCommentVIew.swift in Sources */ = {isa = PBXBuildFile; fileRef = F49638FD206AC795002D62E7 /* JourneyAddCommentVIew.swift */; };
@@ -280,9 +284,13 @@
 		F4183092206AB90700466705 /* HomeFeedCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeFeedCollectionViewCell.xib; sourceTree = "<group>"; };
 		F4183095206AB91D00466705 /* DiscoverCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverCollectionViewCell.swift; sourceTree = "<group>"; };
 		F4183096206AB91D00466705 /* DiscoverCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DiscoverCollectionViewCell.xib; sourceTree = "<group>"; };
+		F4276B46206C0ADB000F872D /* JourneyReplyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyReplyView.swift; sourceTree = "<group>"; };
+		F4276B4A206C2568000F872D /* JourneyHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyHeaderTableViewCell.swift; sourceTree = "<group>"; };
+		F4276B4C206C287D000F872D /* JourneyAddCommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyAddCommentTableViewCell.swift; sourceTree = "<group>"; };
+		F4385F32206D361500F22C90 /* JourneyCarouselCollapsedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyCarouselCollapsedViewController.swift; sourceTree = "<group>"; };
 		F488283F206943930008A656 /* JourneyCarouselViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyCarouselViewController.swift; sourceTree = "<group>"; };
 		F4882846206955690008A656 /* JourneyCommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyCommentTableViewCell.swift; sourceTree = "<group>"; };
-		F4882848206980CC0008A656 /* JourneyCommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyCommentView.swift; sourceTree = "<group>"; };
+		F4882848206980CC0008A656 /* JourneyCommentTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyCommentTableView.swift; sourceTree = "<group>"; };
 		F4882853206A95120008A656 /* iCarousel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCarousel.h; sourceTree = "<group>"; };
 		F4882854206A95120008A656 /* iCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCarousel.m; sourceTree = "<group>"; };
 		F4882855206A95120008A656 /* Phase-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Phase-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -534,7 +542,9 @@
 				81237780206A9EEB00A6BC02 /* Discover */,
 				81AB8A95205AD42900A98AFB /* ProfileTableViewCell.swift */,
 				F4D34A79205C482C00F4D50D /* EventCollectionViewCell.swift */,
+				F4276B4A206C2568000F872D /* JourneyHeaderTableViewCell.swift */,
 				F4882846206955690008A656 /* JourneyCommentTableViewCell.swift */,
+				F4276B4C206C287D000F872D /* JourneyAddCommentTableViewCell.swift */,
 				810DF96C2062A64C00B426BB /* FollowsTableViewCell.swift */,
 				817C6EE22069AB4F00010EDF /* FollowingCells */,
 				8123777F206A9EB900A6BC02 /* Collections */,
@@ -712,6 +722,7 @@
 				810935732059BAAC00A95B30 /* EventViewController.swift */,
 				810935752059BB0D00A95B30 /* FollowsViewController.swift */,
 				F488283F206943930008A656 /* JourneyCarouselViewController.swift */,
+				F4385F32206D361500F22C90 /* JourneyCarouselCollapsedViewController.swift */,
 				810935772059BB9200A95B30 /* EditProfileViewController.swift */,
 				817C6EDC2069A99500010EDF /* FollowsViewController.swift */,
 				81817A392064CAAE00CA7044 /* SearchVCs */,
@@ -774,9 +785,10 @@
 			isa = PBXGroup;
 			children = (
 				F404878B20657904009039AF /* JourneyCarouselView.swift */,
-				F4882848206980CC0008A656 /* JourneyCommentView.swift */,
+				F4882848206980CC0008A656 /* JourneyCommentTableView.swift */,
 				F49638FD206AC795002D62E7 /* JourneyAddCommentVIew.swift */,
 				F49638FF206AC7EB002D62E7 /* JourneyHeaderView.swift */,
+				F4276B46206C0ADB000F872D /* JourneyReplyView.swift */,
 			);
 			path = JourneyCarouselViews;
 			sourceTree = "<group>";
@@ -1020,6 +1032,7 @@
 				"${BUILT_PRODUCTS_DIR}/AWSUserPoolsSignIn/AWSUserPoolsSignIn.framework",
 				"${BUILT_PRODUCTS_DIR}/BetterSegmentedControl/BetterSegmentedControl.framework",
 				"${BUILT_PRODUCTS_DIR}/DGElasticPullToRefresh/DGElasticPullToRefresh.framework",
+				"${BUILT_PRODUCTS_DIR}/Hero/Hero.framework",
 				"${BUILT_PRODUCTS_DIR}/Material/Material.framework",
 				"${BUILT_PRODUCTS_DIR}/Motion/Motion.framework",
 				"${BUILT_PRODUCTS_DIR}/PageMenu/PageMenu.framework",
@@ -1043,6 +1056,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/AWSUserPoolsSignIn.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/BetterSegmentedControl.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DGElasticPullToRefresh.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hero.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Material.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Motion.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PageMenu.framework",
@@ -1156,6 +1170,7 @@
 				81817A4220655FE700CA7044 /* ActiveLabel.swift in Sources */,
 				8128B4752069481E009E0629 /* S3Manager.swift in Sources */,
 				81C1F86F2060ABAE0037BF42 /* SegmentioBuilder.swift in Sources */,
+				F4276B4B206C2568000F872D /* JourneyHeaderTableViewCell.swift in Sources */,
 				F418308C206AB7F700466705 /* CreateNewPostViewController.swift in Sources */,
 				817C6EDD2069A99500010EDF /* FollowsViewController.swift in Sources */,
 				81AB8AB2205AF77C00A98AFB /* UISearchBar+Extensions.swift in Sources */,
@@ -1175,6 +1190,7 @@
 				F4183093206AB90700466705 /* HomeFeedCollectionViewCell.swift in Sources */,
 				81AB8AC4205AFB4200A98AFB /* AnimateDiscoverToDetailVC.swift in Sources */,
 				810DF96D2062A64C00B426BB /* FollowsTableViewCell.swift in Sources */,
+				F4276B4D206C287D000F872D /* JourneyAddCommentTableViewCell.swift in Sources */,
 				81115DFF2069C1970052C9E1 /* WelcomeViewController.swift in Sources */,
 				810935D0205C45D200A95B30 /* ConfirmAccountView.swift in Sources */,
 				817C6EE82069AB7E00010EDF /* FollowingTableCell.swift in Sources */,
@@ -1200,6 +1216,7 @@
 				8128B47320694815009E0629 /* DynamoDBManager.swift in Sources */,
 				810935722059BA8400A95B30 /* HomeViewController.swift in Sources */,
 				F404878C20657904009039AF /* JourneyCarouselView.swift in Sources */,
+				F4385F33206D361500F22C90 /* JourneyCarouselCollapsedViewController.swift in Sources */,
 				F49638FE206AC795002D62E7 /* JourneyAddCommentVIew.swift in Sources */,
 				81817A4320655FE700CA7044 /* ActiveType.swift in Sources */,
 				81AB8AAC205AF6F600A98AFB /* CALayer+Extensions.swift in Sources */,
@@ -1210,6 +1227,7 @@
 				81AB8AC2205AFB0500A98AFB /* Animator.swift in Sources */,
 				817C6EEF2069ABB000010EDF /* FollowsView.swift in Sources */,
 				812B325F20616C3F006C69F7 /* CameraView.swift in Sources */,
+				F4276B47206C0ADC000F872D /* JourneyReplyView.swift in Sources */,
 				8113D4C820659A1B00D31332 /* postViewCollectionViewCell.swift in Sources */,
 				81CA1BE92064435600EF7B8E /* JourneyViewController.swift in Sources */,
 				F4882856206A95130008A656 /* iCarousel.m in Sources */,
@@ -1223,7 +1241,7 @@
 				8134CF0620615EE700A146B1 /* LoginView.swift in Sources */,
 				810935782059BB9200A95B30 /* EditProfileViewController.swift in Sources */,
 				81CA1BE72064432600EF7B8E /* PeopleViewController.swift in Sources */,
-				F4882849206980CC0008A656 /* JourneyCommentView.swift in Sources */,
+				F4882849206980CC0008A656 /* JourneyCommentTableView.swift in Sources */,
 				81CFD3F62058824700DDD630 /* Models.swift in Sources */,
 				810935D2205C45E000A95B30 /* ForgotPasswordView.swift in Sources */,
 				81AB8AB0205AF75D00A98AFB /* UIViewController+Extensions.swift in Sources */,

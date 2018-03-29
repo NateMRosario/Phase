@@ -16,10 +16,10 @@ protocol JourneyHeaderDelegate: class {
 
 
 class JourneyHeaderView: UIView {
-    
+
     // MARK: - Delegate
     weak var delegate: JourneyHeaderDelegate?
-    
+
     // MARK: - Lazy variables
     lazy var journeyProfileImageView: UIImageView = {
         let imageView = UIImageView()
@@ -32,7 +32,7 @@ class JourneyHeaderView: UIView {
         imageView.layer.cornerRadius = bounds.width / 2
         return imageView
     }()
-    
+
     lazy var journeyUserNamelabel: UILabel = {
         let label = UILabel()
         label.text = "Ty PodMaster"
@@ -50,40 +50,40 @@ class JourneyHeaderView: UIView {
         label.font = UIFont.systemFont(ofSize: 12, weight: .regular)
         return label
     }()
-    
+
     // MARK: - Initializers
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
     }
-    
+
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         commonInit()
     }
-    
+
     private func commonInit() {
         backgroundColor = UIColor.red
         setupViews()
     }
-    
+
     // MARK: - Functions
     override func layoutSubviews() {
         super.layoutSubviews()
         journeyProfileImageView.layer.cornerRadius = journeyProfileImageView.bounds.width/2.0
     }
-    
+
     private func setupViews() {
         setupJourneyProfileImageView()
         setupJourneyUserNamelabel()
         setupJourneyDescriptionLabel()
     }
-    
+
     @objc private func journeyProfileImageButtonTapped() {
         print("profile button delegate")
         delegate?.journeyProfileImageButtonTapped()
     }
-    
+
     // MARK: - Constraints
     private func setupJourneyProfileImageView() {
         addSubview(journeyProfileImageView)
@@ -94,7 +94,7 @@ class JourneyHeaderView: UIView {
             make.leading.equalTo(self).offset(8)
         }
     }
-    
+
     private func setupJourneyUserNamelabel() {
         addSubview(journeyUserNamelabel)
         journeyUserNamelabel.snp.makeConstraints { (make) in
@@ -104,7 +104,7 @@ class JourneyHeaderView: UIView {
             make.trailing.equalTo(self).offset(-8)
         }
     }
-    
+
     private func setupJourneyDescriptionLabel() {
         addSubview(journeyDescriptionLabel)
         journeyDescriptionLabel.snp.makeConstraints { (make) in
@@ -115,4 +115,5 @@ class JourneyHeaderView: UIView {
         }
     }
 }
+
 
