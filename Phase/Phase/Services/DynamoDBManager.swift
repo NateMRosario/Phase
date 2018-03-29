@@ -122,7 +122,7 @@ extension DynamoDBManager {
 
 // MARK: - Journey Methods
 extension DynamoDBManager {
-    func createJourney(title: String, description: String, hashtags: Set<String>, completion: @escaping (Error?) -> Void) {
+    func createJourney(title: String, description: String, hashtags: Set<String>?, completion: @escaping (Error?) -> Void) {
         
         let newJourney: Journey = Journey()
         newJourney._journeyId = UUID().uuidString
