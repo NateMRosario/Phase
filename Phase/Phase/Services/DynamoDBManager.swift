@@ -19,7 +19,7 @@ class DynamoDBManager {
 
 // MARK: - AppUser Methods
 extension DynamoDBManager {
-    func createUser(sub: String) {
+    func createUser(sub: String, completion: @escaping (Error?) -> Void) {
         
         let newUser: AppUser = AppUser()
         newUser._userId = sub
@@ -30,9 +30,10 @@ extension DynamoDBManager {
         
         mapper.save(newUser) { (error) in
             if let error = error {
-                print(error)
+                completion(error)
             } else {
-                print("success creating user")
+                print("success creating user in database")
+                completion(nil)
             }
         }
     }
@@ -52,14 +53,14 @@ extension DynamoDBManager {
         }
     }
     
-    func updateUser(appUser: AppUser) {
+    func updateUser(appUser: AppUser, completion: @escaping (Error?) -> Void) {
         
         let newAppUser: AppUser = AppUser()
         newAppUser._userId = appUser._userId
         
         mapper.save(newAppUser) { (error) in
             if let error = error {
-                print(error)
+                completion(error)
             }
         }
         
@@ -68,7 +69,7 @@ extension DynamoDBManager {
 
 // MARK: - Journey Methods
 extension DynamoDBManager {
-    func createJourney(title: String, description: String, hashtags: Set<String>) {
+    func createJourney(title: String, description: String, hashtags: Set<String>, completion: @escaping (Error?) -> Void) {
         
         let newJourney: Journey = Journey()
         newJourney._journeyId = UUID().uuidString
@@ -82,9 +83,10 @@ extension DynamoDBManager {
         
         mapper.save(newJourney) { (error) in
             if let error = error {
-                print(error)
+                completion(error)
             } else {
                 print("success creating journey")
+                completion(nil)
             }
         }
         
@@ -106,13 +108,22 @@ extension DynamoDBManager {
     }
     
     
-    func updateJourney(journey: Journey) {
+    func updateJourney(journey: Journey, completion: @escaping (Error?) -> Void) {
         
         let updateJourney: Journey = journey
         updateJourney._journeyId = journey._journeyId
         updateJourney._eventCount = ((journey._eventCount as! Int) + 1) as NSNumber
         
+        mapper.save(updateJourney) { (error) in
+            if let error = error {
+                completion(error)
+            } else {
+                completion(nil)
+            }
+        }
+        
     }
+    
     
     func deleteJourney(journeyId: String, completion: @escaping (Error?) -> Void) {
         
@@ -120,15 +131,71 @@ extension DynamoDBManager {
         journeyToDelete._journeyId = journeyId
         
         mapper.remove(journeyToDelete) { (error) in
-            completion(error)
+            if let error = error {
+                completion(error)
+            } else {
+                completion(nil)
+            }
         }
-        
     }
-
 }
 
 // MARK: - Event Methods
 extension DynamoDBManager {
+    func createEvent(journeyId: String, image: UIImage, caption: String, completion: @escaping (Error?) -> Void) {
+        
+        let newEvent: Event = Event()
+        newEvent._eventId = UUID().uuidString
+        newEvent._creationDate = Date().timeIntervalSinceReferenceDate as NSNumber
+        newEvent._journey = journeyId
+        newEvent._userId = CognitoManager.shared.userId
+        newEvent._numberOfLikes = 0
+        newEvent._numberOfViews = 0
+        newEvent._caption = caption
+        newEvent._media = ""
+        // CALL STORAGE MANAGER AND THEN SET MEDIA LINKS
+        
+        mapper.save(newEvent) { (error) in
+            if let error = error {
+                completion(error)
+            } else {
+                completion(nil)
+            }
+        }
+    }
+    
+    func loadEvent(eventId: String, completion: @escaping (Event?, Error?) -> Void) {
+        
+        var event: Event = Event()
+        event._eventId = eventId
+        
+        mapper.load(Event.self, hashKey: eventId, rangeKey: nil) { (loadedEvent, error) in
+            if let error = error {
+                completion(nil, error)
+            } else if let loadedEvent = loadedEvent {
+                event = loadedEvent as! Event
+                completion(event, nil)
+            }
+        }
+        
+    }
+    
+    func deleteEvent(event: Event, completion: @escaping (Error?) -> Void) {
+        
+        let eventToDelete: Event = Event()
+        eventToDelete._eventId = event._eventId
+        
+        mapper.remove(eventToDelete) { (error) in
+            if let error = error {
+                completion(error)
+            } else {
+                completion(nil)
+            }
+        }
+        
+        
+    }
+
     
 }
 

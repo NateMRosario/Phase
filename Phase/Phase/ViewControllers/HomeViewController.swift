@@ -11,6 +11,10 @@ import DGElasticPullToRefresh
 
 class HomeViewController: UIViewController {
     
+    @IBAction func goToChat(_ sender: UIBarButtonItem) {
+        present(UINavigationController(rootViewController: ChatExamplesViewController()), animated: true)
+    }
+    
     //TODO: Add character limit
     fileprivate var layout = CollectionViewLayout(number: 1)
     let configure = CollectionViewLayout.Configuration(numberOfColumns: 1)
@@ -46,7 +50,7 @@ class HomeViewController: UIViewController {
     }
     
     private func setupNavbar() {
-        navigationItem.title = "PHASE"
+        navigationItem.title = "Phase"
     }
     
     private func fetchContents() {
@@ -57,7 +61,7 @@ class HomeViewController: UIViewController {
     }
     
     deinit {
-        homeCollectionView.dg_removePullToRefresh()
+        homeCollectionView?.dg_removePullToRefresh()
         print("deinit")
     }
 }

@@ -67,7 +67,7 @@ struct ActiveBuilder {
                 .trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
             let rangeInMatched = matched.range(of: word)
             let distance = matched.distance(from: matched.startIndex, to: rangeInMatched?.lowerBound ?? matched.startIndex)
-            let range = NSRange(location: match.range.location + distance, length: word.characters.count)
+            let range = NSRange(location: match.range.location + distance, length: word.count)
             if filterPredicate?(word) ?? true {
                 let element = ActiveElement.create(with: type, text: word)
                 elements.append((range, element, type))

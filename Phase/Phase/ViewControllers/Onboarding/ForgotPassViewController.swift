@@ -17,7 +17,11 @@ class ForgotPassViewController: UIViewController {
     @IBOutlet weak var emailTextField: UITextField!
     @IBAction func sendResetEmailButton(_ sender: UIButton) {
         guard let userInfo = emailTextField.text else {return}
-        CognitoManager.shared.forgotPassword(username: userInfo)
+        CognitoManager.shared.forgotPassword(username: userInfo, completion: {(error) in
+            
+            
+            
+        })
     }
     
     override func viewDidLoad() {
