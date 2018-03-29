@@ -33,17 +33,8 @@ class JourneyCarouselViewController: UIViewController, UICollisionBehaviorDelega
     
     // MARK: - Properties
     private let journeyCarouselView = JourneyCarouselView()
-    
-    //    private let journeyHeaderView = JourneyHeaderView()
-    //    private let headerCellId = JourneyHeaderTableViewCell()
-    //    private let journeyAddCommentView = JourneyAddCommentVIew()
-    
-    private let footerViewId = JourneyAddCommentVIew()
-    private let headerViewID = JourneyHeaderView()
-    
-    private let journeyCommentTableView = JourneyCommentTableView()
-    private let commentCellId = JourneyCommentTableViewCell()
-    private let footerID = JourneyAddCommentVIew()
+    private let journeyCommentTableView = JourneyEventDetailView()
+//    private let commentCellId = JourneyCommentTableViewCell()
     
     
     private let cellID = "JourneyCommentTableViewCell"
@@ -71,7 +62,7 @@ class JourneyCarouselViewController: UIViewController, UICollisionBehaviorDelega
 //        self.journeyCommentTableView.journeyCommentTableView.delegate = self
 //        self.journeyCommentTableView.journeyCommentTableView.dataSource = self
         setupView()
-        var offset:CGFloat = 250
+        var offset:CGFloat = self.view.bounds.height * 0.2
         let view = addViewController(atOffset: offset, dataForVC: nil)
         self.views.append(view!)
             offset -= 50
@@ -109,6 +100,7 @@ class JourneyCarouselViewController: UIViewController, UICollisionBehaviorDelega
             
             self.addChildViewController(collapsedViewController)
             self.view.addSubview(view)
+            collapsedViewController.view.frame = CGRect(x: 0.0, y: view.frame.minY, width: self.view.bounds.width, height: self.view.bounds.height * 0.8)
             collapsedViewController.didMove(toParentViewController: self)
             
             

@@ -12,7 +12,7 @@ import SnapKit
 class JourneyCarouselCollapsedViewController: UIViewController {
     
     // MARK: - Properties
-    private let commentView = JourneyCommentTableView()
+    private let commentView = JourneyEventDetailView()
     
     private let cellID = "JourneyCommentTableViewCell"
     
@@ -32,7 +32,7 @@ class JourneyCarouselCollapsedViewController: UIViewController {
     // MARK: - Life cycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.red
+        self.view.backgroundColor = UIColor.clear
         self.commentView.journeyCommentTableView.delegate = self
         self.commentView.journeyCommentTableView.dataSource = self
         setupView()
@@ -55,7 +55,10 @@ class JourneyCarouselCollapsedViewController: UIViewController {
     private func setViewConstraints() {
         self.view.addSubview(commentView)
         commentView.snp.makeConstraints { (make) in
-            make.edges.equalTo(self.view.snp.edges)
+            make.width.equalTo(self.view.snp.width).multipliedBy(0.9)
+            make.centerX.equalTo(self.view.snp.centerX)
+            make.height.equalTo(self.view.snp.height)
+            make.bottom.equalTo(self.view.snp.bottom)
         }
     }
     

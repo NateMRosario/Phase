@@ -1,8 +1,8 @@
 //
-//  JourneyAddCommentVIew.swift
+//  JourneyCommentTableView.swift
 //  Phase
 //
-//  Created by Clint Mejia on 3/27/18.
+//  Created by Clint Mejia on 3/26/18.
 //  Copyright © 2018 Reiaz Gafar. All rights reserved.
 //
 
@@ -10,16 +10,61 @@ import UIKit
 import SnapKit
 
 // MARK: - Custom Delegate
-protocol JourneyPostACommentDelegate: class {
+protocol JourneyEventDetailViewDelegate: class {
+    func replyButtonTapped()
+    func journeyProfileImageButtonTapped()
     func postButtonTapped()
 }
 
-class JourneyAddCommentVIew: UIView {
+class JourneyEventDetailView: UIView {
+    
+    // MARK: - TableViewCell Identifier
+    let cellID = "JourneyCommentTableViewCell"
     
     // MARK: - Delegate
-    weak var delegate: JourneyPostACommentDelegate?
-
+    weak var delegate: JourneyEventDetailViewDelegate?
+    
     // MARK: - Lazy variables
+    // header properties
+    lazy var journeyProfileImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.image = UIImage(named: "g")
+        imageView.contentMode = .scaleAspectFit
+        imageView.layer.masksToBounds = true
+        imageView.clipsToBounds = true
+        imageView.layer.borderWidth = 0.5
+        imageView.layer.borderColor = UIColor.gray.cgColor
+        imageView.layer.cornerRadius = bounds.width / 2
+        return imageView
+    }()
+    
+    lazy var journeyUserNamelabel: UILabel = {
+        let label = UILabel()
+        label.text = "Ty PodMaster"
+        label.textAlignment = .left
+        label.backgroundColor = UIColor.green
+        label.font = UIFont.systemFont(ofSize: 16, weight: .heavy)
+        return label
+    }()
+    
+    lazy var journeyDescriptionLabel: UILabel = {
+        let label = UILabel()
+        label.backgroundColor = UIColor.green
+        label.text = "Ty PodMaster. Ty PodMaster"
+        label.textAlignment = .left
+        label.font = UIFont.systemFont(ofSize: 12, weight: .regular)
+        return label
+    }()
+    
+    // tableView properties
+    lazy var journeyCommentTableView: UITableView = {
+        let tableView = UITableView()
+        tableView.register(JourneyCommentTableViewCell.self, forCellReuseIdentifier: cellID)
+        tableView.backgroundColor = .yellow
+        return tableView
+    }()
+    
+    // footer properties
     lazy var commentProfileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "g")
@@ -56,8 +101,8 @@ class JourneyAddCommentVIew: UIView {
         textfield.layoutEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
         return textfield
     }()
-
-        // MARK: - Initializers
+    
+    // MARK: - Initializers
     override init(frame: CGRect) {
         super.init(frame: frame)
         commonInit()
@@ -68,22 +113,38 @@ class JourneyAddCommentVIew: UIView {
         commonInit()
     }
     
+    // MARK: - Functions
     private func commonInit() {
-        backgroundColor = UIColor.blue
+        backgroundColor = UIColor.orange
         setupViews()
     }
     
     // MARK: - Functions
     override func layoutSubviews() {
         super.layoutSubviews()
+        journeyProfileImageView.layer.cornerRadius = journeyProfileImageView.bounds.width/2.0
         commentProfileImageView.layer.cornerRadius = commentProfileImageView.bounds.width/2.0
         commentTextField.addPadding(UITextField.PaddingSide.left(8))
     }
     
     private func setupViews() {
+        setupJourneyProfileImageView()
+        setupJourneyUserNamelabel()
+        setupJourneyDescriptionLabel()
         setupCommentProfileImageView()
         setupCommentTextField()
+        setupJourneyCommentTableViewConstraints()
         addSubview(postButton)
+    }
+    
+    @objc private func journeyProfileImageButtonTapped() {
+        print("profile button delegate")
+        delegate?.journeyProfileImageButtonTapped()
+    }
+    
+    @objc private func replyButtonTapped() {
+        print("reply button delegate")
+        delegate?.replyButtonTapped()
     }
     
     @objc private func postButtonTapped() {
@@ -92,6 +153,49 @@ class JourneyAddCommentVIew: UIView {
     }
     
     // MARK: - Constraints
+    // header constraints
+    private func setupJourneyProfileImageView() {
+        addSubview(journeyProfileImageView)
+        journeyProfileImageView.snp.makeConstraints { (make) in
+            make.top.equalTo(self).offset(8)
+            make.leading.equalTo(self).offset(8)
+            make.width.equalTo(self).multipliedBy(0.2)
+            make.height.equalTo(journeyProfileImageView.snp.width)
+        }
+    }
+    
+    private func setupJourneyUserNamelabel() {
+        addSubview(journeyUserNamelabel)
+        journeyUserNamelabel.snp.makeConstraints { (make) in
+            make.leading.equalTo(journeyProfileImageView.snp.trailing).offset(14)
+            make.height.equalTo(journeyProfileImageView.snp.height).multipliedBy(0.5)
+            make.top.equalTo(self).offset(8)
+            make.trailing.equalTo(self).offset(-8)
+        }
+    }
+    
+    private func setupJourneyDescriptionLabel() {
+        addSubview(journeyDescriptionLabel)
+        journeyDescriptionLabel.snp.makeConstraints { (make) in
+            make.leading.equalTo(journeyProfileImageView.snp.trailing).offset(14)
+            make.trailing.equalTo(self).offset(-8)
+            make.height.equalTo(journeyProfileImageView.snp.height).multipliedBy(0.4)
+            make.top.equalTo(journeyUserNamelabel.snp.bottom).offset(8)
+        }
+    }
+    
+    // tableview constraints
+    private func setupJourneyCommentTableViewConstraints() {
+        addSubview(journeyCommentTableView)
+        journeyCommentTableView.snp.makeConstraints { (make) in
+            make.top.equalTo(journeyDescriptionLabel.snp.bottom).offset(10)
+            make.width.equalTo(self)
+            make.centerX.equalTo(self)
+            make.bottom.equalTo(commentProfileImageView.snp.top).offset(-15)
+        }
+    }
+    
+    // footer constraints
     private func setupCommentProfileImageView() {
         addSubview(commentProfileImageView)
         commentProfileImageView.snp.makeConstraints { (make) in
@@ -111,6 +215,7 @@ class JourneyAddCommentVIew: UIView {
             make.bottom.equalTo(commentProfileImageView.snp.bottom)
         }
     }
+    
 }
 
 extension UITextField {
@@ -150,5 +255,6 @@ extension UITextField {
         }
     }
 }
+
 
 
