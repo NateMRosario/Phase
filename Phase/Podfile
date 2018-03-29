@@ -7,7 +7,6 @@ target 'Phase' do
 
   # Pods for Phase
   pod 'AWSMobileClient'
-  pod 'Hero'
   pod 'SnapKit'
   pod 'Material'
   pod 'BetterSegmentedControl', '~> 0.9'
