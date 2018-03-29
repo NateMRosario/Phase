@@ -22,12 +22,14 @@ class AppUser: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
     var _creationDate: NSNumber?
     var _eventsViewed: Set<String>?
     var _followerCount: NSNumber?
+    var _headerImage: String?
     var _isPremium: NSNumber?
     var _isWatching: Set<String>?
     var _journeys: Set<String>?
     var _journeysFollowed: Set<String>?
     var _numberOfJourneys: NSNumber?
     var _profileImage: String?
+    var _username: String?
     var _usersFollowed: Set<String>?
     var _watcherCount: NSNumber?
     
@@ -47,15 +49,16 @@ class AppUser: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
             "_creationDate" : "creationDate",
             "_eventsViewed" : "eventsViewed",
             "_followerCount" : "followerCount",
+            "_headerImage" : "headerImage",
             "_isPremium" : "isPremium",
             "_isWatching" : "isWatching",
             "_journeys" : "journeys",
             "_journeysFollowed" : "journeysFollowed",
             "_numberOfJourneys" : "numberOfJourneys",
             "_profileImage" : "profileImage",
+            "_username" : "username",
             "_usersFollowed" : "usersFollowed",
             "_watcherCount" : "watcherCount",
         ]
     }
 }
-

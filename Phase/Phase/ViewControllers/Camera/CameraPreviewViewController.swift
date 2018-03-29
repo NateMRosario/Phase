@@ -40,10 +40,10 @@ class PreviewViewController: UIViewController {
         imagePreview.saveButton.addTarget(self,
                                           action: #selector(save),
                                           for: .touchUpInside)
-        //        imagePreview.postButton.addTarget(self,
-        //                                         action: #selector(post),
-        //                                         for: .touchUpInside
-        //        )
+                imagePreview.postButton.addTarget(self,
+                                                 action: #selector(post),
+                                                 for: .touchUpInside
+                )
         
         imagePreview.imagePreviewView.image = image
     }
@@ -82,11 +82,10 @@ class PreviewViewController: UIViewController {
         dismiss(animated: true, completion: nil)
     }
     
-    //    @objc func post(){
-    //        imagePreview.saveButton.isEnabled = true
-    //        let cpVC = NewPostViewController(image: image)
-    //        present(cpVC, animated: true, completion: nil)
-    //    }
+    @objc func post(){
+        let caption = imagePreview.postTextView.text ?? " "
+
+    }
     
     @objc func save(sender: UIButton){
         UIImageWriteToSavedPhotosAlbum(image, nil, nil, nil)
