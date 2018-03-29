@@ -49,6 +49,7 @@ class AppUser: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
             "_creationDate" : "creationDate",
             "_eventsViewed" : "eventsViewed",
             "_followerCount" : "followerCount",
+            "_headerImage" : "headerImage",
             "_isPremium" : "isPremium",
             "_isWatching" : "isWatching",
             "_journeys" : "journeys",
@@ -61,4 +62,3 @@ class AppUser: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
         ]
     }
 }
-
