@@ -48,7 +48,7 @@ class TabsViewController: UITabBarController {
         homeVC.tabBarItem.imageInsets = UIEdgeInsets(top: 6, left: 0, bottom: -6, right: 0)
         
         // Login VC
-        let notificationVC = NotificationsViewController.instantiate(withStoryboard: "Notifications")
+        let notificationVC = UINavigationController(rootViewController: NotificationsViewController.instantiate(withStoryboard: "Notifications"))
         notificationVC.tabBarItem.image = #imageLiteral(resourceName: "alert-unseleced")
         notificationVC.tabBarItem.selectedImage = #imageLiteral(resourceName: "alert-selected")
         notificationVC.tabBarItem.imageInsets = UIEdgeInsets(top: 6, left: 0, bottom: -6, right: 0)
