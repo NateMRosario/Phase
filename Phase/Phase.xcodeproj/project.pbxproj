@@ -111,6 +111,8 @@
 		81DE34CC20697E2E00310CD1 /* CreateNewJourneyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81DE34CB20697E2E00310CD1 /* CreateNewJourneyView.swift */; };
 		81F64312206AAC2C00519554 /* MozaikCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F64311206AAC2C00519554 /* MozaikCollectionViewCell.swift */; };
 		81F64314206AAC3500519554 /* MozaikCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81F64313206AAC3500519554 /* MozaikCollectionViewCell.xib */; };
+		81F64316206C2D0200519554 /* Test.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81F64315206C2D0200519554 /* Test.storyboard */; };
+		81F64318206C2D1000519554 /* TestViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F64317206C2D1000519554 /* TestViewController.swift */; };
 		8791DFDB2060171F00337CA3 /* FollowersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8791DFDA2060171F00337CA3 /* FollowersView.swift */; };
 		C6B46A8543265BAEF66E0411 /* Pods_PhaseTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2E71635C053C1F5A36A0E3E9 /* Pods_PhaseTests.framework */; };
 		EAB9DF6080B0DDD7A709CE05 /* Pods_PhaseUITests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77732BF92135231E852C350B /* Pods_PhaseUITests.framework */; };
@@ -266,6 +268,8 @@
 		81F6430F206AAC1E00519554 /* JourneyTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = JourneyTableViewCell.xib; path = Collections/JourneyTableViewCell.xib; sourceTree = "<group>"; };
 		81F64311206AAC2C00519554 /* MozaikCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MozaikCollectionViewCell.swift; sourceTree = "<group>"; };
 		81F64313206AAC3500519554 /* MozaikCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MozaikCollectionViewCell.xib; sourceTree = "<group>"; };
+		81F64315206C2D0200519554 /* Test.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Test.storyboard; sourceTree = "<group>"; };
+		81F64317206C2D1000519554 /* TestViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestViewController.swift; sourceTree = "<group>"; };
 		8791DFDA2060171F00337CA3 /* FollowersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowersView.swift; sourceTree = "<group>"; };
 		9E534A5BA8A8AA1BD6106D54 /* Pods-PhaseTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhaseTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PhaseTests/Pods-PhaseTests.debug.xcconfig"; sourceTree = "<group>"; };
 		B9EA73BB8347138AE4D02088 /* Pods-PhaseUITests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-PhaseUITests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-PhaseUITests/Pods-PhaseUITests.debug.xcconfig"; sourceTree = "<group>"; };
@@ -642,6 +646,8 @@
 				81CFD3F02058819700DDD630 /* ViewControllers */,
 				81CFD3F2205881C200DDD630 /* Storyboards */,
 				81CFD3F1205881B000DDD630 /* SupportingFiles */,
+				81F64315206C2D0200519554 /* Test.storyboard */,
+				81F64317206C2D1000519554 /* TestViewController.swift */,
 			);
 			path = Phase;
 			sourceTree = "<group>";
@@ -893,6 +899,7 @@
 				81F64314206AAC3500519554 /* MozaikCollectionViewCell.xib in Resources */,
 				8134CF00205C47EB00A146B1 /* HomeFeed.storyboard in Resources */,
 				81C1F87D2060AC410037BF42 /* DiscoverDetail.storyboard in Resources */,
+				81F64316206C2D0200519554 /* Test.storyboard in Resources */,
 				F4183094206AB90700466705 /* HomeFeedCollectionViewCell.xib in Resources */,
 				818DBB70206986B500B91990 /* Notifications.storyboard in Resources */,
 				81C1F87F2060AC410037BF42 /* Main.storyboard in Resources */,
@@ -1122,6 +1129,7 @@
 				81AB8A9B205AF64800A98AFB /* Constants.swift in Sources */,
 				810935882059BD2400A95B30 /* EditProfileView.swift in Sources */,
 				81AB8AB7205AF8EA00A98AFB /* GridViewProtocol.swift in Sources */,
+				81F64318206C2D1000519554 /* TestViewController.swift in Sources */,
 				818DBB292066C54300B91990 /* ForgotPassViewController.swift in Sources */,
 				81AB8A96205AD42900A98AFB /* ProfileTableViewCell.swift in Sources */,
 				81AB8AB9205AF99100A98AFB /* CollectionViewLayout.swift in Sources */,
