@@ -50,7 +50,7 @@ class CognitoManager {
                 
                 self.userId = result.userSub
                 
-                DynamoDBManager.shared.createUser(sub: self.userId!, completion: { (error) in
+                DynamoDBManager.shared.createUser(sub: self.userId!, username: result.user.username!, completion: { (error) in
                     if let error = error {
                         completion(error)
                     } else {
