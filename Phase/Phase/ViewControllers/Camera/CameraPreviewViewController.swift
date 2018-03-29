@@ -14,7 +14,33 @@ class PreviewViewController: UIViewController {
     
     let cellSpacing: CGFloat = 1
     
-    var journeys = [#imageLiteral(resourceName: "a"),#imageLiteral(resourceName: "b"),#imageLiteral(resourceName: "c"),#imageLiteral(resourceName: "d"),#imageLiteral(resourceName: "e"),#imageLiteral(resourceName: "f"),#imageLiteral(resourceName: "g"),#imageLiteral(resourceName: "h")]
+    var journeys = [Journey]() {
+        didSet {
+            imagePreview.postCollectionView.reloadData()
+        }
+    }
+    
+    var journeyIds = [String]() {
+        didSet {
+            //            for id in journeyIds {
+            //                DynamoDBManager.shared.loadJourney(journeyId: id, completion: { (journey, error) in
+            //                    if let journey = journey {
+            //                        self.journeys.append(journey)
+            //                    } else if let error = error {
+            //
+            //                    }
+            //                })
+            //            }
+            DynamoDBManager.shared.loadJourney(journeyId: journeyIds.last!, completion: { (journey, error) in
+                if let journey = journey {
+                    self.journeys.append(journey)
+                } else if let error = error {
+                    print(error)
+                }
+            })
+        }
+    }
+
     
     public var image: UIImage!
     
@@ -46,6 +72,7 @@ class PreviewViewController: UIViewController {
                 )
         
         imagePreview.imagePreviewView.image = image
+        getJourneys()
     }
     
     init(image: UIImage) {
@@ -56,6 +83,24 @@ class PreviewViewController: UIViewController {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    private func getJourneys() {
+        let userID = CognitoManager.shared.userId!
+        DynamoDBManager.shared.loadUser(userId: userID) { (appUser, error) in
+            if let error = error {
+                print(error)
+            } else if let appUser = appUser {
+                guard let journeyIDs = appUser._journeys else { return }
+                for journey in journeyIDs {
+                    self.journeyIds.append(journey)
+                }
+            }
+        }
+        
+    }
+    
+    
+    
     
     private func addObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
@@ -84,7 +129,9 @@ class PreviewViewController: UIViewController {
     
     @objc func post(){
         let caption = imagePreview.postTextView.text ?? " "
-
+//        DynamoDBManager.shared.createEvent(journey: <#T##Journey#>, image: image, caption: caption) { (error) in
+//
+//        }
     }
     
     @objc func save(sender: UIButton){
@@ -127,7 +174,7 @@ extension PreviewViewController: UICollectionViewDelegate {
             print("add journey cell selected")
         } else {
             let cell = collectionView.cellForItem(at: indexPath) as! JourneyCollectionViewCell
-            cell.journeyImageView.image = journeys[indexPath.row - 1]
+//            cell.journeyImageView.image = journeys[indexPath.row - 1]
             if cell.selectedJourneyLayer.isHidden == true {
                 cell.selectedJourneyLayer.isHidden = false
             } else {
@@ -150,7 +197,9 @@ extension PreviewViewController: UICollectionViewDataSource {
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: imagePreview.journeyCellID, for: indexPath) as! JourneyCollectionViewCell
-            cell.journeyImageView.image = journeys[indexPath.row - 1]
+//            cell.journeyImageView.image = journeys[indexPath.row - 1]
+            let journey = journeys[indexPath.row - 1]
+            cell.journeyNameLabel.text = journey._title
             return cell
         }
     }
