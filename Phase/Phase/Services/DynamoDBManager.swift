@@ -24,7 +24,7 @@ class DynamoDBManager {
 
 // MARK: - AppUser Methods
 extension DynamoDBManager {
-    func createUser(sub: String, completion: @escaping (Error?) -> Void) {
+    func createUser(sub: String, username: String, completion: @escaping (Error?) -> Void) {
         
         let newUser: AppUser = AppUser()
         newUser._userId = sub
@@ -33,6 +33,7 @@ extension DynamoDBManager {
         newUser._isPremium = false
         newUser._watcherCount = 0
         newUser._numberOfJourneys = 0
+        newUser._username = username
         
         mapper.save(newUser) { (error) in
             if let error = error {
@@ -72,7 +73,10 @@ extension DynamoDBManager {
     }
     
     func followUser(user: AppUser, completion: @escaping (Error?) -> Void) {
-        guard let userId = CognitoManager.shared.userId else { return }
+        guard let userId = CognitoManager.shared.userId else {
+            completion(CognitoError.noActiveUser)
+            return
+        }
 
         let userToFollow = user
         
@@ -112,6 +116,7 @@ extension DynamoDBManager {
         }
         
     }
+    
     
 }
 
@@ -272,8 +277,10 @@ extension DynamoDBManager {
     }
     
     func likeEvent(event: Event, completion: @escaping (Error?) -> Void) {
-        guard let userId = CognitoManager.shared.userId else { return }
-
+        guard let userId = CognitoManager.shared.userId else {
+            completion(CognitoError.noActiveUser)
+            return
+        }
         
         
     }
