@@ -16,7 +16,7 @@ class S3Manager {
     let s3Bucket = "phase-journey-events" ///Bucket Name
     let transferManager = AWSS3TransferManager.default()
     
-    func uploadManagerData(image: UIImage, completion: @escaping (String) -> Void) {
+    func uploadManagerData(image: UIImage, completion: @escaping (String?, Error?) -> Void) {
         guard let pngImage = UIImagePNGRepresentation(image) else { print("image is nil"); return }
         let fileName = "test.png"
         let fileURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(fileName)
@@ -31,10 +31,11 @@ class S3Manager {
             transferManager.upload(uploadRequest!).continueWith { (task) -> Any? in
                 if let error = task.error {
                     print("Error, Unable to Load: \(error)")
+                    completion(nil, error)
                 }
                 if let result = task.result {
                     print("Uploaded: \(result)")
-                    completion(imageUID)
+                    completion(imageUID, nil)
                 }
                 return nil
             }
