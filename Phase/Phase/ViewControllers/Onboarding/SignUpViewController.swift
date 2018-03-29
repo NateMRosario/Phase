@@ -85,5 +85,13 @@ class SignUpViewController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if let _ = touches.first {
+            DispatchQueue.main.async {
+                self.view.endEditing(true)
+            }
+        }
+    }
 }
 

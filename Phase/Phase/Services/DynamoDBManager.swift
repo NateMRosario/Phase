@@ -14,6 +14,7 @@ class DynamoDBManager {
     static let shared = DynamoDBManager()
     private init() {}
     
+    let dynamoDB = AWSDynamoDB.default()
     let mapper = AWSDynamoDBObjectMapper.default()
 }
 
@@ -112,7 +113,6 @@ extension DynamoDBManager {
         
         let updateJourney: Journey = journey
         updateJourney._journeyId = journey._journeyId
-        updateJourney._eventCount = ((journey._eventCount as! Int) + 1) as NSNumber
         
         mapper.save(updateJourney) { (error) in
             if let error = error {
@@ -142,12 +142,12 @@ extension DynamoDBManager {
 
 // MARK: - Event Methods
 extension DynamoDBManager {
-    func createEvent(journeyId: String, image: UIImage, caption: String, completion: @escaping (Error?) -> Void) {
+    func createEvent(journey: Journey, image: UIImage, caption: String, completion: @escaping (Error?) -> Void) {
         
         let newEvent: Event = Event()
         newEvent._eventId = UUID().uuidString
         newEvent._creationDate = Date().timeIntervalSinceReferenceDate as NSNumber
-        newEvent._journey = journeyId
+        newEvent._journey = journey._journeyId
         newEvent._userId = CognitoManager.shared.userId
         newEvent._numberOfLikes = 0
         newEvent._numberOfViews = 0
@@ -159,9 +159,25 @@ extension DynamoDBManager {
             if let error = error {
                 completion(error)
             } else {
-                completion(nil)
+                var eventSet = journey._events
+                eventSet!.insert(newEvent._eventId!)
+                let newEventCount = ((journey._eventCount as! Int) + 1) as NSNumber
+                
+                let journeyToUpdate: Journey = journey
+                journeyToUpdate._eventCount = newEventCount
+                journeyToUpdate._events = eventSet
+                
+                self.updateJourney(journey: journeyToUpdate) { (error) in
+                    if let error = error {
+                        completion(error)
+                    } else {
+                        print("success adding event and updating journey")
+                        completion(nil)
+                    }
+                }
             }
         }
+    
     }
     
     func loadEvent(eventId: String, completion: @escaping (Event?, Error?) -> Void) {
@@ -179,6 +195,13 @@ extension DynamoDBManager {
         }
         
     }
+    
+    func likeEvent(eventId: String) {
+        
+        
+        
+    }
+    
     
     func deleteEvent(event: Event, completion: @escaping (Error?) -> Void) {
         

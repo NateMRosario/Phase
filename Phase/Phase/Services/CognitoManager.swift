@@ -45,27 +45,18 @@ class CognitoManager {
             if let error = task.error {
                 print(error)
                 completion(error)
-            } else {
-                print(task.result?.description ?? "pool sign up success block reached")
+            } else if let result = task.result {
+                print("sign up response: \(task.result?.description ?? "pool sign up success block reached")" )
                 
-                self.user = self.pool.getUser(username)
-                self.getDetails(user: self.user, completion: {(error) in
+                self.userId = result.userSub
+                
+                DynamoDBManager.shared.createUser(sub: self.userId!, completion: { (error) in
                     if let error = error {
                         completion(error)
                     } else {
-                        guard self.userId != nil  else { return }
-                        DynamoDBManager.shared.createUser(sub: self.userId!, completion: { (error) in
-                            if let error = error {
-                                completion(error)
-                            } else {
-                                completion(nil)
-                            }
-                        })
+                        completion(nil)
                     }
-                    
                 })
-                
-                
                 
                 completion(nil)
             }
@@ -96,7 +87,7 @@ class CognitoManager {
     }
     
     func getDetails(user: AWSCognitoIdentityUser?, completion: @escaping (Error?) -> Void) {
-        user?.getDetails().continueOnSuccessWith(block: { (task) -> Any? in
+        user?.getDetails().continueWith(block: { (task) -> Any? in
             if let error = task.error {
                 completion(error)
             } else {
