@@ -139,6 +139,30 @@ extension DynamoDBManager {
             if let error = error {
                 completion(error)
             } else {
+                
+                self.loadUser(userId: CognitoManager.shared.userId!, completion: { (user, error) in
+                    if let error = error {
+                        completion(error)
+                    } else if let user = user {
+                        
+                        let userToUpdate = user
+                        
+                        var newSet = user._journeys ?? Set<String>()
+                        newSet.insert(newJourney._journeyId!)
+                        
+                        userToUpdate._numberOfJourneys = ((user._numberOfJourneys as! Int) + 1) as NSNumber
+                        userToUpdate._journeys = newSet
+                        
+                        self.updateUser(appUser: user, completion: { (error) in
+                            if let error = error {
+                                completion(error)
+                            } else {
+                                completion(nil)
+                            }
+                        })
+                    }
+                })
+
                 print("success creating journey")
                 completion(nil)
             }
