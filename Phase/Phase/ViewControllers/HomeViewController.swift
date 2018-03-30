@@ -12,7 +12,14 @@ import DGElasticPullToRefresh
 class HomeViewController: UIViewController {
     
     @IBAction func goToChat(_ sender: UIBarButtonItem) {
-        present(UINavigationController(rootViewController: ChatExamplesViewController()), animated: true)
+        DynamoDBManager.shared.loadUser(userId: CognitoManager.shared.userId!) { (user, error) in
+            if let error = error {
+                print(error)
+            } else {
+                print(user!)
+            }
+        }
+        //present(UINavigationController(rootViewController: ChatExamplesViewController()), animated: true)
     }
     
     //TODO: Add character limit

@@ -10,8 +10,8 @@ import Foundation
 import AWSCore
 import AWSDynamoDB
 
-enum CognitoError: Error {
-    case noActiveUser
+enum DBError: Error {
+    case loadResultNil
 }
 
 class DynamoDBManager {
@@ -50,25 +50,18 @@ extension DynamoDBManager {
         var user: AppUser = AppUser()
         user._userId = userId
         
-        mapper.load(AppUser.self, hashKey: userId, rangeKey: nil, configuration: nil).continueWith { (task) -> Any? in
-            if let error = task.error {
+        mapper.load(AppUser.self, hashKey: userId, rangeKey: nil) { (loadedUser, error) in
+            if let error = error {
+                print(error)
                 completion(nil, error)
-            } else if let loadedUser = task.result {
-                print(task.result)
+            } else if let loadedUser = loadedUser {
                 user = loadedUser as! AppUser
+                print(loadedUser)
                 completion(user, nil)
+            } else {
+                completion(nil, DBError.loadResultNil)
             }
-            return nil
         }
-        
-//        mapper.load(AppUser.self, hashKey: userId, rangeKey: nil) { (loadedUser, error) in
-//            if let error = error {
-//                completion(nil, error)
-//            } else if let loadedUser = loadedUser {
-//                user = loadedUser as! AppUser
-//                completion(user, nil)
-//            }
-//        }
     }
     
     func updateUser(appUser: AppUser, completion: @escaping (Error?) -> Void) {
@@ -104,7 +97,6 @@ extension DynamoDBManager {
                         followingSet.insert(userToFollow._userId!)
                         
                         currentUser._usersFollowed = followingSet
-                        
                         
                         self.updateUser(appUser: currentUser, completion: { (error) in
                             if let error = error {
@@ -228,8 +220,14 @@ extension DynamoDBManager {
         }
     }
     
-    func watchJourney() {
+    func watchJourney(completion: @escaping (Error?) -> Void) {
+        guard let userId = CognitoManager.shared.userId else {
+            completion(CognitoError.noActiveUser)
+            return
+        }
         
+        
+
     }
     
 }
