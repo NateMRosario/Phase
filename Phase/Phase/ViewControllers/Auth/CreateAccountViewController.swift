@@ -58,32 +58,32 @@ extension CreateAccountViewController {
         
         
         //sign up the user
-        self.pool?.signUp(userNameValue, password: passwordValue, userAttributes: attributes, validationData: nil).continueWith {[weak self] (task) -> Any? in
-            guard let strongSelf = self else { return nil }
-            DispatchQueue.main.async(execute: {
-                if let error = task.error as NSError? {
-                    let alertController = UIAlertController(title: error.userInfo["__type"] as? String,
-                                                            message: error.userInfo["message"] as? String,
-                                                            preferredStyle: .alert)
-                    let retryAction = UIAlertAction(title: "Retry", style: .default, handler: nil)
-                    alertController.addAction(retryAction)
-                    
-                    self?.present(alertController, animated: true, completion:  nil)
-                } else if let result = task.result  {
-                    // handle the case where user has to confirm his identity via email / SMS
-                    if (result.user.confirmedStatus != AWSCognitoIdentityUserStatus.confirmed) {
-                        //strongSelf.sentTo = result.codeDeliveryDetails?.destination
-                        //strongSelf.performSegue(withIdentifier: "confirmSignUpSegue", sender:sender)
-                        let confirmVC = ConfirmAccountViewController()
-                        confirmVC.sentTo = result.codeDeliveryDetails?.destination
-                        strongSelf.navigationController?.pushViewController(confirmVC, animated: true)
-                    } else {
-                        let _ = strongSelf.navigationController?.popToRootViewController(animated: true)
-                    }
-                }
-                
-            })
-            return nil
-        }
+//        self.pool?.signUp(userNameValue, password: passwordValue, userAttributes: attributes, validationData: nil).continueWith {[weak self] (task) -> Any? in
+//            guard let strongSelf = self else { return nil }
+//            DispatchQueue.main.async(execute: {
+//                if let error = task.error as NSError? {
+//                    let alertController = UIAlertController(title: error.userInfo["__type"] as? String,
+//                                                            message: error.userInfo["message"] as? String,
+//                                                            preferredStyle: .alert)
+//                    let retryAction = UIAlertAction(title: "Retry", style: .default, handler: nil)
+//                    alertController.addAction(retryAction)
+//                    
+//                    self?.present(alertController, animated: true, completion:  nil)
+//                } else if let result = task.result  {
+//                    // handle the case where user has to confirm his identity via email / SMS
+//                    if (result.user.confirmedStatus != AWSCognitoIdentityUserStatus.confirmed) {
+//                        //strongSelf.sentTo = result.codeDeliveryDetails?.destination
+//                        //strongSelf.performSegue(withIdentifier: "confirmSignUpSegue", sender:sender)
+//                        //let confirmVC = ConfirmAccountViewController()
+//                        confirmVC.sentTo = result.codeDeliveryDetails?.destination
+//                        strongSelf.navigationController?.pushViewController(confirmVC, animated: true)
+//                    } else {
+//                        let _ = strongSelf.navigationController?.popToRootViewController(animated: true)
+//                    }
+//                }
+//                
+//            })
+//            return nil
+//        }
     }
 }

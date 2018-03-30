@@ -75,6 +75,7 @@
 		811BDBB8206C832D0050EBA3 /* hungry.png in Resources */ = {isa = PBXBuildFile; fileRef = 811BDB9B206C832D0050EBA3 /* hungry.png */; };
 		811BDBBB206C8FFB0050EBA3 /* InSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811BDBBA206C8FFB0050EBA3 /* InSearchViewController.swift */; };
 		811BDBBD206CAF110050EBA3 /* ResignKeyboardProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811BDBBC206CAF110050EBA3 /* ResignKeyboardProtocol.swift */; };
+		811BDBBF206D85F70050EBA3 /* TestCollectionVViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811BDBBE206D85F70050EBA3 /* TestCollectionVViewController.swift */; };
 		8123777B206A9AAA00A6BC02 /* AddJourneyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8123777A206A9AAA00A6BC02 /* AddJourneyViewController.swift */; };
 		8123777D206A9B0D00A6BC02 /* CreateAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8123777C206A9B0C00A6BC02 /* CreateAccountView.swift */; };
 		81237788206AA03300A6BC02 /* CameraPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81237786206AA03300A6BC02 /* CameraPreviewViewController.swift */; };
@@ -290,6 +291,7 @@
 		811BDB9B206C832D0050EBA3 /* hungry.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hungry.png; sourceTree = "<group>"; };
 		811BDBBA206C8FFB0050EBA3 /* InSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InSearchViewController.swift; sourceTree = "<group>"; };
 		811BDBBC206CAF110050EBA3 /* ResignKeyboardProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResignKeyboardProtocol.swift; sourceTree = "<group>"; };
+		811BDBBE206D85F70050EBA3 /* TestCollectionVViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCollectionVViewController.swift; sourceTree = "<group>"; };
 		8123777A206A9AAA00A6BC02 /* AddJourneyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddJourneyViewController.swift; sourceTree = "<group>"; };
 		8123777C206A9B0C00A6BC02 /* CreateAccountView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccountView.swift; sourceTree = "<group>"; };
 		81237786206AA03300A6BC02 /* CameraPreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraPreviewViewController.swift; sourceTree = "<group>"; };
@@ -1045,6 +1047,7 @@
 				81C1F87B2060AC410037BF42 /* Discover.storyboard */,
 				81C1F87A2060AC410037BF42 /* DiscoverDetail.storyboard */,
 				81C1F87C2060AC410037BF42 /* Main.storyboard */,
+				811BDBBE206D85F70050EBA3 /* TestCollectionVViewController.swift */,
 				81C279DB2061F74B00DB1825 /* Login.storyboard */,
 				81CA1BE4206442E600EF7B8E /* SearchVCs.storyboard */,
 				81817A462065941C00CA7044 /* NewPost.storyboard */,
@@ -1436,6 +1439,7 @@
 				"${BUILT_PRODUCTS_DIR}/Material/Material.framework",
 				"${BUILT_PRODUCTS_DIR}/Motion/Motion.framework",
 				"${BUILT_PRODUCTS_DIR}/PageMenu/PageMenu.framework",
+				"${BUILT_PRODUCTS_DIR}/Parchment/Parchment.framework",
 				"${BUILT_PRODUCTS_DIR}/Pastel/Pastel.framework",
 				"${BUILT_PRODUCTS_DIR}/Segmentio/Segmentio.framework",
 				"${BUILT_PRODUCTS_DIR}/SkyFloatingLabelTextField/SkyFloatingLabelTextField.framework",
@@ -1461,6 +1465,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Material.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Motion.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PageMenu.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Parchment.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Pastel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Segmentio.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SkyFloatingLabelTextField.framework",
@@ -1575,6 +1580,7 @@
 				81C368B9206B2ED400A1873E /* DemoChatItemsDecorator.swift in Sources */,
 				8128B47320694815009E0629 /* DynamoDBManager.swift in Sources */,
 				810935722059BA8400A95B30 /* HomeViewController.swift in Sources */,
+				811BDBBF206D85F70050EBA3 /* TestCollectionVViewController.swift in Sources */,
 				F404878C20657904009039AF /* JourneyCarouselView.swift in Sources */,
 				F4385F33206D361500F22C90 /* JourneyCarouselCollapsedViewController.swift in Sources */,
 				81817A4320655FE700CA7044 /* ActiveType.swift in Sources */,
@@ -1772,11 +1778,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3V32EPY5YP;
+				DEVELOPMENT_TEAM = KSNU4DN7MY;
 				INFOPLIST_FILE = "$(SRCROOT)/Phase/SupportingFiles/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.reiazgafar.Phase;
+				PRODUCT_BUNDLE_IDENTIFIER = tyzhaoac.Phase;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Phase/iCarousel/Phase-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1792,11 +1798,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3V32EPY5YP;
+				DEVELOPMENT_TEAM = KSNU4DN7MY;
 				INFOPLIST_FILE = "$(SRCROOT)/Phase/SupportingFiles/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.2;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.reiazgafar.Phase;
+				PRODUCT_BUNDLE_IDENTIFIER = tyzhaoac.Phase;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Phase/iCarousel/Phase-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;

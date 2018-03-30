@@ -7,81 +7,67 @@
 //
 
 import UIKit
-import SkyFloatingLabelTextField
+import Material
 
 class ConfirmAccountView: UIView {
     
     // MARK: - Properties
-    let systemBlue = UIColor(displayP3Red: 27/255, green: 173/255, blue: 248/255, alpha: 1)
-    
-    lazy var usernameTextField: SkyFloatingLabelTextFieldWithIcon = {
-        let textField = SkyFloatingLabelTextFieldWithIcon()
-        
-        textField.autocorrectionType = .no
-        textField.autocapitalizationType = .none
-        
-        textField.placeholder = "Username"
-        textField.title = "Username"
-        textField.tintColor = .blue // the color of the blinking cursor
-        textField.textColor = .darkGray
-        textField.lineColor = .darkGray
-        textField.selectedTitleColor = .blue
-        textField.selectedLineColor = .blue
-        textField.lineHeight = 1.0 // bottom line height in points
-        textField.selectedLineHeight = 2.0
-        
-        textField.iconType = IconType.image
-        textField.iconImage = #imageLiteral(resourceName: "iconEmail")
-        textField.iconColor = systemBlue
-        textField.selectedIconColor = .blue
-        textField.iconMarginBottom = 2
-        textField.iconRotationDegrees = 0 // rotate it 90 degrees
-        textField.iconMarginLeft = 6
-        return textField
+    lazy var containerView: UIView = {
+        let container = UIView()
+        container.backgroundColor = .clear
+        return container
     }()
     
-    lazy var confirmationCodeTextField: SkyFloatingLabelTextFieldWithIcon = {
-        let textField = SkyFloatingLabelTextFieldWithIcon()
+    lazy var userNameLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Username"
+        label.font = UIFont.systemFont(ofSize: 24)
+        label.textColor = .white
+        label.textAlignment = .center
+        return label
+    }()
+    
+    lazy var confirmationCodeTextField: TextField = {
+        let textField = TextField()
         
         textField.autocorrectionType = .no
         textField.autocapitalizationType = .none
-        
         textField.placeholder = "Confirmation Code"
-        textField.title = "Confirmation Code"
-        textField.tintColor = .blue // the color of the blinking cursor
-        textField.textColor = .darkGray
-        textField.lineColor = .darkGray
-        textField.selectedTitleColor = .blue
-        textField.selectedLineColor = .blue
-        textField.lineHeight = 1.0 // bottom line height in points
-        textField.selectedLineHeight = 2.0
-        
-        textField.iconType = IconType.image
-        textField.iconImage = #imageLiteral(resourceName: "iconEmail")
-        textField.iconColor = systemBlue
-        textField.selectedIconColor = .blue
-        textField.iconMarginBottom = 2
-        textField.iconRotationDegrees = 0 // rotate it 90 degrees
-        textField.iconMarginLeft = 6
+        textField.textColor = .white
+        textField.clearIconButton
+        textField.isClearIconButtonEnabled = true
+        textField.tintColor = .white // the color of the blinking cursor
+        textField.font = UIFont.systemFont(ofSize: 20)
+        textField.keyboardType = .default
+        let leftView = UIImageView()
+        leftView.image = #imageLiteral(resourceName: "edit")
+        textField.leftView = leftView
         return textField
     }()
     
     lazy var confirmAccountButton: UIButton = {
         let button = UIButton()
         button.setTitle("Confirm Account", for: .normal)
-        button.backgroundColor = .black
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 18)
+        button.backgroundColor = .clear
         button.layer.cornerRadius = 8
+        button.layer.borderColor = UIColor.white.cgColor
+        button.layer.borderWidth = 1
         return button
     }()
     
     lazy var resendButton: UIButton = {
         let button = UIButton()
-        button.setTitle("resend confirmation code", for: .normal)
-        button.setTitleColor(systemBlue, for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+        button.setTitle("Resend Code", for: .normal)
+        button.setTitleColor(.red, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 18)
+        button.backgroundColor = .clear
+        button.layer.cornerRadius = 8
+        button.layer.borderColor = UIColor.white.cgColor
+        button.layer.borderWidth = 1
         return button
     }()
-
+    
     override init(frame: CGRect) {
         super.init(frame: UIScreen.main.bounds)
         commonInit()
@@ -93,53 +79,67 @@ class ConfirmAccountView: UIView {
     }
     
     private func commonInit() {
-        backgroundColor = .white
+        backgroundColor = .clear
         setupViews()
     }
     
     private func setupViews() {
-        setupUsernameTextField()
+        setupContainerView()
+        setupUserNameLabel()
         setupConfirmationCodeTextField()
         setupConfirmAccountButton()
         setupResendButton()
     }
-
-}
-
-extension ConfirmAccountView {
-    private func setupUsernameTextField() {
-        addSubview(usernameTextField)
-        usernameTextField.snp.makeConstraints { (make) in
-            make.top.equalTo(safeAreaLayoutGuide.snp.top).offset(12)
-            make.centerX.equalTo(safeAreaLayoutGuide.snp.centerX)
-            make.width.equalTo(safeAreaLayoutGuide.snp.width).multipliedBy(0.90)
-        }
+    
+    // Mark:- Constraints
+    private func setupContainerView() {
+        addSubview(containerView)
+        containerView.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            containerView.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, multiplier: 0.8),
+            containerView.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.heightAnchor, multiplier: 0.7),
+            containerView.centerXAnchor.constraint(equalTo: safeAreaLayoutGuide.centerXAnchor),
+            containerView.centerYAnchor.constraint(equalTo: safeAreaLayoutGuide.centerYAnchor)
+            ])
+    }
+    
+    private func setupUserNameLabel() {
+        addSubview(userNameLabel)
+        userNameLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            userNameLabel.topAnchor.constraint(equalTo: containerView.topAnchor),
+            userNameLabel.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 1),
+            userNameLabel.centerXAnchor.constraint(equalTo: containerView.centerXAnchor)
+            ])
     }
     
     private func setupConfirmationCodeTextField() {
         addSubview(confirmationCodeTextField)
-        confirmationCodeTextField.snp.makeConstraints { (make) in
-            make.top.equalTo(usernameTextField.snp.bottom).offset(6)
-            make.centerX.equalTo(safeAreaLayoutGuide.snp.centerX)
-            make.width.equalTo(safeAreaLayoutGuide.snp.width).multipliedBy(0.90)
-        }
+        confirmationCodeTextField.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            confirmationCodeTextField.topAnchor.constraint(equalTo: userNameLabel.bottomAnchor, constant: 40),
+            confirmationCodeTextField.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.8),
+            confirmationCodeTextField.centerXAnchor.constraint(equalTo: containerView.centerXAnchor)
+            ])
     }
     
     private func setupConfirmAccountButton() {
         addSubview(confirmAccountButton)
-        confirmAccountButton.snp.makeConstraints { (make) in
-            make.top.equalTo(confirmationCodeTextField.snp.bottom).offset(6)
-            make.centerX.equalTo(safeAreaLayoutGuide.snp.centerX)
-            make.width.equalTo(safeAreaLayoutGuide.snp.width).multipliedBy(0.90)
-        }
+        confirmAccountButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            confirmAccountButton.topAnchor.constraint(equalTo: confirmationCodeTextField.bottomAnchor, constant: 20),
+            confirmAccountButton.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.8),
+            confirmAccountButton.centerXAnchor.constraint(equalTo: containerView.centerXAnchor)
+            ])
     }
     
     private func setupResendButton() {
         addSubview(resendButton)
-        resendButton.snp.makeConstraints { (make) in
-            make.top.equalTo(confirmAccountButton.snp.bottom).offset(6)
-            make.leading.equalTo(confirmAccountButton.snp.leading)
-        }
+        resendButton.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            resendButton.topAnchor.constraint(equalTo: confirmAccountButton.bottomAnchor, constant: 8),
+            resendButton.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 0.8),
+            resendButton.centerXAnchor.constraint(equalTo: containerView.centerXAnchor)
+            ])
     }
-    
 }

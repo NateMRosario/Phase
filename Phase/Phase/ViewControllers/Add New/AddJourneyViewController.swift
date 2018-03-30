@@ -29,27 +29,40 @@ class AddJourneyViewController: UIViewController {
                                               for: .touchUpInside)
     }
     
-    @objc func cancel() {
+    @objc private func cancel() {
         imagePreview.saveButton.isEnabled = true
         dismiss(animated: true, completion: nil)
     }
 
-    @objc func create() {
-        var set = Set<String>()
-        set.insert("#yoo")
-        DynamoDBManager.shared.createJourney(title: addJourneyView.newJourneyNameTextField.text ?? "", description: addJourneyView.newJourneyDescriptionTextView.text ?? "", hashtags: set, completion: {(error) in
+    @objc private func create() {
+        guard addJourneyView.newJourneyDescriptionTextView.text != "" else {
+            showAlert(title: "Error", message: "Journey name cannot be empty"); return}
+        
+        let set = checkHashTags(from: addJourneyView.newJourneyDescriptionTextView.text)
+        DynamoDBManager.shared.createJourney(title: addJourneyView.newJourneyDescriptionTextView.text,
+                                             description: addJourneyView.newJourneyDescriptionTextView.text ?? "",
+                                             hashtags: set, completion: {(error) in
             if let error = error {
                 DispatchQueue.main.async {
-                    
-                }
+                    self.showAlert(title: "Error", message: "\(error.localizedDescription)")}
             } else {
                 DispatchQueue.main.async {
-                    
-                }
+                    self.showAlert(title: "Created", message: "Created New Journey")}
             }
-            
         })
         imagePreview.saveButton.isEnabled = true
         dismiss(animated: true)
+    }
+    
+    func checkHashTags(from string: String) -> Set<String>? {
+        var set = Set<String>()
+        let spaceSeparatedStr = string.components(separatedBy: " ")
+        for word in spaceSeparatedStr {
+            if word.hasPrefix("#") {
+                set.insert(word)
+            }
+        }
+        if set.isEmpty {return nil}
+        return set
     }
 }
