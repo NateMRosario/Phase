@@ -9,6 +9,10 @@
 import Foundation
 import AWSCognitoIdentityProvider
 
+enum CognitoError: Error {
+    case noActiveUser
+}
+
 class CognitoManager {
     static let shared = CognitoManager()
     private init() {
@@ -109,9 +113,17 @@ class CognitoManager {
         })
     }
     
-    func verify(username: String, code: String) {
+    func confirmAccount(username: String, code: String, completion: @escaping (Error?) -> Void) {
         user = pool.getUser(username)
-        user?.confirmSignUp(code)
+        user?.confirmSignUp(code).continueWith(block: { (task) -> Any? in
+            if let error = task.error {
+                completion(error)
+            } else if let result = task.result {
+                print(result.description())
+                completion(nil)
+            }
+            return nil
+        })
     }
     
     func signOut() {
