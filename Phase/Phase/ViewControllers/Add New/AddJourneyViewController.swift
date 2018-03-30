@@ -33,10 +33,12 @@ class AddJourneyViewController: UIViewController {
         imagePreview.saveButton.isEnabled = true
         dismiss(animated: true, completion: nil)
     }
-
+    
     @objc private func create() {
         guard addJourneyView.newJourneyDescriptionTextView.text != "" else {
-            showAlert(title: "Error", message: "Journey name cannot be empty"); return}
+            DispatchQueue.main.async {
+                self.showAlert(title: "Error", message: "Journey name cannot be empty")
+            }; return}
         
         let set = checkHashTags(from: addJourneyView.newJourneyDescriptionTextView.text)
         DynamoDBManager.shared.createJourney(title: addJourneyView.newJourneyNameTextField.text!,
