@@ -46,19 +46,17 @@ class AddJourneyViewController: UIViewController {
                                              hashtags: set, completion: {(error) in
             if let error = error {
                 DispatchQueue.main.async {
-                    self.showAlert(title: "Error", message: "\(error.localizedDescription)")
-                }
+                    self.showAlert(title: "Error", message: "\(error.localizedDescription)")}
             } else {
                 DispatchQueue.main.async {
-                    self.showAlert(title: "Created", message: "Created New Journey")
-                }
+                    self.showAlert(title: "Created", message: "Created New Journey")}
             }
         })
         imagePreview.saveButton.isEnabled = true
         dismiss(animated: true)
     }
     
-    func checkHashTags(from string: String) -> Set<String> {
+    func checkHashTags(from string: String) -> Set<String>? {
         var set = Set<String>()
         let spaceSeparatedStr = string.components(separatedBy: " ")
         for word in spaceSeparatedStr {
@@ -66,6 +64,7 @@ class AddJourneyViewController: UIViewController {
                 set.insert(word)
             }
         }
+        if set.isEmpty {return nil}
         return set
     }
 }
