@@ -90,14 +90,15 @@ class DiscoverCollectionViewCell: UICollectionViewCell {
     }
 }
 
-extension DiscoverCollectionViewCell: GridViewProtocol {
-    // TODO: MAKE THE SNAPSHOT VIEW == DiscoverCollectionViewNib
-    func snapShotForTransition() -> UIView {
-        let snapShotView = UIImageView(image: stackImageView.image)
-        snapShotView.frame = CGRect.init(x: 0, y: 0, width: stackImageView.frame.width, height: stackImageView.frame.height * CGFloat(3))
-//        snapShotView.layer.masksToBounds = contentImageView.layer.masksToBounds
-        snapShotView.layer.cornerRadius = stackImageView.layer.cornerRadius
-        snapShotView.contentMode = .scaleAspectFill
-        return snapShotView
-    }
-}
+//extension DiscoverCollectionViewCell: GridViewProtocol {
+//    // TODO: MAKE THE SNAPSHOT VIEW == DiscoverCollectionViewNib
+//    func snapShotForTransition() -> UIView {
+//        let snapShotView = UIImageView(image: stackImageView.image)
+//        snapShotView.frame = CGRect.init(x: 0, y: 0, width: stackImageView.frame.width, height: stackImageView.frame.height * CGFloat(3))
+////        snapShotView.layer.masksToBounds = contentImageView.layer.masksToBounds
+//        snapShotView.layer.cornerRadius = stackImageView.layer.cornerRadius
+//        snapShotView.contentMode = .scaleAspectFill
+//        return snapShotView
+//    }
+//}
+

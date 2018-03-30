@@ -146,10 +146,10 @@ extension DiscoveryViewController: UICollectionViewDataSource {
 
 extension DiscoveryViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let detailNC = DetailNavigationViewController.instantiate(withStoryboard: "DiscoverDetail")
+        let detailNC = JourneyCarouselViewController()
 
         selectedIndexPath = indexPath
-        present(detailNC, animated: true, completion: nil)
+        navigationController?.pushViewController(detailNC, animated: true)
     }
 }
 
