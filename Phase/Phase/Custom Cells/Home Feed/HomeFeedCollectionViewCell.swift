@@ -11,15 +11,10 @@ import SnapKit
 
 class HomeFeedCollectionViewCell: UICollectionViewCell {
     
+    @IBOutlet weak var journeyTitle: UILabel!
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var timeStamp: UILabel!
     @IBOutlet weak var journeyLabel: UILabel!
-    @IBOutlet weak var likeLabel: UILabel! {
-        didSet {
-            likeLabel.layer.cornerRadius = likeLabel.bounds.height / 2
-            likeLabel.layer.borderWidth = 1
-        }
-    }
     @IBOutlet weak var postLabel: UILabel!
     @IBOutlet weak var detailView: UIView! {
         didSet {

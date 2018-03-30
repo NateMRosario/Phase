@@ -31,6 +31,7 @@ class HomeViewController: UIViewController {
             homeCollectionView.setCollectionViewLayout(layout, animated: false)
         }
     }
+    
     let loading = UIActivityIndicatorView(activityIndicatorStyle: .whiteLarge)
     
     override func viewDidLoad() {
@@ -95,19 +96,14 @@ extension HomeViewController: UICollectionViewDataSource {
         switch image {
         case #imageLiteral(resourceName: "a11"):
             cell.postLabel.text = "Saber Lily"
-            cell.likeLabel.text = "420"
         case #imageLiteral(resourceName: "nostalgic1"):
             cell.postLabel.text = "Finally finished the city of Elianor"
-            cell.likeLabel.text = 5.description
         case #imageLiteral(resourceName: "nostalgic2"):
             cell.postLabel.text = "Sunset overview with a bridge inbetween"
-            cell.likeLabel.text = 18.description
         case #imageLiteral(resourceName: "nostalgic3"):
             cell.postLabel.text = "Something that just came to mind"
-            cell.likeLabel.text = 48.description
         case #imageLiteral(resourceName: "nostalgic4"):
             cell.postLabel.text = "Dreamt of this, thought it would be perfect for my first art piece"
-            cell.likeLabel.text = 150.description
         default:
             break
         }
