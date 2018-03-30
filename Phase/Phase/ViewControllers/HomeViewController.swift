@@ -19,7 +19,7 @@ class HomeViewController: UIViewController {
     let configure = CollectionViewLayout.Configuration(numberOfColumns: 1)
     fileprivate let loadingView = DGElasticPullToRefreshLoadingViewCircle()
     
-    fileprivate var contents = [#imageLiteral(resourceName: "nostalgic1"), #imageLiteral(resourceName: "nostalgic2"), #imageLiteral(resourceName: "nostalgic3"), #imageLiteral(resourceName: "nostalgic4")]
+    fileprivate var contents = [#imageLiteral(resourceName: "a11"), #imageLiteral(resourceName: "nostalgic1"), #imageLiteral(resourceName: "nostalgic2"), #imageLiteral(resourceName: "nostalgic3"), #imageLiteral(resourceName: "nostalgic4")]
     
     var appUser = AppUser()
     var appJourney = [Journey]()
@@ -125,6 +125,9 @@ extension HomeViewController: UICollectionViewDataSource {
     ///Delete when AWS is set up
     private func switchItUp(image: UIImage, cell: HomeFeedCollectionViewCell) {
         switch image {
+        case #imageLiteral(resourceName: "a11"):
+            cell.postLabel.text = "Saber Lily"
+            cell.likeLabel.text = "420"
         case #imageLiteral(resourceName: "nostalgic1"):
             cell.postLabel.text = "Finally finished the city of Elianor"
             cell.likeLabel.text = 5.description
@@ -143,6 +146,10 @@ extension HomeViewController: UICollectionViewDataSource {
     }
 }
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        navigationController?.pushViewController(JourneyCarouselViewController(), animated: true)
+    }
     //TODO:
 }
 
@@ -157,7 +164,10 @@ extension HomeViewController: CollectionViewDelegateLayout {
         }
         let image = contents[indexPath.row]
         let width = configure.itemWidth
-        let height = width / image.size.width * image.size.height + 49
+        var height = width / image.size.width * image.size.height + 49
+        if height < 300 {
+            height = 400
+        }
         return CGSize(width: width, height: height)
     }
 }

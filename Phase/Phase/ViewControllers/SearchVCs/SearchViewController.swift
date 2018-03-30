@@ -7,7 +7,7 @@
 //
 
 import UIKit
-import PageMenu
+import Parchment
 import SnapKit
 
 class SearchViewController: UIViewController {
@@ -17,67 +17,41 @@ class SearchViewController: UIViewController {
     }
     
     let searchBar = UISearchBar()
-    var pageMenu : CAPSPageMenu?
-    var controllerArray : [UIViewController] = []
     
     let controller4: TestTableViewController = TestTableViewController(nibName: "TestTableViewController", bundle: nil)
-    let controller2: TestCollectionViewController = TestCollectionViewController(nibName: "TestCollectionViewController", bundle: nil)
+    let controller2: PeopleViewController = PeopleViewController.instantiate(withStoryboard: "SearchVCs")
     let controller3: TestViewController = TestViewController(nibName: "TestViewController", bundle: nil)
-    let controller1: TestViewController = TestViewController(nibName: "TestViewController", bundle: nil)
-    
-    let parameters: [CAPSPageMenuOption] = [
-        .scrollMenuBackgroundColor(.white),
-        .viewBackgroundColor(.white),
-        .selectionIndicatorColor(ColorPalette.appBlue),
-        .selectionIndicatorHeight(5),
-        .selectedMenuItemLabelColor(UIColor(red: 30.0/255.0, green: 30.0/255.0, blue: 30.0/255.0, alpha: 1.0)),
-        .bottomMenuHairlineColor(UIColor(red: 70.0/255.0, green: 70.0/255.0, blue: 80.0/255.0, alpha: 1.0)),
-        .menuItemFont(UIFont.boldSystemFont(ofSize: 17)),
-        .menuHeight(40.0),
-        .menuItemWidth(90.0),
-        .useMenuLikeSegmentedControl(true),
-//        .centerMenuItems(false),
-        .menuItemSeparatorPercentageHeight(0.0)
-    ]
-    
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-        
-        pageMenu = CAPSPageMenu(viewControllers: controllerArray,
-                                frame: view.safeAreaLayoutGuide.layoutFrame,
-                                pageMenuOptions: parameters)
-        self.addChildViewController(pageMenu!)
-        self.view.addSubview(pageMenu!.view)
-        
-        pageMenu!.didMove(toParentViewController: self)
-    }
-    
-    override func shouldAutomaticallyForwardRotationMethods() -> Bool {
-        return true
-    }
+    let controller1: PeopleViewController = PeopleViewController.instantiate(withStoryboard: "SearchVCs")
     
     override func viewDidLoad() {
         super.viewDidLoad()
         configureNav()
         
         controller1.title = "Top"
-        controller1.delegate = self
-        controllerArray.append(controller1)
-        
         controller2.title = "Tags"
-        controllerArray.append(controller2)
-        
         controller3.title = "Journeys"
-        controllerArray.append(controller3)
-        
         controller4.title = "People"
-        controllerArray.append(controller4)
-
-//        pageMenu = CAPSPageMenu(viewControllers: controllerArray,
-//                                frame: CGRect(x: 0, y: ((navigationController?.navigationBar.frame.height)! + 34),
-//                                              width: self.view.bounds.width,
-//                                              height: view.safeAreaLayoutGuide.layoutFrame.height),
-
+        
+        let pagingViewController = FixedPagingViewController(viewControllers: [
+            controller1,
+            controller2,
+            controller3,
+            controller4
+            ])
+        
+        pagingViewController.borderOptions = PagingBorderOptions.visible(height: 1, zIndex: Int.max - 1, insets: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
+        pagingViewController.indicatorOptions = PagingIndicatorOptions.visible(height: 5, zIndex: Int.max - 1, spacing: UIEdgeInsets.zero, insets: UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0))
+        pagingViewController.menuHorizontalAlignment = .center
+        pagingViewController.menuItemSize = PagingMenuItemSize.sizeToFit(minWidth: 50, height: 40)
+        pagingViewController.menuInteraction = .none
+            
+        addChildViewController(pagingViewController)
+        view.addSubview(pagingViewController.view)
+        pagingViewController.view.snp.makeConstraints { (make) in
+            make.edges.equalTo(view.safeAreaLayoutGuide.snp.edges)
+        }
+        pagingViewController.didMove(toParentViewController: self)
+        
     }
     
     func configureNav() {

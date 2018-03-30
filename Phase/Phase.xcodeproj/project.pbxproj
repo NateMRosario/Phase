@@ -75,6 +75,7 @@
 		811BDBB8206C832D0050EBA3 /* hungry.png in Resources */ = {isa = PBXBuildFile; fileRef = 811BDB9B206C832D0050EBA3 /* hungry.png */; };
 		811BDBBB206C8FFB0050EBA3 /* InSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811BDBBA206C8FFB0050EBA3 /* InSearchViewController.swift */; };
 		811BDBBD206CAF110050EBA3 /* ResignKeyboardProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811BDBBC206CAF110050EBA3 /* ResignKeyboardProtocol.swift */; };
+		811BDBBF206D85F70050EBA3 /* TestCollectionVViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 811BDBBE206D85F70050EBA3 /* TestCollectionVViewController.swift */; };
 		8123777B206A9AAA00A6BC02 /* AddJourneyViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8123777A206A9AAA00A6BC02 /* AddJourneyViewController.swift */; };
 		8123777D206A9B0D00A6BC02 /* CreateAccountView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8123777C206A9B0C00A6BC02 /* CreateAccountView.swift */; };
 		81237788206AA03300A6BC02 /* CameraPreviewViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81237786206AA03300A6BC02 /* CameraPreviewViewController.swift */; };
@@ -188,9 +189,10 @@
 		F4183094206AB90700466705 /* HomeFeedCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4183092206AB90700466705 /* HomeFeedCollectionViewCell.xib */; };
 		F4183097206AB91D00466705 /* DiscoverCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4183095206AB91D00466705 /* DiscoverCollectionViewCell.swift */; };
 		F4183098206AB91D00466705 /* DiscoverCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4183096206AB91D00466705 /* DiscoverCollectionViewCell.xib */; };
+		F4385F33206D361500F22C90 /* JourneyCarouselCollapsedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4385F32206D361500F22C90 /* JourneyCarouselCollapsedViewController.swift */; };
 		F4882840206943930008A656 /* JourneyCarouselViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F488283F206943930008A656 /* JourneyCarouselViewController.swift */; };
 		F4882847206955690008A656 /* JourneyCommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4882846206955690008A656 /* JourneyCommentTableViewCell.swift */; };
-		F4882849206980CC0008A656 /* JourneyCommentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4882848206980CC0008A656 /* JourneyCommentView.swift */; };
+		F4882849206980CC0008A656 /* JourneyEventDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4882848206980CC0008A656 /* JourneyEventDetailView.swift */; };
 		F4882856206A95130008A656 /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = F4882854206A95120008A656 /* iCarousel.m */; };
 		F49638FA206ABD0A002D62E7 /* JourneyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F49638F9206ABD09002D62E7 /* JourneyTableViewCell.xib */; };
 		F4D34A7A205C482C00F4D50D /* EventCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D34A79205C482C00F4D50D /* EventCollectionViewCell.swift */; };
@@ -287,6 +289,7 @@
 		811BDB9B206C832D0050EBA3 /* hungry.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = hungry.png; sourceTree = "<group>"; };
 		811BDBBA206C8FFB0050EBA3 /* InSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InSearchViewController.swift; sourceTree = "<group>"; };
 		811BDBBC206CAF110050EBA3 /* ResignKeyboardProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResignKeyboardProtocol.swift; sourceTree = "<group>"; };
+		811BDBBE206D85F70050EBA3 /* TestCollectionVViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCollectionVViewController.swift; sourceTree = "<group>"; };
 		8123777A206A9AAA00A6BC02 /* AddJourneyViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddJourneyViewController.swift; sourceTree = "<group>"; };
 		8123777C206A9B0C00A6BC02 /* CreateAccountView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccountView.swift; sourceTree = "<group>"; };
 		81237786206AA03300A6BC02 /* CameraPreviewViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraPreviewViewController.swift; sourceTree = "<group>"; };
@@ -414,9 +417,10 @@
 		F4183092206AB90700466705 /* HomeFeedCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeFeedCollectionViewCell.xib; sourceTree = "<group>"; };
 		F4183095206AB91D00466705 /* DiscoverCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverCollectionViewCell.swift; sourceTree = "<group>"; };
 		F4183096206AB91D00466705 /* DiscoverCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DiscoverCollectionViewCell.xib; sourceTree = "<group>"; };
+		F4385F32206D361500F22C90 /* JourneyCarouselCollapsedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyCarouselCollapsedViewController.swift; sourceTree = "<group>"; };
 		F488283F206943930008A656 /* JourneyCarouselViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyCarouselViewController.swift; sourceTree = "<group>"; };
 		F4882846206955690008A656 /* JourneyCommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyCommentTableViewCell.swift; sourceTree = "<group>"; };
-		F4882848206980CC0008A656 /* JourneyCommentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyCommentView.swift; sourceTree = "<group>"; };
+		F4882848206980CC0008A656 /* JourneyEventDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyEventDetailView.swift; sourceTree = "<group>"; };
 		F4882853206A95120008A656 /* iCarousel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCarousel.h; sourceTree = "<group>"; };
 		F4882854206A95120008A656 /* iCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCarousel.m; sourceTree = "<group>"; };
 		F4882855206A95120008A656 /* Phase-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Phase-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -990,8 +994,7 @@
 				810935892059BD5800A95B30 /* SearchView.swift */,
 				8123777E206A9E7400A6BC02 /* Camera+PostViews */,
 				8791DFDA2060171F00337CA3 /* FollowersView.swift */,
-				F404878B20657904009039AF /* JourneyCarouselView.swift */,
-				F4882848206980CC0008A656 /* JourneyCommentView.swift */,
+				F49638FC206AC705002D62E7 /* JourneyCarouselViews */,
 				817C6EEB2069AB9D00010EDF /* Following */,
 			);
 			path = Views;
@@ -1005,13 +1008,13 @@
 				81237784206A9F7900A6BC02 /* Camera */,
 				81817A342064BAA000CA7044 /* Onboarding */,
 				81AB8AC5205AFB9000A98AFB /* Discovery */,
+				F4385F34206D798200F22C90 /* JourneyCarouselViewControllers */,
 				81DC9F012058B210005F2724 /* ProfileViewController.swift */,
 				818DBB69206980A500B91990 /* NotificationsViewController.swift */,
 				810935C7205C436300A95B30 /* Auth */,
 				810935712059BA8400A95B30 /* HomeViewController.swift */,
 				810935732059BAAC00A95B30 /* EventViewController.swift */,
 				810935752059BB0D00A95B30 /* FollowsViewController.swift */,
-				F488283F206943930008A656 /* JourneyCarouselViewController.swift */,
 				810935772059BB9200A95B30 /* EditProfileViewController.swift */,
 				817C6EDC2069A99500010EDF /* FollowsViewController.swift */,
 				81817A392064CAAE00CA7044 /* SearchVCs */,
@@ -1038,12 +1041,22 @@
 				81C1F87B2060AC410037BF42 /* Discover.storyboard */,
 				81C1F87A2060AC410037BF42 /* DiscoverDetail.storyboard */,
 				81C1F87C2060AC410037BF42 /* Main.storyboard */,
+				811BDBBE206D85F70050EBA3 /* TestCollectionVViewController.swift */,
 				81C279DB2061F74B00DB1825 /* Login.storyboard */,
 				81CA1BE4206442E600EF7B8E /* SearchVCs.storyboard */,
 				81817A462065941C00CA7044 /* NewPost.storyboard */,
 				818DBB6F206986B500B91990 /* Notifications.storyboard */,
 			);
 			path = Storyboards;
+			sourceTree = "<group>";
+		};
+		F4385F34206D798200F22C90 /* JourneyCarouselViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				F488283F206943930008A656 /* JourneyCarouselViewController.swift */,
+				F4385F32206D361500F22C90 /* JourneyCarouselCollapsedViewController.swift */,
+			);
+			path = JourneyCarouselViewControllers;
 			sourceTree = "<group>";
 		};
 		F488284A206A94AB0008A656 /* iCarousel */ = {
@@ -1054,6 +1067,15 @@
 				F4882855206A95120008A656 /* Phase-Bridging-Header.h */,
 			);
 			path = iCarousel;
+			sourceTree = "<group>";
+		};
+		F49638FC206AC705002D62E7 /* JourneyCarouselViews */ = {
+			isa = PBXGroup;
+			children = (
+				F404878B20657904009039AF /* JourneyCarouselView.swift */,
+				F4882848206980CC0008A656 /* JourneyEventDetailView.swift */,
+			);
+			path = JourneyCarouselViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1397,7 +1419,7 @@
 				"${BUILT_PRODUCTS_DIR}/DGElasticPullToRefresh/DGElasticPullToRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/Material/Material.framework",
 				"${BUILT_PRODUCTS_DIR}/Motion/Motion.framework",
-				"${BUILT_PRODUCTS_DIR}/PageMenu/PageMenu.framework",
+				"${BUILT_PRODUCTS_DIR}/Parchment/Parchment.framework",
 				"${BUILT_PRODUCTS_DIR}/Pastel/Pastel.framework",
 				"${BUILT_PRODUCTS_DIR}/Segmentio/Segmentio.framework",
 				"${BUILT_PRODUCTS_DIR}/SkyFloatingLabelTextField/SkyFloatingLabelTextField.framework",
@@ -1422,7 +1444,7 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DGElasticPullToRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Material.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Motion.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PageMenu.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Parchment.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Pastel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Segmentio.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/SkyFloatingLabelTextField.framework",
@@ -1535,7 +1557,9 @@
 				81C368B9206B2ED400A1873E /* DemoChatItemsDecorator.swift in Sources */,
 				8128B47320694815009E0629 /* DynamoDBManager.swift in Sources */,
 				810935722059BA8400A95B30 /* HomeViewController.swift in Sources */,
+				811BDBBF206D85F70050EBA3 /* TestCollectionVViewController.swift in Sources */,
 				F404878C20657904009039AF /* JourneyCarouselView.swift in Sources */,
+				F4385F33206D361500F22C90 /* JourneyCarouselCollapsedViewController.swift in Sources */,
 				81817A4320655FE700CA7044 /* ActiveType.swift in Sources */,
 				81AB8AAC205AF6F600A98AFB /* CALayer+Extensions.swift in Sources */,
 				F4882847206955690008A656 /* JourneyCommentTableViewCell.swift in Sources */,
@@ -1566,8 +1590,8 @@
 				811BDB64206C82530050EBA3 /* TestViewController.swift in Sources */,
 				811BDBBD206CAF110050EBA3 /* ResignKeyboardProtocol.swift in Sources */,
 				81CA1BE72064432600EF7B8E /* PeopleViewController.swift in Sources */,
+				F4882849206980CC0008A656 /* JourneyEventDetailView.swift in Sources */,
 				81C368E1206B2EEC00A1873E /* BaseMessagesSelector.swift in Sources */,
-				F4882849206980CC0008A656 /* JourneyCommentView.swift in Sources */,
 				81CFD3F62058824700DDD630 /* Models.swift in Sources */,
 				810935D2205C45E000A95B30 /* ForgotPasswordView.swift in Sources */,
 				81AB8AB0205AF75D00A98AFB /* UIViewController+Extensions.swift in Sources */,
@@ -1731,11 +1755,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3V32EPY5YP;
+				DEVELOPMENT_TEAM = KSNU4DN7MY;
 				INFOPLIST_FILE = "$(SRCROOT)/Phase/SupportingFiles/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.reiazgafar.Phase;
+				PRODUCT_BUNDLE_IDENTIFIER = tyzhaoac.Phase;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Phase/iCarousel/Phase-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1751,11 +1775,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 3V32EPY5YP;
+				DEVELOPMENT_TEAM = KSNU4DN7MY;
 				INFOPLIST_FILE = "$(SRCROOT)/Phase/SupportingFiles/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.reiazgafar.Phase;
+				PRODUCT_BUNDLE_IDENTIFIER = tyzhaoac.Phase;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Phase/iCarousel/Phase-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;

@@ -50,14 +50,24 @@ extension DynamoDBManager {
         var user: AppUser = AppUser()
         user._userId = userId
         
-        mapper.load(AppUser.self, hashKey: userId, rangeKey: nil) { (loadedUser, error) in
-            if let error = error {
+        mapper.load(AppUser.self, hashKey: userId, rangeKey: nil, configuration: nil).continueWith { (task) -> Any? in
+            if let error = task.error {
                 completion(nil, error)
-            } else if let loadedUser = loadedUser {
+            } else if let loadedUser = task.result {
                 user = loadedUser as! AppUser
                 completion(user, nil)
             }
+            return nil
         }
+        
+//        mapper.load(AppUser.self, hashKey: userId, rangeKey: nil) { (loadedUser, error) in
+//            if let error = error {
+//                completion(nil, error)
+//            } else if let loadedUser = loadedUser {
+//                user = loadedUser as! AppUser
+//                completion(user, nil)
+//            }
+//        }
     }
     
     func updateUser(appUser: AppUser, completion: @escaping (Error?) -> Void) {
@@ -122,7 +132,7 @@ extension DynamoDBManager {
 
 // MARK: - Journey Methods
 extension DynamoDBManager {
-    func createJourney(title: String, description: String, hashtags: Set<String>, completion: @escaping (Error?) -> Void) {
+    func createJourney(title: String, description: String, hashtags: Set<String>?, completion: @escaping (Error?) -> Void) {
         
         let newJourney: Journey = Journey()
         newJourney._journeyId = UUID().uuidString
@@ -139,6 +149,30 @@ extension DynamoDBManager {
             if let error = error {
                 completion(error)
             } else {
+                
+                self.loadUser(userId: CognitoManager.shared.userId!, completion: { (user, error) in
+                    if let error = error {
+                        completion(error)
+                    } else if let user = user {
+                        
+                        let userToUpdate = user
+                        
+                        var newSet = user._journeys ?? Set<String>()
+                        newSet.insert(newJourney._journeyId!)
+                        
+                        userToUpdate._numberOfJourneys = ((user._numberOfJourneys as! Int) + 1) as NSNumber
+                        userToUpdate._journeys = newSet
+                        
+                        self.updateUser(appUser: user, completion: { (error) in
+                            if let error = error {
+                                completion(error)
+                            } else {
+                                completion(nil)
+                            }
+                        })
+                    }
+                })
+
                 print("success creating journey")
                 completion(nil)
             }

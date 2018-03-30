@@ -25,6 +25,17 @@
                         <subviews>
                             <stackView opaque="NO" clipsSubviews="YES" contentMode="scaleAspectFill" axis="vertical" distribution="fillProportionally" baselineRelativeArrangement="YES" translatesAutoresizingMaskIntoConstraints="NO" id="eMe-yL-bbD">
                                 <rect key="frame" x="0.0" y="0.0" width="227" height="400"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="a" translatesAutoresizingMaskIntoConstraints="NO" id="SWK-gm-oOw">
+                                        <rect key="frame" x="0.0" y="0.0" width="227" height="99"/>
+                                    </imageView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="b" translatesAutoresizingMaskIntoConstraints="NO" id="Yhs-Lk-yW1">
+                                        <rect key="frame" x="0.0" y="99" width="227" height="154"/>
+                                    </imageView>
+                                    <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="c" translatesAutoresizingMaskIntoConstraints="NO" id="V0q-Cw-J3R">
+                                        <rect key="frame" x="0.0" y="253" width="227" height="147"/>
+                                    </imageView>
+                                </subviews>
                             </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
@@ -124,6 +135,9 @@
             <connections>
                 <outlet property="bottomWhiteSpace" destination="A8f-wf-ygt" id="fcA-Ay-nzs"/>
                 <outlet property="extraWhiteSpace" destination="sFF-oM-fGJ" id="iCe-i2-0Ub"/>
+                <outlet property="image1" destination="SWK-gm-oOw" id="YzS-BM-WHS"/>
+                <outlet property="image2" destination="Yhs-Lk-yW1" id="MjW-xr-QND"/>
+                <outlet property="image3" destination="V0q-Cw-J3R" id="HlY-WS-Xyh"/>
                 <outlet property="profileImage" destination="lwW-B6-mzy" id="des-Rh-vOW"/>
                 <outlet property="stackView" destination="eMe-yL-bbD" id="WaG-9i-g3p"/>
                 <outlet property="stackViewContainer" destination="zd8-Jp-r1f" id="yaF-Z4-rnl"/>
@@ -133,6 +147,9 @@
     </objects>
     <resources>
         <image name="7-R5CLfl_400x400" width="400" height="400"/>
+        <image name="a" width="1728" height="2592"/>
+        <image name="b" width="3024" height="4032"/>
+        <image name="c" width="5770" height="3847"/>
         <image name="heartPressed" width="25" height="25"/>
     </resources>
 </document>
