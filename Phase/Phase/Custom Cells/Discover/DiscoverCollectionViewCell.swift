@@ -36,6 +36,12 @@ class DiscoverCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    @IBOutlet weak var image1: UIImageView!
+    @IBOutlet weak var image2: UIImageView!
+    @IBOutlet weak var image3: UIImageView!
+    
+    
+    
     lazy var stackImageView: UIImageView = {
         let siv = UIImageView()
         siv.contentMode = .scaleAspectFill
@@ -58,28 +64,22 @@ class DiscoverCollectionViewCell: UICollectionViewCell {
     }()
     
     public func set(image: UIImage) {
-        let num = arc4random_uniform(5)
+        let num = arc4random_uniform(7)
         
         // if image view is not nil stackView. content distribution = fill proportional else fill by equal distribution
 
         if num == 1 {
             profileImage.image = image
-            stackView.insertArrangedSubview(stackImageView, at: 0)
-            stackView.insertArrangedSubview(stackImageView2, at: 1)
-            stackView.insertArrangedSubview(stackImageView3, at: 2)
-            stackImageView.image = image
-            stackImageView2.image = image
-            stackImageView3.image = image
+            image1.image = image
+            image2.image = image
+            image3.image = image
         }
-        else if num == 2 || num == 4 {
-            stackView.insertArrangedSubview(stackImageView, at: 0)
-            stackView.insertArrangedSubview(stackImageView2, at: 1)
+        else if num == 2 || num == 4 || num == 6 {
+            image1.image = image
+            image2.image = image
             profileImage.image = image
-            stackImageView.image = image
-            stackImageView2.image = image
         } else {
-            stackView.insertArrangedSubview(stackImageView, at: 0)
-            stackImageView.image = image
+            image1.image = image
             profileImage.image = image
         }
     }
