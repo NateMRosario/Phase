@@ -189,8 +189,6 @@
 		F4183094206AB90700466705 /* HomeFeedCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4183092206AB90700466705 /* HomeFeedCollectionViewCell.xib */; };
 		F4183097206AB91D00466705 /* DiscoverCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4183095206AB91D00466705 /* DiscoverCollectionViewCell.swift */; };
 		F4183098206AB91D00466705 /* DiscoverCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4183096206AB91D00466705 /* DiscoverCollectionViewCell.xib */; };
-		F4276B4B206C2568000F872D /* JourneyHeaderTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4276B4A206C2568000F872D /* JourneyHeaderTableViewCell.swift */; };
-		F4276B4D206C287D000F872D /* JourneyAddCommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4276B4C206C287D000F872D /* JourneyAddCommentTableViewCell.swift */; };
 		F4385F33206D361500F22C90 /* JourneyCarouselCollapsedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4385F32206D361500F22C90 /* JourneyCarouselCollapsedViewController.swift */; };
 		F4882840206943930008A656 /* JourneyCarouselViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = F488283F206943930008A656 /* JourneyCarouselViewController.swift */; };
 		F4882847206955690008A656 /* JourneyCommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4882846206955690008A656 /* JourneyCommentTableViewCell.swift */; };
@@ -419,8 +417,6 @@
 		F4183092206AB90700466705 /* HomeFeedCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeFeedCollectionViewCell.xib; sourceTree = "<group>"; };
 		F4183095206AB91D00466705 /* DiscoverCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverCollectionViewCell.swift; sourceTree = "<group>"; };
 		F4183096206AB91D00466705 /* DiscoverCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DiscoverCollectionViewCell.xib; sourceTree = "<group>"; };
-		F4276B4A206C2568000F872D /* JourneyHeaderTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyHeaderTableViewCell.swift; sourceTree = "<group>"; };
-		F4276B4C206C287D000F872D /* JourneyAddCommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyAddCommentTableViewCell.swift; sourceTree = "<group>"; };
 		F4385F32206D361500F22C90 /* JourneyCarouselCollapsedViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyCarouselCollapsedViewController.swift; sourceTree = "<group>"; };
 		F488283F206943930008A656 /* JourneyCarouselViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyCarouselViewController.swift; sourceTree = "<group>"; };
 		F4882846206955690008A656 /* JourneyCommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyCommentTableViewCell.swift; sourceTree = "<group>"; };
@@ -768,9 +764,7 @@
 				81237780206A9EEB00A6BC02 /* Discover */,
 				81AB8A95205AD42900A98AFB /* ProfileTableViewCell.swift */,
 				F4D34A79205C482C00F4D50D /* EventCollectionViewCell.swift */,
-				F4276B4A206C2568000F872D /* JourneyHeaderTableViewCell.swift */,
 				F4882846206955690008A656 /* JourneyCommentTableViewCell.swift */,
-				F4276B4C206C287D000F872D /* JourneyAddCommentTableViewCell.swift */,
 				810DF96C2062A64C00B426BB /* FollowsTableViewCell.swift */,
 				817C6EE22069AB4F00010EDF /* FollowingCells */,
 				8123777F206A9EB900A6BC02 /* Collections */,
@@ -1054,19 +1048,6 @@
 				818DBB6F206986B500B91990 /* Notifications.storyboard */,
 			);
 			path = Storyboards;
-			sourceTree = "<group>";
-		};
-		EB49043DDF2017CF81237AA4 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				605B3EA013314F78CA5F88DA /* Pods-Phase.debug.xcconfig */,
-				FB898E9F3A3E362DE3BD876E /* Pods-Phase.release.xcconfig */,
-				9E534A5BA8A8AA1BD6106D54 /* Pods-PhaseTests.debug.xcconfig */,
-				DEE8D0B9C3C33D7DFA205C39 /* Pods-PhaseTests.release.xcconfig */,
-				B9EA73BB8347138AE4D02088 /* Pods-PhaseUITests.debug.xcconfig */,
-				CDBD6CF13FB8FF84C3DB0F83 /* Pods-PhaseUITests.release.xcconfig */,
-			);
-			name = Pods;
 			sourceTree = "<group>";
 		};
 		F4385F34206D798200F22C90 /* JourneyCarouselViewControllers */ = {
@@ -1438,7 +1419,6 @@
 				"${BUILT_PRODUCTS_DIR}/DGElasticPullToRefresh/DGElasticPullToRefresh.framework",
 				"${BUILT_PRODUCTS_DIR}/Material/Material.framework",
 				"${BUILT_PRODUCTS_DIR}/Motion/Motion.framework",
-				"${BUILT_PRODUCTS_DIR}/PageMenu/PageMenu.framework",
 				"${BUILT_PRODUCTS_DIR}/Parchment/Parchment.framework",
 				"${BUILT_PRODUCTS_DIR}/Pastel/Pastel.framework",
 				"${BUILT_PRODUCTS_DIR}/Segmentio/Segmentio.framework",
@@ -1464,7 +1444,6 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DGElasticPullToRefresh.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Material.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Motion.framework",
-				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/PageMenu.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Parchment.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Pastel.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Segmentio.framework",
@@ -1522,7 +1501,6 @@
 				8128B4752069481E009E0629 /* S3Manager.swift in Sources */,
 				81C368D1206B2EDF00A1873E /* SendingStatusCollectionViewCell.swift in Sources */,
 				81C1F86F2060ABAE0037BF42 /* SegmentioBuilder.swift in Sources */,
-				F4276B4B206C2568000F872D /* JourneyHeaderTableViewCell.swift in Sources */,
 				F418308C206AB7F700466705 /* CreateNewPostViewController.swift in Sources */,
 				817C6EDD2069A99500010EDF /* FollowsViewController.swift in Sources */,
 				81AB8AB2205AF77C00A98AFB /* UISearchBar+Extensions.swift in Sources */,
@@ -1546,7 +1524,6 @@
 				F4183093206AB90700466705 /* HomeFeedCollectionViewCell.swift in Sources */,
 				81AB8AC4205AFB4200A98AFB /* AnimateDiscoverToDetailVC.swift in Sources */,
 				810DF96D2062A64C00B426BB /* FollowsTableViewCell.swift in Sources */,
-				F4276B4D206C287D000F872D /* JourneyAddCommentTableViewCell.swift in Sources */,
 				81115DFF2069C1970052C9E1 /* WelcomeViewController.swift in Sources */,
 				810935D0205C45D200A95B30 /* ConfirmAccountView.swift in Sources */,
 				817C6EE82069AB7E00010EDF /* FollowingTableCell.swift in Sources */,

@@ -30,8 +30,6 @@ class JourneyEventDetailView: UIView {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "g")
         imageView.contentMode = .scaleAspectFit
-        imageView.layer.masksToBounds = true
-        imageView.clipsToBounds = true
         imageView.layer.borderWidth = 0.5
         imageView.layer.borderColor = UIColor.gray.cgColor
         imageView.layer.cornerRadius = bounds.width / 2
@@ -42,14 +40,14 @@ class JourneyEventDetailView: UIView {
         let label = UILabel()
         label.text = "Ty PodMaster"
         label.textAlignment = .left
-        label.backgroundColor = UIColor.green
+        label.backgroundColor = UIColor.white
         label.font = UIFont.systemFont(ofSize: 16, weight: .heavy)
         return label
     }()
     
     lazy var journeyDescriptionLabel: UILabel = {
         let label = UILabel()
-        label.backgroundColor = UIColor.green
+        label.backgroundColor = UIColor.white
         label.text = "Ty PodMaster. Ty PodMaster"
         label.textAlignment = .left
         label.font = UIFont.systemFont(ofSize: 12, weight: .regular)
@@ -60,7 +58,9 @@ class JourneyEventDetailView: UIView {
     lazy var journeyCommentTableView: UITableView = {
         let tableView = UITableView()
         tableView.register(JourneyCommentTableViewCell.self, forCellReuseIdentifier: cellID)
-        tableView.backgroundColor = .yellow
+        tableView.backgroundColor = .white
+        tableView.layer.borderColor = UIColor.lightGray.cgColor
+        tableView.layer.borderWidth = 0.5
         return tableView
     }()
     
@@ -69,8 +69,6 @@ class JourneyEventDetailView: UIView {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "g")
         imageView.contentMode = .scaleAspectFit
-        imageView.layer.masksToBounds = true
-        imageView.clipsToBounds = true
         imageView.layer.borderWidth = 0.5
         imageView.layer.borderColor = UIColor.gray.cgColor
         imageView.layer.cornerRadius = bounds.width / 2
@@ -115,15 +113,18 @@ class JourneyEventDetailView: UIView {
     
     // MARK: - Functions
     private func commonInit() {
-        backgroundColor = UIColor.orange
+        backgroundColor = UIColor.white
+        super.layer.borderColor = UIColor.lightGray.cgColor
+        super.layer.borderWidth = 0.5
+        super.makeCorner(withRadius: 10)
         setupViews()
     }
     
     // MARK: - Functions
     override func layoutSubviews() {
         super.layoutSubviews()
-        journeyProfileImageView.layer.cornerRadius = journeyProfileImageView.bounds.width/2.0
-        commentProfileImageView.layer.cornerRadius = commentProfileImageView.bounds.width/2.0
+        journeyProfileImageView.makeCircle()
+        commentProfileImageView.makeCircle()
         commentTextField.addPadding(UITextField.PaddingSide.left(8))
     }
     
@@ -152,6 +153,19 @@ class JourneyEventDetailView: UIView {
         delegate?.postButtonTapped()
     }
     
+    public func isViewHidden(_ state: Bool) {
+        guard state == false else {
+            journeyCommentTableView.isHidden = true
+            commentProfileImageView.isHidden = true
+            commentTextField.isHidden = true
+            return
+        }
+        journeyCommentTableView.isHidden = false
+        commentProfileImageView.isHidden = false
+        commentTextField.isHidden = false
+        return
+    }
+    
     // MARK: - Constraints
     // header constraints
     private func setupJourneyProfileImageView() {
@@ -159,7 +173,8 @@ class JourneyEventDetailView: UIView {
         journeyProfileImageView.snp.makeConstraints { (make) in
             make.top.equalTo(self).offset(8)
             make.leading.equalTo(self).offset(8)
-            make.width.equalTo(self).multipliedBy(0.2)
+//            make.width.equalTo(self).multipliedBy(0.25)
+            make.width.equalTo(40)
             make.height.equalTo(journeyProfileImageView.snp.width)
         }
     }
@@ -184,11 +199,12 @@ class JourneyEventDetailView: UIView {
         }
     }
     
+    
     // tableview constraints
     private func setupJourneyCommentTableViewConstraints() {
         addSubview(journeyCommentTableView)
         journeyCommentTableView.snp.makeConstraints { (make) in
-            make.top.equalTo(journeyDescriptionLabel.snp.bottom).offset(10)
+            make.top.equalTo(journeyProfileImageView.snp.bottom).offset(25)
             make.width.equalTo(self)
             make.centerX.equalTo(self)
             make.bottom.equalTo(commentProfileImageView.snp.top).offset(-15)
@@ -199,7 +215,7 @@ class JourneyEventDetailView: UIView {
     private func setupCommentProfileImageView() {
         addSubview(commentProfileImageView)
         commentProfileImageView.snp.makeConstraints { (make) in
-            make.width.equalTo(self).multipliedBy(0.09)
+            make.width.equalTo(self).multipliedBy(0.085)
             make.height.equalTo(commentProfileImageView.snp.width)
             make.bottom.equalTo(self).offset(-8)
             make.leading.equalTo(self).offset(8)

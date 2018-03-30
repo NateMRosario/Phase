@@ -21,8 +21,6 @@ class JourneyCommentTableViewCell: UITableViewCell {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "7-R5CLfl_400x400")
         imageView.contentMode = .scaleAspectFit
-        imageView.layer.masksToBounds = true
-        imageView.clipsToBounds = true
         imageView.layer.borderWidth = 0.5
         imageView.layer.borderColor = UIColor.gray.cgColor
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(profileImageTapped))
@@ -34,27 +32,25 @@ class JourneyCommentTableViewCell: UITableViewCell {
         label.text = "This is a comment. This is a comment. This is a comment. This is a comment. This is a comment. This is a comment. "
         label.textAlignment = .left
         label.numberOfLines = 0
-        label.font = UIFont.systemFont(ofSize: 16, weight: .regular)
+        label.font.withSize(13)
         return label
     }()
     
     lazy var timePostedLabel: UILabel = {
         let label = UILabel()
         label.text = "2h"
-        label.backgroundColor = UIColor.green
         label.textAlignment = .left
         label.textColor = UIColor.gray
-        label.font = UIFont.systemFont(ofSize: 14, weight: .light)
+        label.font = UIFont.systemFont(ofSize: 11, weight: .light)
         return label
     }()
     
     lazy var replyButton: UIButton = {
         let button = UIButton(type: UIButtonType.custom) as UIButton
-        button.backgroundColor = UIColor.yellow
         button.setTitle("Reply", for: .normal)
         button.titleLabel?.textAlignment = .left
         button.setTitleColor(UIColor.gray, for: .normal)
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 14, weight: .light)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 11, weight: .light)
         button.addTarget(self, action: #selector(replyButtonTapped), for: .touchUpInside)
         return button
     }()
@@ -82,7 +78,7 @@ class JourneyCommentTableViewCell: UITableViewCell {
     // profileImageView corner radius implementation
     override func layoutSubviews() {
         super.layoutSubviews()
-        profileImageView.layer.cornerRadius = profileImageView.bounds.width/2.0
+        profileImageView.makeCircle()
     }
     
     
@@ -101,8 +97,8 @@ class JourneyCommentTableViewCell: UITableViewCell {
     private func setupProfileImageView() {
         addSubview(profileImageView)
         profileImageView.snp.makeConstraints { (make) in
-            make.width.equalTo(45)
-            make.height.equalTo(45)
+            make.width.equalTo(40)
+            make.height.equalTo(profileImageView.snp.width)
             make.leading.equalTo(self).offset(8)
             make.top.equalTo(self).offset(8)
         }
@@ -136,13 +132,15 @@ class JourneyCommentTableViewCell: UITableViewCell {
     }
     
     
-//    private func configureCell(with post: Post) {
-//        self.profileImageView.image =
-//        self.profileNameLabel.text =
-//        self.commentLabel.text =
-//        self.timePostedLabel.text =
-//        self.replyButton
-//    }
+    public func configureCell(with event: EventDummyDate) {
+        let formattedString = NSMutableAttributedString()
+        formattedString.bold("\(event._userId):  ")
+        formattedString.normal(" \(event._caption)")
+        
+        self.profileImageView.image = UIImage(contentsOfFile: "\(String(describing: event._media))")
+        self.timePostedLabel.text = event._eventId
+        self.commentLabel.attributedText = formattedString
+    }
     
 }
 

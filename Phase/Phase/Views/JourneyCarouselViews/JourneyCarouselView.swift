@@ -9,6 +9,39 @@
 import UIKit
 import SnapKit
 
+extension UIView {
+    func makeCorner(withRadius radius: CGFloat) {
+        self.layer.cornerRadius = radius
+        self.layer.masksToBounds = true
+        self.clipsToBounds = true
+        self.layer.isOpaque = false
+    }
+    
+    func makeCircle() {
+        self.layer.masksToBounds = true
+        self.clipsToBounds = true
+        self.layer.cornerRadius = self.bounds.width/2.0
+    }
+    
+    func drawCircleInView(parentView: UIView, targetView: UIView, color: UIColor, diameter: CGFloat)
+    {
+        let square = CGSize(width: min(parentView.bounds.width, parentView.bounds.height), height: min(parentView.bounds.width, parentView.bounds.height))
+        let center = CGPoint(x: square.width / 2 - diameter, y: square.height / 2 - diameter)
+        
+        let circlePath = UIBezierPath(arcCenter: center, radius: CGFloat(diameter), startAngle: CGFloat(0), endAngle: CGFloat(Double.pi * 2), clockwise: true)
+        let shapeLayer = CAShapeLayer()
+        print(targetView.center)
+        shapeLayer.path = circlePath.cgPath
+        
+        shapeLayer.fillColor = color.cgColor
+        shapeLayer.strokeColor = color.cgColor
+        shapeLayer.lineWidth = 1.0
+        
+        targetView.backgroundColor = UIColor.clear
+        targetView.layer.addSublayer(shapeLayer)
+    }
+}
+
 class JourneyCarouselView: UIView {
     
     // Cell Identifier
@@ -44,31 +77,33 @@ class JourneyCarouselView: UIView {
     }
     
     private func commonInit() {
-        backgroundColor = UIColor.white
+        backgroundColor = UIColor(hue: 120/360, saturation: 0/100, brightness: 92/100, alpha: 1.0)
         setupViews()
     }
     
     // MARK: - Functions
     private func setupViews() {
-        setupCarouselSlider()
         setupCarouselCollectionView()
+        setupCarouselSlider()
+//        carouselSlider.thumbTintColor = UIColor(hue: 7/360, saturation: 0/100, brightness: 99/100, alpha: 1.0)
     }
     
     private func setupCarouselCollectionView() {
         addSubview(carouselCollectionView)
         carouselCollectionView.snp.makeConstraints { (make) in
-            make.top.equalTo(self)
+            make.top.equalTo(self).offset(8)
+            make.height.equalTo(self).multipliedBy(0.6)
             make.leading.equalTo(self)
             make.trailing.equalTo(self)
-            make.bottom.equalTo(carouselSlider.snp.top)
         }
     }
     
     private func setupCarouselSlider() {
         addSubview(carouselSlider)
         carouselSlider.snp.makeConstraints { (make) in
-            make.bottom.equalTo(self).offset(-8)
+            make.top.equalTo(carouselCollectionView.snp.bottom).offset(10)
             make.width.equalTo(self).multipliedBy(0.75)
+            make.height.equalTo(20)
             make.centerX.equalTo(self)
         }
     }

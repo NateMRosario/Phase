@@ -34,7 +34,7 @@ class JourneyCarouselViewController: UIViewController, UICollisionBehaviorDelega
     // MARK: - Properties
     private let journeyCarouselView = JourneyCarouselView()
     private let journeyCommentTableView = JourneyEventDetailView()
-//    private let commentCellId = JourneyCommentTableViewCell()
+
     let picArr = [#imageLiteral(resourceName: "a1"),#imageLiteral(resourceName: "a2"),#imageLiteral(resourceName: "a3"),#imageLiteral(resourceName: "a4"),#imageLiteral(resourceName: "a5"),#imageLiteral(resourceName: "a6"),#imageLiteral(resourceName: "a7"),#imageLiteral(resourceName: "a8"),#imageLiteral(resourceName: "a9"),#imageLiteral(resourceName: "a10"),#imageLiteral(resourceName: "a11")]
     var scrolledBySlider = false
     var sliderValue: Int = 0 {
@@ -63,16 +63,14 @@ class JourneyCarouselViewController: UIViewController, UICollisionBehaviorDelega
     override func viewDidLoad() {
         super.viewDidLoad()
         setupAnimation()
-        self.view.backgroundColor = UIColor.cyan
+        self.view.backgroundColor = UIColor.white
         self.journeyCarouselView.carouselCollectionView.delegate = self
         self.journeyCarouselView.carouselCollectionView.dataSource = self
-//        self.journeyCommentTableView.journeyCommentTableView.delegate = self
-//        self.journeyCommentTableView.journeyCommentTableView.dataSource = self
+
         setupView()
-        var offset:CGFloat = self.view.bounds.height * 0.2
+        let offset:CGFloat = self.view.bounds.height * 0.2
         let view = addViewController(atOffset: offset, dataForVC: nil)
         self.views.append(view!)
-            offset -= 50
         journeyCarouselView.carouselSlider.maximumValue = Float(picArr.count - 1)
         journeyCarouselView.carouselSlider.minimumValue = 0
         
@@ -114,11 +112,11 @@ class JourneyCarouselViewController: UIViewController, UICollisionBehaviorDelega
         if let view = collapsedViewController.view {
             view.frame = frameForView
             view.layer.cornerRadius = 10
-
+            
             
             self.addChildViewController(collapsedViewController)
             self.view.addSubview(view)
-            collapsedViewController.view.frame = CGRect(x: 0.0, y: view.frame.minY, width: self.view.bounds.width, height: self.view.bounds.height * 0.8)
+            collapsedViewController.view.frame = CGRect(x: self.view.bounds.width * 0.05, y: view.frame.minY, width: self.view.bounds.width * 0.9, height: self.view.bounds.height * 0.6)
             collapsedViewController.didMove(toParentViewController: self)
             
             
@@ -192,7 +190,7 @@ class JourneyCarouselViewController: UIViewController, UICollisionBehaviorDelega
         if viewHasReachedPinLocation {
             if !viewPinned {
                 var snapPosition = self.view.center
-                snapPosition.y += 30
+                snapPosition.y -= 10
                 
                 snap = UISnapBehavior(item: view, snapTo: snapPosition)
                 animator.addBehavior(snap)
@@ -249,6 +247,7 @@ class JourneyCarouselViewController: UIViewController, UICollisionBehaviorDelega
         }
         
     }
+    
 //    private func setupjourneyCommentTableView() {
 //        journeyCommentTableView.journeyCommentTableView.tableFooterView = footerViewId
 //        journeyCommentTableView.journeyCommentTableView.tableHeaderView = headerViewID
@@ -270,7 +269,7 @@ class JourneyCarouselViewController: UIViewController, UICollisionBehaviorDelega
             make.top.equalTo(self.view.safeAreaLayoutGuide)
             make.leading.equalTo(self.view.snp.leading)
             make.trailing.equalTo(self.view.snp.trailing)
-            make.height.equalTo(self.view.snp.height).multipliedBy(0.55)
+            make.bottom.equalTo(self.view.snp.bottom)
         }
     }
 }
@@ -284,10 +283,7 @@ extension JourneyCarouselViewController: iCarouselDataSource {
     func carousel(_ carousel: iCarousel, viewForItemAt index: Int, reusing view: UIView?) -> UIView {
         var label: UILabel
         var itemView: UIImageView
-//        if let view = view as? UIImageView {
-//            itemView = view
-//            label = itemView.viewWithTag(1) as! UILabel
-//        } else {
+        
             itemView = UIImageView(frame: CGRect(x: 0, y: 0,
                                                  width: UIScreen.main.bounds.width - 20,
                                                  height: UIScreen.main.bounds.width - 20))
@@ -302,8 +298,6 @@ extension JourneyCarouselViewController: iCarouselDataSource {
             label.font = label.font.withSize(50)
             label.tag = 1
             itemView.addSubview(label)
-      //  }
-       // label.text = "\(items[index])"
         return itemView
     }
 }
@@ -323,26 +317,4 @@ extension JourneyCarouselViewController: iCarouselDelegate {
         }
     }
 }
-
-//// MARK: - UITableViewDelegate
-//extension JourneyCarouselViewController: UITableViewDelegate {
-//    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//    }
-//}
-//
-//// MARK: - UITableViewDataSource
-//extension JourneyCarouselViewController: UITableViewDataSource {
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//        return 10
-//    }
-//
-//    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        let cell = tableView.dequeueReusableCell(withIdentifier: cellID, for: indexPath) as! JourneyCommentTableViewCell
-//        cell.layer.cornerRadius = 10
-//        cell.layer.masksToBounds = true
-//        cell.clipsToBounds = true
-//
-//        return cell
-//    }
-//}
 
