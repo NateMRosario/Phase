@@ -16,21 +16,16 @@ class PreviewViewController: UIViewController {
     
     var journeys = [Journey]() {
         didSet {
-            imagePreview.postCollectionView.reloadData()
+            DispatchQueue.main.async {
+                
+                self.journeys = self.journeys.sorted{ $0._creationDate as! Double > $1._creationDate as! Double }
+                self.imagePreview.postCollectionView.reloadData()
+            }
         }
     }
     
     var journeyIds = [String]() {
         didSet {
-            //            for id in journeyIds {
-            //                DynamoDBManager.shared.loadJourney(journeyId: id, completion: { (journey, error) in
-            //                    if let journey = journey {
-            //                        self.journeys.append(journey)
-            //                    } else if let error = error {
-            //
-            //                    }
-            //                })
-            //            }
             DynamoDBManager.shared.loadJourney(journeyId: journeyIds.last!, completion: { (journey, error) in
                 if let journey = journey {
                     self.journeys.append(journey)
@@ -97,11 +92,14 @@ class PreviewViewController: UIViewController {
             } else if let appUser = appUser {
                 guard let journeyIDs = appUser._journeys else { return }
                 for journey in journeyIDs {
+                    if !self.journeyIds.contains(journey) {
                     self.journeyIds.append(journey)
-                }
+                    }
+
             }
         }
         
+    }
     }
     
     

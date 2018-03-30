@@ -39,8 +39,8 @@ class AddJourneyViewController: UIViewController {
             showAlert(title: "Error", message: "Journey name cannot be empty"); return}
         
         let set = checkHashTags(from: addJourneyView.newJourneyDescriptionTextView.text)
-        DynamoDBManager.shared.createJourney(title: addJourneyView.newJourneyDescriptionTextView.text,
-                                             description: addJourneyView.newJourneyDescriptionTextView.text ?? "",
+        DynamoDBManager.shared.createJourney(title: addJourneyView.newJourneyNameTextField.text!,
+                                             description: addJourneyView.newJourneyDescriptionTextView.text!,
                                              hashtags: set, completion: {(error) in
             if let error = error {
                 DispatchQueue.main.async {
