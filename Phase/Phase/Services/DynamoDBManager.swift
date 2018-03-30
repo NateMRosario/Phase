@@ -50,14 +50,24 @@ extension DynamoDBManager {
         var user: AppUser = AppUser()
         user._userId = userId
         
-        mapper.load(AppUser.self, hashKey: userId, rangeKey: nil) { (loadedUser, error) in
-            if let error = error {
+        mapper.load(AppUser.self, hashKey: userId, rangeKey: nil, configuration: nil).continueWith { (task) -> Any? in
+            if let error = task.error {
                 completion(nil, error)
-            } else if let loadedUser = loadedUser {
+            } else if let loadedUser = task.result {
                 user = loadedUser as! AppUser
                 completion(user, nil)
             }
+            return nil
         }
+        
+//        mapper.load(AppUser.self, hashKey: userId, rangeKey: nil) { (loadedUser, error) in
+//            if let error = error {
+//                completion(nil, error)
+//            } else if let loadedUser = loadedUser {
+//                user = loadedUser as! AppUser
+//                completion(user, nil)
+//            }
+//        }
     }
     
     func updateUser(appUser: AppUser, completion: @escaping (Error?) -> Void) {
