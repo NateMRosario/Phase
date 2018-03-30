@@ -15,12 +15,17 @@ class HomeViewController: UIViewController {
         present(UINavigationController(rootViewController: ChatExamplesViewController()), animated: true)
     }
     
-    //TODO: Add character limit
     fileprivate var layout = CollectionViewLayout(number: 1)
     let configure = CollectionViewLayout.Configuration(numberOfColumns: 1)
     fileprivate let loadingView = DGElasticPullToRefreshLoadingViewCircle()
     
     fileprivate var contents = [#imageLiteral(resourceName: "nostalgic1"), #imageLiteral(resourceName: "nostalgic2"), #imageLiteral(resourceName: "nostalgic3"), #imageLiteral(resourceName: "nostalgic4")]
+    
+    var appUser = AppUser()
+    var appJourney = [Journey]()
+    var appEvents = [Event]()
+    
+    var eventIDs = Set<String>()
     
     @IBOutlet weak var homeCollectionView: UICollectionView! {
         didSet {
@@ -36,8 +41,9 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         loading.color = UIColor.red
-        
-//        fetchContents()
+        fetchCurrentUser()
+        fetchJourney()
+        fetchEvents()
         self.homeCollectionView.alwaysBounceVertical = true
         loadingView.tintColor = UIColor(red: 78/255.0, green: 221/255.0, blue: 200/255.0, alpha: 1.0)
         homeCollectionView.dg_addPullToRefreshWithActionHandler({ [weak self] () -> Void in
@@ -53,10 +59,32 @@ class HomeViewController: UIViewController {
         navigationItem.title = "Phase"
     }
     
-    private func fetchContents() {
-        DB.fetchContents() { [weak self] contents in
-            self?.contents = contents
-            self?.homeCollectionView.reloadData()
+    private func fetchCurrentUser() {
+        DynamoDBManager.shared.loadUser(userId: CognitoManager.shared.userId!) { (user, error) in
+            self.appUser = user
+        }
+    }
+    private func fetchJourney() {
+        var currentEvents = [Journey]()
+        guard let journeyIds = appUser?._journeysFollowed else {return}
+        for journey in journeyIds {
+            DynamoDBManager.shared.loadJourney(journeyId: journey, completion: { (journey, error) in
+                guard let journey = journey else {return}
+                currentEvents.append(journey)
+                self.appJourney.append(journey)
+            })
+        }
+        for event in currentEvents {
+            guard let newEvent = event._events else {return}
+            eventIDs = newEvent
+        }
+    }
+    private func fetchEvents() {
+        for id in self.eventIDs {
+            DynamoDBManager.shared.loadEvent(eventId: id, completion: { (event, error) in
+                guard let event = event else {return}
+                self.appEvents.append(event)
+            })
         }
     }
     
@@ -67,7 +95,7 @@ class HomeViewController: UIViewController {
 }
 extension HomeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return contents.count + 1
+        return appEvents.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -84,9 +112,13 @@ extension HomeViewController: UICollectionViewDataSource {
         }
         
         let cell = collectionView.dequeueReusableCell(with: HomeFeedCollectionViewCell.self, for: indexPath)
-        let content = contents[indexPath.row]
-        cell.set(image: contents[indexPath.row])
-        switchItUp(image: content, cell: cell)
+        let event = appEvents[indexPath.row]
+        let journey = appJourney[indexPath.row]
+        guard let user = appUser else {return cell}
+        cell.configureCell(event: event, journey: journey, user: user)
+        //        let content = contents[indexPath.row]
+        //        cell.set(image: contents[indexPath.row])
+        //        switchItUp(image: content, cell: cell)
         cell.layer.cornerRadius = 8
         return cell
     }
@@ -109,7 +141,6 @@ extension HomeViewController: UICollectionViewDataSource {
             break
         }
     }
-    //
 }
 extension HomeViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
     //TODO:
