@@ -137,7 +137,7 @@ class JourneyCommentTableViewCell: UITableViewCell {
         formattedString.bold("\(event._userId):  ")
         formattedString.normal(" \(event._caption)")
         
-        self.profileImageView.image = UIImage(contentsOfFile: "\(String(describing: event._media))")
+        self.profileImageView.image = UIImage(imageLiteralResourceName: "\(event._media)")
         self.timePostedLabel.text = event._eventId
         self.commentLabel.attributedText = formattedString
     }

@@ -22,6 +22,8 @@ class DiscoveryViewController: UIViewController {
     }
     
     let urls = [
+        "https://images.unsplash.com/photo-1498605380187-1800640888d5?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=ef329bb3843b73393f198e296099264c&auto=format&fit=crop&w=943&q=80",
+        "https://images.unsplash.com/photo-1511066561711-5a67745b6134?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=43123b20cd0d20c5789d33c7ffbb4f70&auto=format&fit=crop&w=2134&q=80",
         "https://images.unsplash.com/photo-1520824247747-126a95298fe3?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjF9&s=e74039124f299f828767e569585b1dd0",
         "https://images.unsplash.com/photo-1519374086542-9ff30b72beec?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjF9&s=bece3c94ca262933aae9e60e607cc84a",
         "https://images.unsplash.com/photo-1519383886281-9b35dfe073bd?ixlib=rb-0.3.5&q=80&fm=jpg&crop=entropy&cs=tinysrgb&w=1080&fit=max&ixid=eyJhcHBfaWQiOjF9&s=d4a46e874369abf3eddf1d056b49c3d7",
@@ -144,10 +146,10 @@ extension DiscoveryViewController: UICollectionViewDataSource {
 
 extension DiscoveryViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let detailNC = DetailNavigationViewController.instantiate(withStoryboard: "DiscoverDetail")
+        let detailNC = JourneyCarouselViewController()
 
         selectedIndexPath = indexPath
-        present(detailNC, animated: true, completion: nil)
+        navigationController?.pushViewController(detailNC, animated: true)
     }
 }
 

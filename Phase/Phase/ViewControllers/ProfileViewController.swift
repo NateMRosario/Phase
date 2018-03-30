@@ -98,7 +98,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate {
     // MARK: - View life cycles
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        bioLabel.text = "An Asian boy living in new york city An Asian boy living in new york cityAn Asian boy living in new york cityAn Asian boy living in new york cityAn Asian boy living in new york cityAn Asian boy living in new york cityAn Asian boy living in new york cityAn Asian boy living in new york city"
+        bioLabel.text = "A VEEREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY LOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOONNNNNNNNNNNNNNNNNNNNNNNNNNNNNNGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG header"
         
         // This makes tableView header height dynamic
         let size = profileView.systemLayoutSizeFitting(UILayoutFittingCompressedSize)

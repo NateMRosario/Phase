@@ -285,8 +285,8 @@ extension JourneyCarouselViewController: iCarouselDataSource {
         var itemView: UIImageView
         
             itemView = UIImageView(frame: CGRect(x: 0, y: 0,
-                                                 width: UIScreen.main.bounds.width - 20,
-                                                 height: UIScreen.main.bounds.width - 20))
+                                                 width: journeyCarouselView.carouselCollectionView.frame.width,
+                                                 height: journeyCarouselView.carouselCollectionView.frame.height))
             itemView.image = picArr[index]
             itemView.layer.masksToBounds = true
             itemView.clipsToBounds = true
