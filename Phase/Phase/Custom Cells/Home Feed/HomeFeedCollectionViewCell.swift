@@ -11,6 +11,8 @@ import SnapKit
 
 class HomeFeedCollectionViewCell: UICollectionViewCell {
     
+    
+    var eventImage: UIImage?
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var timeStamp: UILabel!
     @IBOutlet weak var journeyLabel: UILabel!
@@ -41,6 +43,15 @@ class HomeFeedCollectionViewCell: UICollectionViewCell {
         }
     }
     
+    public func configureCell(event: Event, journey: Journey, user: AppUser) {
+        userName.text = user._username
+        timeStamp.text = event._creationDate?.description
+        journeyLabel.text =  journey._title
+        likeLabel.text = event._numberOfLikes?.description
+        postLabel.text = event._caption
+        guard let image = eventImage else {return}
+        userImage.image = image
+    }
     public func set(image: UIImage) {
         contentImage.image = image
     }
