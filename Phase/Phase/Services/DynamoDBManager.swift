@@ -54,6 +54,7 @@ extension DynamoDBManager {
             if let error = task.error {
                 completion(nil, error)
             } else if let loadedUser = task.result {
+                print(task.result)
                 user = loadedUser as! AppUser
                 completion(user, nil)
             }
@@ -147,14 +148,16 @@ extension DynamoDBManager {
         
         mapper.save(newJourney) { (error) in
             if let error = error {
+                print(error)
                 completion(error)
             } else {
-                
+                print("about to load user...")
                 self.loadUser(userId: CognitoManager.shared.userId!, completion: { (user, error) in
                     if let error = error {
+                        print(error)
                         completion(error)
                     } else if let user = user {
-                        
+                        print(user)
                         let userToUpdate = user
                         
                         var newSet = user._journeys ?? Set<String>()

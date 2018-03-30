@@ -238,14 +238,14 @@ extension PreviewViewController: UITextViewDelegate {
             textView.resignFirstResponder()
             return false
         }
-        let currentText = textView.text ?? ""
+        let currentText = textView.text ?? "CHANGE LATER"
         guard let stringRange = Range(range, in: currentText) else { return false }
         let changedText = currentText.replacingCharacters(in: stringRange, with: text)
         return changedText.count <= 120 // Pass your character count here
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
-        imagePreview.postTextView.text = ""
+        imagePreview.postTextView.text = "CHANGE LATER"
         imagePreview.postTextView.textColor = .black
     }
     
