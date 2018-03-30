@@ -48,6 +48,9 @@ class OnboardingLoginViewController: UIViewController {
         
         pastelView.startAnimation()
         view.insertSubview(pastelView, at: 0)
+        
+        userLoginInfoTF.text = "test"
+        passwordTF.text = "123456"
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
