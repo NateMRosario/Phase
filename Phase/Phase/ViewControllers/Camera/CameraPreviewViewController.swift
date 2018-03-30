@@ -72,7 +72,12 @@ class PreviewViewController: UIViewController {
                 )
         
         imagePreview.imagePreviewView.image = image
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
         getJourneys()
+
     }
     
     init(image: UIImage) {
