@@ -35,7 +35,14 @@ class JourneyCarouselViewController: UIViewController, UICollisionBehaviorDelega
     private let journeyCarouselView = JourneyCarouselView()
     private let journeyCommentTableView = JourneyEventDetailView()
 //    private let commentCellId = JourneyCommentTableViewCell()
-    
+    let picArr = [#imageLiteral(resourceName: "a1"),#imageLiteral(resourceName: "a2"),#imageLiteral(resourceName: "a3"),#imageLiteral(resourceName: "a4"),#imageLiteral(resourceName: "a5"),#imageLiteral(resourceName: "a6"),#imageLiteral(resourceName: "a7"),#imageLiteral(resourceName: "a8"),#imageLiteral(resourceName: "a9"),#imageLiteral(resourceName: "a10"),#imageLiteral(resourceName: "a11")]
+    var scrolledBySlider = false
+    var sliderValue: Int = 0 {
+        didSet {
+            journeyCarouselView.carouselCollectionView.scrollToItem(at: sliderValue, animated: false)
+            journeyCarouselView.carouselCollectionView.reloadData()
+        }
+    }
     
     private let cellID = "JourneyCommentTableViewCell"
     
@@ -66,12 +73,23 @@ class JourneyCarouselViewController: UIViewController, UICollisionBehaviorDelega
         let view = addViewController(atOffset: offset, dataForVC: nil)
         self.views.append(view!)
             offset -= 50
+        journeyCarouselView.carouselSlider.maximumValue = Float(picArr.count - 1)
+        journeyCarouselView.carouselSlider.minimumValue = 0
+        
+        journeyCarouselView.carouselSlider.addTarget(self,
+                                                     action: #selector(sliderValueChanged(_:)),
+                                                     for: .valueChanged)
     }
     
     // MARK: - Functions
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    @objc func sliderValueChanged(_ sender: UISlider) {
+        scrolledBySlider = true
+        sliderValue = Int(sender.value)
     }
     
     private func setupView() {
@@ -255,28 +273,28 @@ class JourneyCarouselViewController: UIViewController, UICollisionBehaviorDelega
             make.height.equalTo(self.view.snp.height).multipliedBy(0.55)
         }
     }
-    
 }
 
 // MARK: - iCarouselDataSource
 extension JourneyCarouselViewController: iCarouselDataSource {
     func numberOfItems(in carousel: iCarousel) -> Int {
-        return 10
+        return picArr.count
     }
     
     func carousel(_ carousel: iCarousel, viewForItemAt index: Int, reusing view: UIView?) -> UIView {
         var label: UILabel
         var itemView: UIImageView
-        if let view = view as? UIImageView {
-            itemView = view
-            label = itemView.viewWithTag(1) as! UILabel
-        } else {
-            itemView = UIImageView(frame: CGRect(x: 0, y: 0, width: 385, height: 385))
-            itemView.image = UIImage(named: "g")
-            itemView.contentMode = .scaleAspectFit
+//        if let view = view as? UIImageView {
+//            itemView = view
+//            label = itemView.viewWithTag(1) as! UILabel
+//        } else {
+            itemView = UIImageView(frame: CGRect(x: 0, y: 0,
+                                                 width: UIScreen.main.bounds.width - 20,
+                                                 height: UIScreen.main.bounds.width - 20))
+            itemView.image = picArr[index]
             itemView.layer.masksToBounds = true
             itemView.clipsToBounds = true
-            itemView.contentMode = .center
+            itemView.contentMode = .scaleAspectFill
             
             label = UILabel(frame: itemView.bounds)
             label.backgroundColor = .clear
@@ -284,9 +302,8 @@ extension JourneyCarouselViewController: iCarouselDataSource {
             label.font = label.font.withSize(50)
             label.tag = 1
             itemView.addSubview(label)
-            
-        }
-        label.text = "\(items[index])"
+      //  }
+       // label.text = "\(items[index])"
         return itemView
     }
 }
@@ -300,6 +317,11 @@ extension JourneyCarouselViewController: iCarouselDelegate {
         return value
     }
     
+    func carouselDidScroll(_ carousel: iCarousel) {
+        if scrolledBySlider == false {
+            journeyCarouselView.carouselSlider.value = Float(carousel.currentItemIndex)
+        }
+    }
 }
 
 //// MARK: - UITableViewDelegate
