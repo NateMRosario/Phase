@@ -85,7 +85,6 @@ class JourneyCarouselView: UIView {
     private func setupViews() {
         setupCarouselCollectionView()
         setupCarouselSlider()
-//        carouselSlider.thumbTintColor = UIColor(hue: 7/360, saturation: 0/100, brightness: 99/100, alpha: 1.0)
     }
     
     private func setupCarouselCollectionView() {

@@ -34,7 +34,7 @@ class JourneyCarouselViewController: UIViewController, UICollisionBehaviorDelega
     // MARK: - Properties
     private let journeyCarouselView = JourneyCarouselView()
     private let journeyCommentTableView = JourneyEventDetailView()
-
+    
     let picArr = [#imageLiteral(resourceName: "a1"),#imageLiteral(resourceName: "a2"),#imageLiteral(resourceName: "a3"),#imageLiteral(resourceName: "a4"),#imageLiteral(resourceName: "a5"),#imageLiteral(resourceName: "a6"),#imageLiteral(resourceName: "a7"),#imageLiteral(resourceName: "a8"),#imageLiteral(resourceName: "a9"),#imageLiteral(resourceName: "a10"),#imageLiteral(resourceName: "a11")]
     var scrolledBySlider = false
     var sliderValue: Int = 0 {
@@ -66,7 +66,7 @@ class JourneyCarouselViewController: UIViewController, UICollisionBehaviorDelega
         self.view.backgroundColor = UIColor.white
         self.journeyCarouselView.carouselCollectionView.delegate = self
         self.journeyCarouselView.carouselCollectionView.dataSource = self
-
+        
         setupView()
         let offset:CGFloat = self.view.bounds.height * 0.2
         let view = addViewController(atOffset: offset, dataForVC: nil)
@@ -248,12 +248,12 @@ class JourneyCarouselViewController: UIViewController, UICollisionBehaviorDelega
         
     }
     
-//    private func setupjourneyCommentTableView() {
-//        journeyCommentTableView.journeyCommentTableView.tableFooterView = footerViewId
-//        journeyCommentTableView.journeyCommentTableView.tableHeaderView = headerViewID
-//        journeyCommentTableView.journeyCommentTableView.tableHeaderView?.setNeedsLayout()
-//        journeyCommentTableView.journeyCommentTableView.tableHeaderView?.layoutIfNeeded()
-//    }
+    //    private func setupjourneyCommentTableView() {
+    //        journeyCommentTableView.journeyCommentTableView.tableFooterView = footerViewId
+    //        journeyCommentTableView.journeyCommentTableView.tableHeaderView = headerViewID
+    //        journeyCommentTableView.journeyCommentTableView.tableHeaderView?.setNeedsLayout()
+    //        journeyCommentTableView.journeyCommentTableView.tableHeaderView?.layoutIfNeeded()
+    //    }
     
     private func getPost() {}
     
@@ -281,23 +281,15 @@ extension JourneyCarouselViewController: iCarouselDataSource {
     }
     
     func carousel(_ carousel: iCarousel, viewForItemAt index: Int, reusing view: UIView?) -> UIView {
-        var label: UILabel
         var itemView: UIImageView
-        
-            itemView = UIImageView(frame: CGRect(x: 0, y: 0,
-                                                 width: journeyCarouselView.carouselCollectionView.frame.width,
-                                                 height: journeyCarouselView.carouselCollectionView.frame.height))
-            itemView.image = picArr[index]
-            itemView.layer.masksToBounds = true
-            itemView.clipsToBounds = true
-            itemView.contentMode = .scaleAspectFill
-            
-            label = UILabel(frame: itemView.bounds)
-            label.backgroundColor = .clear
-            label.textAlignment = .center
-            label.font = label.font.withSize(50)
-            label.tag = 1
-            itemView.addSubview(label)
+        itemView = UIImageView(frame: CGRect(x: 0, y: 0,
+                                             width: journeyCarouselView.carouselCollectionView.frame.width,
+                                             height: journeyCarouselView.carouselCollectionView.frame.height
+        ))
+        itemView.image = picArr[index]
+        itemView.layer.masksToBounds = true
+        itemView.clipsToBounds = true
+        itemView.contentMode = .scaleAspectFill
         return itemView
     }
 }
@@ -311,10 +303,9 @@ extension JourneyCarouselViewController: iCarouselDelegate {
         return value
     }
     
-    func carouselDidScroll(_ carousel: iCarousel) {
-        if scrolledBySlider == false {
-            journeyCarouselView.carouselSlider.value = Float(carousel.currentItemIndex)
-        }
+    func carouselCurrentItemIndexDidChange(_ carousel: iCarousel) {
+        journeyCarouselView.carouselSlider.value = Float(carousel.currentItemIndex)
     }
+
 }
 
