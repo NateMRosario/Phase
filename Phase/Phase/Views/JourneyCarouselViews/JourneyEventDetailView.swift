@@ -79,24 +79,27 @@ class JourneyEventDetailView: UIView {
         let button = UIButton(type: UIButtonType.custom) as UIButton
         button.backgroundColor = UIColor.white
         button.setTitle("Post", for: .normal)
-        button.titleLabel?.textAlignment = .center
-        button.setTitleColor(UIColor.red, for: .normal)
+        button.titleLabel?.textAlignment = .right
+        button.setTitleColor(UIColor.lightGray, for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 11)
-        //        button.contentEdgeInsets = UIEdgeInsetsMake(2, 2, 2, 2)
         button.addTarget(self, action: #selector(postButtonTapped), for: .touchUpInside)
         return button
     }()
     
     lazy var commentTextField: UITextField = {
         let textfield = UITextField()
-        textfield.rightView = postButton
+        //        textfield.rightView = postButton
         textfield.rightViewMode = .always
         textfield.placeholder = "Add a comment..."
         textfield.layer.cornerRadius = 14.0
         textfield.layer.borderColor = UIColor.gray.cgColor
         textfield.layer.borderWidth = 0.5
         textfield.textAlignment = .left
-        textfield.layoutEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 5)
+        textfield.layoutEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 25)
+        let button = postButton
+        button.frame = CGRect(x: CGFloat(textfield.frame.size.width - 25), y: CGFloat(5), width: CGFloat(20), height: CGFloat(20))
+        button.titleLabel?.layoutEdgeInsets.right = 25
+        textfield.rightView = button
         return textfield
     }()
     
@@ -118,6 +121,7 @@ class JourneyEventDetailView: UIView {
         super.layer.borderWidth = 0.5
         super.makeCorner(withRadius: 10)
         setupViews()
+        updateCommentTextFieldRightView()
     }
     
     // MARK: - Functions
@@ -136,6 +140,14 @@ class JourneyEventDetailView: UIView {
         setupCommentTextField()
         setupJourneyCommentTableViewConstraints()
         addSubview(postButton)
+    }
+    
+    func updateCommentTextFieldRightView() {
+        let image = postButton
+        image.frame = CGRect(x: CGFloat(commentTextField.frame.size.width - 25), y: CGFloat(5), width: CGFloat(25), height: CGFloat(25))
+//        button.imageEdgeInsets = UIEdgeInsetsMake(0, -16, 0, 0)
+//        button.frame = CGRect(x: 0, y: 0, width: 29, height: 29)
+        commentTextField.rightView = image
     }
     
     @objc private func journeyProfileImageButtonTapped() {
@@ -173,7 +185,7 @@ class JourneyEventDetailView: UIView {
         journeyProfileImageView.snp.makeConstraints { (make) in
             make.top.equalTo(self).offset(8)
             make.leading.equalTo(self).offset(8)
-//            make.width.equalTo(self).multipliedBy(0.25)
+            //            make.width.equalTo(self).multipliedBy(0.25)
             make.width.equalTo(40)
             make.height.equalTo(journeyProfileImageView.snp.width)
         }
