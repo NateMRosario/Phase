@@ -8,7 +8,16 @@
 
 import UIKit
 
+enum CellSelected {
+    case selected
+    case notSelected
+}
+
 class JourneyCollectionViewCell: UICollectionViewCell {
+    
+    var journey: Journey?
+    
+    var state: CellSelected = .notSelected
     
     // MARK: - Outlets
     lazy var journeyImageView: UIImageView = {

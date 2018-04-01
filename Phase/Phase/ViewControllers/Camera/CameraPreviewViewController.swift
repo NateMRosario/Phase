@@ -35,11 +35,11 @@ class PreviewViewController: UIViewController {
             })
         }
     }
-
     
     public var image: UIImage!
     
     var selectedIndexPath: IndexPath!
+    var selectedJourney: Journey!
     
     //var mediaType: MediaType
     
@@ -61,10 +61,10 @@ class PreviewViewController: UIViewController {
         imagePreview.saveButton.addTarget(self,
                                           action: #selector(save),
                                           for: .touchUpInside)
-                imagePreview.postButton.addTarget(self,
-                                                 action: #selector(post),
-                                                 for: .touchUpInside
-                )
+        imagePreview.postButton.addTarget(self,
+                                          action: #selector(post),
+                                          for: .touchUpInside
+        )
         
         imagePreview.imagePreviewView.image = image
     }
@@ -101,10 +101,7 @@ class PreviewViewController: UIViewController {
         
     }
     }
-    
-    
-    
-    
+  
     private func addObservers() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
@@ -132,9 +129,17 @@ class PreviewViewController: UIViewController {
     
     @objc func post(){
         let caption = imagePreview.postTextView.text ?? " "
-//        DynamoDBManager.shared.createEvent(journey: <#T##Journey#>, image: image, caption: caption) { (error) in
-//
-//        }
+        
+        
+        DynamoDBManager.shared.createEvent(journey: selectedJourney, image: image, caption: caption) { (error) in
+            if let error = error {
+                DispatchQueue.main.async {
+                    self.showAlert(title: "Error", message: "Error creating event: \(error)")
+                }
+            } else {
+                
+            }
+        }
     }
     
     @objc func save(sender: UIButton){
@@ -159,16 +164,18 @@ class PreviewViewController: UIViewController {
 
 extension PreviewViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        if indexPath.row == 0 {
-            selectedIndexPath = nil
-        } else if selectedIndexPath == nil {
-            selectedIndexPath = indexPath
-        } else {
-            // MARK: - PHONY
-            let previousCell =  collectionView.cellForItem(at: selectedIndexPath) as! JourneyCollectionViewCell
-            previousCell.selectedJourneyLayer.isHidden = true
-            selectedIndexPath = indexPath
-        }
+//        if indexPath.row == 0 {
+//            selectedIndexPath = nil
+//        } else if selectedIndexPath == nil {
+//            selectedIndexPath = indexPath
+//        } else {
+//            // MARK: - PHONY
+//            let previousCell =  collectionView.cellForItem(at: selectedIndexPath) as! JourneyCollectionViewCell
+//            previousCell.selectedJourneyLayer.isHidden = true
+//            selectedIndexPath = indexPath
+//        }
+        
+//        selectedJourney = journeys[indexPath.row - 1]
         
         if indexPath.row == 0 {
             let cell = collectionView.cellForItem(at: indexPath) as! AddJourneyCollectionViewCell
@@ -177,10 +184,12 @@ extension PreviewViewController: UICollectionViewDelegate {
             print("add journey cell selected")
         } else {
             let cell = collectionView.cellForItem(at: indexPath) as! JourneyCollectionViewCell
-//            cell.journeyImageView.image = journeys[indexPath.row - 1]
+            selectedJourney = cell.journey!
             if cell.selectedJourneyLayer.isHidden == true {
+                cell.state = .selected
                 cell.selectedJourneyLayer.isHidden = false
             } else {
+                cell.state = .notSelected
                 cell.selectedJourneyLayer.isHidden = true
             }
             imagePreview.journeyNameLabel.text = cell.journeyNameLabel.text
@@ -200,8 +209,14 @@ extension PreviewViewController: UICollectionViewDataSource {
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: imagePreview.journeyCellID, for: indexPath) as! JourneyCollectionViewCell
+            if cell.state == .selected {
+                cell.selectedJourneyLayer.isHidden = false
+            } else {
+                cell.selectedJourneyLayer.isHidden = true
+            }
 //            cell.journeyImageView.image = journeys[indexPath.row - 1]
             let journey = journeys[indexPath.row - 1]
+            cell.journey = journey
             cell.journeyNameLabel.text = journey._title
             return cell
         }
