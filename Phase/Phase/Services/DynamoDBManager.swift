@@ -269,8 +269,16 @@ extension DynamoDBManager {
             return
         }
         
+    }
+    
+    func likeJourney() {
+        guard let userId = CognitoManager.shared.userId else {
+            completion(CognitoError.noActiveUser)
+            return
+        }
         
-
+        
+        
     }
     
 }
