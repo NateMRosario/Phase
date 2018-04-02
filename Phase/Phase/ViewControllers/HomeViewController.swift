@@ -27,7 +27,13 @@ class HomeViewController: UIViewController {
         }
     }
     
-    @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var tableView: UITableView! {
+        didSet {
+            tableView.estimatedRowHeight = 400
+            tableView.rowHeight = UITableViewAutomaticDimension
+            tableView.separatorStyle = .none
+        }
+    }
     
     //TODO: Add character limit
     fileprivate let loadingView = DGElasticPullToRefreshLoadingViewCircle()

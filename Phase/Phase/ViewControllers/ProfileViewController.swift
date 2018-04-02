@@ -10,10 +10,17 @@ import Material
 import SnapKit
 import Segmentio
 
-class ProfileViewController: UIViewController, UITableViewDelegate {
+class ProfileViewController: UIViewController, DynamoDBUserActionsDelegate {
+    
+    convenience init?(loadSelectedUser: String) {
+        self.init()
+        self.userInfoToDisplay = loadSelectedUser
+    }
     
     @IBAction func hitUpDMs(_ sender: UIButton) {
+        
     }
+    
     @IBAction func goToUserSocialDetail(_ sender: UIButton) {
         switch sender.tag {
         case 0:
@@ -28,6 +35,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate {
             break
         }
     }
+    
     @IBOutlet weak var segmentedViewTop: NSLayoutConstraint!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var username: UILabel!
@@ -75,7 +83,14 @@ class ProfileViewController: UIViewController, UITableViewDelegate {
         }
     }
     @IBAction func followButtonPressed(_ sender: UIButton) {
-        
+        guard let user = currentDisplayedUser else {followButton.isEnabled = false; return}
+        DynamoDBManager.shared.followUser(user: user) { (error) in
+            if let error = error {
+                self.showAlert(title: "Error", message: "\(error.localizedDescription)")
+            } else {
+                
+            }
+        }
     }
     
     // Sticky header and fake nav bar
@@ -95,6 +110,21 @@ class ProfileViewController: UIViewController, UITableViewDelegate {
         return hiv
     }()
     
+    // Varriables to display user profile when selecting someone's profile
+    private var currentDisplayedUser: AppUser? {
+        didSet {
+            setupUserInfo(with: currentDisplayedUser!)
+        }
+    }
+    public var userInfoToDisplay = "" {
+        didSet {
+            loadData(for: userInfoToDisplay)
+        }
+    }
+    public var isOwnProfile = true
+    private var userJourneys = [Journey]()
+    let dynamoDBActions = DynamoDBManager.shared
+    
     // MARK: - View life cycles
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -108,12 +138,14 @@ class ProfileViewController: UIViewController, UITableViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        if isOwnProfile {
+            loadData(for: CognitoManager.shared.userId)
+        }
+        dynamoDBActions.delegate = self
         navigationController?.hidesBarsOnSwipe = true
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         setupUI()
-        loadData()
         tableView.delegate = self
         tableView.dataSource = self
         tableView.contentInset = UIEdgeInsetsMake(headerView.frame.height, 0, 0, 0)
@@ -122,13 +154,43 @@ class ProfileViewController: UIViewController, UITableViewDelegate {
         followButton.isHidden = true
         hitUpDM.isHidden = true
     }
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(true)
-        loadData()
+    
+    private func loadData(for user: String?) {
+        if let user = user {
+            DynamoDBManager.shared.loadUser(userId: user) { (appUser, error) in
+                if let error = error {
+                    self.showAlert(title: "Error", message: "Error displaying user profile, please try again. \(error.localizedDescription)")
+                } else {
+                    self.currentDisplayedUser = appUser
+                }
+            }
+        }
     }
     
-    private func loadData() {
+    private func setupUserInfo(with userInfo: AppUser) {
+        loadJourneys(for: userInfo)
+        DispatchQueue.main.async {
+            self.username.text = userInfo._username
+        }
         
+        if let headerImageUrl = userInfo._headerImage {
+            ImageAPIClient.manager.loadImage(from: headerImageUrl,
+                                             completionHandler: {self.headerImageView.image = $0},
+                                             errorHandler: {(print($0))})
+        }
+    }
+    private func loadJourneys(for user: AppUser) {
+        if let journeys = user._journeys {
+            for journey in journeys {
+                dynamoDBActions.loadJourney(journeyId: journey) { (journey, error) in
+                    if let error = error {
+                        self.showAlert(title: "Error", message: "Failed to load user Journeys")
+                    } else {
+                        self.userJourneys.append(journey!)
+                    }
+                }
+            }
+        }
     }
     
     private func setupUI() {
@@ -175,6 +237,19 @@ class ProfileViewController: UIViewController, UITableViewDelegate {
     fileprivate func selectedSegmentioIndex() -> Int {
         return 0
     }
+    
+    fileprivate func selectedIndexChanged(to index: Int) {
+        switch index {
+        case 0:
+            print(0)
+        case 1:
+            print(1)
+        case 2:
+            print(2)
+        default:
+            break
+        }
+    }
 }
 
 //MARK: - TABLEVIEW DATASOURCE
@@ -194,7 +269,7 @@ extension ProfileViewController: UITableViewDataSource {
             SegmentioBuilder.buildSegmentioView(segmentioView: segmentioView, segmentioStyle: .onlyLabel)
             segmentioView.selectedSegmentioIndex = selectedSegmentioIndex()
             segmentioView.valueDidChange = { [weak self] _, segmentIndex in
-                print(segmentIndex) //TODO
+                self?.selectedIndexChanged(to: segmentIndex)
             }
             v.addSubview(segmentioView)
             v.addSubview(line)
@@ -208,16 +283,19 @@ extension ProfileViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 50
+        return userJourneys.count
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 300
+        return UITableViewAutomaticDimension
         // UIScreen.main.bounds.width * 0.5628 + 32 //for testing purposes
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "JourneyCell", for: indexPath) as! JourneyTableViewCell
+        let journey = self.userJourneys[indexPath.row]
+        cell.configureCell(with: journey, creator: currentDisplayedUser)
+        cell.journey = journey
         
         return cell
     }
@@ -225,7 +303,7 @@ extension ProfileViewController: UITableViewDataSource {
 
 // MARK: - SCROLLING INTERACTIONS
 // Basically all the fancy stuff goes on here
-extension ProfileViewController: UIScrollViewDelegate {
+extension ProfileViewController: UIScrollViewDelegate, UITableViewDelegate {
     internal func scrollViewDidScroll(_ scrollView: UIScrollView) {
 
         let offset = scrollView.contentOffset.y + headerView.bounds.height

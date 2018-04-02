@@ -18,8 +18,16 @@ class DynamoDBManager {
     static let shared = DynamoDBManager()
     private init() {}
     
+    weak var delegate: DynamoDBUserActionsDelegate?
     let dynamoDB = AWSDynamoDB.default()
     let mapper = AWSDynamoDBObjectMapper.default()
+}
+
+@objc protocol DynamoDBUserActionsDelegate: class {
+    @objc optional func didFollow()
+    @objc optional func didUnfollow()
+    @objc optional func didWatchJourney()
+    @objc optional func didUnwatchJourney()
 }
 
 // MARK: - AppUser Methods
@@ -76,6 +84,39 @@ extension DynamoDBManager {
         }
     }
     
+    func unfollowUser(user: AppUser, completion: @escaping (Error?) -> Void) {
+        guard let userId = CognitoManager.shared.userId else {completion(CognitoError.noActiveUser); return}
+        let userToUnfollow = user
+        loadUser(userId: userId) { (user, error) in
+            if let error = error {completion(error)}
+            else if let currentUser = user {
+                guard currentUser._userId == userToUnfollow._userId else {return}
+                if let followingSet = currentUser._usersFollowed {
+                    var followingSet = followingSet
+                    followingSet.remove(currentUser._userId!)
+                    currentUser._usersFollowed = followingSet
+                    self.updateUser(appUser: currentUser, completion: { (error) in
+                        if let error = error {completion(error)}
+                        else {userToUnfollow._followerCount = ((userToUnfollow._followerCount as! Int) - 1) as NSNumber
+                            self.updateUser(appUser: currentUser, completion: { (error) in
+                                if let error = error {completion(error)}
+                                else {
+                                    self.updateUser(appUser: userToUnfollow, completion: { (error) in
+                                        if let error = error {
+                                            completion(error)
+                                        } else {
+                                            self.delegate?.didUnfollow!()
+                                        }
+                                    })
+                                }
+                            })
+                        }
+                    })
+                }
+            }
+        }
+    }
+    
     func followUser(user: AppUser, completion: @escaping (Error?) -> Void) {
         guard let userId = CognitoManager.shared.userId else {
             completion(CognitoError.noActiveUser)
@@ -106,6 +147,8 @@ extension DynamoDBManager {
                                 self.updateUser(appUser: userToFollow, completion: { (error) in
                                     if let error = error {
                                         completion(error)
+                                    } else {
+                                        self.delegate?.didFollow!()
                                     }
                                 })
                             }
