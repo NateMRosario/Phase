@@ -18,6 +18,21 @@ class AddJourneyCollectionViewCell: UICollectionViewCell {
         imageView.layer.masksToBounds = true
         return imageView
     }()
+    
+    lazy var newJourneyLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Add Journey"
+        label.textAlignment = .center
+        label.font = UIFont.boldSystemFont(ofSize: 12)
+        label.backgroundColor = .white
+        return label
+    }()
+    
+    lazy var cellLayer: UIView = {
+        let layer = UIView()
+        layer.backgroundColor = .clear
+        return layer
+    }()
   
     // MARK: - Initializers
     override init(frame: CGRect) {
@@ -43,7 +58,8 @@ class AddJourneyCollectionViewCell: UICollectionViewCell {
     // MARK: - Functions
     func setupViews() {
         setupAddJourneyImageView()
-        //setupNewJourneyButton()
+        setupNewJourneyLabel()
+        setupCellLayer()
     }
     
     // Contraints
@@ -51,10 +67,31 @@ class AddJourneyCollectionViewCell: UICollectionViewCell {
         addSubview(addJourneyImageView)
         addJourneyImageView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
+            addJourneyImageView.topAnchor.constraint(equalTo: topAnchor, constant: 8),
             addJourneyImageView.centerXAnchor.constraint(equalTo: centerXAnchor),
             addJourneyImageView.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 0.8),
-            addJourneyImageView.heightAnchor.constraint(equalTo: addJourneyImageView.widthAnchor),
-            addJourneyImageView.centerYAnchor.constraint(equalTo: centerYAnchor)
+            addJourneyImageView.heightAnchor.constraint(equalTo: addJourneyImageView.widthAnchor)
+            ])
+    }
+    
+    private func setupNewJourneyLabel() {
+        addSubview(newJourneyLabel)
+        newJourneyLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            newJourneyLabel.topAnchor.constraint(equalTo: addJourneyImageView.bottomAnchor, constant: 12),
+            newJourneyLabel.widthAnchor.constraint(equalTo: widthAnchor, multiplier: 1),
+            newJourneyLabel.centerXAnchor.constraint(equalTo: centerXAnchor)
+            ])
+    }
+    
+    private func setupCellLayer() {
+        addSubview(cellLayer)
+        cellLayer.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            cellLayer.topAnchor.constraint(equalTo: topAnchor),
+            cellLayer.leadingAnchor.constraint(equalTo: leadingAnchor),
+            cellLayer.trailingAnchor.constraint(equalTo: trailingAnchor),
+            cellLayer.bottomAnchor.constraint(equalTo: bottomAnchor)
             ])
     }
     
