@@ -58,6 +58,11 @@ extension DynamoDBManager {
         var user: AppUser = AppUser()
         user._userId = userId
         
+        if let user = CacheService.manager.getUserData(by: userId) {
+            completion(user, DBError.loadResultNil)
+            print("Got user from cache")
+        }
+        
         mapper.load(AppUser.self, hashKey: userId, rangeKey: nil) { (loadedUser, error) in
             if let error = error {
                 print(error)
@@ -66,6 +71,7 @@ extension DynamoDBManager {
                 user = loadedUser as! AppUser
                 print(loadedUser)
                 completion(user, nil)
+                CacheService.manager.add(userData: user, withID: userId)
             } else {
                 completion(nil, DBError.loadResultNil)
             }
@@ -223,12 +229,18 @@ extension DynamoDBManager {
         var journey: Journey = Journey()
         journey._journeyId = journeyId
         
+        if let journey =  CacheService.manager.getJourney(fromURL: journeyId) {
+            completion(journey, nil)
+            print("Got journey from cache")
+        }
+        
         mapper.load(Journey.self, hashKey: journeyId, rangeKey: nil) { (loadedJourney, error) in
             if let error = error {
                 completion(nil, error)
             } else if let loadedJourney = loadedJourney {
                 journey = loadedJourney as! Journey
                 completion(journey, nil)
+                CacheService.manager.add(journey: journey, withUrlStr: journeyId)
             }
         }
     }
@@ -268,7 +280,7 @@ extension DynamoDBManager {
             completion(CognitoError.noActiveUser)
             return
         }
-        
+
     }
     
 //    func likeJourney() {

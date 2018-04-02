@@ -21,6 +21,7 @@ class JourneyTableViewCell: UITableViewCell {
     var events = [Event]() {
         didSet {
             DispatchQueue.main.async {
+                print(self.events.count)
                 self.collectionView.reloadData()
             }
         }
@@ -68,7 +69,6 @@ class JourneyTableViewCell: UITableViewCell {
     private func convertDate(from num: NSNumber?) -> String? {
         guard num != nil else {return nil}
         let date = Date(timeIntervalSinceReferenceDate: num as! TimeInterval)
-        print(date)
         return date.timeAgoDisplay()
     }
     
@@ -85,10 +85,10 @@ class JourneyTableViewCell: UITableViewCell {
     }
     
     private func getEvents(for journey: Journey) {
-        
         //TODO: Check if journey contains 1,2,3 or more events
         if let events = journey._events {
-            for event in events.reversed() {
+            for event in events {
+                print(event)
                 DynamoDBManager.shared.loadEvent(eventId: event) { (event, error) in
                     if let error = error {
                         print(error)
@@ -110,7 +110,6 @@ extension JourneyTableViewCell: UICollectionViewDataSource {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ADMozaikLayoutCell", for: indexPath) as! MozaikCollectionViewCell
         if indexPath.row < 3 {
-            let imageView: UIImageView = cell.viewWithTag(1000) as! UIImageView
             let event = events[indexPath.row]
             //TODO: GET PICTURE URL OR VIDEO URL FROM DB
             if let media = event._media {
@@ -119,7 +118,7 @@ extension JourneyTableViewCell: UICollectionViewDataSource {
                     if let error = error {
                         print(error)
                     }
-                    imageView.image = image
+                    cell.mozaik.image = image
                 }
             }
             cell.howManyMoreLabel.text = ""

@@ -122,7 +122,13 @@ class ProfileViewController: UIViewController, DynamoDBUserActionsDelegate {
         }
     }
     public var isOwnProfile = true
-    private var userJourneys = [Journey]()
+    private var userJourneys = [Journey]() {
+        didSet {
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
+        }
+    }
     let dynamoDBActions = DynamoDBManager.shared
     
     // MARK: - View life cycles
@@ -276,7 +282,6 @@ extension ProfileViewController: UITableViewDataSource {
             segmentioView.snp.makeConstraints({ (make) in
                 make.edges.equalTo(v.snp.edges)
             })
-            
             return v
         }
         return UIView()
