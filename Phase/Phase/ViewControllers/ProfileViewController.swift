@@ -36,6 +36,10 @@ class ProfileViewController: UIViewController, DynamoDBUserActionsDelegate {
         }
     }
     
+    @IBOutlet weak var followers: UILabel!
+    @IBOutlet weak var watchers: UILabel!
+    @IBOutlet weak var following: UILabel!
+    @IBOutlet weak var watching: UILabel!
     @IBOutlet weak var segmentedViewTop: NSLayoutConstraint!
     @IBOutlet weak var nameLabel: UILabel!
     @IBOutlet weak var username: UILabel!
@@ -177,6 +181,9 @@ class ProfileViewController: UIViewController, DynamoDBUserActionsDelegate {
         loadJourneys(for: userInfo)
         DispatchQueue.main.async {
             self.username.text = userInfo._username
+            self.followers.text = "\(userInfo._followerCount ?? 0)"
+            self.watchers.text = "\(userInfo._watcherCount ?? 0)"
+            
         }
         
         if let headerImageUrl = userInfo._headerImage {

@@ -192,7 +192,6 @@ extension PreviewViewController: UICollectionViewDelegate {
                 selectedJourney = journeys[indexPath.row - 1]
                 imagePreview.journeyNameLabel.text = cell.journeyNameLabel.text
 
-
             } else if selectedIndexPath == indexPath {
                 selectedIndexPath = nil
                 cell.selectedJourneyLayer.isHidden = true
