@@ -12,7 +12,7 @@ protocol CollectionViewDelegateLayout: class {
     func sizeForItemAt(indexPath: IndexPath) -> CGSize
 }
 
-class CollectionViewLayout: UICollectionViewLayout {
+class CollectionViewLayout: UICollectionViewFlowLayout {
     
     struct Configuration {
         var numberOfColumns: Int
@@ -32,7 +32,7 @@ class CollectionViewLayout: UICollectionViewLayout {
             return itemHeight
         }
     }
-    
+        
     var number = 1
     weak var delegate: CollectionViewDelegateLayout?
     private var configuration = Configuration(numberOfColumns: 0)

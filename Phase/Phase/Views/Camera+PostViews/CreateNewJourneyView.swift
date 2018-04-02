@@ -146,7 +146,7 @@ class CreateNewJourneyView: UIView {
         NSLayoutConstraint.activate([
             cancelButton.leadingAnchor.constraint(equalTo: headerView.leadingAnchor, constant: 10),
             cancelButton.centerYAnchor.constraint(equalTo: headerView.safeAreaLayoutGuide.centerYAnchor),
-            cancelButton.heightAnchor.constraint(equalTo: headerView.heightAnchor, multiplier: 0.6),
+            cancelButton.heightAnchor.constraint(equalTo: headerView.heightAnchor, multiplier: 0.5),
             cancelButton.widthAnchor.constraint(equalTo: cancelButton.heightAnchor, multiplier: 1)
             ])
     }

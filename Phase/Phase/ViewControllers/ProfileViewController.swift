@@ -108,6 +108,10 @@ class ProfileViewController: UIViewController, UITableViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        navigationController?.hidesBarsOnSwipe = true
+        navigationController?.navigationBar.isTranslucent = false
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         setupUI()
         loadData()
         tableView.delegate = self
