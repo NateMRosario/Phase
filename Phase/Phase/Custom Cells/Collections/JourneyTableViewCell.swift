@@ -74,7 +74,7 @@ class JourneyTableViewCell: UITableViewCell {
     
     public func configureCell(with journey: Journey, creator: AppUser?) {
         self.startDateLabel.text = convertDate(from: journey._creationDate)
-        self.userName.text = journey._userId
+        self.userName.text = creator?._username
         self.watchersLabel.text = "Watchers: \(String(describing: journey._numberOfWatchers!))"
         self.journeyTitle.text = journey._title
         if let profileImageUrl = creator?._profileImage {
@@ -113,7 +113,15 @@ extension JourneyTableViewCell: UICollectionViewDataSource {
             let imageView: UIImageView = cell.viewWithTag(1000) as! UIImageView
             let event = events[indexPath.row]
             //TODO: GET PICTURE URL OR VIDEO URL FROM DB
-            
+            if let media = event._media {
+                print(media)
+                S3Manager.shared.downloadManagerData(imageUID: media) { (image, error) in
+                    if let error = error {
+                        print(error)
+                    }
+                    imageView.image = image
+                }
+            }
             cell.howManyMoreLabel.text = ""
         } else {
             cell.mozaik.backgroundColor = UIColor.lightGray
