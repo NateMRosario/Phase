@@ -24,6 +24,7 @@ PODS:
   - ChattoAdditions (3.3.0):
     - Chatto
   - DGElasticPullToRefresh (1.1)
+  - Kingfisher (4.6.4)
   - Material (2.14.0):
     - Material/Core (= 2.14.0)
   - Material/Core (2.14.0):
@@ -50,6 +51,7 @@ DEPENDENCIES:
   - Chatto (= 3.3.0)
   - ChattoAdditions (= 3.3.0)
   - DGElasticPullToRefresh
+  - Kingfisher
   - Material
   - Parchment
   - Pastel
@@ -73,6 +75,7 @@ SPEC CHECKSUMS:
   Chatto: d9f67acd6230f08323a51a11c4b639d40c1f8d99
   ChattoAdditions: 9ee09ac09a89d8c0aa3dc87019e3a22efb2cbac6
   DGElasticPullToRefresh: 28f11a6026302a90f8ffebbc6e24748e584dddd3
+  Kingfisher: 68498a706e46c2a050b0c9572f100e5db407f6e0
   Material: c5bea030f57d4b903c5284200bb612d571c9ec03
   Motion: 9f74d115d7f72bb5380a8e3cde2f8a1fc898ac36
   Parchment: 88f4b2642a09f37ee314a7492067a9ce04edc3b8
@@ -81,6 +84,6 @@ SPEC CHECKSUMS:
   SkyFloatingLabelTextField: 8085f20f57f74a00cfcae58099299faa1a971035
   SnapKit: a42d492c16e80209130a3379f73596c3454b7694
 
-PODFILE CHECKSUM: dffff9a69041606de8d654b4f7e2e666b32e5f97
+PODFILE CHECKSUM: bd8bc81e0de9ffb48085ff4a41eb3fa5ba12b3fe
 
 COCOAPODS: 1.4.0

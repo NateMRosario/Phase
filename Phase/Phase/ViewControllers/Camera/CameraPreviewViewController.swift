@@ -17,7 +17,6 @@ class PreviewViewController: UIViewController {
     var journeys = [Journey]() {
         didSet {
             DispatchQueue.main.async {
-                
                 self.journeys = self.journeys.sorted{ $0._creationDate as! Double > $1._creationDate as! Double }
                 self.imagePreview.postCollectionView.reloadData()
             }
@@ -93,13 +92,13 @@ class PreviewViewController: UIViewController {
                 guard let journeyIDs = appUser._journeys else { return }
                 for journey in journeyIDs {
                     if !self.journeyIds.contains(journey) {
-                    self.journeyIds.append(journey)
+                        self.journeyIds.append(journey)
                     }
-
+                    
+                }
             }
+            
         }
-        
-    }
     }
   
     private func addObservers() {
@@ -128,8 +127,18 @@ class PreviewViewController: UIViewController {
     }
     
     @objc func post(){
-        let caption = imagePreview.postTextView.text ?? " "
+        let caption = imagePreview.postTextView.text ?? "PUT SUM STUFF HURR"
         
+        if image == nil {
+            print("image nil")
+        }
+        
+        guard selectedJourney != nil else {
+            DispatchQueue.main.async {
+                self.showAlert(title: "Error", message: "Please select a journey.")
+            }
+            return
+        }
         
         DynamoDBManager.shared.createEvent(journey: selectedJourney, image: image, caption: caption) { (error) in
             if let error = error {
@@ -137,7 +146,9 @@ class PreviewViewController: UIViewController {
                     self.showAlert(title: "Error", message: "Error creating event: \(error)")
                 }
             } else {
-                
+                DispatchQueue.main.async {
+                    self.showAlert(title: "Success", message: "You made a new event")
+                }
             }
         }
     }
@@ -164,36 +175,40 @@ class PreviewViewController: UIViewController {
 
 extension PreviewViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        if indexPath.row == 0 {
-//            selectedIndexPath = nil
-//        } else if selectedIndexPath == nil {
-//            selectedIndexPath = indexPath
-//        } else {
-//            // MARK: - PHONY
-//            let previousCell =  collectionView.cellForItem(at: selectedIndexPath) as! JourneyCollectionViewCell
-//            previousCell.selectedJourneyLayer.isHidden = true
-//            selectedIndexPath = indexPath
-//        }
-        
-//        selectedJourney = journeys[indexPath.row - 1]
-        
         if indexPath.row == 0 {
+            selectedIndexPath = nil
+            
             let cell = collectionView.cellForItem(at: indexPath) as! AddJourneyCollectionViewCell
             let njVC = AddJourneyViewController()
             present(njVC, animated: true, completion: nil)
             print("add journey cell selected")
+            
         } else {
             let cell = collectionView.cellForItem(at: indexPath) as! JourneyCollectionViewCell
-            selectedJourney = cell.journey!
-            if cell.selectedJourneyLayer.isHidden == true {
-                cell.state = .selected
+
+            if selectedIndexPath == nil {
+                selectedIndexPath = indexPath
                 cell.selectedJourneyLayer.isHidden = false
-            } else {
-                cell.state = .notSelected
+                selectedJourney = journeys[indexPath.row - 1]
+                imagePreview.journeyNameLabel.text = cell.journeyNameLabel.text
+
+
+            } else if selectedIndexPath == indexPath {
+                selectedIndexPath = nil
                 cell.selectedJourneyLayer.isHidden = true
+            } else {
+                cell.selectedJourneyLayer.isHidden = false
+                selectedIndexPath = indexPath
+                
+                imagePreview.journeyNameLabel.text = cell.journeyNameLabel.text
+                selectedJourney = journeys[indexPath.row - 1]
+                print(selectedJourney._title!)
+                
             }
-            imagePreview.journeyNameLabel.text = cell.journeyNameLabel.text
+            
+            
         }
+        
     }
 }
 
@@ -209,17 +224,25 @@ extension PreviewViewController: UICollectionViewDataSource {
             return cell
         } else {
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: imagePreview.journeyCellID, for: indexPath) as! JourneyCollectionViewCell
-            if cell.state == .selected {
-                cell.selectedJourneyLayer.isHidden = false
-            } else {
-                cell.selectedJourneyLayer.isHidden = true
-            }
 //            cell.journeyImageView.image = journeys[indexPath.row - 1]
             let journey = journeys[indexPath.row - 1]
             cell.journey = journey
             cell.journeyNameLabel.text = journey._title
+            
+            if selectedIndexPath != nil {
+                if indexPath == selectedIndexPath {
+                    cell.selectedJourneyLayer.isHidden = false
+                } else {
+                    cell.selectedJourneyLayer.isHidden = true
+                }
+            }
+            
             return cell
         }
+        
+
+        
+        
     }
 }
 

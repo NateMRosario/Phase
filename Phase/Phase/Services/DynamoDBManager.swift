@@ -297,17 +297,22 @@ extension DynamoDBManager {
                 newEvent._creationDate = Date().timeIntervalSinceReferenceDate as NSNumber
                 newEvent._journey = journey._journeyId
                 newEvent._userId = CognitoManager.shared.userId
-                newEvent._numberOfLikes = 0
-                newEvent._numberOfViews = 0
+                newEvent._numberOfLikes = 0 as NSNumber
+                newEvent._numberOfViews = 0 as NSNumber
                 newEvent._caption = caption
                 newEvent._media = imageId
+                newEvent._viewers = nil
+                
                 
                 self.mapper.save(newEvent) { (error) in
                     if let error = error {
                         completion(error)
                     } else {
-                        var eventSet = journey._events
-                        eventSet!.insert(newEvent._eventId!)
+                        var eventSet = Set<String>()
+                        if journey._events != nil {
+                            eventSet = journey._events!
+                        }
+                        eventSet.insert(newEvent._eventId!)
                         let newEventCount = ((journey._eventCount as! Int) + 1) as NSNumber
                         
                         let journeyToUpdate: Journey = journey
