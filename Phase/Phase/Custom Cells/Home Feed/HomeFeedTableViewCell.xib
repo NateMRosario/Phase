@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -36,20 +36,28 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100 Days of Code" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S8X-U1-0DT">
-                                <rect key="frame" x="8" y="66" width="393" height="21"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="100 Days of Code" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S8X-U1-0DT">
+                                <rect key="frame" x="8" y="66" width="393" height="20.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" text="I can finally follow the metronome at 120 bps!" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dQX-Qg-cmY" userLabel="Post" customClass="ActiveLabel" customModule="Phase" customModuleProvider="target">
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" text="@Tyler #Art Bruh" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dQX-Qg-cmY" userLabel="Post" customClass="ActiveLabel" customModule="Phase" customModuleProvider="target">
                                 <rect key="frame" x="8" y="420" width="393" height="20"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="mentionColor">
+                                        <color key="value" red="0.47684186699999997" green="0.50480759139999998" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="hashtagColor">
+                                        <color key="value" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="9Hp-vu-UEU">
-                                <rect key="frame" x="0.0" y="95" width="409" height="317"/>
+                                <rect key="frame" x="0.0" y="90.5" width="409" height="321.5"/>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3 hours ago" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9my-Qt-9Tl">
                                 <rect key="frame" x="62" y="37" width="72.5" height="16"/>
@@ -62,12 +70,11 @@
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="9Hp-vu-UEU" secondAttribute="trailing" id="7ry-a4-wQH"/>
                             <constraint firstItem="9my-Qt-9Tl" firstAttribute="top" secondItem="b4c-LL-AFM" secondAttribute="bottom" constant="4" id="BPM-Vv-xyS"/>
-                            <constraint firstItem="dQX-Qg-cmY" firstAttribute="top" secondItem="9Hp-vu-UEU" secondAttribute="bottom" constant="8" id="CFV-ob-reI"/>
                             <constraint firstItem="S8X-U1-0DT" firstAttribute="top" secondItem="QT1-aQ-NK2" secondAttribute="bottom" constant="8" id="Ezd-t1-5UL"/>
                             <constraint firstAttribute="bottom" secondItem="dQX-Qg-cmY" secondAttribute="bottom" constant="8" id="Nve-4C-7Au"/>
                             <constraint firstAttribute="trailing" secondItem="S8X-U1-0DT" secondAttribute="trailing" constant="8" id="VfQ-SU-mPi"/>
                             <constraint firstAttribute="trailing" secondItem="dQX-Qg-cmY" secondAttribute="trailing" constant="8" id="Y5d-vx-CX4"/>
-                            <constraint firstItem="9Hp-vu-UEU" firstAttribute="top" secondItem="S8X-U1-0DT" secondAttribute="bottom" constant="8" id="bgu-Uw-6kx"/>
+                            <constraint firstItem="9Hp-vu-UEU" firstAttribute="top" secondItem="S8X-U1-0DT" secondAttribute="bottom" constant="4" id="bgu-Uw-6kx"/>
                             <constraint firstItem="b4c-LL-AFM" firstAttribute="top" secondItem="QT1-aQ-NK2" secondAttribute="top" constant="4" id="bmv-2d-nF8"/>
                             <constraint firstItem="QT1-aQ-NK2" firstAttribute="leading" secondItem="lL7-fn-kwX" secondAttribute="leading" constant="8" id="eaU-nJ-zti"/>
                             <constraint firstItem="9Hp-vu-UEU" firstAttribute="leading" secondItem="lL7-fn-kwX" secondAttribute="leading" id="fcF-8u-FuN"/>
@@ -76,6 +83,7 @@
                             <constraint firstItem="S8X-U1-0DT" firstAttribute="leading" secondItem="lL7-fn-kwX" secondAttribute="leading" constant="8" id="mEs-qg-EK4"/>
                             <constraint firstItem="QT1-aQ-NK2" firstAttribute="top" secondItem="lL7-fn-kwX" secondAttribute="top" constant="8" id="xrb-xz-n9k"/>
                             <constraint firstItem="dQX-Qg-cmY" firstAttribute="leading" secondItem="lL7-fn-kwX" secondAttribute="leading" constant="8" id="yyK-aI-I5n"/>
+                            <constraint firstItem="dQX-Qg-cmY" firstAttribute="top" secondItem="9Hp-vu-UEU" secondAttribute="bottom" constant="8" id="zwA-rc-e37"/>
                         </constraints>
                     </view>
                 </subviews>
@@ -93,7 +101,6 @@
                 <outlet property="detailView" destination="lL7-fn-kwX" id="JoD-9y-sNa"/>
                 <outlet property="journeyLabel" destination="dQX-Qg-cmY" id="efD-7C-cw7"/>
                 <outlet property="journeyTitle" destination="S8X-U1-0DT" id="51a-dR-Bkd"/>
-                <outlet property="postLabel" destination="dQX-Qg-cmY" id="flS-lZ-Rte"/>
                 <outlet property="timeStamp" destination="9my-Qt-9Tl" id="sdD-ix-Fdp"/>
                 <outlet property="userImage" destination="QT1-aQ-NK2" id="JGJ-Bm-xL3"/>
                 <outlet property="userName" destination="b4c-LL-AFM" id="WtH-Pw-c5R"/>

@@ -9,13 +9,19 @@
 import UIKit
 import SnapKit
 
-class HomeFeedCollectionViewCell: UICollectionViewCell {
+protocol PresentVCDelgate: class {
+    func mentionsTapped()
+    func hashTagTapped()
+}
+
+class HomeFeedCollectionViewCell: UITableViewCell {
+    
+    weak var delegate: PresentVCDelgate?
     
     @IBOutlet weak var journeyTitle: UILabel!
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var timeStamp: UILabel!
-    @IBOutlet weak var journeyLabel: UILabel!
-    @IBOutlet weak var postLabel: UILabel!
+    @IBOutlet weak var journeyLabel: ActiveLabel!
     @IBOutlet weak var detailView: UIView! {
         didSet {
             detailView.layer.cornerRadius = 8
@@ -36,13 +42,21 @@ class HomeFeedCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    public func set(image: UIImage) {
+    public func set(image: UIImage, event: Event) {
         contentImage.image = image
     }
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        journeyLabel.customize { (label) in
+            label.hashtagColor = UIColor(red: 85.0/255, green: 172.0/255, blue: 238.0/255, alpha: 1)
+            label.mentionColor = UIColor(red: 238.0/255, green: 85.0/255, blue: 96.0/255, alpha: 1)
+            
+            label.handleHashtagTap {_ in self.delegate?.hashTagTapped()}
+            label.handleMentionTap({ (mention) in
+                self.delegate?.mentionsTapped()
+            })
+        }
     }
-    
-    
 }

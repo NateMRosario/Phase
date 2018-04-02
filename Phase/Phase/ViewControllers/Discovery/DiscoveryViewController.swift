@@ -17,7 +17,9 @@ class DiscoveryViewController: UIViewController {
             collectionView.delegate = self
             layout.delegate = self
             collectionView.setCollectionViewLayout(layout, animated: false)
+            collectionView.register(UINib.init(nibName: "TrendingHeader", bundle: nil), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "TrendingHeader")
             collectionView.register(cellTypes: DiscoverCollectionViewCell.self)
+            layout.headerReferenceSize = CGSize(width: UIScreen.main.bounds.width, height: 100)
         }
     }
     
@@ -63,6 +65,7 @@ class DiscoveryViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        layout.headerReferenceSize = CGSize(width: UIScreen.main.bounds.width, height: 100)
         
         initNavigationBar()
         fetchContents()
@@ -122,6 +125,14 @@ class DiscoveryViewController: UIViewController {
 }
 
 extension DiscoveryViewController: UICollectionViewDataSource {
+    
+    // Why the hell isnt this being called even though headerRef height is implemented
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "TrendingHeader", for: indexPath) as! TrendingHeader
+        return view
+    }
+    
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return contents.count + 1
     }
@@ -151,9 +162,11 @@ extension DiscoveryViewController: UICollectionViewDelegate {
         selectedIndexPath = indexPath
         navigationController?.pushViewController(detailNC, animated: true)
     }
+    
 }
 
 extension DiscoveryViewController: CollectionViewDelegateLayout {
+    
     func numberOfColumns(indexPath: IndexPath) -> Int {
         if indexPath.item == contents.count {
             return 1
@@ -168,15 +181,15 @@ extension DiscoveryViewController: CollectionViewDelegateLayout {
         
         let image = contents[indexPath.row]
         let width = CollectionViewLayout.Configuration(numberOfColumns: numberOfColumns(indexPath: indexPath)).itemWidth
-        let height = width / image.size.width * image.size.height + 79 // 79 = Cell's clear space below image
-        return CGSize(width: width, height: max(height, width / image.size.height * image.size.height + 79 + 40))
+        let height = width * 1.2 / image.size.width * image.size.height + 79 // 79 = Cell's clear space below image
+        return CGSize(width: width, height: height)
     }
 }
 
 extension DiscoveryViewController {
-    
+
 }
 
 extension DiscoveryViewController: UISearchBarDelegate {
-
+    
 }
