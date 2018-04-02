@@ -22,34 +22,39 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
 
-        // setup service configuration
-        let credentialsProvider = AWSCognitoCredentialsProvider(regionType: .USEast1, identityPoolId: "us-east-1:1052d5f1-355e-4345-9c61-d38b8bea36c2")
-        let serviceConfiguration = AWSServiceConfiguration(region: CognitoIdentityUserPoolRegion, credentialsProvider: credentialsProvider)
-
-        AWSServiceManager.default().defaultServiceConfiguration = serviceConfiguration
-
-        // create pool configuration
-        let poolConfiguration = AWSCognitoIdentityUserPoolConfiguration(clientId: CognitoIdentityUserPoolAppClientId,
-                                                                        clientSecret: CognitoIdentityUserPoolAppClientSecret,
-                                                                        poolId: CognitoIdentityUserPoolId)
-
-        // initialize user pool client
-        AWSCognitoIdentityUserPool.register(with: serviceConfiguration, userPoolConfiguration: poolConfiguration, forKey: AWSCognitoUserPoolsSignInProviderKey)
-
-        // fetch the user pool client we initialized in above step
-        let pool = AWSCognitoIdentityUserPool(forKey: AWSCognitoUserPoolsSignInProviderKey)
-        self.storyboard = UIStoryboard(name: "Main", bundle: nil)
-        pool.delegate = self
-
-        if CognitoManager.shared.isUserSignedIn() {
-            window = UIWindow(frame: UIScreen.main.bounds)
-            window?.rootViewController = TabsViewController.instantiate(withStoryboard: "Main")
-            window?.makeKeyAndVisible()
-        }
-        
-        return AWSMobileClient.sharedInstance().interceptApplication(
-            application,
-            didFinishLaunchingWithOptions: launchOptions)
+//        // setup service configuration
+//        let credentialsProvider = AWSCognitoCredentialsProvider(regionType: .USEast1, identityPoolId: "us-east-1:1052d5f1-355e-4345-9c61-d38b8bea36c2")
+//        let serviceConfiguration = AWSServiceConfiguration(region: CognitoIdentityUserPoolRegion, credentialsProvider: credentialsProvider)
+//
+//        AWSServiceManager.default().defaultServiceConfiguration = serviceConfiguration
+//
+//        // create pool configuration
+//        let poolConfiguration = AWSCognitoIdentityUserPoolConfiguration(clientId: CognitoIdentityUserPoolAppClientId,
+//                                                                        clientSecret: CognitoIdentityUserPoolAppClientSecret,
+//                                                                        poolId: CognitoIdentityUserPoolId)
+//
+//        // initialize user pool client
+//        AWSCognitoIdentityUserPool.register(with: serviceConfiguration, userPoolConfiguration: poolConfiguration, forKey: AWSCognitoUserPoolsSignInProviderKey)
+//
+//        // fetch the user pool client we initialized in above step
+//        let pool = AWSCognitoIdentityUserPool(forKey: AWSCognitoUserPoolsSignInProviderKey)
+//        self.storyboard = UIStoryboard(name: "Main", bundle: nil)
+//        pool.delegate = self
+//
+//        if CognitoManager.shared.isUserSignedIn() {
+//            window = UIWindow(frame: UIScreen.main.bounds)
+//            window?.rootViewController = TabsViewController.instantiate(withStoryboard: "Main")
+//            window?.makeKeyAndVisible()
+//        }
+//
+//        return AWSMobileClient.sharedInstance().interceptApplication(
+//            application,
+//            didFinishLaunchingWithOptions: launchOptions)
+        let controller = JourneyTestViewController()
+        window = UIWindow(frame: UIScreen.main.bounds)
+                    window?.rootViewController = controller
+                    window?.makeKeyAndVisible()
+        return true
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
