@@ -72,8 +72,8 @@ class JourneyCarouselViewController: UIViewController, UICollisionBehaviorDelega
         let offset:CGFloat = self.view.bounds.height * 0.2
         let view = addViewController(atOffset: offset, dataForVC: nil)
         self.views.append(view!)
-        journeyCarouselView.carouselSlider.maximumValue = Float(picArr.count - 1)
-        journeyCarouselView.carouselSlider.minimumValue = 0
+        journeyCarouselView.carouselSlider.maximumValue = Float(picArr.count)
+        journeyCarouselView.carouselSlider.minimumValue = 1
         
         journeyCarouselView.carouselSlider.addTarget(self,
                                                      action: #selector(sliderValueChanged(_:)),
@@ -307,6 +307,5 @@ extension JourneyCarouselViewController: iCarouselDelegate {
     func carouselCurrentItemIndexDidChange(_ carousel: iCarousel) {
         journeyCarouselView.carouselSlider.value = Float(carousel.currentItemIndex)
     }
-
 }
 
