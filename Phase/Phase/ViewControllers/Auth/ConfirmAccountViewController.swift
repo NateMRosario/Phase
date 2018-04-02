@@ -15,8 +15,7 @@ import Pastel
 class ConfirmAccountViewController: UIViewController {
 
     let confirmAccountView = ConfirmAccountView()
-    var sentTo: String?
-    var userName: String!
+    var username: String!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,12 +35,12 @@ class ConfirmAccountViewController: UIViewController {
         pastelView.startAnimation()
         view.insertSubview(pastelView, at: 0)
         setupButtons()
-        confirmAccountView.userNameLabel.text = userName
+        confirmAccountView.userNameLabel.text = username
     }
     
     init(username: String) {
         super.init(nibName: nil, bundle: nil)
-        self.userName = username
+        self.username = username
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -56,11 +55,29 @@ extension ConfirmAccountViewController {
     }
     
     @objc private func confirmButtonTapped() {
-
+        
+        guard let code = confirmAccountView.confirmationCodeTextField.text else { return }
+        guard code.count > 0 else { showAlert(title: "Error", message: "Please enter a valid code."); return }
+        
+        CognitoManager.shared.confirmAccount(username: username, code: code) { (error) in
+            if let error = error {
+                DispatchQueue.main.async {
+                    self.showAlert(title: "Error", message: "\(error)")
+                }
+            } else {
+                self.motionUnwindToRootViewController()
+            }
+        }
     }
     
     // handle code resend action
     @objc private func resendButtonTapped() {
-
+        CognitoManager.shared.resendCode(username: username) { (error) in
+            if let error = error {
+                DispatchQueue.main.async {
+                    self.showAlert(title: "Error", message: "\(error)")
+                }
+            }
+        }
     }
 }
