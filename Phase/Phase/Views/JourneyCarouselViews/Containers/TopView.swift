@@ -29,7 +29,7 @@ class TopView: UIViewController {
         imageView.contentMode = .scaleAspectFit
         imageView.layer.borderWidth = 0.5
         imageView.layer.borderColor = UIColor.gray.cgColor
-        imageView.layer.cornerRadius = bounds.width / 2
+        imageView.layer.cornerRadius = self.bounds.width / 2
         return imageView
     }()
     
