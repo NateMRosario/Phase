@@ -39,6 +39,8 @@ class JourneyEventDetailView: UIView {
     lazy var journeyUserNamelabel: UILabel = {
         let label = UILabel()
         label.text = "Ty PodMaster"
+        label.backgroundColor = UIColor.yellow
+        let padding = 25
         label.textAlignment = .left
         label.backgroundColor = UIColor.white
         label.font = UIFont.systemFont(ofSize: 16, weight: .heavy)
@@ -76,10 +78,11 @@ class JourneyEventDetailView: UIView {
     }()
     
     lazy var postButton: UIButton = {
-        let button = UIButton(type: UIButtonType.custom) as UIButton
+//        let button = UIButton(type: UIButtonType.custom) as UIButton
+        let button = UIButton(frame: CGRect(x: 100, y: 0, width: 20, height: 20))
         button.backgroundColor = UIColor.white
         button.setTitle("Post", for: .normal)
-        button.titleLabel?.textAlignment = .right
+        button.titleLabel?.textAlignment = .center
         button.setTitleColor(UIColor.lightGray, for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 11)
         button.addTarget(self, action: #selector(postButtonTapped), for: .touchUpInside)
@@ -96,10 +99,9 @@ class JourneyEventDetailView: UIView {
         textfield.layer.borderWidth = 0.5
         textfield.textAlignment = .left
         textfield.layoutEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 25)
-        let button = postButton
-        button.frame = CGRect(x: CGFloat(textfield.frame.size.width - 25), y: CGFloat(5), width: CGFloat(20), height: CGFloat(20))
-        button.titleLabel?.layoutEdgeInsets.right = 25
-        textfield.rightView = button
+        let view = UIView(frame: CGRect(x: 100, y: 0, width: CGFloat(20), height: CGFloat(20)))
+        view.addSubview(postButton)
+        textfield.rightView = view
         return textfield
     }()
     
@@ -145,8 +147,8 @@ class JourneyEventDetailView: UIView {
     func updateCommentTextFieldRightView() {
         let image = postButton
         image.frame = CGRect(x: CGFloat(commentTextField.frame.size.width - 25), y: CGFloat(5), width: CGFloat(25), height: CGFloat(25))
-//        button.imageEdgeInsets = UIEdgeInsetsMake(0, -16, 0, 0)
-//        button.frame = CGRect(x: 0, y: 0, width: 29, height: 29)
+        //        button.imageEdgeInsets = UIEdgeInsetsMake(0, -16, 0, 0)
+        //        button.frame = CGRect(x: 0, y: 0, width: 29, height: 29)
         commentTextField.rightView = image
     }
     
