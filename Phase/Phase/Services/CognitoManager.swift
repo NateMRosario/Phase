@@ -126,6 +126,18 @@ class CognitoManager {
         })
     }
     
+    func resendCode(username: String, completion: @escaping (Error?) -> Void) {
+        user = pool.getUser(username)
+        user?.resendConfirmationCode().continueWith(block: { (task) -> Any? in
+            if let error = task.error {
+                completion(error)
+            } else {
+                completion(nil)
+            }
+            return nil
+        })
+    }
+    
     func signOut() {
         user = pool.getUser()
         user?.signOut()

@@ -45,16 +45,17 @@ class JourneyCarouselViewController: UIViewController, UICollisionBehaviorDelega
     }
     
     private let cellID = "JourneyCommentTableViewCell"
+    private var heroID = ""
     
-    // MARK: - Init (Dependency injection)
-    //    init(list: List){
-    //        self.journey = post
-    //        super.init(nibName: nil, bundle: nil)
-    //    }
-    //
-    //    required init?(coder aDecoder: NSCoder) {
-    //        fatalError("init(coder:) has not been implemented")
-    //    }
+    //MARK: - Init (Dependency injection)
+        init(heroID: String){
+            super.init(nibName: nil, bundle: nil)
+            self.heroID = heroID
+        }
+    
+        required init?(coder aDecoder: NSCoder) {
+            fatalError("init(coder:) has not been implemented")
+        }
     
     // MARK: - Lazy Variable
     

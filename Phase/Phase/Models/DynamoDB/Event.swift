@@ -19,41 +19,42 @@ import AWSDynamoDB
 class Event: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
     
     var _eventId: String?
-    var _userId: String?
-    var _caption: String?
     var _creationDate: NSNumber?
+    var _caption: String?
     var _journey: String?
     var _media: String?
     var _numberOfLikes: NSNumber?
     var _numberOfViews: NSNumber?
+    var _userId: String?
     var _viewers: Set<String>?
     
     class func dynamoDBTableName() -> String {
-
+        
         return "phase-mobilehub-529604760-Event"
     }
     
     class func hashKeyAttribute() -> String {
-
+        
         return "_eventId"
     }
     
     class func rangeKeyAttribute() -> String {
-
-        return "_userId"
+        
+        return "_creationDate"
     }
     
     override class func jsonKeyPathsByPropertyKey() -> [AnyHashable: Any] {
         return [
-               "_eventId" : "eventId",
-               "_userId" : "userId",
-               "_caption" : "caption",
-               "_creationDate" : "creationDate",
-               "_journey" : "journey",
-               "_media" : "media",
-               "_numberOfLikes" : "numberOfLikes",
-               "_numberOfViews" : "numberOfViews",
-               "_viewers" : "viewers",
+            "_eventId" : "eventId",
+            "_creationDate" : "creationDate",
+            "_caption" : "caption",
+            "_journey" : "journey",
+            "_media" : "media",
+            "_numberOfLikes" : "numberOfLikes",
+            "_numberOfViews" : "numberOfViews",
+            "_userId" : "userId",
+            "_viewers" : "viewers",
         ]
     }
 }
+

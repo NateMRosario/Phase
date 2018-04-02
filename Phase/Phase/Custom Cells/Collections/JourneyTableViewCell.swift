@@ -10,9 +10,23 @@ import UIKit
 import ADMozaicCollectionViewLayout
 
 class JourneyTableViewCell: UITableViewCell {
-
-    let pics = [#imageLiteral(resourceName: "a"),#imageLiteral(resourceName: "b"),#imageLiteral(resourceName: "c"),#imageLiteral(resourceName: "d"),#imageLiteral(resourceName: "e"),#imageLiteral(resourceName: "f")]
-
+    
+    var journey: Journey? {
+        didSet {
+            if let journey = journey {
+                getEvents(for: journey)
+            }
+        }
+    }
+    var events = [Event]() {
+        didSet {
+            DispatchQueue.main.async {
+                print(self.events.count)
+                self.collectionView.reloadData()
+            }
+        }
+    }
+    
     @IBOutlet weak var containter: UIView! {
         didSet {
             self.containter.layer.cornerRadius = 10
@@ -32,6 +46,7 @@ class JourneyTableViewCell: UITableViewCell {
         }
     }
     
+    @IBOutlet weak var journeyTitle: UILabel!
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var startDateLabel: UILabel!
     @IBOutlet weak var profileImageView: UIImageView! {
@@ -46,9 +61,43 @@ class JourneyTableViewCell: UITableViewCell {
     override func awakeFromNib() {
         super.awakeFromNib()
     }
-
+    
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
+    }
+    
+    private func convertDate(from num: NSNumber?) -> String? {
+        guard num != nil else {return nil}
+        let date = Date(timeIntervalSinceReferenceDate: num as! TimeInterval)
+        return date.timeAgoDisplay()
+    }
+    
+    public func configureCell(with journey: Journey, creator: AppUser?) {
+        self.startDateLabel.text = convertDate(from: journey._creationDate)
+        self.userName.text = creator?._username
+        self.watchersLabel.text = "Watchers: \(String(describing: journey._numberOfWatchers!))"
+        self.journeyTitle.text = journey._title
+        if let profileImageUrl = creator?._profileImage {
+            ImageAPIClient.manager.loadImage(from: profileImageUrl,
+                                             completionHandler: {self.profileImageView.image = $0},
+                                             errorHandler: {print($0)})
+        }
+    }
+    
+    private func getEvents(for journey: Journey) {
+        //TODO: Check if journey contains 1,2,3 or more events
+        if let events = journey._events {
+            for event in events {
+                print(event)
+                DynamoDBManager.shared.loadEvent(eventId: event) { (event, error) in
+                    if let error = error {
+                        print(error)
+                    } else {
+                        self.events.append(event!)
+                    }
+                }
+            }
+        }
     }
 }
 
@@ -61,19 +110,28 @@ extension JourneyTableViewCell: UICollectionViewDataSource {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ADMozaikLayoutCell", for: indexPath) as! MozaikCollectionViewCell
         if indexPath.row < 3 {
-            let imageView: UIImageView = cell.viewWithTag(1000) as! UIImageView
-            imageView.image = pics[indexPath.row]
+            let event = events[indexPath.row]
+            //TODO: GET PICTURE URL OR VIDEO URL FROM DB
+            if let media = event._media {
+                print(media)
+                S3Manager.shared.downloadManagerData(imageUID: media) { (image, error) in
+                    if let error = error {
+                        print(error)
+                    }
+                    cell.mozaik.image = image
+                }
+            }
             cell.howManyMoreLabel.text = ""
         } else {
             cell.mozaik.backgroundColor = UIColor.lightGray
-            cell.howManyMoreLabel.text = "32 More"
+            cell.howManyMoreLabel.text = "\(Int(truncating: (journey?._eventCount)!) - 3)"
             cell.isVideo.image = nil
         }
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 4
+        return events.count
     }
 }
 

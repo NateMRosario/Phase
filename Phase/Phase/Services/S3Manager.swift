@@ -8,6 +8,7 @@
 
 import Foundation
 import AWSS3
+import Kingfisher
 
 class S3Manager {
     static let shared = S3Manager()
@@ -17,11 +18,17 @@ class S3Manager {
     let transferManager = AWSS3TransferManager.default()
     
     func uploadManagerData(image: UIImage, completion: @escaping (String?, Error?) -> Void) {
-        guard let pngImage = UIImagePNGRepresentation(image) else { print("image is nil"); return }
+        
+        let kfImg = image.kf.resize(to: CGSize(width: 1024, height: 1024), for: ContentMode.aspectFit)
+        guard let pngData = kfImg.kf.pngRepresentation() else { print("image is nil"); return }
+        
+        //guard let pngImage = UIImagePNGRepresentation(image) else { print("image is nil"); return }
+        
+
         let fileName = "test.png"
         let fileURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent(fileName)
         do {
-            try pngImage.write(to: fileURL)
+            try pngData.write(to: fileURL)
             let uploadRequest = AWSS3TransferManagerUploadRequest()
             let imageUID = UUID().uuidString + ".png" ///Unique String
             uploadRequest?.bucket = s3Bucket

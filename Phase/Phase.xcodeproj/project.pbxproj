@@ -114,7 +114,6 @@
 		818E5DC120719B1100AF4838 /* TrendingCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 818E5DBF20719B1100AF4838 /* TrendingCollectionViewCell.swift */; };
 		818E5DC220719B1100AF4838 /* TrendingCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 818E5DC020719B1100AF4838 /* TrendingCollectionViewCell.xib */; };
 		819B8CE62061693C00F77039 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 81C9EE1B2058795200C27016 /* Assets.xcassets */; };
-		81AB8A96205AD42900A98AFB /* ProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AB8A95205AD42900A98AFB /* ProfileTableViewCell.swift */; };
 		81AB8A98205AEE3B00A98AFB /* TabsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AB8A97205AEE3B00A98AFB /* TabsViewController.swift */; };
 		81AB8A9B205AF64800A98AFB /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AB8A9A205AF64800A98AFB /* Constants.swift */; };
 		81AB8AAA205AF6BE00A98AFB /* Array+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81AB8AA9205AF6BE00A98AFB /* Array+Extensions.swift */; };
@@ -333,7 +332,6 @@
 		818E5DB72071996600AF4838 /* TrendingHeader.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrendingHeader.xib; sourceTree = "<group>"; };
 		818E5DBF20719B1100AF4838 /* TrendingCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrendingCollectionViewCell.swift; sourceTree = "<group>"; };
 		818E5DC020719B1100AF4838 /* TrendingCollectionViewCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TrendingCollectionViewCell.xib; sourceTree = "<group>"; };
-		81AB8A95205AD42900A98AFB /* ProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileTableViewCell.swift; sourceTree = "<group>"; };
 		81AB8A97205AEE3B00A98AFB /* TabsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabsViewController.swift; sourceTree = "<group>"; };
 		81AB8A9A205AF64800A98AFB /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
 		81AB8AA9205AF6BE00A98AFB /* Array+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
@@ -780,7 +778,6 @@
 			children = (
 				81237781206A9EF300A6BC02 /* Home Feed */,
 				81237780206A9EEB00A6BC02 /* Discover */,
-				81AB8A95205AD42900A98AFB /* ProfileTableViewCell.swift */,
 				F4D34A79205C482C00F4D50D /* EventCollectionViewCell.swift */,
 				F4882846206955690008A656 /* JourneyCommentTableViewCell.swift */,
 				810DF96C2062A64C00B426BB /* FollowsTableViewCell.swift */,
@@ -1436,6 +1433,8 @@
 				"${BUILT_PRODUCTS_DIR}/Chatto/Chatto.framework",
 				"${BUILT_PRODUCTS_DIR}/ChattoAdditions/ChattoAdditions.framework",
 				"${BUILT_PRODUCTS_DIR}/DGElasticPullToRefresh/DGElasticPullToRefresh.framework",
+				"${BUILT_PRODUCTS_DIR}/Hero/Hero.framework",
+				"${BUILT_PRODUCTS_DIR}/Kingfisher/Kingfisher.framework",
 				"${BUILT_PRODUCTS_DIR}/Material/Material.framework",
 				"${BUILT_PRODUCTS_DIR}/Motion/Motion.framework",
 				"${BUILT_PRODUCTS_DIR}/Parchment/Parchment.framework",
@@ -1461,6 +1460,8 @@
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Chatto.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/ChattoAdditions.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/DGElasticPullToRefresh.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Hero.framework",
+				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Kingfisher.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Material.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Motion.framework",
 				"${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}/Parchment.framework",
@@ -1495,7 +1496,6 @@
 				81C368CD206B2EDF00A1873E /* DemoPhotoMessageViewModel.swift in Sources */,
 				81AB8AB7205AF8EA00A98AFB /* GridViewProtocol.swift in Sources */,
 				818DBB292066C54300B91990 /* ForgotPassViewController.swift in Sources */,
-				81AB8A96205AD42900A98AFB /* ProfileTableViewCell.swift in Sources */,
 				81AB8AB9205AF99100A98AFB /* CollectionViewLayout.swift in Sources */,
 				81CA1BCD206423F600EF7B8E /* CacheService.swift in Sources */,
 				817C6EEA2069AB7E00010EDF /* MenuCollectionCell.swift in Sources */,
