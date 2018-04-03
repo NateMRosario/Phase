@@ -12,14 +12,7 @@ import DGElasticPullToRefresh
 class HomeViewController: UIViewController {
     
     @IBAction func goToChat(_ sender: UIBarButtonItem) {
-        DynamoDBManager.shared.loadUser(userId: CognitoManager.shared.userId!) { (user, error) in
-            if let error = error {
-                print(error)
-            } else {
-                print(user!)
-            }
-        }
-        //present(UINavigationController(rootViewController: ChatExamplesViewController()), animated: true)
+        present(UINavigationController(rootViewController: ChatExamplesViewController()), animated: true)
     }
     
     fileprivate var layout = CollectionViewLayout(number: 1)
@@ -28,11 +21,46 @@ class HomeViewController: UIViewController {
     
     fileprivate var contents = [#imageLiteral(resourceName: "a11"), #imageLiteral(resourceName: "nostalgic1"), #imageLiteral(resourceName: "nostalgic2"), #imageLiteral(resourceName: "nostalgic3"), #imageLiteral(resourceName: "nostalgic4")]
     
-    var appUser = AppUser()
-    var appJourney = [Journey]()
-    var appEvents = [Event]()
+    var appUser = AppUser() 
+    var journeysFollowed = [Journey]() {
+        didSet {
+            DispatchQueue.main.async {
+                self.homeCollectionView.reloadData()
+            }
+        }
+    }
+    var appEvents = [String : [Event]]() {
+        didSet {
+            print("AppEvent: \(appEvents)")
+            DispatchQueue.main.async {
+                self.homeCollectionView.reloadData()
+            }
+        }
+    }
     
-    var eventIDs = Set<String>()
+    var eventIDs = [String]() {
+        didSet {
+            for id in eventIDs {
+                print(id)
+                DynamoDBManager.shared.loadEvent(eventId: id, completion: { (event, error) in ///FIX THIS ALMOST THERE!
+                    if let error = error {
+                        print(error)
+                    }
+                    guard let event = event else {print("event in eventIDs");return}
+                    var currentEvents = [Event]()
+                    if self.appEvents[event._journey!] == nil {
+                        currentEvents.append(event)
+                        self.appEvents[event._journey!] = currentEvents
+                    } else {
+                        currentEvents = self.appEvents[event._journey!]!
+                        currentEvents.append(event)
+                        self.appEvents[event._journey!] = currentEvents
+                    }
+                })
+            }
+//            self.fetchEvents()
+        }
+    }
     
     @IBOutlet weak var homeCollectionView: UICollectionView! {
         didSet {
@@ -48,9 +76,6 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         loading.color = UIColor.red
-        fetchCurrentUser()
-        fetchJourney()
-        fetchEvents()
         self.homeCollectionView.alwaysBounceVertical = true
         loadingView.tintColor = UIColor(red: 78/255.0, green: 221/255.0, blue: 200/255.0, alpha: 1.0)
         homeCollectionView.dg_addPullToRefreshWithActionHandler({ [weak self] () -> Void in
@@ -60,39 +85,54 @@ class HomeViewController: UIViewController {
         let img = #imageLiteral(resourceName: "085 October Silence").crop(toWidth: UIScreen.main.bounds.width, toHeight: UIScreen.main.bounds.width)!
         homeCollectionView.dg_setPullToRefreshFillColor(UIColor(patternImage: img))
         homeCollectionView.dg_setPullToRefreshBackgroundColor(homeCollectionView.backgroundColor!)
+        fetchCurrentUser()
+        
     }
     
     private func setupNavbar() {
         navigationItem.title = "Phase"
     }
-    
     private func fetchCurrentUser() {
         DynamoDBManager.shared.loadUser(userId: CognitoManager.shared.userId!) { (user, error) in
-            self.appUser = user
+            if let error = error {
+                print(error.localizedDescription)
+            } else if let user = user{
+                self.appUser = user
+                self.fetchJourney()
+            }
         }
     }
+
     private func fetchJourney() {
-        var currentEvents = [Journey]()
-        guard let journeyIds = appUser?._journeysFollowed else {return}
+//        var currentEventID = Set<String>() {
+//            didSet {
+//                    self.eventIDs = Array(currentEventID)
+//            }
+//        }
+        
+        var currentJourney = Set<Journey>() {
+            didSet {
+                self.journeysFollowed = currentJourney.sorted{$0._creationDate as! Double > $1._creationDate as! Double}
+                for journey in currentJourney {
+                    guard let eventID = journey._events else {print("eventID");return}
+                    self.eventIDs = Array(eventID)
+                }
+            }
+        }
+        ///TODO: Switch to this when following is active
+//        guard let journeyIds = appUser?._journeysFollowed else {return}
+        
+        guard let journeyIds = appUser?._journeys else {print("journeyIds");return}
         for journey in journeyIds {
             DynamoDBManager.shared.loadJourney(journeyId: journey, completion: { (journey, error) in
                 guard let journey = journey else {return}
-                currentEvents.append(journey)
-                self.appJourney.append(journey)
+                currentJourney.insert(journey)
             })
-        }
-        for event in currentEvents {
-            guard let newEvent = event._events else {return}
-            eventIDs = newEvent
         }
     }
+    
     private func fetchEvents() {
-        for id in self.eventIDs {
-            DynamoDBManager.shared.loadEvent(eventId: id, completion: { (event, error) in
-                guard let event = event else {return}
-                self.appEvents.append(event)
-            })
-        }
+        
     }
     
     deinit {
@@ -102,12 +142,12 @@ class HomeViewController: UIViewController {
 }
 extension HomeViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return appEvents.count
+        return journeysFollowed.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        if indexPath.item == contents.count{
+        if indexPath.item == journeysFollowed.count{
             let cell = homeCollectionView.dequeueReusableCell(withReuseIdentifier: "loading", for: indexPath)
             cell.addSubview(loading)
             loading.snp.makeConstraints({ (make) in
@@ -119,10 +159,13 @@ extension HomeViewController: UICollectionViewDataSource {
         }
         
         let cell = collectionView.dequeueReusableCell(with: HomeFeedCollectionViewCell.self, for: indexPath)
-        let event = appEvents[indexPath.row]
-        let journey = appJourney[indexPath.row]
+        let journey = journeysFollowed[indexPath.row]
+        let event = appEvents[journey._journeyId!]?.last
         guard let user = appUser else {return cell}
-        cell.configureCell(event: event, journey: journey, user: user)
+        
+        let event1: Event = Event()
+        
+        cell.configureCell(journey: journey, user: user)
         //        let content = contents[indexPath.row]
         //        cell.set(image: contents[indexPath.row])
         //        switchItUp(image: content, cell: cell)
@@ -166,10 +209,10 @@ extension HomeViewController: CollectionViewDelegateLayout {
     }
     
     internal func sizeForItemAt(indexPath: IndexPath) -> CGSize {
-        if indexPath.item == contents.count{
+        if indexPath.item == journeysFollowed.count{
             return CGSize(width: configure.itemWidth,height: 100)
         }
-        let image = contents[indexPath.row]
+        let image = #imageLiteral(resourceName: "nostalgic4")
         let width = configure.itemWidth
         var height = width / image.size.width * image.size.height + 49
         if height < 300 {
@@ -185,7 +228,7 @@ extension HomeViewController: UIScrollViewDelegate {
     }
     
     func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
-        if indexPath.item == contents.count{
+        if indexPath.item == journeysFollowed.count{
             // loadMoreData()
         }
     }

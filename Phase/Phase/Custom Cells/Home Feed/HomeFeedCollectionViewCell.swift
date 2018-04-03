@@ -43,18 +43,22 @@ class HomeFeedCollectionViewCell: UICollectionViewCell {
         }
     }
     
-    public func configureCell(event: Event, journey: Journey, user: AppUser) {
+    public func configureCell(journey: Journey, user: AppUser) {
         userName.text = user._username
-        timeStamp.text = event._creationDate?.description
+        timeStamp.text = journey._creationDate?.description
+        likeLabel.text = 72.description
+        postLabel.text = journey._description
+//        timeStamp.text = event._creationDate?.description
+//        likeLabel.text = event._numberOfLikes?.description
+//        postLabel.text = event._caption
         journeyLabel.text =  journey._title
-        likeLabel.text = event._numberOfLikes?.description
-        postLabel.text = event._caption
-        guard let image = eventImage else {return}
+        contentImage.image = #imageLiteral(resourceName: "nostalgic4")
+        guard let image = eventImage else {return userImage.image = #imageLiteral(resourceName: "7-R5CLfl_400x400") }
         userImage.image = image
     }
-    public func set(image: UIImage) {
-        contentImage.image = image
-    }
+//    public func set(image: UIImage) {
+//        contentImage.image = image
+//    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
