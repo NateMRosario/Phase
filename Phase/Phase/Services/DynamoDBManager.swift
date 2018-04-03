@@ -309,8 +309,8 @@ extension DynamoDBManager {
                 newEvent._creationDate = Date().timeIntervalSinceReferenceDate as NSNumber
                 newEvent._journey = journey._journeyId
                 newEvent._userId = CognitoManager.shared.userId
-                newEvent._numberOfLikes = 0 as NSNumber
-                newEvent._numberOfViews = 0 as NSNumber
+                newEvent._numberOfLikes = 0
+                newEvent._numberOfViews = 0
                 newEvent._caption = caption
                 newEvent._media = imageId
                 newEvent._viewers = nil
@@ -349,14 +349,11 @@ extension DynamoDBManager {
     
     func loadEvent(eventId: String, completion: @escaping (Event?, Error?) -> Void) {
         
-        var event: Event = Event()
-        event._eventId = eventId
-        
         mapper.load(Event.self, hashKey: eventId, rangeKey: nil) { (loadedEvent, error) in
             if let error = error {
                 completion(nil, error)
             } else if let loadedEvent = loadedEvent {
-                event = loadedEvent as! Event
+                let event = loadedEvent as! Event
                 completion(event, nil)
             }
         }
