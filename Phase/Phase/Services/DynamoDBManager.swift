@@ -18,8 +18,16 @@ class DynamoDBManager {
     static let shared = DynamoDBManager()
     private init() {}
     
+    weak var delegate: DynamoDBUserActionsDelegate?
     let dynamoDB = AWSDynamoDB.default()
     let mapper = AWSDynamoDBObjectMapper.default()
+}
+
+@objc protocol DynamoDBUserActionsDelegate: class {
+    @objc optional func didFollow()
+    @objc optional func didUnfollow()
+    @objc optional func didWatchJourney()
+    @objc optional func didUnwatchJourney()
 }
 
 // MARK: - AppUser Methods
@@ -50,6 +58,11 @@ extension DynamoDBManager {
         var user: AppUser = AppUser()
         user._userId = userId
         
+        if let user = CacheService.manager.getUserData(by: userId) {
+            completion(user, DBError.loadResultNil)
+            print("Got user from cache")
+        }
+        
         mapper.load(AppUser.self, hashKey: userId, rangeKey: nil) { (loadedUser, error) in
             if let error = error {
                 print(error)
@@ -58,6 +71,7 @@ extension DynamoDBManager {
                 user = loadedUser as! AppUser
                 print(loadedUser)
                 completion(user, nil)
+                CacheService.manager.add(userData: user, withID: userId)
             } else {
                 completion(nil, DBError.loadResultNil)
             }
@@ -72,6 +86,39 @@ extension DynamoDBManager {
         mapper.save(newAppUser) { (error) in
             if let error = error {
                 completion(error)
+            }
+        }
+    }
+    
+    func unfollowUser(user: AppUser, completion: @escaping (Error?) -> Void) {
+        guard let userId = CognitoManager.shared.userId else {completion(CognitoError.noActiveUser); return}
+        let userToUnfollow = user
+        loadUser(userId: userId) { (user, error) in
+            if let error = error {completion(error)}
+            else if let currentUser = user {
+                guard currentUser._userId == userToUnfollow._userId else {return}
+                if let followingSet = currentUser._usersFollowed {
+                    var followingSet = followingSet
+                    followingSet.remove(currentUser._userId!)
+                    currentUser._usersFollowed = followingSet
+                    self.updateUser(appUser: currentUser, completion: { (error) in
+                        if let error = error {completion(error)}
+                        else {userToUnfollow._followerCount = ((userToUnfollow._followerCount as! Int) - 1) as NSNumber
+                            self.updateUser(appUser: currentUser, completion: { (error) in
+                                if let error = error {completion(error)}
+                                else {
+                                    self.updateUser(appUser: userToUnfollow, completion: { (error) in
+                                        if let error = error {
+                                            completion(error)
+                                        } else {
+                                            self.delegate?.didUnfollow!()
+                                        }
+                                    })
+                                }
+                            })
+                        }
+                    })
+                }
             }
         }
     }
@@ -106,6 +153,8 @@ extension DynamoDBManager {
                                 self.updateUser(appUser: userToFollow, completion: { (error) in
                                     if let error = error {
                                         completion(error)
+                                    } else {
+                                        self.delegate?.didFollow!()
                                     }
                                 })
                             }
@@ -180,12 +229,18 @@ extension DynamoDBManager {
         var journey: Journey = Journey()
         journey._journeyId = journeyId
         
+        if let journey =  CacheService.manager.getJourney(fromURL: journeyId) {
+            completion(journey, nil)
+            print("Got journey from cache")
+        }
+        
         mapper.load(Journey.self, hashKey: journeyId, rangeKey: nil) { (loadedJourney, error) in
             if let error = error {
                 completion(nil, error)
             } else if let loadedJourney = loadedJourney {
                 journey = loadedJourney as! Journey
                 completion(journey, nil)
+                CacheService.manager.add(journey: journey, withUrlStr: journeyId)
             }
         }
     }
@@ -225,10 +280,18 @@ extension DynamoDBManager {
             completion(CognitoError.noActiveUser)
             return
         }
-        
-        
 
     }
+    
+//    func likeJourney() {
+//        guard let userId = CognitoManager.shared.userId else {
+//            completion(CognitoError.noActiveUser)
+//            return
+//        }
+//        
+//        
+//        
+//    }
     
 }
 
@@ -246,17 +309,22 @@ extension DynamoDBManager {
                 newEvent._creationDate = Date().timeIntervalSinceReferenceDate as NSNumber
                 newEvent._journey = journey._journeyId
                 newEvent._userId = CognitoManager.shared.userId
-                newEvent._numberOfLikes = 0
-                newEvent._numberOfViews = 0
+                newEvent._numberOfLikes = 0 as NSNumber
+                newEvent._numberOfViews = 0 as NSNumber
                 newEvent._caption = caption
                 newEvent._media = imageId
+                newEvent._viewers = nil
+                
                 
                 self.mapper.save(newEvent) { (error) in
                     if let error = error {
                         completion(error)
                     } else {
-                        var eventSet = journey._events
-                        eventSet!.insert(newEvent._eventId!)
+                        var eventSet = Set<String>()
+                        if journey._events != nil {
+                            eventSet = journey._events!
+                        }
+                        eventSet.insert(newEvent._eventId!)
                         let newEventCount = ((journey._eventCount as! Int) + 1) as NSNumber
                         
                         let journeyToUpdate: Journey = journey
