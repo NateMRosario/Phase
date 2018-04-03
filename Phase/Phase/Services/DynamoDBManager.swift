@@ -53,6 +53,23 @@ extension DynamoDBManager {
         }
     }
     
+    func loadAllUsers(completion: @escaping (AppUser?, Error?) -> Void) {
+        var user: AppUser = AppUser()
+        let exp = AWSDynamoDBScanExpression()
+        mapper.scan(AppUser.self, expression: exp) { (loadedUser, error) in
+            if let error = error {
+                print(error)
+                completion(nil, error)
+            } else {
+                if let loadedUser = loadedUser {
+                    //user = loadedUser as! AppUser
+                    completion(user, nil)
+                    CacheService.manager.add(userData: user, withID: user._userId!)
+                }
+            }
+        }
+    }
+    
     func loadUser(userId: String, completion: @escaping (AppUser?, Error?) -> Void) {
         
         var user: AppUser = AppUser()

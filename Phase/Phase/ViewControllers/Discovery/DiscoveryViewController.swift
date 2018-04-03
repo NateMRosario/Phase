@@ -125,7 +125,7 @@ class DiscoveryViewController: UIViewController {
     }
     
     private func getPopularJourneys() {
-        DynamoDBManager.shared.loadJourney(journeyId: <#T##String#>, completion: <#T##(Journey?, Error?) -> Void#>)
+        
     }
     
     deinit {
@@ -188,7 +188,7 @@ extension DiscoveryViewController: CollectionViewDelegateLayout {
     }
     
     func sizeForItemAt(indexPath: IndexPath) -> CGSize {
-        let cell = collectionView.cellForItem(at: indexPath) as! DiscoverCollectionViewCell
+//        let cell = collectionView.cellForItem(at: indexPath) as! DiscoverCollectionViewCell
         if indexPath.item == contents.count{
              return CGSize(width: UIScreen.main.bounds.width, height: 100)
         }
