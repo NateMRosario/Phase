@@ -24,7 +24,7 @@ class EventDummyDate {
 }
 
 
-class JourneyTestViewController: UIViewController {
+class JourneyDetailViewController: UIViewController {
     
     // MARK: - Testbed properties
     private var comments = [EventDummyDate]() {
@@ -47,15 +47,18 @@ class JourneyTestViewController: UIViewController {
         comments.append(event3)
         
     }
-    var headerViewMoved = false
+    private var headerViewMoved = false
     
     // MARK: - Properties
-    lazy var journeyProfileImageView: UIImageView = {
+    lazy private var journeyProfileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "g")
         imageView.contentMode = .scaleAspectFit
         imageView.layer.borderWidth = 0.5
         imageView.layer.borderColor = UIColor.gray.cgColor
+        let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(journeyProfileImageTapped))
+        imageView.addGestureRecognizer(tapRecognizer)
+        imageView.isUserInteractionEnabled = true
         return imageView
     }()
     
@@ -113,7 +116,7 @@ class JourneyTestViewController: UIViewController {
                 headerView.round(corners: .allCorners, radius: 18)
     }
     
-    // MARK: - Functions
+    // MARK: - Overrides
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -124,6 +127,18 @@ class JourneyTestViewController: UIViewController {
         headerView.addBorder(toSide: .bottom, withColor: UIColor.black.cgColor, andThickness: 1)
     }
     
+    // MARK: - Functions
+    private func setupView() {
+        setJourneyCarouselViewConstraints()
+        setHeaderViewConstraints()
+        setJourneyProfileImageViewConstraints()
+        setMiddleViewConstraints()
+        setFooterViewConstraints()
+    }
+    
+    private func getPost() {}
+    
+    // hides tableView and footerView when headerView is in its default position
     private func setHiddenViews() {
         footerView.isHidden = !headerViewMoved
         middleView.isHidden = !headerViewMoved
@@ -140,25 +155,10 @@ class JourneyTestViewController: UIViewController {
         journeyCarouselView.carouselSlider.addTarget(self, action: #selector(sliderValueChanged(_:)), for: .valueChanged)
     }
     
-    @objc private func sliderValueChanged(_ sender: UISlider) {
-        scrolledBySlider = true
-        sliderValue = Int(sender.value)
-    }
-    
-    private func setupView() {
-        setJourneyCarouselViewConstraints()
-        setHeaderViewConstraints()
-        setJourneyProfileImageViewConstraints()
-        setMiddleViewConstraints()
-        setFooterViewConstraints()
-    }
-    
     private func setupAnimatedHeader() {
         self.headerView.transform = CGAffineTransform(translationX: -headerView.frame.width, y: 0)
         self.journeyProfileImageView.transform = CGAffineTransform(translationX: -headerView.frame.width, y: 0)
     }
-    
-
     
     private func headerViewTapped() {
         headerViewMoved = !headerViewMoved
@@ -187,7 +187,12 @@ class JourneyTestViewController: UIViewController {
         footerView.transform = CGAffineTransform(translationX: 0, y: -self.view.frame.bounds.height * 0.5)
     }
     
-    private func getPost() {}
+    @objc private func sliderValueChanged(_ sender: UISlider) {
+        scrolledBySlider = true
+        sliderValue = Int(sender.value)
+    }
+    
+    @objc private func journeyProfileImageTapped() {}
     
     
     // MARK: - Contraints
@@ -243,17 +248,14 @@ class JourneyTestViewController: UIViewController {
 }
 
 // MARK: - iCarouselDataSource
-extension JourneyTestViewController: iCarouselDataSource {
+extension JourneyDetailViewController: iCarouselDataSource {
     func numberOfItems(in carousel: iCarousel) -> Int {
         return picArr.count
     }
     
     func carousel(_ carousel: iCarousel, viewForItemAt index: Int, reusing view: UIView?) -> UIView {
         var itemView: UIImageView
-        itemView = UIImageView(frame: CGRect(x: 0, y: 0,
-                                             width: journeyCarouselView.carouselCollectionView.frame.width,
-                                             height: journeyCarouselView.carouselCollectionView.frame.height
-        ))
+        itemView = UIImageView(frame: CGRect(x: 0, y: 0, width: journeyCarouselView.carouselCollectionView.frame.width, height: journeyCarouselView.carouselCollectionView.frame.height))
         itemView.image = picArr[index]
         itemView.layer.masksToBounds = true
         itemView.clipsToBounds = true
@@ -263,7 +265,7 @@ extension JourneyTestViewController: iCarouselDataSource {
 }
 
 // MARK: - iCarouselDelegate
-extension JourneyTestViewController: iCarouselDelegate {
+extension JourneyDetailViewController: iCarouselDelegate {
     func carousel(_ carousel: iCarousel, valueFor option: iCarouselOption, withDefault value: CGFloat) -> CGFloat {
         if (option == .spacing) {
             return value * 1.1
@@ -277,13 +279,13 @@ extension JourneyTestViewController: iCarouselDelegate {
 }
 
 // MARK: - MiddleView TableViewDelegate
-extension JourneyTestViewController: UITableViewDelegate {
+extension JourneyDetailViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
     }
 }
 
 // MARK: -  MiddleView UITableViewDataSource
-extension JourneyTestViewController: UITableViewDataSource {
+extension JourneyDetailViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return comments.count
     }
@@ -297,41 +299,15 @@ extension JourneyTestViewController: UITableViewDataSource {
     }
 }
 
-extension JourneyTestViewController: JourneyCommentTableCellDelegate {
+// MARK: - Custom Delegates
+extension JourneyDetailViewController: JourneyCommentTableCellDelegate {
     func profileImageTapped() {}
     func replyButtonTapped() {}
 }
 
-extension JourneyTestViewController: JourneyHeaderDelegate {
+extension JourneyDetailViewController: JourneyHeaderDelegate {
     func segueToProfileTapped() {}
     func showCommentsTapped() {
         headerViewTapped()
-    }
-}
-
-extension UIView {
-    func round(corners: UIRectCorner, radius: CGFloat) {
-        let path = UIBezierPath(roundedRect: bounds, byRoundingCorners: corners, cornerRadii: CGSize(width: radius, height: radius))
-        let mask = CAShapeLayer()
-        mask.path = path.cgPath
-        self.layer.mask = mask
-    }
-}
-
-extension UIView {
-    func blur() {
-        let blurEffect = UIBlurEffect(style: .light)
-        let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        blurEffectView.frame = self.bounds
-        blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        self.addSubview(blurEffectView)
-    }
-    
-    func unBlur() {
-        for subview in self.subviews {
-            if subview is UIVisualEffectView {
-                subview.removeFromSuperview()
-            }
-        }
     }
 }

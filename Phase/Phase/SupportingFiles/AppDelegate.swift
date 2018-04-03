@@ -50,7 +50,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        return AWSMobileClient.sharedInstance().interceptApplication(
 //            application,
 //            didFinishLaunchingWithOptions: launchOptions)
-        let controller = JourneyTestViewController()
+        let controller = JourneyDetailViewController()
         window = UIWindow(frame: UIScreen.main.bounds)
                     window?.rootViewController = controller
                     window?.makeKeyAndVisible()

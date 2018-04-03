@@ -135,13 +135,9 @@ class JourneyCommentTableViewCell: UITableViewCell {
     
     
     public func configureCell(with event: EventDummyDate) {
-        let formattedString = NSMutableAttributedString()
-        formattedString.bold("\(event._userId):  ")
-        formattedString.normal(" \(event._caption)")
-        
         self.profileImageView.image = UIImage(imageLiteralResourceName: "\(event._media)")
         self.timePostedLabel.text = event._eventId
-        self.commentLabel.attributedText = formattedString
+        self.commentLabel.text = event._caption
     }
     
 }
