@@ -15,15 +15,12 @@ class JourneyCommentTableView: UIView {
     // MARK: - TableViewCell Identifier
     let cellID = "JourneyCommentTableViewCell"
     
-    // MARK: - Delegate
-    weak var delegate: JourneyCommentTableCellDelegate?
-    
     // MARK: - Lazy variables
     lazy var journeyCommentTableView: UITableView = {
         let tableView = UITableView()
         tableView.register(JourneyCommentTableViewCell.self, forCellReuseIdentifier: cellID)
-        tableView.backgroundColor = .yellow
-        tableView.separatorStyle = .none
+        tableView.backgroundColor = .white
+        tableView.separatorStyle = .singleLine
         return tableView
     }()
     
@@ -46,11 +43,6 @@ class JourneyCommentTableView: UIView {
     
     private func setupViews() {
         setupJourneyCommentTableViewConstraints()
-    }
-    
-    @objc private func replyButtonTapped() {
-        print("reply button delegate")
-        delegate?.replyButtonTapped()
     }
     
     // MARK: - Constraints

@@ -51,6 +51,7 @@ class JourneyBottomView: UIView {
         textfield.layer.borderColor = UIColor.gray.cgColor
         textfield.layer.borderWidth = 0.5
         textfield.textAlignment = .left
+        textfield.font = UIFont(name: "AppleSDGothicNeo-SemiBold", size: 12)
         textfield.layoutEdgeInsets = UIEdgeInsets(top: 0, left: 5, bottom: 0, right: 25)
         let view = UIView(frame: CGRect(x: 100, y: 0, width: CGFloat(20), height: CGFloat(20)))
         view.addSubview(postButton)
@@ -70,7 +71,7 @@ class JourneyBottomView: UIView {
     }
     
     private func commonInit() {
-        backgroundColor = UIColor.blue
+        backgroundColor = UIColor.white
         setupViews()
     }
     
@@ -103,9 +104,9 @@ class JourneyBottomView: UIView {
     private func setupCommentProfileImageView() {
         addSubview(commentProfileImageView)
         commentProfileImageView.snp.makeConstraints { (make) in
-            make.width.equalTo(self).multipliedBy(0.09)
+            make.width.equalTo(self).multipliedBy(0.07)
             make.height.equalTo(commentProfileImageView.snp.width)
-            make.bottom.equalTo(self).offset(-8)
+            make.centerY.equalTo(self)
             make.leading.equalTo(self).offset(8)
         }
     }

@@ -11,7 +11,8 @@ import SnapKit
 
 // MARK: - Custom Delegate
 protocol JourneyHeaderDelegate: class {
-    func journeyProfileImageButtonTapped()
+    func showCommentsTapped()
+    func segueToProfileTapped()
 }
 
 
@@ -36,29 +37,29 @@ class JourneyHeaderView: UIView {
         button.layer.shadowRadius = 1
         button.layer.cornerRadius = 4
         button.backgroundColor = UIColor(hue: 0/360, saturation: 0/100, brightness: 98/100, alpha: 1.0)
+        button.addTarget(self, action: #selector(showCommentsTapped), for: .touchUpInside)
         return button
     }()
     
-    lazy var journeyProfileImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "g")
-        imageView.contentMode = .scaleAspectFit
-        imageView.layer.masksToBounds = true
-        imageView.clipsToBounds = true
-        imageView.layer.borderWidth = 0.5
-        imageView.layer.borderColor = UIColor.gray.cgColor
-        imageView.layer.cornerRadius = bounds.width / 2
-        return imageView
+    lazy var journeyUserNamelabel: UIButton = {
+        let button = UIButton()
+        button.setTitle("Ty PodMaster", for: .normal)
+        button.titleLabel?.textAlignment = .left
+        button.setTitleColor(UIColor.black, for: .normal)
+        button.backgroundColor = UIColor.clear
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .heavy)
+        button.addTarget(self, action: #selector(segueToProfileTapped), for: .touchUpInside)
+        return button
     }()
     
-    lazy var journeyUserNamelabel: UILabel = {
-        let label = UILabel()
-        label.text = "Ty PodMaster"
-        label.textAlignment = .left
-        label.backgroundColor = UIColor.clear
-        label.font = UIFont.systemFont(ofSize: 16, weight: .heavy)
-        return label
-    }()
+//    lazy var journeyUserNamelabel: UILabel = {
+//        let label = UILabel()
+//        label.text = "Ty PodMaster"
+//        label.textAlignment = .left
+//        label.backgroundColor = UIColor.clear
+//        label.font = UIFont.systemFont(ofSize: 16, weight: .heavy)
+//        return label
+//    }()
     
     lazy var journeyDescriptionLabel: UILabel = {
         let label = UILabel()
@@ -78,14 +79,25 @@ class JourneyHeaderView: UIView {
         return label
     }()
     
-    lazy var journeyTotalComments: UILabel = {
-        let label = UILabel()
-        label.text = "5 comments"
-        label.textAlignment = .right
-        label.backgroundColor = UIColor.clear
-        label.font = UIFont.systemFont(ofSize: 11, weight: .light)
-        return label
+    lazy var journeyTotalComments: UIButton = {
+        let button = UIButton()
+        button.setTitle("5 comments", for: .normal)
+        button.titleLabel?.textAlignment = .right
+        button.backgroundColor = UIColor.clear
+        button.setTitleColor(UIColor.gray, for: .normal)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 11, weight: .light)
+        button.addTarget(self, action: #selector(showCommentsTapped), for: .touchUpInside)
+        return button
     }()
+    
+//    lazy var journeyTotalComments: UILabel = {
+//        let label = UILabel()
+//        label.text = "5 comments"
+//        label.textAlignment = .right
+//        label.backgroundColor = UIColor.clear
+//        label.font = UIFont.systemFont(ofSize: 11, weight: .light)
+//        return label
+//    }()
     
     // MARK: - Initializers
     override init(frame: CGRect) {
@@ -104,10 +116,10 @@ class JourneyHeaderView: UIView {
     }
     
     // MARK: - Functions
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        journeyProfileImageView.layer.cornerRadius = journeyProfileImageView.bounds.width/2.0
-    }
+//    override func layoutSubviews() {
+//        super.layoutSubviews()
+//        journeyProfileImageView.layer.cornerRadius = journeyProfileImageView.bounds.width/2.0
+//    }
     
     private func setupViews() {
         setupThinButton()
@@ -117,9 +129,14 @@ class JourneyHeaderView: UIView {
         setupJourneyTotalComments()
     }
     
-    @objc private func journeyProfileImageButtonTapped() {
-        print("profile button delegate")
-        delegate?.journeyProfileImageButtonTapped()
+    @objc private func segueToProfileTapped() {
+        print("profile")
+        delegate?.segueToProfileTapped()
+    }
+    
+    @objc private func showCommentsTapped() {
+        print("as")
+        delegate?.showCommentsTapped()
     }
     
     // MARK: - Constraints
@@ -136,9 +153,8 @@ class JourneyHeaderView: UIView {
     private func setupJourneyUserNamelabel() {
         addSubview(journeyUserNamelabel)
         journeyUserNamelabel.snp.makeConstraints { (make) in
-            make.top.equalTo(thinButton.snp.bottom).offset(14)
+            make.top.equalTo(thinButton.snp.bottom).offset(6)
             make.leading.equalTo(self).offset(12)
-            make.trailing.equalTo(self).offset(-12)
         }
     }
     
@@ -147,7 +163,7 @@ class JourneyHeaderView: UIView {
         journeyDescriptionLabel.snp.makeConstraints { (make) in
             make.leading.equalTo(self).offset(12)
             make.trailing.equalTo(self).offset(-12)
-            make.top.equalTo(journeyUserNamelabel.snp.bottom).offset(8)
+            make.top.equalTo(journeyUserNamelabel.snp.bottom).offset(4)
         }
     }
     
@@ -156,7 +172,7 @@ class JourneyHeaderView: UIView {
         journeyStartDate.snp.makeConstraints { (make) in
             make.leading.equalTo(self).offset(12)
             make.trailing.equalTo(self).offset(-12)
-            make.top.equalTo(journeyDescriptionLabel.snp.bottom).offset(8)
+            make.top.equalTo(journeyDescriptionLabel.snp.bottom).offset(16)
         }
     }
     
@@ -164,7 +180,7 @@ class JourneyHeaderView: UIView {
         addSubview(journeyTotalComments)
         journeyTotalComments.snp.makeConstraints { (make) in
             make.trailing.equalTo(self).offset(-12)
-            make.top.equalTo(journeyDescriptionLabel.snp.bottom).offset(8)
+            make.firstBaseline.equalTo(journeyStartDate.snp.firstBaseline)
         }
     }
 }
