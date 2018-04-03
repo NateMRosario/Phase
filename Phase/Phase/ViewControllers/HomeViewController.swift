@@ -18,13 +18,16 @@ class HomeViewController: UIViewController {
     }
     
     @IBAction func goToChat(_ sender: UIBarButtonItem) {
-        DynamoDBManager.shared.loadUser(userId: CognitoManager.shared.userId!) { (user, error) in
+        DynamoDBManager.shared.loadEvent(eventId: "B2EDE1FE-40ED-400F-B239-9D42BD526800") { (event, error) in
             if let error = error {
                 print(error)
+            } else if let event = event {
+                print(event)
             } else {
-                print(user!)
+                print("nil")
             }
         }
+        
     }
     
     @IBOutlet weak var tableView: UITableView! {
@@ -99,7 +102,7 @@ extension HomeViewController: UITableViewDataSource {
 
 extension HomeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        navigationController?.pushViewController(JourneyCarouselViewController(heroID: ""), animated: true)
+        //navigationController?.pushViewController(JourneyCarouselViewController(heroID: ""), animated: true)
     }
 }
 

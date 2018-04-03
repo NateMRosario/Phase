@@ -19,8 +19,9 @@ import AWSDynamoDB
 class Event: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
     
     var _eventId: String?
-    var _creationDate: NSNumber?
     var _caption: String?
+    var _comments: Set<String>?
+    var _creationDate: NSNumber?
     var _journey: String?
     var _media: String?
     var _numberOfLikes: NSNumber?
@@ -38,16 +39,12 @@ class Event: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
         return "_eventId"
     }
     
-    class func rangeKeyAttribute() -> String {
-        
-        return "_creationDate"
-    }
-    
     override class func jsonKeyPathsByPropertyKey() -> [AnyHashable: Any] {
         return [
             "_eventId" : "eventId",
-            "_creationDate" : "creationDate",
             "_caption" : "caption",
+            "_comments" : "comments",
+            "_creationDate" : "creationDate",
             "_journey" : "journey",
             "_media" : "media",
             "_numberOfLikes" : "numberOfLikes",
@@ -57,4 +54,3 @@ class Event: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
         ]
     }
 }
-

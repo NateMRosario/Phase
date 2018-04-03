@@ -24,6 +24,8 @@ class JourneyCommentTableViewCell: UITableViewCell {
         imageView.layer.borderWidth = 0.5
         imageView.layer.borderColor = UIColor.gray.cgColor
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(profileImageTapped))
+        imageView.addGestureRecognizer(tapRecognizer)
+        imageView.isUserInteractionEnabled = true
         return imageView
     }()
     
@@ -32,7 +34,7 @@ class JourneyCommentTableViewCell: UITableViewCell {
         label.text = "This is a comment. This is a comment. This is a comment. This is a comment. This is a comment. This is a comment. "
         label.textAlignment = .left
         label.numberOfLines = 0
-        label.font.withSize(13)
+        label.font.withSize(11)
         return label
     }()
     
@@ -64,7 +66,7 @@ class JourneyCommentTableViewCell: UITableViewCell {
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
-        backgroundColor = .red
+        backgroundColor = .white
     }
     
     // MARK: - Functions
@@ -82,7 +84,7 @@ class JourneyCommentTableViewCell: UITableViewCell {
     }
     
     
-    @objc private  func profileImageTapped(sender: UIImageView, target:UIViewController) {
+    @objc private  func profileImageTapped() {
         print("profile image delegate")
         delegate?.profileImageTapped()
     }
@@ -97,7 +99,7 @@ class JourneyCommentTableViewCell: UITableViewCell {
     private func setupProfileImageView() {
         addSubview(profileImageView)
         profileImageView.snp.makeConstraints { (make) in
-            make.width.equalTo(40)
+            make.width.equalTo(30)
             make.height.equalTo(profileImageView.snp.width)
             make.leading.equalTo(self).offset(8)
             make.top.equalTo(self).offset(8)
@@ -116,8 +118,8 @@ class JourneyCommentTableViewCell: UITableViewCell {
         addSubview(replyButton)
         replyButton.snp.makeConstraints { (make) in
             make.leading.equalTo(timePostedLabel.snp.trailing).offset(12)
-            make.firstBaseline.equalTo(timePostedLabel.snp.firstBaseline).offset(6)
-            make.bottom.equalTo(self).offset(-8)
+            make.height.equalTo(timePostedLabel.snp.height)
+            make.bottom.equalTo(timePostedLabel.snp.bottom)
         }
     }
     
@@ -127,19 +129,15 @@ class JourneyCommentTableViewCell: UITableViewCell {
             make.top.equalTo(profileImageView.snp.top).offset(2)
             make.leading.equalTo(profileImageView.snp.trailing).offset(14)
             make.trailing.equalTo(self).offset(-12)
-            make.bottom.equalTo(timePostedLabel.snp.top).offset(-10)
+            make.bottom.equalTo(timePostedLabel.snp.top).offset(-6)
         }
     }
     
     
     public func configureCell(with event: EventDummyDate) {
-        let formattedString = NSMutableAttributedString()
-        formattedString.bold("\(event._userId):  ")
-        formattedString.normal(" \(event._caption)")
-        
         self.profileImageView.image = UIImage(imageLiteralResourceName: "\(event._media)")
         self.timePostedLabel.text = event._eventId
-        self.commentLabel.attributedText = formattedString
+        self.commentLabel.text = event._caption
     }
     
 }

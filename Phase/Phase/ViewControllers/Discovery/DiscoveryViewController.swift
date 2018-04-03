@@ -167,14 +167,14 @@ extension DiscoveryViewController: UICollectionViewDataSource {
 
 extension DiscoveryViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let cell = collectionView.cellForItem(at: indexPath) as! DiscoverCollectionViewCell
-        let detailNC = JourneyCarouselViewController(heroID: "view\(indexPath.row)")
-        selectedIndexPath = indexPath
-        cell.image1.hero.id = "view\(indexPath.row)"
-        let nonFade = HeroModifier.forceNonFade
-        let orange = HeroModifier.backgroundColor(.orange)
-        cell.hero.modifiers = [nonFade, orange]
-        navigationController?.pushViewController(detailNC, animated: true)
+//        let cell = collectionView.cellForItem(at: indexPath) as! DiscoverCollectionViewCell
+//        let detailNC = JourneyCarouselViewController(heroID: "view\(indexPath.row)")
+//        selectedIndexPath = indexPath
+//        cell.image1.hero.id = "view\(indexPath.row)"
+//        let nonFade = HeroModifier.forceNonFade
+//        let orange = HeroModifier.backgroundColor(.orange)
+//        cell.hero.modifiers = [nonFade, orange]
+//        navigationController?.pushViewController(detailNC, animated: true)
     }
 }
 
