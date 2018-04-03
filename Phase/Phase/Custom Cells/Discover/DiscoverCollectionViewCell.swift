@@ -75,10 +75,13 @@ class DiscoverCollectionViewCell: UICollectionViewCell {
             image3.image = image
         }
         else if num == 2 || num == 4 || num == 6 {
+            image3.image = nil
             image1.image = image
             image2.image = image
             profileImage.image = image
         } else {
+            image3.image = nil
+            image2.image = nil
             image1.image = image
             profileImage.image = image
         }

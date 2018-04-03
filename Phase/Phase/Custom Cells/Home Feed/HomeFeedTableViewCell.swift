@@ -9,20 +9,20 @@
 import UIKit
 import SnapKit
 
-class HomeFeedCollectionViewCell: UICollectionViewCell {
+protocol PresentVCDelgate: class {
+    func mentionsTapped()
+    func hashTagTapped()
+}
+
+class HomeFeedCollectionViewCell: UITableViewCell {
     
+    weak var delegate: PresentVCDelgate?
     
     var eventImage: UIImage?
+    @IBOutlet weak var journeyTitle: UILabel!
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var timeStamp: UILabel!
-    @IBOutlet weak var journeyLabel: UILabel!
-    @IBOutlet weak var likeLabel: UILabel! {
-        didSet {
-            likeLabel.layer.cornerRadius = likeLabel.bounds.height / 2
-            likeLabel.layer.borderWidth = 1
-        }
-    }
-    @IBOutlet weak var postLabel: UILabel!
+    @IBOutlet weak var journeyLabel: ActiveLabel!
     @IBOutlet weak var detailView: UIView! {
         didSet {
             detailView.layer.cornerRadius = 8
@@ -46,23 +46,27 @@ class HomeFeedCollectionViewCell: UICollectionViewCell {
     public func configureCell(journey: Journey, user: AppUser) {
         userName.text = user._username
         timeStamp.text = journey._creationDate?.description
-        likeLabel.text = 72.description
-        postLabel.text = journey._description
-//        timeStamp.text = event._creationDate?.description
-//        likeLabel.text = event._numberOfLikes?.description
-//        postLabel.text = event._caption
         journeyLabel.text =  journey._title
         contentImage.image = #imageLiteral(resourceName: "nostalgic4")
         guard let image = eventImage else {return userImage.image = #imageLiteral(resourceName: "7-R5CLfl_400x400") }
         userImage.image = image
     }
-//    public func set(image: UIImage) {
-//        contentImage.image = image
-//    }
+        
+    public func set(image: UIImage, event: Event) {
+        contentImage.image = image
+    }
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        journeyLabel.customize { (label) in
+            label.hashtagColor = UIColor(red: 85.0/255, green: 172.0/255, blue: 238.0/255, alpha: 1)
+            label.mentionColor = UIColor(red: 238.0/255, green: 85.0/255, blue: 96.0/255, alpha: 1)
+            
+            label.handleHashtagTap {_ in self.delegate?.hashTagTapped()}
+            label.handleMentionTap({ (mention) in
+                self.delegate?.mentionsTapped()
+            })
+        }
     }
-    
-    
 }

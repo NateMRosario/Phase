@@ -8,6 +8,7 @@
 
 import UIKit
 import DGElasticPullToRefresh
+import Hero
 
 class DiscoveryViewController: UIViewController {
     
@@ -17,7 +18,9 @@ class DiscoveryViewController: UIViewController {
             collectionView.delegate = self
             layout.delegate = self
             collectionView.setCollectionViewLayout(layout, animated: false)
+            collectionView.register(UINib.init(nibName: "TrendingHeader", bundle: nil), forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: "TrendingHeader")
             collectionView.register(cellTypes: DiscoverCollectionViewCell.self)
+            layout.headerReferenceSize = CGSize(width: UIScreen.main.bounds.width, height: 100)
         }
     }
     
@@ -59,10 +62,16 @@ class DiscoveryViewController: UIViewController {
         return tl
     }()
     let searchBar = UISearchBar()
-
     
+    var journeys = [Journey]() {
+        didSet {
+            
+        }
+    }
+
     override func viewDidLoad() {
         super.viewDidLoad()
+        layout.headerReferenceSize = CGSize(width: UIScreen.main.bounds.width, height: 100)
         
         initNavigationBar()
         fetchContents()
@@ -115,6 +124,10 @@ class DiscoveryViewController: UIViewController {
 //        }
     }
     
+    private func getPopularJourneys() {
+        //DynamoDBManager.shared.loadJourney(journeyId: <#T##String#>, completion: <#T##(Journey?, Error?) -> Void#>)
+    }
+    
     deinit {
         collectionView.dg_removePullToRefresh()
         print("deinit")
@@ -122,6 +135,14 @@ class DiscoveryViewController: UIViewController {
 }
 
 extension DiscoveryViewController: UICollectionViewDataSource {
+    
+    // Why the hell isnt this being called even though headerRef height is implemented
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        let view = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "TrendingHeader", for: indexPath) as! TrendingHeader
+        return view
+    }
+    
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return contents.count + 1
     }
@@ -146,14 +167,19 @@ extension DiscoveryViewController: UICollectionViewDataSource {
 
 extension DiscoveryViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let detailNC = JourneyCarouselViewController()
-
-        selectedIndexPath = indexPath
-        navigationController?.pushViewController(detailNC, animated: true)
+//        let cell = collectionView.cellForItem(at: indexPath) as! DiscoverCollectionViewCell
+//        let detailNC = JourneyCarouselViewController(heroID: "view\(indexPath.row)")
+//        selectedIndexPath = indexPath
+//        cell.image1.hero.id = "view\(indexPath.row)"
+//        let nonFade = HeroModifier.forceNonFade
+//        let orange = HeroModifier.backgroundColor(.orange)
+//        cell.hero.modifiers = [nonFade, orange]
+//        navigationController?.pushViewController(detailNC, animated: true)
     }
 }
 
 extension DiscoveryViewController: CollectionViewDelegateLayout {
+    
     func numberOfColumns(indexPath: IndexPath) -> Int {
         if indexPath.item == contents.count {
             return 1
@@ -162,21 +188,22 @@ extension DiscoveryViewController: CollectionViewDelegateLayout {
     }
     
     func sizeForItemAt(indexPath: IndexPath) -> CGSize {
+        let cell = collectionView.cellForItem(at: indexPath) as! DiscoverCollectionViewCell
         if indexPath.item == contents.count{
              return CGSize(width: UIScreen.main.bounds.width, height: 100)
         }
         
         let image = contents[indexPath.row]
         let width = CollectionViewLayout.Configuration(numberOfColumns: numberOfColumns(indexPath: indexPath)).itemWidth
-        let height = width / image.size.width * image.size.height + 79 // 79 = Cell's clear space below image
-        return CGSize(width: width, height: max(height, width / image.size.height * image.size.height + 79 + 40))
+        let height = width * 1.2 / image.size.width * image.size.height + 79 // 79 = Cell's clear space below image
+        return CGSize(width: width, height: height)
     }
 }
 
 extension DiscoveryViewController {
-    
+
 }
 
 extension DiscoveryViewController: UISearchBarDelegate {
-
+    
 }

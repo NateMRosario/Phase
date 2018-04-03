@@ -17,10 +17,11 @@ class OnboardingLoginViewController: UIViewController {
     @IBAction func loginButtonPressed(_ sender: UIButton) {
         guard let userInfo = userLoginInfoTF.text else { return }
         guard let password = passwordTF.text else { return }
-
+        loginButton.isEnabled = false
         CognitoManager.shared.signIn(username: userInfo , password: password) { (error) in
             if let error = error {
                 self.showAlert(title: "Error", message: "\(error.localizedDescription)")
+                self.loginButton.isEnabled = true
             } else {
                 DispatchQueue.main.async {
                     self.present(TabsViewController.instantiate(withStoryboard: "Main"), animated: true, completion: nil)
@@ -29,6 +30,7 @@ class OnboardingLoginViewController: UIViewController {
         }
     }
     
+    @IBOutlet weak var loginButton: UIButton!
     @IBOutlet weak var userLoginInfoTF: UITextField!
     @IBOutlet weak var passwordTF: UITextField!
     
