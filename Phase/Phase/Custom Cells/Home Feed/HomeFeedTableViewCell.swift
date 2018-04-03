@@ -18,6 +18,7 @@ class HomeFeedCollectionViewCell: UITableViewCell {
     
     weak var delegate: PresentVCDelgate?
     
+    var eventImage: UIImage?
     @IBOutlet weak var journeyTitle: UILabel!
     @IBOutlet weak var userName: UILabel!
     @IBOutlet weak var timeStamp: UILabel!
@@ -42,6 +43,15 @@ class HomeFeedCollectionViewCell: UITableViewCell {
         }
     }
     
+    public func configureCell(journey: Journey, user: AppUser) {
+        userName.text = user._username
+        timeStamp.text = journey._creationDate?.description
+        journeyLabel.text =  journey._title
+        contentImage.image = #imageLiteral(resourceName: "nostalgic4")
+        guard let image = eventImage else {return userImage.image = #imageLiteral(resourceName: "7-R5CLfl_400x400") }
+        userImage.image = image
+    }
+        
     public func set(image: UIImage, event: Event) {
         contentImage.image = image
     }
