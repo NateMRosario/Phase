@@ -70,6 +70,59 @@ class S3Manager {
         })
     }
     
+    //UserImage
+    func uploadUserImage(userImage: UIImage, completion: @escaping (String?, Error?) -> Void) {
+        
+        let kfImg = userImage.kf.resize(to: CGSize(width: 1024, height: 1024), for: ContentMode.aspectFit)
+        guard let pngData = kfImg.kf.pngRepresentation() else { print("image is nil"); return }
+        
+        //guard let pngImage = UIImagePNGRepresentation(image) else { print("image is nil"); return }
+        
+        let fileURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("user.png")
+        do {
+            try pngData.write(to: fileURL)
+            let uploadRequest = AWSS3TransferManagerUploadRequest()
+            let imageUID = UUID().uuidString + ".png" ///Unique String
+            uploadRequest?.bucket = s3Bucket + "/Userimage"
+            uploadRequest?.key = imageUID
+            uploadRequest?.body = fileURL
+            uploadRequest?.contentType = "image/png"
+            transferManager.upload(uploadRequest!).continueWith { (task) -> Any? in
+                if let error = task.error {
+                    print("Error, Unable to Load: \(error)")
+                    completion(nil, error)
+                }
+                if let result = task.result {
+                    print("Uploaded: \(result)")
+                    completion(imageUID, nil)
+                }
+                return nil
+            }
+        } catch {
+            print("File not Saved")
+        }
+    }
+    
+    func downloadUserImage(profileUID: String, completionHandler: @escaping (UIImage?, Error?) -> Void) {
+        
+        let downloadingFileURL = URL(fileURLWithPath: NSTemporaryDirectory()).appendingPathComponent("myImage.jpg")
+        let downloadRequest = AWSS3TransferManagerDownloadRequest()
+        downloadRequest?.bucket = s3Bucket + "/Userimage"
+        downloadRequest?.key = profileUID
+        downloadRequest?.downloadingFileURL = downloadingFileURL
+        var image = UIImage()
+        transferManager.download(downloadRequest!).continueWith(block: { (task) -> Any? in
+            if let error = task.error {
+                print(error)
+                completionHandler(nil, error)
+            } else {
+                image = UIImage(contentsOfFile: downloadingFileURL.path)!
+                completionHandler(image, nil)
+            }
+            return nil
+        })
+    }
+    
     /// Used for progress tracking (Optional)
     let transferUtility = AWSS3TransferUtility.default()
     
