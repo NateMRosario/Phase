@@ -242,7 +242,17 @@ extension PreviewViewController: UICollectionViewDataSource {
             let journey = journeys[indexPath.row - 1]
             cell.journey = journey
             cell.journeyNameLabel.text = journey._title
-            
+            if let lastEvent = journey._lastEvent {
+                DynamoDBManager.shared.loadEvent(eventId: lastEvent, completion: { (event, error) in
+                    if let error = error {
+                        
+                    } else if let event = event {
+                        DispatchQueue.main.async {
+                            cell.journeyImageView.kf.setImage(with: URL(string: "https://s3.amazonaws.com/phase-journey-events/\(event._media!)"))
+                        }
+                    }
+                })
+            }
             if selectedIndexPath != nil {
                 if indexPath == selectedIndexPath {
                     cell.selectedJourneyLayer.isHidden = false
