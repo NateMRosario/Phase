@@ -58,12 +58,8 @@ class PreviewViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        journeys = [Journey]()
         selectedJourney = nil
         selectedIndexPath = nil
-        getJourneys()
-        
-
     }
     
     init(image: UIImage) {
@@ -96,7 +92,11 @@ class PreviewViewController: UIViewController {
     }
     
     private func loadAllJourneys(from ids: [String]) {
-        var journeys = [Journey]()
+        var journeys = [Journey]() {
+            didSet {
+                print(journeys.count)
+            }
+        }
         for id in ids {
             DynamoDBManager.shared.loadJourney(journeyId: id, completion: { (journey, error) in
                 if let journey = journey {
@@ -106,10 +106,18 @@ class PreviewViewController: UIViewController {
                 }
             })
         }
-        if !journeys.isEmpty {
-            journeys = journeys.sorted{ $0._creationDate as! Double > $1._creationDate as! Double }
+        sortJourneys(unsortedJourneys: journeys) { (journeys) in
+            self.journeys = journeys
         }
-        self.journeys = journeys
+    }
+    
+    func sortJourneys(unsortedJourneys: [Journey], completion: ([Journey]) -> Void) {
+        let unsorted = unsortedJourneys
+        var sorted = [Journey]()
+        if !unsorted.isEmpty {
+            sorted = unsorted.sorted{ $0._creationDate as! Double > $1._creationDate as! Double }
+        }
+        completion(sorted)
     }
   
     private func addObservers() {
@@ -250,13 +258,8 @@ extension PreviewViewController: UICollectionViewDataSource {
                     cell.selectedJourneyLayer.isHidden = true
                 }
             }
-            
             return cell
         }
-        
-
-        
-        
     }
 }
 
@@ -305,7 +308,7 @@ extension PreviewViewController: UITextViewDelegate {
 }
 
 extension PreviewViewController: AddNewJourneyViewDelegate {
-    func createdNewJourney() {
+    func createdNewJourney(with name: String, details: String) {
         self.journeys = []
         getJourneys()
     }

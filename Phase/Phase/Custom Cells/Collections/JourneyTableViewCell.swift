@@ -12,20 +12,14 @@ import Kingfisher
 
 class JourneyTableViewCell: UITableViewCell {
     
-    var eventids = [String]() {
+    @objc var eventids = [String]() {
         didSet {
             getEventFor(for: eventids)
         }
     }
     
     var unsortedEvents = [Event]()
-    var sortedEvents = [Event]() {
-        didSet {
-        DispatchQueue.main.async {
-            self.collectionView.reloadData()
-        }
-        }
-    }
+    var sortedEvents = [Event]()
     @IBOutlet weak var emptyJourneyView: UIView!
     
     @IBOutlet weak var containter: UIView! {
@@ -74,9 +68,6 @@ class JourneyTableViewCell: UITableViewCell {
     }
     
     public func configureCell(with journey: Journey, creator: AppUser?, row rows: Int) {
-        if journey._events?.count == 0 {
-            emptyJourneyView.isHidden = false
-        }
         getEvents(for: journey)
         self.startDateLabel.text = convertDate(from: journey._creationDate)
         self.userName.text = creator?._username
@@ -122,11 +113,13 @@ class JourneyTableViewCell: UITableViewCell {
             })
         }
         self.sortedEvents = loadedEvents
-//        DispatchQueue.main.async {
-//            self.collectionView.reloadData()
-//        }
+    }
+    
+    override func prepareForReuse() {
+        collectionView.reloadData()
     }
 }
+   
 
 extension JourneyTableViewCell: UICollectionViewDelegate {
     
@@ -136,10 +129,8 @@ extension JourneyTableViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ADMozaikLayoutCell", for: indexPath) as! MozaikCollectionViewCell
-        let event = sortedEvents[indexPath.row]
-        
-        
-        
+        let event = sortedEvents[indexPath.item]
+    
         if indexPath.row < 3 {
             cell.configureCell(with: event)
         } else {

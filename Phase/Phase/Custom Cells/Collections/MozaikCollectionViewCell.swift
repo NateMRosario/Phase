@@ -20,6 +20,7 @@ class MozaikCollectionViewCell: UICollectionViewCell {
     }
     
     func configureCell(with event: Event) {
+        mozaik.image = nil
         howManyMoreLabel.text = ""
         mozaik.kf.setImage(with: URL(string: "https://s3.amazonaws.com/phase-journey-events/\(event._media!)"))
     }
