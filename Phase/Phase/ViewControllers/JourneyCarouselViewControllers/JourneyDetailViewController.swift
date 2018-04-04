@@ -81,7 +81,7 @@ class JourneyDetailViewController: UIViewController {
     private let middleView = JourneyCommentTableView()
     private let footerView = JourneyBottomView()
     
-    let picArr = [#imageLiteral(resourceName: "a1"),#imageLiteral(resourceName: "a2"),#imageLiteral(resourceName: "a3"),#imageLiteral(resourceName: "a4"),#imageLiteral(resourceName: "a5"),#imageLiteral(resourceName: "a6"),#imageLiteral(resourceName: "a7"),#imageLiteral(resourceName: "a8"),#imageLiteral(resourceName: "a9"),#imageLiteral(resourceName: "a10"),#imageLiteral(resourceName: "a11")]
+    //    let picArr = [#imageLiteral(resourceName: "a1"),#imageLiteral(resourceName: "a2"),#imageLiteral(resourceName: "a3"),#imageLiteral(resourceName: "a4"),#imageLiteral(resourceName: "a5"),#imageLiteral(resourceName: "a6"),#imageLiteral(resourceName: "a7"),#imageLiteral(resourceName: "a8"),#imageLiteral(resourceName: "a9"),#imageLiteral(resourceName: "a10"),#imageLiteral(resourceName: "a11")]
     var scrolledBySlider = false
     var sliderValue: Int = 0 {
         didSet {
@@ -90,21 +90,20 @@ class JourneyDetailViewController: UIViewController {
         }
     }
     
-    var journey: Journey {
-        didSet {
-            guard let eventIds = journey._events else { return }
-            for id in eventIds {
-                DynamoDBManager.shared.loadEvent(eventId: id, completion: { (event, error) in
-                    if let error = error {
-                        
-                    } else if let event = event {
-                        self.events.append(event)
-                    }
-                })
-            }
+    var journey: Journey!
+    
+    private func loadJourney() {
+        guard let eventIds = journey._events else { return }
+        for id in eventIds {
+            DynamoDBManager.shared.loadEvent(eventId: id, completion: { (event, error) in
+                if let error = error {
+                    
+                } else if let event = event {
+                    self.events.append(event)
+                }
+            })
         }
     }
-
     
     var events = [Event]() {
         didSet {
@@ -113,21 +112,22 @@ class JourneyDetailViewController: UIViewController {
             }
         }
     }
-
+    
     // MARK: - Init (Dependency injection)
-            init(journey: Journey){
-                self.journey = journey
-                super.init(nibName: nil, bundle: nil)
-            }
-
-            required init?(coder aDecoder: NSCoder) {
-                fatalError("init(coder:) has not been implemented")
-            }
+    init(journey: Journey){
+        self.journey = journey
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     
     // MARK: - Life cycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        loadJourney()
         self.journeyCarouselView.carouselCollectionView.delegate = self
         self.journeyCarouselView.carouselCollectionView.dataSource = self
         self.middleView.journeyCommentTableView.delegate = self
@@ -169,7 +169,7 @@ class JourneyDetailViewController: UIViewController {
     }
     
     private func setupSlider() {
-        journeyCarouselView.carouselSlider.maximumValue = Float(picArr.count - 1)
+        journeyCarouselView.carouselSlider.maximumValue = Float(events.count)
         journeyCarouselView.carouselSlider.minimumValue = 0
         journeyCarouselView.carouselSlider.addTarget(self, action: #selector(sliderValueChanged(_:)), for: .valueChanged)
     }
@@ -355,7 +355,12 @@ extension JourneyDetailViewController: iCarouselDataSource {
         //itemView.image = picArr[index]
         let event = events[index]
         
-        itemView.kf.setImage(with: URL(string: event._media!)!)
+        let url = URL(string: "https://s3.amazonaws.com/phase-journey-events/\(event._media!)")
+        
+        itemView.kf.indicatorType = .activity
+        itemView.kf.setImage(with: url, placeholder: nil, options: nil, progressBlock: nil, completionHandler: nil)
+//
+//        itemView.kf.setImage(with: URL(string: event._media!)!)
         itemView.layer.masksToBounds = true
         itemView.clipsToBounds = true
         itemView.contentMode = .scaleAspectFill
