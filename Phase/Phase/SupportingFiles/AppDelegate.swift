@@ -50,11 +50,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         return AWSMobileClient.sharedInstance().interceptApplication(
             application,
             didFinishLaunchingWithOptions: launchOptions)
-//        let vc = JourneyDetailViewController()
-//        window = UIWindow(frame: UIScreen.main.bounds)
-//        window?.rootViewController = vc
-//        window?.makeKeyAndVisible()
-//        return true
     }
 
     func applicationWillResignActive(_ application: UIApplication) {
