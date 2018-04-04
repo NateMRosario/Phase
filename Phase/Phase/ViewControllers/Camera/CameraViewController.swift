@@ -74,12 +74,15 @@ class CameraViewController: UIViewController {
         tapGestureRecognizer.numberOfTapsRequired = 2
         cameraView.previewLayerContainer.addGestureRecognizer(tapGestureRecognizer)
     }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         getImages()
-        
-    }
+   }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -102,14 +105,11 @@ class CameraViewController: UIViewController {
     }
     
     func setupNav() {
-        let newJourneyButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewJourney(_:)))
-        self.navigationItem.rightBarButtonItem = newJourneyButton
+        navigationController?.navigationBar.isHidden = true
+        
     }
     
-    @objc func addNewJourney(_ sender: UIBarButtonItem) {
-        navigationController?.pushViewController(NewPostViewController.instantiate(withStoryboard: "NewPost"), animated: true)
-
-    }
+    
     
     // This function sets up a switch to change the camera in use depending on current position when called.
     private func setUpCaptureSessionInput(position: AVCaptureDevice.Position) {
