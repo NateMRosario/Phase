@@ -67,12 +67,13 @@ class HomeFeedTableViewCell: UITableViewCell {
         }
         userName.text = currentUser?._username
         timeStamp.text = convertDate(from: event._creationDate)
-        journeyLabel.text =  currentJourney?._title
-        
+        journeyLabel.text =  currentJourney?._description
+        journeyTitle.text = currentJourney?._title
         guard let currentImage = event._media else {return}
         let url = URL(string: "https://s3.amazonaws.com/phase-journey-events/\(currentImage)")
         
-        contentImage.kf.setImage(with: url)
+        contentImage.kf.indicatorType = .activity
+        contentImage.kf.setImage(with: url, placeholder: #imageLiteral(resourceName: "icon6"), options: nil, progressBlock: nil, completionHandler: nil)
 //        { (image, error, cache, url) in
 //            if let image = image {
 //                let ratio = image.size.width / image.size.height

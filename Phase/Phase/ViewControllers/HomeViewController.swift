@@ -28,14 +28,9 @@ class HomeViewController: UIViewController {
     fileprivate var contents = [#imageLiteral(resourceName: "a11"), #imageLiteral(resourceName: "nostalgic1"), #imageLiteral(resourceName: "nostalgic2"), #imageLiteral(resourceName: "nostalgic3"), #imageLiteral(resourceName: "nostalgic4")]
     
     var appUser = AppUser() 
-    var journeysFollowed = [Journey]() {
-        didSet {
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-        }
-    }
-    var appEvents = [Event]() {
+    var journeysFollowed = [Journey]()
+    
+    var appEvents = Set<Event>() {
         didSet {
             DispatchQueue.main.async {
                 self.tableView.reloadData()
@@ -43,7 +38,7 @@ class HomeViewController: UIViewController {
         }
     }
     
-    var eventIDs = [String]() {
+    var eventIDs = Set<String>() {
         didSet {
             for id in eventIDs {
                 DynamoDBManager.shared.loadEvent(eventId: id, completion: { (event, error) in
@@ -51,7 +46,7 @@ class HomeViewController: UIViewController {
                         print(error)
                     }
                     guard let event = event else {print("event in eventIDs");return}
-                    self.appEvents.append(event)
+                    self.appEvents.insert(event)
 //                    var currentEvents = [Event]()
 //                    if self.appEvents[event._journey!] == nil {
 //                        currentEvents.append(event)
@@ -120,13 +115,12 @@ class HomeViewController: UIViewController {
                 self.journeysFollowed = currentJourney.sorted{$0._creationDate as! Double > $1._creationDate as! Double}
                 for journey in currentJourney {
                     guard let eventID = journey._events else {print("eventID");return}
-                    self.eventIDs = Array(eventID)
+                    self.eventIDs.formUnion(eventID)
                 }
             }
         }
         ///TODO: Switch to this when following is active
 //        guard let journeyIds = appUser?._journeysFollowed else {return}
-        
         guard let journeyIds = appUser?._journeys else {print("journeyIds");return}
         for journey in journeyIds {
             DynamoDBManager.shared.loadJourney(journeyId: journey, completion: { (journey, error) in
@@ -170,7 +164,7 @@ extension HomeViewController: UITableViewDataSource {
 //            return cell
 //        }
         let cell = tableView.dequeueReusableCell(withIdentifier: "HomeFeedCell", for: indexPath) as! HomeFeedTableViewCell ///Change name
-        let event = appEvents[indexPath.row]
+        let event = Array(appEvents)[indexPath.row]
         cell.configureCell(event: event)
         cell.detailView.sizeToFit()
         cell.detailView.layoutIfNeeded()
