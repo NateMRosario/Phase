@@ -22,7 +22,7 @@ class SignUpViewController: UIViewController {
         guard let fullName = fullName.text else {return}
         guard let password = password.text else {return}
         
-        CognitoManager.shared.signUp(username: userName, email: email, password: password) { (error) in
+        CognitoManager.shared.signUp(username: userName, email: email, password: password, name: fullName) { (error) in
             if let error = error {
                 DispatchQueue.main.async {
                     self.showAlert(title: "Error", message: "\(error.localizedDescription)")
