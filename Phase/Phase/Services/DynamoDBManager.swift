@@ -299,6 +299,34 @@ extension DynamoDBManager {
 
     }
     
+    func mostPopularJourneys(completion: @escaping ([Journey]?, Error?) -> Void) {
+        let scanExpression = AWSDynamoDBScanExpression()
+        scanExpression.limit = 10
+        scanExpression.filterExpression = "Likes > :val"
+        scanExpression.expressionAttributeValues = [":val": 0]
+        
+        mapper.scan(Journey.self, expression: scanExpression) { (output, error) in
+            if let error = error {
+                completion(nil, error)
+            } else if let output = output {
+                if let journeys = output.items as? [Journey] {
+                    completion(journeys, nil)
+                }
+            }
+        }
+    }
+    
+    func queryJourneys(completion: @escaping ([Journey]?, Error?) -> Void) {
+        let expression = AWSDynamoDBQueryExpression()
+        expression.keyConditionExpression = ""
+        expression.limit = 10
+        expression.expressionAttributeNames = ["#journeyId" : "journeyId"]
+        expression.expressionAttributeValues = ["journeyId" : ""]
+        expression.filterExpression = ""
+        
+//        mapper.query(<#T##resultClass: AnyClass##AnyClass#>, expression: <#T##AWSDynamoDBQueryExpression#>, completionHandler: <#T##((AWSDynamoDBPaginatedOutput?, Error?) -> Void)?##((AWSDynamoDBPaginatedOutput?, Error?) -> Void)?##(AWSDynamoDBPaginatedOutput?, Error?) -> Void#>)
+    }
+    
 //    func likeJourney() {
 //        guard let userId = CognitoManager.shared.userId else {
 //            completion(CognitoError.noActiveUser)
@@ -331,7 +359,6 @@ extension DynamoDBManager {
                 newEvent._media = imageId
                 newEvent._viewers = nil
                 
-                
                 self.mapper.save(newEvent) { (error) in
                     if let error = error {
                         completion(error)
@@ -357,10 +384,8 @@ extension DynamoDBManager {
                         }
                     }
                 }
-                
             }
         }
-        
     }
     
     func loadEvent(eventId: String, completion: @escaping (Event?, Error?) -> Void) {
@@ -394,7 +419,6 @@ extension DynamoDBManager {
             }
         }
         
-        
     }
     
     func likeEvent(event: Event, completion: @escaping (Error?) -> Void) {
@@ -402,7 +426,6 @@ extension DynamoDBManager {
             completion(CognitoError.noActiveUser)
             return
         }
-        
         
     }
 

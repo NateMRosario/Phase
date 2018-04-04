@@ -56,6 +56,16 @@ class PreviewViewController: UIViewController {
         imagePreview.imagePreviewView.image = image
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        journeys = [Journey]()
+        selectedJourney = nil
+        selectedIndexPath = nil
+        getJourneys()
+        
+
+    }
+    
     init(image: UIImage) {
         super.init(nibName: nil, bundle: nil)
         self.image = image
