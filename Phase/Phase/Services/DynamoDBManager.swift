@@ -64,7 +64,7 @@ extension DynamoDBManager {
                 if let loadedUser = loadedUser {
                     //user = loadedUser as! AppUser
                     completion(user, nil)
-                    CacheService.manager.add(userData: user, withID: user._userId!)
+//                    CacheService.manager.add(userData: user, withID: user._userId!)
                 }
             }
         }
@@ -366,12 +366,17 @@ extension DynamoDBManager {
     
     func loadEvent(eventId: String, completion: @escaping (Event?, Error?) -> Void) {
         
+        if let event = CacheService.manager.getEvents(by: eventId) {
+            completion(event, nil)
+        }
+        
         mapper.load(Event.self, hashKey: eventId, rangeKey: nil) { (loadedEvent, error) in
             if let error = error {
                 completion(nil, error)
             } else if let loadedEvent = loadedEvent {
                 let event = loadedEvent as! Event
                 completion(event, nil)
+                CacheService.manager.add(event: event, withEventID: eventId)
             }
         }
         

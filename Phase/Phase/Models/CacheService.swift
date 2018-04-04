@@ -15,7 +15,7 @@ class CacheService {
     private var userData: [String: AppUser] = [:]
     private var journeys: [String: Journey] = [:]
     private var images: [String: UIImage] = [:]
-    private var events: [Event] = []
+    private var events: [String: Event] = [:]
     
     public func add(journey: Journey, withUrlStr urlStr: String) {
         self.journeys[urlStr] = journey
@@ -30,12 +30,9 @@ class CacheService {
         self.userData[userId] = userData
     }
     
-    public func add(event: Event) {
+    public func add(event: Event, withEventID: String) {
         // TODO: linear runtime, fix it
-        guard !events.contains(event) else {
-            return
-        }
-        self.events.insert(event, at: 0)
+       self.events[withEventID] = event
     }
     public func getJourney(fromURL urlStr: String) -> Journey? {
         if let journey = self.journeys[urlStr] {
@@ -58,8 +55,8 @@ class CacheService {
         return nil
     }
     
-    public func getEvents() -> [Event] {
-        return events
+    public func getEvents(by eventID: String) -> Event? {
+        return events[eventID]
     }
     // will load previous searches into cache
 //    public func configureSearches() {

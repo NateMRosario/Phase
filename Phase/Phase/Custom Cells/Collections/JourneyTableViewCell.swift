@@ -8,22 +8,25 @@
 
 import UIKit
 import ADMozaicCollectionViewLayout
+import Kingfisher
 
 class JourneyTableViewCell: UITableViewCell {
     
-    var journey: Journey? {
+    var eventids = [String]() {
         didSet {
-            if let journey = journey {
-                getEvents(for: journey)
-            }
+            getEventFor(for: eventids)
         }
     }
-    var events = [Event]() {
+    
+    var unsortedEvents = [Event]() {
         didSet {
-            DispatchQueue.main.async {
-                print(self.events.count)
-                self.collectionView.reloadData()
-            }
+            print(unsortedEvents.count)
+        }
+    }
+    
+    var sortedEvents = [Event]() {
+        didSet {
+            print("============================================")
         }
     }
     
@@ -73,32 +76,81 @@ class JourneyTableViewCell: UITableViewCell {
     }
     
     public func configureCell(with journey: Journey, creator: AppUser?) {
+        getEvents(for: journey)
         self.startDateLabel.text = convertDate(from: journey._creationDate)
         self.userName.text = creator?._username
         self.watchersLabel.text = "Watchers: \(String(describing: journey._numberOfWatchers!))"
         self.journeyTitle.text = journey._title
         if let profileImageUrl = creator?._profileImage {
-            ImageAPIClient.manager.loadImage(from: profileImageUrl,
-                                             completionHandler: {self.profileImageView.image = $0},
-                                             errorHandler: {print($0)})
+            profileImageView.kf.setImage(with: URL(string: profileImageUrl))
         }
     }
     
     private func getEvents(for journey: Journey) {
-        //TODO: Check if journey contains 1,2,3 or more events
-        if let events = journey._events {
-            for event in events {
-                print(event)
-                DynamoDBManager.shared.loadEvent(eventId: event) { (event, error) in
-                    if let error = error {
-                        print(error)
-                    } else {
-                        self.events.append(event!)
+        var allEventids = [String]()
+        for event in journey._events! {
+            if !allEventids.contains(event) {
+                allEventids.append(event)
+            }
+        }
+        if !allEventids.isEmpty {
+            self.eventids = allEventids
+        }
+    }
+    
+    private func getEventFor(for events: [String]) {
+        var loadedEvents = [Event]()
+        for id in events {
+            DynamoDBManager.shared.loadEvent(eventId: id) { (event, error) in
+                if let error = error {
+                    print(error)
+                } else {
+                    if let event = event {
+                        if !loadedEvents.contains(event) {
+                            loadedEvents.append(event)
+                        }
                     }
                 }
             }
         }
+        if !loadedEvents.isEmpty {
+            loadedEvents = loadedEvents.sorted(by: { (prev, next) -> Bool in
+                (prev._creationDate as! Double) < (next._creationDate as! Double)
+            })
+        }
+        self.sortedEvents = loadedEvents
+        print(sortedEvents.count)
     }
+    
+    //    private func sortAndGetLastThreeEvents(for events: [Event]) {
+    //        switch events.count {
+    //        case 0:
+    //            print(0)
+    //        case 1:
+    //            sortedEvents.append(events.first!)
+    //            DispatchQueue.main.async {
+    //                 self.collectionView.reloadData()
+    //                print("case 1 reload")
+    //            }
+    //        case 2:
+    //            sortedEvents.append(events[0])
+    //            sortedEvents.append(events[1])
+    //            DispatchQueue.main.async {
+    //                self.collectionView.reloadData()
+    //                 print("case 2 reload")
+    //            }
+    //        case 3:
+    //            sortedEvents.append(events[0])
+    //            sortedEvents.append(events[1])
+    //            sortedEvents.append(events[2])
+    //            DispatchQueue.main.async {
+    //                self.collectionView.reloadData()
+    //                 print("case 3 reload")
+    //            }
+    //        default:
+    //            break
+    //        }
+    //    }
 }
 
 extension JourneyTableViewCell: UICollectionViewDelegate {
@@ -109,29 +161,21 @@ extension JourneyTableViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ADMozaikLayoutCell", for: indexPath) as! MozaikCollectionViewCell
+        let event = sortedEvents[indexPath.row]
+        
         if indexPath.row < 3 {
-            let event = events[indexPath.row]
-            //TODO: GET PICTURE URL OR VIDEO URL FROM DB
-            if let media = event._media {
-                print(media)
-                S3Manager.shared.downloadManagerData(imageUID: media) { (image, error) in
-                    if let error = error {
-                        print(error)
-                    }
-                    cell.mozaik.image = image
-                }
-            }
-            cell.howManyMoreLabel.text = ""
+            cell.configureCell(with: event)
         } else {
             cell.mozaik.backgroundColor = UIColor.lightGray
-            cell.howManyMoreLabel.text = "\(Int(truncating: (journey?._eventCount)!) - 3)"
+            cell.mozaik.image = nil
+            cell.howManyMoreLabel.text = "\(eventids.count - 3) more"
             cell.isVideo.image = nil
         }
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return events.count
+        return sortedEvents.count
     }
 }
 

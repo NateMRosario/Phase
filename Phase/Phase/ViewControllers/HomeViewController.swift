@@ -37,7 +37,7 @@ class HomeViewController: UIViewController {
     }
     var appEvents = [String : [Event]]() {
         didSet {
-            print("AppEvent: \(appEvents)")
+//            print("AppEvent: \(appEvents)")
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
@@ -47,7 +47,7 @@ class HomeViewController: UIViewController {
     var eventIDs = [String]() {
         didSet {
             for id in eventIDs {
-                print(id)
+//                print(id)
                 DynamoDBManager.shared.loadEvent(eventId: id, completion: { (event, error) in ///FIX THIS ALMOST THERE!
                     if let error = error {
                         print(error)
