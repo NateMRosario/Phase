@@ -348,10 +348,11 @@ extension ProfileViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cell = tableView.cellForRow(at: indexPath) as! JourneyTableViewCell
-        let detailVC = JourneyDetailViewController()
-        
-        self.navigationController?.pushViewController(detailVC, animated: true)
+//        let cell = tableView.cellForRow(at: indexPath) as! JourneyTableViewCell
+//        
+//        let detailVC = JourneyDetailViewController(journey: )
+//        
+//        self.navigationController?.pushViewController(detailVC, animated: true)
     }
 }
 
