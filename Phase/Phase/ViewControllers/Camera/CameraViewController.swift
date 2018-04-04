@@ -252,6 +252,7 @@ extension CameraViewController: AVCapturePhotoCaptureDelegate {
             image = UIImage(data: imageData)
             guard let image = image else { return }
             let previewVC = PreviewViewController(image: image)
+            previewVC.delegate = self
             present(previewVC, animated: true, completion: nil)
             
         }
@@ -280,6 +281,7 @@ extension CameraViewController: UIImagePickerControllerDelegate, UINavigationCon
             self.imagePreview.saveButton.isEnabled = false
             self.image = editedImage
             let cpVC = PreviewViewController(image: self.image!)
+            cpVC.delegate = self
             self.present(cpVC, animated: true, completion: nil)}
         
        
@@ -348,5 +350,11 @@ extension CameraViewController: UICollectionViewDelegateFlowLayout{
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return cellSpacing
+    }
+}
+extension CameraViewController: PreviewVCDelegate {
+    func didPost() {
+        self.tabBarController?.selectedIndex = 0
+//        self.navigationController?.tabBarController?.selectedIndex = 0
     }
 }

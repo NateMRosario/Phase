@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol PreviewVCDelegate: class {
+    func didPost()
+}
+
 class PreviewViewController: UIViewController {
     
     public let imagePreview = CapturedImageView()
@@ -39,7 +43,7 @@ class PreviewViewController: UIViewController {
     
     var selectedIndexPath: IndexPath!
     var selectedJourney: Journey!
-    
+    weak var delegate: PreviewVCDelegate?
     //var mediaType: MediaType
     
     let addNewJourneyDelegate = AddJourneyViewController()
@@ -147,7 +151,8 @@ class PreviewViewController: UIViewController {
                 }
             } else {
                 DispatchQueue.main.async {
-                    self.showAlert(title: "Success", message: "You made a new event")
+                    self.dismiss(animated: true)
+                    self.delegate?.didPost()
                 }
             }
         }
