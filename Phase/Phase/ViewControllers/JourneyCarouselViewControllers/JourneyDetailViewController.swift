@@ -8,6 +8,7 @@
 
 import UIKit
 import SnapKit
+import Kingfisher
 
 class EventDummyDate {
     var _userId: String
@@ -27,6 +28,14 @@ class EventDummyDate {
 class JourneyDetailViewController: UIViewController {
     
     // MARK: - Testbed properties
+    func getXY(cgRect: CGRect) {
+        var frm: CGRect = cgRect
+        print("frm.origin.x \(frm.origin.x), frm.origin.y \(frm.origin.y)")
+        frm.size.width = frm.size.width + 500
+        frm.size.height = frm.size.height + 500
+    }
+    
+    
     private var comments = [EventDummyDate]() {
         didSet {
             DispatchQueue.main.async {
@@ -45,12 +54,12 @@ class JourneyDetailViewController: UIViewController {
         comments.append(event1)
         comments.append(event2)
         comments.append(event3)
-        
     }
+    
     private var headerViewMoved = false
     private var followersViewMoved = false
     
-    // MARK: - Properties
+    // MARK: - Lazy Properties
     lazy private var journeyProfileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "g")
@@ -65,7 +74,7 @@ class JourneyDetailViewController: UIViewController {
     
     private let cellID = "JourneyCommentTableViewCell"
     
-    
+    // MARK: - Instances
     private let journeyCarouselView = JourneyCarouselView()
     private let followersView = JourneySecondMenuView()
     private let headerView = JourneyHeaderView()
@@ -81,15 +90,39 @@ class JourneyDetailViewController: UIViewController {
         }
     }
     
+    var journey: Journey {
+        didSet {
+            guard let eventIds = journey._events else { return }
+            for id in eventIds {
+                DynamoDBManager.shared.loadEvent(eventId: id, completion: { (event, error) in
+                    if let error = error {
+                        
+                    } else if let event = event {
+                        self.events.append(event)
+                    }
+                })
+            }
+        }
+    }
+
+    
+    var events = [Event]() {
+        didSet {
+            DispatchQueue.main.async {
+                self.journeyCarouselView.carouselCollectionView.reloadData()
+            }
+        }
+    }
+
     // MARK: - Init (Dependency injection)
-//        init(list: List){
-//            self.journey = post
-//            super.init(nibName: nil, bundle: nil)
-//        }
-//    
-//        required init?(coder aDecoder: NSCoder) {
-//            fatalError("init(coder:) has not been implemented")
-//        }
+            init(journey: Journey){
+                self.journey = journey
+                super.init(nibName: nil, bundle: nil)
+            }
+
+            required init?(coder aDecoder: NSCoder) {
+                fatalError("init(coder:) has not been implemented")
+            }
     
     
     // MARK: - Life cycle methods
@@ -122,7 +155,7 @@ class JourneyDetailViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         journeyProfileImageView.makeCircle()
-        headerView.addBorder(toSide: .bottom, withColor: UIColor.black.cgColor, andThickness: 1)
+        headerView.addBorder(toSide: .bottom, withColor: UIColor.black.cgColor, andThickness: 2)
     }
     
     // MARK: - Functions
@@ -227,7 +260,7 @@ class JourneyDetailViewController: UIViewController {
             journeyCarouselView.blur()
         }
     }
-
+    
     private func animateFollowersView() {
         followersView.round(corners: [.topRight, .topLeft], radius: 18)
         followersView.transform = CGAffineTransform(translationX: 0, y: -self.view.frame.bounds.height * 0.779)
@@ -312,13 +345,17 @@ class JourneyDetailViewController: UIViewController {
 // MARK: - iCarouselDataSource
 extension JourneyDetailViewController: iCarouselDataSource {
     func numberOfItems(in carousel: iCarousel) -> Int {
-        return picArr.count
+        //return picArr.count
+        return events.count
     }
     
     func carousel(_ carousel: iCarousel, viewForItemAt index: Int, reusing view: UIView?) -> UIView {
         var itemView: UIImageView
         itemView = UIImageView(frame: CGRect(x: 0, y: 0, width: journeyCarouselView.carouselCollectionView.frame.width, height: journeyCarouselView.carouselCollectionView.frame.height))
-        itemView.image = picArr[index]
+        //itemView.image = picArr[index]
+        let event = events[index]
+        
+        itemView.kf.setImage(with: URL(string: event._media!)!)
         itemView.layer.masksToBounds = true
         itemView.clipsToBounds = true
         itemView.contentMode = .scaleAspectFill
