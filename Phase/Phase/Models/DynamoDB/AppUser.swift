@@ -19,9 +19,11 @@ import AWSDynamoDB
 class AppUser: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
     
     var _userId: String?
+    var _bio: String?
     var _creationDate: NSNumber?
     var _eventsViewed: Set<String>?
     var _followerCount: NSNumber?
+    var _fullName: String?
     var _headerImage: String?
     var _isPremium: NSNumber?
     var _isWatching: Set<String>?
@@ -46,9 +48,11 @@ class AppUser: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
     override class func jsonKeyPathsByPropertyKey() -> [AnyHashable: Any] {
         return [
             "_userId" : "userId",
+            "_bio" : "bio",
             "_creationDate" : "creationDate",
             "_eventsViewed" : "eventsViewed",
             "_followerCount" : "followerCount",
+            "_fullName" : "fullName",
             "_headerImage" : "headerImage",
             "_isPremium" : "isPremium",
             "_isWatching" : "isWatching",
@@ -62,4 +66,3 @@ class AppUser: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
         ]
     }
 }
-
