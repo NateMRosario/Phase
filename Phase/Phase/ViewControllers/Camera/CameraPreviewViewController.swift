@@ -70,7 +70,12 @@ class PreviewViewController: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        journeys = [Journey]()
+        journeyIds = [String]()
+        selectedJourney = nil
+        selectedIndexPath = nil
         getJourneys()
+        
 
     }
     
