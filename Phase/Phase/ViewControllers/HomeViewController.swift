@@ -99,7 +99,7 @@ extension HomeViewController: UITableViewDataSource {
 
 extension HomeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        navigationController?.pushViewController(JourneyCarouselViewController(heroID: ""), animated: true)
+//        navigationController?.pushViewController(JourneyCarouselViewController(heroID: ""), animated: true)
     }
 }
 

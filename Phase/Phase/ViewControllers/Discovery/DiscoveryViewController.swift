@@ -124,9 +124,9 @@ class DiscoveryViewController: UIViewController {
 //        }
     }
     
-    private func getPopularJourneys() {
-        DynamoDBManager.shared.loadJourney(journeyId: <#T##String#>, completion: <#T##(Journey?, Error?) -> Void#>)
-    }
+//    private func getPopularJourneys() {
+//        DynamoDBManager.shared.loadJourney(journeyId: <#T##String#>, completion: <#T##(Journey?, Error?) -> Void#>)
+//    }
     
     deinit {
         collectionView.dg_removePullToRefresh()
@@ -168,13 +168,13 @@ extension DiscoveryViewController: UICollectionViewDataSource {
 extension DiscoveryViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let cell = collectionView.cellForItem(at: indexPath) as! DiscoverCollectionViewCell
-        let detailNC = JourneyCarouselViewController(heroID: "view\(indexPath.row)")
+//        let detailNC = JourneyCarouselViewController(heroID: "view\(indexPath.row)")
         selectedIndexPath = indexPath
         cell.image1.hero.id = "view\(indexPath.row)"
         let nonFade = HeroModifier.forceNonFade
         let orange = HeroModifier.backgroundColor(.orange)
         cell.hero.modifiers = [nonFade, orange]
-        navigationController?.pushViewController(detailNC, animated: true)
+//        navigationController?.pushViewController(detailNC, animated: true)
     }
 }
 

@@ -20,7 +20,7 @@ class EventViewController: UIViewController {
 //    }
     
     private let eventView = EventView()
-    private let followersView = FollowersView()
+    private let followersView = JourneyFollowersImagesView()
     
     // MARK: - Init (Dependency injection)
     //    init(list: List){

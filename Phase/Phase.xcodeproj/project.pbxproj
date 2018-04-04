@@ -182,7 +182,7 @@
 		81DE34CC20697E2E00310CD1 /* CreateNewJourneyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81DE34CB20697E2E00310CD1 /* CreateNewJourneyView.swift */; };
 		81F64312206AAC2C00519554 /* MozaikCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81F64311206AAC2C00519554 /* MozaikCollectionViewCell.swift */; };
 		81F64314206AAC3500519554 /* MozaikCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 81F64313206AAC3500519554 /* MozaikCollectionViewCell.xib */; };
-		8791DFDB2060171F00337CA3 /* FollowersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8791DFDA2060171F00337CA3 /* FollowersView.swift */; };
+		8791DFDB2060171F00337CA3 /* JourneyFollowersImagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8791DFDA2060171F00337CA3 /* JourneyFollowersImagesView.swift */; };
 		87F742BB2072904700972DD8 /* JourneyHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F742BA2072904700972DD8 /* JourneyHeaderView.swift */; };
 		87F742BD2072905600972DD8 /* JourneyCommentTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F742BC2072905600972DD8 /* JourneyCommentTableView.swift */; };
 		87F742BF2072906200972DD8 /* JourneyBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F742BE2072906200972DD8 /* JourneyBottomView.swift */; };
@@ -199,8 +199,11 @@
 		F4183098206AB91D00466705 /* DiscoverCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4183096206AB91D00466705 /* DiscoverCollectionViewCell.xib */; };
 		F4882847206955690008A656 /* JourneyCommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4882846206955690008A656 /* JourneyCommentTableViewCell.swift */; };
 		F4882856206A95130008A656 /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = F4882854206A95120008A656 /* iCarousel.m */; };
+		F4899F3320742375009388B4 /* JourneySecondMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4899F3220742375009388B4 /* JourneySecondMenuView.swift */; };
 		F49638FA206ABD0A002D62E7 /* JourneyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F49638F9206ABD09002D62E7 /* JourneyTableViewCell.xib */; };
 		F4D34A7A205C482C00F4D50D /* EventCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D34A79205C482C00F4D50D /* EventCollectionViewCell.swift */; };
+		F4E9F8AB2073DDA400D56A97 /* JourneyFollowersDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E9F8AA2073DDA400D56A97 /* JourneyFollowersDetailView.swift */; };
+		F4E9F8AF2073E50B00D56A97 /* RoundedfollowersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E9F8AE2073E50B00D56A97 /* RoundedfollowersView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -412,7 +415,7 @@
 		81F6430F206AAC1E00519554 /* JourneyTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = JourneyTableViewCell.xib; path = Collections/JourneyTableViewCell.xib; sourceTree = "<group>"; };
 		81F64311206AAC2C00519554 /* MozaikCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MozaikCollectionViewCell.swift; sourceTree = "<group>"; };
 		81F64313206AAC3500519554 /* MozaikCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = MozaikCollectionViewCell.xib; sourceTree = "<group>"; };
-		8791DFDA2060171F00337CA3 /* FollowersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FollowersView.swift; sourceTree = "<group>"; };
+		8791DFDA2060171F00337CA3 /* JourneyFollowersImagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyFollowersImagesView.swift; sourceTree = "<group>"; };
 		87F742BA2072904700972DD8 /* JourneyHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyHeaderView.swift; sourceTree = "<group>"; };
 		87F742BC2072905600972DD8 /* JourneyCommentTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyCommentTableView.swift; sourceTree = "<group>"; };
 		87F742BE2072906200972DD8 /* JourneyBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyBottomView.swift; sourceTree = "<group>"; };
@@ -434,11 +437,14 @@
 		F4882853206A95120008A656 /* iCarousel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCarousel.h; sourceTree = "<group>"; };
 		F4882854206A95120008A656 /* iCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCarousel.m; sourceTree = "<group>"; };
 		F4882855206A95120008A656 /* Phase-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Phase-Bridging-Header.h"; sourceTree = "<group>"; };
+		F4899F3220742375009388B4 /* JourneySecondMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneySecondMenuView.swift; sourceTree = "<group>"; };
 		F48DA6BC20588ACD006E4FFC /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		F48DA6BE20588F17006E4FFC /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		F48DA6C020589024006E4FFC /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
 		F49638F9206ABD09002D62E7 /* JourneyTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = JourneyTableViewCell.xib; sourceTree = "<group>"; };
 		F4D34A79205C482C00F4D50D /* EventCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCollectionViewCell.swift; sourceTree = "<group>"; };
+		F4E9F8AA2073DDA400D56A97 /* JourneyFollowersDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyFollowersDetailView.swift; sourceTree = "<group>"; };
+		F4E9F8AE2073E50B00D56A97 /* RoundedfollowersView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedfollowersView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -1016,8 +1022,7 @@
 				810935872059BD2400A95B30 /* EditProfileView.swift */,
 				810935892059BD5800A95B30 /* SearchView.swift */,
 				8123777E206A9E7400A6BC02 /* Camera+PostViews */,
-				8791DFDA2060171F00337CA3 /* FollowersView.swift */,
-				F49638FC206AC705002D62E7 /* JourneyCarouselViews */,
+				F49638FC206AC705002D62E7 /* JourneyDetailViews */,
 				817C6EEB2069AB9D00010EDF /* Following */,
 			);
 			path = Views;
@@ -1090,15 +1095,19 @@
 			path = iCarousel;
 			sourceTree = "<group>";
 		};
-		F49638FC206AC705002D62E7 /* JourneyCarouselViews */ = {
+		F49638FC206AC705002D62E7 /* JourneyDetailViews */ = {
 			isa = PBXGroup;
 			children = (
 				F404878B20657904009039AF /* JourneyCarouselView.swift */,
 				87F742BA2072904700972DD8 /* JourneyHeaderView.swift */,
 				87F742BC2072905600972DD8 /* JourneyCommentTableView.swift */,
 				87F742BE2072906200972DD8 /* JourneyBottomView.swift */,
+				F4E9F8AA2073DDA400D56A97 /* JourneyFollowersDetailView.swift */,
+				8791DFDA2060171F00337CA3 /* JourneyFollowersImagesView.swift */,
+				F4899F3220742375009388B4 /* JourneySecondMenuView.swift */,
+				F4E9F8AE2073E50B00D56A97 /* RoundedfollowersView.swift */,
 			);
-			path = JourneyCarouselViews;
+			path = JourneyDetailViews;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1530,9 +1539,10 @@
 				81C1F86F2060ABAE0037BF42 /* SegmentioBuilder.swift in Sources */,
 				F418308C206AB7F700466705 /* CreateNewPostViewController.swift in Sources */,
 				817C6EDD2069A99500010EDF /* FollowsViewController.swift in Sources */,
+				F4E9F8AF2073E50B00D56A97 /* RoundedfollowersView.swift in Sources */,
 				818E5DC120719B1100AF4838 /* TrendingCollectionViewCell.swift in Sources */,
 				81AB8AB2205AF77C00A98AFB /* UISearchBar+Extensions.swift in Sources */,
-				8791DFDB2060171F00337CA3 /* FollowersView.swift in Sources */,
+				8791DFDB2060171F00337CA3 /* JourneyFollowersImagesView.swift in Sources */,
 				F4183097206AB91D00466705 /* DiscoverCollectionViewCell.swift in Sources */,
 				81C36967206B30F600A1873E /* TimeSeparatorPresenter.swift in Sources */,
 				811BDB6C206C82530050EBA3 /* MoodCollectionViewCell.swift in Sources */,
@@ -1574,12 +1584,14 @@
 				81C36969206B311500A1873E /* TimeSeparatorCollectionViewCell.swift in Sources */,
 				8128B47C206951B2009E0629 /* Event.swift in Sources */,
 				81C368BA206B2ED400A1873E /* DemoChatDataSource.swift in Sources */,
+				F4E9F8AB2073DDA400D56A97 /* JourneyFollowersDetailView.swift in Sources */,
 				81DC9F022058B210005F2724 /* ProfileViewController.swift in Sources */,
 				810935742059BAAC00A95B30 /* EventViewController.swift in Sources */,
 				87F742BF2072906200972DD8 /* JourneyBottomView.swift in Sources */,
 				81CA1BE3206442C100EF7B8E /* TopViewController.swift in Sources */,
 				8109356E2059BA5B00A95B30 /* LoginViewController.swift in Sources */,
 				81817A4420655FE700CA7044 /* RegexParser.swift in Sources */,
+				F4899F3320742375009388B4 /* JourneySecondMenuView.swift in Sources */,
 				81C368B7206B2ED400A1873E /* DemoChatMessageSender.swift in Sources */,
 				81C368D7206B2EDF00A1873E /* BaseMessageCollectionViewCellAvatarStyle.swift in Sources */,
 				8128B47120694808009E0629 /* CognitoManager.swift in Sources */,
