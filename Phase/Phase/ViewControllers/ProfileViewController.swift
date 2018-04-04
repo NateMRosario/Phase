@@ -346,6 +346,13 @@ extension ProfileViewController: UITableViewDataSource {
         cell.configureCell(with: journey, creator: currentDisplayedUser, row: indexPath.row)
         return cell
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let cell = tableView.cellForRow(at: indexPath) as! JourneyTableViewCell
+        let detailVC = JourneyDetailViewController()
+        
+        self.navigationController?.pushViewController(detailVC, animated: true)
+    }
 }
 
 // MARK: - SCROLLING INTERACTIONS
