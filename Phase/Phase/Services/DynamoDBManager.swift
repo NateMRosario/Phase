@@ -71,12 +71,11 @@ extension DynamoDBManager {
     }
     
     func loadUser(userId: String, completion: @escaping (AppUser?, Error?) -> Void) {
-        
         var user: AppUser = AppUser()
         user._userId = userId
         
         if let user = CacheService.manager.getUserData(by: userId) {
-            completion(user, DBError.loadResultNil)
+            completion(user, nil)
             print("Got user from cache")
         }
         

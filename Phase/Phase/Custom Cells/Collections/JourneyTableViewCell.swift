@@ -19,7 +19,14 @@ class JourneyTableViewCell: UITableViewCell {
     }
     
     var unsortedEvents = [Event]()
-    var sortedEvents = [Event]()
+    var sortedEvents = [Event]() {
+        didSet {
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
+        }
+    }
+    @IBOutlet weak var emptyJourneyView: UIView!
     
     @IBOutlet weak var containter: UIView! {
         didSet {
@@ -67,7 +74,9 @@ class JourneyTableViewCell: UITableViewCell {
     }
     
     public func configureCell(with journey: Journey, creator: AppUser?, row rows: Int) {
-        collectionView.reloadData()
+        if journey._events?.count == 0 {
+            emptyJourneyView.isHidden = false
+        }
         getEvents(for: journey)
         self.startDateLabel.text = convertDate(from: journey._creationDate)
         self.userName.text = creator?._username
@@ -80,9 +89,11 @@ class JourneyTableViewCell: UITableViewCell {
     
     private func getEvents(for journey: Journey) {
         var allEventids = [String]()
-        for event in journey._events! {
-            if !allEventids.contains(event) {
-                allEventids.append(event)
+        if let events = journey._events {
+            for event in events {
+                if !allEventids.contains(event) {
+                    allEventids.append(event)
+                }
             }
         }
         if !allEventids.isEmpty {
@@ -111,9 +122,9 @@ class JourneyTableViewCell: UITableViewCell {
             })
         }
         self.sortedEvents = loadedEvents
-        DispatchQueue.main.async {
-            self.collectionView.reloadData()
-        }
+//        DispatchQueue.main.async {
+//            self.collectionView.reloadData()
+//        }
     }
 }
 

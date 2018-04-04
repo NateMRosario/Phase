@@ -49,11 +49,14 @@ class AddJourneyViewController: UIViewController {
                     self.showAlert(title: "Error", message: "\(error.localizedDescription)")}
             } else {
                 DispatchQueue.main.async {
-                    self.showAlert(title: "Created", message: "Created New Journey")}
+                    self.showAlert(title: "Created", message: "Created New Journey")
+                }
             }
         })
         imagePreview.saveButton.isEnabled = true
-        dismiss(animated: true)
+        dismiss(animated: true) {
+            self.delegate?.createdNewJourney()
+        }
     }
     
     func checkHashTags(from string: String) -> Set<String>? {
