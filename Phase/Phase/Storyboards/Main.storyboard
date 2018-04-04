@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -39,7 +38,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="200"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="@basedOnTy" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ffn-Qb-9Bm">
-                                        <rect key="frame" x="117.66666666666667" y="250" width="140.33333333333331" height="28"/>
+                                        <rect key="frame" x="118.00000000000001" y="250" width="140.33333333333337" height="28"/>
                                         <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                         <fontDescription key="fontDescription" name="Gotham-Bold" family="Gotham" pointSize="24"/>
                                         <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -68,7 +67,7 @@
                                             </constraints>
                                         </imageView>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="252" text="Ty Zhao" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" minimumFontSize="9" translatesAutoresizingMaskIntoConstraints="NO" id="gEE-uu-JgQ">
-                                            <rect key="frame" x="145" y="51.999999999999993" width="87" height="28.666666666666664"/>
+                                            <rect key="frame" x="144.33333333333334" y="51.999999999999993" width="87" height="28.666666666666664"/>
                                             <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="24"/>
                                             <color key="textColor" red="0.26051741839999998" green="0.2605243921" blue="0.260520637" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <nil key="highlightedColor"/>
@@ -86,7 +85,7 @@
                                                     <rect key="frame" x="0.0" y="0.0" width="343" height="20.333333333333332"/>
                                                     <subviews>
                                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="249" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aym-ZG-nnw">
-                                                            <rect key="frame" x="0.0" y="0.0" width="69.666666666666671" height="20.333333333333332"/>
+                                                            <rect key="frame" x="0.0" y="0.0" width="70" height="20.333333333333332"/>
                                                             <fontDescription key="fontDescription" type="boldSystem" pointSize="17"/>
                                                             <nil key="textColor"/>
                                                             <nil key="highlightedColor"/>
@@ -170,8 +169,7 @@
                                                 <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </state>
                                             <connections>
-                                                <action selector="followButtonPressed:" destination="7IL-1D-84Q" eventType="touchUpInside" id="7d1-Pj-oku"/>
-                                                <action selector="subscribeButtonPressed:" destination="7IL-1D-84Q" eventType="touchUpInside" id="Tj0-cE-fAN"/>
+                                                <action selector="followButtonPressed:" destination="7IL-1D-84Q" eventType="touchUpInside" id="Tj0-cE-fAN"/>
                                             </connections>
                                         </button>
                                         <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" translatesAutoresizingMaskIntoConstraints="NO" id="6HT-BU-R4h">
@@ -298,7 +296,7 @@
                         <outlet property="bioLabel" destination="W3a-D2-Lbz" id="5g5-YN-MaI"/>
                         <outlet property="constraintHeightHeaderImages" destination="Skf-14-qnR" id="GVL-v3-Wta"/>
                         <outlet property="editProfileButton" destination="qwf-B0-YE9" id="7l1-CX-2VV"/>
-                        <outlet property="followButton" destination="R4o-e1-thN" id="NIl-XS-H9E"/>
+                        <outlet property="followButton" destination="R4o-e1-thN" id="X61-VK-OSq"/>
                         <outlet property="followers" destination="aym-ZG-nnw" id="sUE-S6-zX5"/>
                         <outlet property="following" destination="4U4-cy-oeH" id="wXd-6b-SKb"/>
                         <outlet property="handleLabel" destination="pxo-Y1-5A6" id="RuH-UA-ym9"/>
@@ -308,7 +306,6 @@
                         <outlet property="nameLabel" destination="gEE-uu-JgQ" id="XyS-Ak-mTo"/>
                         <outlet property="profileImage" destination="jmp-bG-NY2" id="7cJ-00-f7Q"/>
                         <outlet property="profileView" destination="4k0-iW-35V" id="pv6-tt-mdl"/>
-                        <outlet property="subscribeButton" destination="R4o-e1-thN" id="X61-VK-OSq"/>
                         <outlet property="tableView" destination="7Gr-2i-Syk" id="VOW-hn-APl"/>
                         <outlet property="username" destination="pxo-Y1-5A6" id="INn-7y-zAf"/>
                         <outlet property="watchers" destination="08P-9j-g2c" id="gAa-CD-X8X"/>
@@ -389,11 +386,11 @@
                                                     <rect key="frame" x="138" y="118.66666666666669" width="100" height="100"/>
                                                     <subviews>
                                                         <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="profilePlaceholder" translatesAutoresizingMaskIntoConstraints="NO" id="AtW-2p-a70">
-                                                            <rect key="frame" x="0.0" y="0.3333333333333286" width="100" height="100"/>
+                                                            <rect key="frame" x="0.0" y="0.66666666666665719" width="100" height="100"/>
                                                             <color key="backgroundColor" white="0.66666666669999997" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                                         </imageView>
                                                         <button alpha="0.80000001192092896" contentMode="scaleAspectFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" showsTouchWhenHighlighted="YES" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="J3F-T9-TXX">
-                                                            <rect key="frame" x="0.0" y="0.3333333333333286" width="100" height="100"/>
+                                                            <rect key="frame" x="0.0" y="0.66666666666665719" width="100" height="100"/>
                                                             <state key="normal" image="icons8-google-images-filled-100 (1)"/>
                                                             <connections>
                                                                 <action selector="changeProfileImage:" destination="mr7-mc-nrk" eventType="touchUpInside" id="ocv-gx-yf1"/>
@@ -497,13 +494,13 @@
                                                     <state key="normal" title="Change Password"/>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="oW0-8b-WRP">
-                                                    <rect key="frame" x="16" y="659" width="342" height="30"/>
+                                                    <rect key="frame" x="16" y="659" width="343" height="30"/>
                                                     <state key="normal" title="Deactivate Accout">
                                                         <color key="titleColor" red="1" green="0.14913141730000001" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                     </state>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Q5h-5Z-hWV">
-                                                    <rect key="frame" x="163.33333333333334" y="697" width="48" height="30"/>
+                                                    <rect key="frame" x="164" y="697" width="48" height="30"/>
                                                     <state key="normal" title="Logout"/>
                                                     <connections>
                                                         <action selector="logoutButton:" destination="mr7-mc-nrk" eventType="touchUpInside" id="ea1-1B-PIm"/>

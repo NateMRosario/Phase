@@ -8,75 +8,45 @@
 
 import UIKit
 
-class FollowersView: UIView {
+class JourneyFollowersImagesView: UIView {
     
     // Custom Delegate
     weak var delegate: FollowersViewDelegate?
     
     // MARK: - Lazy Properties
-    lazy var followerOneImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "7-R5CLfl_400x400")
-        imageView.contentMode = .scaleAspectFit
-        imageView.layer.masksToBounds = true
-        imageView.clipsToBounds = true
-        imageView.layer.borderWidth = 0.5
-        imageView.layer.borderColor = UIColor.gray.cgColor
-        imageView.tag = 0
+    lazy var followerOneImageView: RoundedfollowersView = {
+        let roundedView = RoundedfollowersView.init(tag: 0)
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(followerImageViewTapped))
-        return imageView
+        roundedView.addGestureRecognizer(tapRecognizer)
+        return roundedView
     }()
     
-    lazy var followerTwoImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "7-R5CLfl_400x400")
-        imageView.contentMode = .scaleAspectFit
-        imageView.layer.masksToBounds = true
-        imageView.clipsToBounds = true
-        imageView.layer.borderWidth = 0.5
-        imageView.layer.borderColor = UIColor.gray.cgColor
-        imageView.tag = 1
+    lazy var followerTwoImageView: RoundedfollowersView = {
+        let roundedView = RoundedfollowersView.init(tag: 1)
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(followerImageViewTapped))
-        return imageView
+        roundedView.addGestureRecognizer(tapRecognizer)
+        return roundedView
     }()
     
-    lazy var followerThreeImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "7-R5CLfl_400x400")
-        imageView.contentMode = .scaleAspectFit
-        imageView.layer.masksToBounds = true
-        imageView.clipsToBounds = true
-        imageView.layer.borderWidth = 0.5
-        imageView.layer.borderColor = UIColor.gray.cgColor
-        imageView.tag = 2
+    lazy var followerThreeImageView: RoundedfollowersView = {
+        let roundedView = RoundedfollowersView.init(tag: 2)
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(followerImageViewTapped))
-        return imageView
+        roundedView.addGestureRecognizer(tapRecognizer)
+        return roundedView
     }()
     
-    lazy var followerFourImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "7-R5CLfl_400x400")
-        imageView.contentMode = .scaleAspectFit
-        imageView.layer.masksToBounds = true
-        imageView.clipsToBounds = true
-        imageView.layer.borderWidth = 0.5
-        imageView.layer.borderColor = UIColor.gray.cgColor
-        imageView.tag = 3
+    lazy var followerFourImageView: RoundedfollowersView = {
+        let roundedView = RoundedfollowersView.init(tag: 3)
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(followerImageViewTapped))
-        return imageView
+        roundedView.addGestureRecognizer(tapRecognizer)
+        return roundedView
     }()
     
-    lazy var followerFiveImageView: UIImageView = {
-        let imageView = UIImageView()
-        imageView.image = UIImage(named: "7-R5CLfl_400x400")
-        imageView.contentMode = .scaleAspectFit
-        imageView.layer.masksToBounds = true
-        imageView.clipsToBounds = true
-        imageView.layer.borderWidth = 0.5
-        imageView.layer.borderColor = UIColor.gray.cgColor
-        imageView.tag = 4
+    lazy var followerFiveImageView: RoundedfollowersView = {
+        let roundedView = RoundedfollowersView.init(tag: 4)
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(followerImageViewTapped))
-        return imageView
+        roundedView.addGestureRecognizer(tapRecognizer)
+        return roundedView
     }()
     
     lazy var moreFollowersButton: UIButton = {
@@ -122,12 +92,12 @@ class FollowersView: UIView {
     // profileImageView corner radius implementation
     override func layoutSubviews() {
         super.layoutSubviews()
-        moreFollowersButton.layer.cornerRadius = moreFollowersButton.bounds.width/2
-        followerOneImageView.layer.cornerRadius = followerOneImageView.bounds.width/2.0
-        followerTwoImageView.layer.cornerRadius = followerTwoImageView.bounds.width/2.0
-        followerThreeImageView.layer.cornerRadius = followerThreeImageView.bounds.width/2.0
-        followerFourImageView.layer.cornerRadius = followerFourImageView.bounds.width/2.0
-        followerFiveImageView.layer.cornerRadius = followerFiveImageView.bounds.width/2.0
+        moreFollowersButton.makeCircle()
+        followerOneImageView.makeCircle()
+        followerTwoImageView.makeCircle()
+        followerThreeImageView.makeCircle()
+        followerFourImageView.makeCircle()
+        followerFiveImageView.makeCircle()
     }
     
     public func getResizePercentage(usersFollowers: Int, userWithHighestFollowers: Int) -> Double {

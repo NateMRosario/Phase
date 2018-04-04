@@ -8,44 +8,33 @@
 
 import UIKit
 
+protocol PreviewVCDelegate: class {
+    func didPost()
+}
+
 class PreviewViewController: UIViewController {
     
     public let imagePreview = CapturedImageView()
-    
     let cellSpacing: CGFloat = 1
-    
-    var journeys = [Journey]() {
+    private var journeys = [Journey]() {
         didSet {
             DispatchQueue.main.async {
-                self.journeys = self.journeys.sorted{ $0._creationDate as! Double > $1._creationDate as! Double }
                 self.imagePreview.postCollectionView.reloadData()
             }
         }
     }
-    
-    var journeyIds = [String]() {
-        didSet {
-            DynamoDBManager.shared.loadJourney(journeyId: journeyIds.last!, completion: { (journey, error) in
-                if let journey = journey {
-                    self.journeys.append(journey)
-                } else if let error = error {
-                    print(error)
-                }
-            })
-        }
-    }
-    
     public var image: UIImage!
     
     var selectedIndexPath: IndexPath!
     var selectedJourney: Journey!
-    
+    weak var delegate: PreviewVCDelegate?
     //var mediaType: MediaType
     
     let addNewJourneyDelegate = AddJourneyViewController()
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        getJourneys()
         addNewJourneyDelegate.delegate = self
         view.addSubview(imagePreview)
         self.imagePreview.postCollectionView.delegate = self
@@ -64,14 +53,13 @@ class PreviewViewController: UIViewController {
                                           action: #selector(post),
                                           for: .touchUpInside
         )
-        
         imagePreview.imagePreviewView.image = image
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        getJourneys()
-
+        selectedJourney = nil
+        selectedIndexPath = nil
     }
     
     init(image: UIImage) {
@@ -84,21 +72,52 @@ class PreviewViewController: UIViewController {
     }
     
     private func getJourneys() {
+        var journeys = [String]()
         let userID = CognitoManager.shared.userId!
         DynamoDBManager.shared.loadUser(userId: userID) { (appUser, error) in
             if let error = error {
-                print(error)
+                print("\(error.localizedDescription)")
             } else if let appUser = appUser {
                 guard let journeyIDs = appUser._journeys else { return }
                 for journey in journeyIDs {
-                    if !self.journeyIds.contains(journey) {
-                        self.journeyIds.append(journey)
+                    if !journeys.contains(journey) {
+                        journeys.append(journey)
                     }
-                    
                 }
             }
-            
         }
+        if !journeys.isEmpty {
+            loadAllJourneys(from: journeys)
+        }
+    }
+    
+    private func loadAllJourneys(from ids: [String]) {
+        var journeys = [Journey]() {
+            didSet {
+                print(journeys.count)
+            }
+        }
+        for id in ids {
+            DynamoDBManager.shared.loadJourney(journeyId: id, completion: { (journey, error) in
+                if let journey = journey {
+                    journeys.append(journey)
+                } else if let error = error {
+                    print(error)
+                }
+            })
+        }
+        sortJourneys(unsortedJourneys: journeys) { (journeys) in
+            self.journeys = journeys
+        }
+    }
+    
+    func sortJourneys(unsortedJourneys: [Journey], completion: ([Journey]) -> Void) {
+        let unsorted = unsortedJourneys
+        var sorted = [Journey]()
+        if !unsorted.isEmpty {
+            sorted = unsorted.sorted{ $0._creationDate as! Double > $1._creationDate as! Double }
+        }
+        completion(sorted)
     }
   
     private func addObservers() {
@@ -127,6 +146,7 @@ class PreviewViewController: UIViewController {
     }
     
     @objc func post(){
+        imagePreview.postButton.isEnabled = false
         let caption = imagePreview.postTextView.text ?? "PUT SUM STUFF HURR"
         
         if image == nil {
@@ -136,10 +156,11 @@ class PreviewViewController: UIViewController {
         guard selectedJourney != nil else {
             DispatchQueue.main.async {
                 self.showAlert(title: "Error", message: "Please select a journey.")
+                self.imagePreview.postButton.isEnabled = true
             }
             return
         }
-        
+
         DynamoDBManager.shared.createEvent(journey: selectedJourney, image: image, caption: caption) { (error) in
             if let error = error {
                 DispatchQueue.main.async {
@@ -147,7 +168,8 @@ class PreviewViewController: UIViewController {
                 }
             } else {
                 DispatchQueue.main.async {
-                    self.showAlert(title: "Success", message: "You made a new event")
+                    self.dismiss(animated: true)
+                    self.delegate?.didPost()
                 }
             }
         }
@@ -180,6 +202,7 @@ extension PreviewViewController: UICollectionViewDelegate {
             
             let cell = collectionView.cellForItem(at: indexPath) as! AddJourneyCollectionViewCell
             let njVC = AddJourneyViewController()
+            njVC.delegate = self
             present(njVC, animated: true, completion: nil)
             print("add journey cell selected")
             
@@ -235,13 +258,8 @@ extension PreviewViewController: UICollectionViewDataSource {
                     cell.selectedJourneyLayer.isHidden = true
                 }
             }
-            
             return cell
         }
-        
-
-        
-        
     }
 }
 
@@ -290,8 +308,9 @@ extension PreviewViewController: UITextViewDelegate {
 }
 
 extension PreviewViewController: AddNewJourneyViewDelegate {
-    func createdNewJourney() {
-        // SET COLLECTIONVIEW CELL
+    func createdNewJourney(with name: String, details: String) {
+        self.journeys = []
+        getJourneys()
     }
 }
 

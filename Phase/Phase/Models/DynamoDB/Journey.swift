@@ -19,6 +19,7 @@ import AWSDynamoDB
 class Journey: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
     
     var _journeyId: String?
+    var _comments: Set<String>?
     var _creationDate: NSNumber?
     var _description: String?
     var _eventCount: NSNumber?
@@ -27,6 +28,7 @@ class Journey: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
     var _inspiredBy: String?
     var _isOriginal: NSNumber?
     var _journeysInspired: Set<String>?
+    var _lastEvent: String?
     var _numberOfWatchers: NSNumber?
     var _title: String?
     var _userId: String?
@@ -44,6 +46,7 @@ class Journey: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
     override class func jsonKeyPathsByPropertyKey() -> [AnyHashable: Any] {
         return [
             "_journeyId" : "journeyId",
+            "_comments" : "comments",
             "_creationDate" : "creationDate",
             "_description" : "description",
             "_eventCount" : "eventCount",
@@ -52,10 +55,10 @@ class Journey: AWSDynamoDBObjectModel, AWSDynamoDBModeling {
             "_inspiredBy" : "inspiredBy",
             "_isOriginal" : "isOriginal",
             "_journeysInspired" : "journeysInspired",
+            "_lastEvent" : "lastEvent",
             "_numberOfWatchers" : "numberOfWatchers",
             "_title" : "title",
             "_userId" : "userId",
         ]
     }
 }
-

@@ -28,11 +28,13 @@ class DynamoDBManager {
     @objc optional func didUnfollow()
     @objc optional func didWatchJourney()
     @objc optional func didUnwatchJourney()
+    @objc optional func didLikeEvent()
+    @objc optional func didUnlikeEvent()
 }
 
 // MARK: - AppUser Methods
 extension DynamoDBManager {
-    func createUser(sub: String, username: String, completion: @escaping (Error?) -> Void) {
+    func createUser(sub: String, username: String, name: String, completion: @escaping (Error?) -> Void) {
         
         let newUser: AppUser = AppUser()
         newUser._userId = sub
@@ -53,13 +55,56 @@ extension DynamoDBManager {
         }
     }
     
-    func loadUser(userId: String, completion: @escaping (AppUser?, Error?) -> Void) {
+    func updateBio(bio: String, completion: @escaping (Error?) -> Void) {
+        guard let userId = CognitoManager.shared.userId else {
+            completion(CognitoError.noActiveUser)
+            return
+        }
         
+        loadUser(userId: userId) { (user, error) in
+            if let error = error {
+                completion(error)
+            } else if let user = user {
+                
+                let newUser = user
+                newUser._bio = bio
+                
+                self.updateUser(appUser: newUser, completion: { (error) in
+                    if let error = error {
+                        completion(error)
+                    } else {
+                        completion(nil)
+                    }
+                })
+            } else {
+                print("update bio function is nil")
+            }
+        }
+    }
+    
+    func loadAllUsers(completion: @escaping (AppUser?, Error?) -> Void) {
+        var user: AppUser = AppUser()
+        let exp = AWSDynamoDBScanExpression()
+        mapper.scan(AppUser.self, expression: exp) { (loadedUser, error) in
+            if let error = error {
+                print(error)
+                completion(nil, error)
+            } else {
+                if let loadedUser = loadedUser {
+                    //user = loadedUser as! AppUser
+                    completion(user, nil)
+//                    CacheService.manager.add(userData: user, withID: user._userId!)
+                }
+            }
+        }
+    }
+    
+    func loadUser(userId: String, completion: @escaping (AppUser?, Error?) -> Void) {
         var user: AppUser = AppUser()
         user._userId = userId
         
         if let user = CacheService.manager.getUserData(by: userId) {
-            completion(user, DBError.loadResultNil)
+            completion(user, nil)
             print("Got user from cache")
         }
         
@@ -275,12 +320,75 @@ extension DynamoDBManager {
         }
     }
     
-    func watchJourney(completion: @escaping (Error?) -> Void) {
+    func watchJourney(journey: Journey, completion: @escaping (Error?) -> Void) {
         guard let userId = CognitoManager.shared.userId else {
             completion(CognitoError.noActiveUser)
             return
         }
+        
+        loadUser(userId: userId) { (user, error) in
+            if let error = error {
+                completion(error)
+            } else {
+                if let user = user {
+                    
+                    let newUser = user
+                    var newSet = user._isWatching ?? Set<String>()
+                    newSet.insert(journey._journeyId!)
+                    
+                    self.updateUser(appUser: newUser, completion: { (error) in
+                        if let error = error {
+                            completion(error)
+                        } else {
+                            
+                            let newJourney = journey
+                            newJourney._numberOfWatchers = ((journey._numberOfWatchers as! Int) + 1) as NSNumber
+                            
+                            self.updateJourney(journey: newJourney, completion: { (error) in
+                                if let error = error {
+                                    completion(error)
+                                } else {
+                                    self.delegate?.didWatchJourney!()
+                                    completion(nil)
+                                }
+                            })
+                        }
+                    })
+                    
+                    
+                }
+            }
+        }
+        
 
+    }
+    
+    func mostPopularJourneys(completion: @escaping ([Journey]?, Error?) -> Void) {
+        let scanExpression = AWSDynamoDBScanExpression()
+        scanExpression.limit = 10
+        scanExpression.filterExpression = "Likes > :val"
+        scanExpression.expressionAttributeValues = [":val": 0]
+        
+        mapper.scan(Journey.self, expression: scanExpression) { (output, error) in
+            if let error = error {
+                completion(nil, error)
+            } else if let output = output {
+                if let journeys = output.items as? [Journey] {
+                    completion(journeys, nil)
+                }
+            }
+        }
+    }
+    
+    func queryJourneys(completion: @escaping ([Journey]?, Error?) -> Void) {
+        let expression = AWSDynamoDBQueryExpression()
+        expression.keyConditionExpression = ""
+        expression.limit = 10
+        expression.expressionAttributeNames = ["#journeyId" : "journeyId"]
+        expression.expressionAttributeValues = ["journeyId" : ""]
+        expression.filterExpression = ""
+        
+//        mapper.query(<#T##resultClass: AnyClass##AnyClass#>, expression: <#T##AWSDynamoDBQueryExpression#>, completionHandler: <#T##((AWSDynamoDBPaginatedOutput?, Error?) -> Void)?##((AWSDynamoDBPaginatedOutput?, Error?) -> Void)?##(AWSDynamoDBPaginatedOutput?, Error?) -> Void#>)
     }
     
 //    func likeJourney() {
@@ -315,7 +423,6 @@ extension DynamoDBManager {
                 newEvent._media = imageId
                 newEvent._viewers = nil
                 
-                
                 self.mapper.save(newEvent) { (error) in
                     if let error = error {
                         completion(error)
@@ -330,6 +437,7 @@ extension DynamoDBManager {
                         let journeyToUpdate: Journey = journey
                         journeyToUpdate._eventCount = newEventCount
                         journeyToUpdate._events = eventSet
+                        journeyToUpdate._lastEvent = newEvent._eventId!
                         
                         self.updateJourney(journey: journeyToUpdate) { (error) in
                             if let error = error {
@@ -341,13 +449,15 @@ extension DynamoDBManager {
                         }
                     }
                 }
-                
             }
         }
-        
     }
     
     func loadEvent(eventId: String, completion: @escaping (Event?, Error?) -> Void) {
+        
+        if let event = CacheService.manager.getEvents(by: eventId) {
+            completion(event, nil)
+        }
         
         mapper.load(Event.self, hashKey: eventId, rangeKey: nil) { (loadedEvent, error) in
             if let error = error {
@@ -355,6 +465,7 @@ extension DynamoDBManager {
             } else if let loadedEvent = loadedEvent {
                 let event = loadedEvent as! Event
                 completion(event, nil)
+                CacheService.manager.add(event: event, withEventID: eventId)
             }
         }
         
@@ -373,14 +484,26 @@ extension DynamoDBManager {
             }
         }
         
-        
     }
     
     func likeEvent(event: Event, completion: @escaping (Error?) -> Void) {
-        guard let userId = CognitoManager.shared.userId else {
+        guard let _ = CognitoManager.shared.userId else {
             completion(CognitoError.noActiveUser)
             return
         }
+        
+        let newEvent = event
+        newEvent._numberOfLikes = ((event._numberOfLikes as! Int) + 1) as NSNumber
+        
+        mapper.save(newEvent) { (error) in
+            if let error = error {
+                completion(error)
+            } else {
+                self.delegate?.didLikeEvent!()
+                completion(nil)
+            }
+        }
+        
         
         
     }

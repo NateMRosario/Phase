@@ -104,7 +104,7 @@ class CameraView: UIView {
         addSubview(previewLayerContainer)
         previewLayerContainer.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            previewLayerContainer.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
+            previewLayerContainer.topAnchor.constraint(equalTo: topAnchor),
             previewLayerContainer.widthAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, multiplier: 1),
             previewLayerContainer.heightAnchor.constraint(equalTo: safeAreaLayoutGuide.widthAnchor, multiplier: 1)
             ])
@@ -136,7 +136,7 @@ class CameraView: UIView {
         NSLayoutConstraint.activate([
             buttonContainer.topAnchor.constraint(equalTo: containerView.topAnchor),
             buttonContainer.widthAnchor.constraint(equalTo: containerView.safeAreaLayoutGuide.widthAnchor, multiplier: 1),
-            buttonContainer.heightAnchor.constraint(equalTo: containerView.heightAnchor, multiplier: 0.33),
+            buttonContainer.heightAnchor.constraint(equalTo: containerView.heightAnchor, multiplier: 0.3),
             buttonContainer.centerXAnchor.constraint(equalTo: containerView.centerXAnchor)
             ])
     }
@@ -168,7 +168,7 @@ class CameraView: UIView {
         switchCameraButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             switchCameraButton.trailingAnchor.constraint(equalTo: buttonContainer.safeAreaLayoutGuide.trailingAnchor, constant: -30),
-            switchCameraButton.heightAnchor.constraint(equalTo: buttonContainer.heightAnchor, multiplier: 0.8),
+            switchCameraButton.heightAnchor.constraint(equalTo: buttonContainer.heightAnchor, multiplier: 0.65),
             switchCameraButton.widthAnchor.constraint(equalTo: switchCameraButton.heightAnchor, multiplier: 1),
             switchCameraButton.centerYAnchor.constraint(equalTo: buttonContainer.centerYAnchor)
             ])
@@ -178,7 +178,7 @@ class CameraView: UIView {
         addSubview(photoCollectionView)
         photoCollectionView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            photoCollectionView.topAnchor.constraint(equalTo: buttonContainer.bottomAnchor, constant: 8),
+            photoCollectionView.topAnchor.constraint(equalTo: buttonContainer.bottomAnchor, constant: 4),
             photoCollectionView.widthAnchor.constraint(equalTo: containerView.widthAnchor, multiplier: 1),
             photoCollectionView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -2),
             photoCollectionView.centerXAnchor.constraint(equalTo: containerView.centerXAnchor)
