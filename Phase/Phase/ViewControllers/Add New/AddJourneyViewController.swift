@@ -9,7 +9,7 @@
 import UIKit
 
 protocol AddNewJourneyViewDelegate: class {
-    func createdNewJourney(with name: String, details: String)
+    func createdNewJourney(with name: String, details: String, hashtags: Set<String>?)
 }
 
 class AddJourneyViewController: UIViewController {
@@ -50,22 +50,27 @@ class AddJourneyViewController: UIViewController {
             }; return}
         
         let set = checkHashTags(from: addJourneyView.newJourneyDescriptionTextView.text)
-        DynamoDBManager.shared.createJourney(title: addJourneyView.newJourneyNameTextField.text!,
-                                             description: addJourneyView.newJourneyDescriptionTextView.text!,
-                                             hashtags: set, completion: {(error) in
-            if let error = error {
-                DispatchQueue.main.async {
-                    self.showAlert(title: "Error", message: "\(error.localizedDescription)")}
-            } else {
-                DispatchQueue.main.async {
-                    self.dismiss(animated: true) {
-                        self.imagePreview.saveButton.isEnabled = true
-                        self.delegate?.createdNewJourney(with: self.addJourneyView.newJourneyNameTextField.text!,
-                                                         details: self.addJourneyView.newJourneyDescriptionTextView.text!)
-                    }
-                }
-            }
-        })
+        
+        self.delegate?.createdNewJourney(with: self.addJourneyView.newJourneyNameTextField.text!,
+                                         details: self.addJourneyView.newJourneyDescriptionTextView.text!, hashtags: set)
+        dismiss(animated: true, completion: nil)
+        
+//        DynamoDBManager.shared.createJourney(title: addJourneyView.newJourneyNameTextField.text!,
+//                                             description: addJourneyView.newJourneyDescriptionTextView.text!,
+//                                             hashtags: set, completion: {(error) in
+//            if let error = error {
+//                DispatchQueue.main.async {
+//                    self.showAlert(title: "Error", message: "\(error.localizedDescription)")}
+//            } else {
+//                DispatchQueue.main.async {
+//                    self.dismiss(animated: true) {
+//                        self.imagePreview.saveButton.isEnabled = true
+//                        self.delegate?.createdNewJourney(with: self.addJourneyView.newJourneyNameTextField.text!,
+//                                                         details: self.addJourneyView.newJourneyDescriptionTextView.text!, hashtags: set)
+//                    }
+//                }
+//            }
+//        })
 //        dismiss(animated: true) {
 //            self.delegate?.createdNewJourney(with: , details: <#T##String#>)
 //        }

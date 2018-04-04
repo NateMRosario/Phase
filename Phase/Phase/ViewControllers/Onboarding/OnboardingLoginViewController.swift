@@ -37,7 +37,7 @@ class OnboardingLoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let pastelView = PastelView(frame: view.bounds)
-        
+                
         // Custom Direction
         pastelView.startPastelPoint = .topLeft
         pastelView.endPastelPoint = .bottomRight
