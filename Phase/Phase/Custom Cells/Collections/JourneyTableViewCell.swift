@@ -18,17 +18,8 @@ class JourneyTableViewCell: UITableViewCell {
         }
     }
     
-    var unsortedEvents = [Event]() {
-        didSet {
-            print(unsortedEvents.count)
-        }
-    }
-    
-    var sortedEvents = [Event]() {
-        didSet {
-            print("============================================")
-        }
-    }
+    var unsortedEvents = [Event]()
+    var sortedEvents = [Event]()
     
     @IBOutlet weak var containter: UIView! {
         didSet {
@@ -75,7 +66,8 @@ class JourneyTableViewCell: UITableViewCell {
         return date.timeAgoDisplay()
     }
     
-    public func configureCell(with journey: Journey, creator: AppUser?) {
+    public func configureCell(with journey: Journey, creator: AppUser?, row rows: Int) {
+        collectionView.reloadData()
         getEvents(for: journey)
         self.startDateLabel.text = convertDate(from: journey._creationDate)
         self.userName.text = creator?._username
@@ -119,38 +111,10 @@ class JourneyTableViewCell: UITableViewCell {
             })
         }
         self.sortedEvents = loadedEvents
-        print(sortedEvents.count)
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
     }
-    
-    //    private func sortAndGetLastThreeEvents(for events: [Event]) {
-    //        switch events.count {
-    //        case 0:
-    //            print(0)
-    //        case 1:
-    //            sortedEvents.append(events.first!)
-    //            DispatchQueue.main.async {
-    //                 self.collectionView.reloadData()
-    //                print("case 1 reload")
-    //            }
-    //        case 2:
-    //            sortedEvents.append(events[0])
-    //            sortedEvents.append(events[1])
-    //            DispatchQueue.main.async {
-    //                self.collectionView.reloadData()
-    //                 print("case 2 reload")
-    //            }
-    //        case 3:
-    //            sortedEvents.append(events[0])
-    //            sortedEvents.append(events[1])
-    //            sortedEvents.append(events[2])
-    //            DispatchQueue.main.async {
-    //                self.collectionView.reloadData()
-    //                 print("case 3 reload")
-    //            }
-    //        default:
-    //            break
-    //        }
-    //    }
 }
 
 extension JourneyTableViewCell: UICollectionViewDelegate {
@@ -162,6 +126,8 @@ extension JourneyTableViewCell: UICollectionViewDataSource {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ADMozaikLayoutCell", for: indexPath) as! MozaikCollectionViewCell
         let event = sortedEvents[indexPath.row]
+        
+        
         
         if indexPath.row < 3 {
             cell.configureCell(with: event)

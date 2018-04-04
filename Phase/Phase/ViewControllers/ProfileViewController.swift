@@ -158,6 +158,7 @@ class ProfileViewController: UIViewController, DynamoDBUserActionsDelegate {
         if isOwnProfile {
             loadData(for: CognitoManager.shared.userId)
         }
+        tableView.reloadData()
     }
     
     override func viewDidLoad() {
@@ -329,8 +330,7 @@ extension ProfileViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "JourneyCell", for: indexPath) as! JourneyTableViewCell
         let journey = userJourneys[indexPath.row]
-        print(indexPath.row)
-        cell.configureCell(with: journey, creator: currentDisplayedUser)
+        cell.configureCell(with: journey, creator: currentDisplayedUser, row: indexPath.row)
         return cell
     }
 }
