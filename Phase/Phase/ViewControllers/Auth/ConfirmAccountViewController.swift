@@ -46,6 +46,14 @@ class ConfirmAccountViewController: UIViewController {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if let _ = touches.first {
+            DispatchQueue.main.async {
+                self.view.endEditing(true)
+            }
+        }
+    }
 }
 
 extension ConfirmAccountViewController {

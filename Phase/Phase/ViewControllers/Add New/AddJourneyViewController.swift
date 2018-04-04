@@ -21,12 +21,21 @@ class AddJourneyViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.addSubview(addJourneyView)
+        addJourneyView.newJourneyDescriptionTextView.delegate = self
         addJourneyView.cancelButton.addTarget(self,
                                               action: #selector(cancel),
                                               for: .touchUpInside)
         addJourneyView.createButton.addTarget(self,
                                               action: #selector(create),
                                               for: .touchUpInside)
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        if let _ = touches.first {
+            DispatchQueue.main.async {
+                self.view.endEditing(true)
+            }
+        }
     }
     
     @objc private func cancel() {
@@ -49,11 +58,14 @@ class AddJourneyViewController: UIViewController {
                     self.showAlert(title: "Error", message: "\(error.localizedDescription)")}
             } else {
                 DispatchQueue.main.async {
-                    self.showAlert(title: "Created", message: "Created New Journey")}
+                    self.showAlert(title: "Created", message: "Created New Journey")
+                }
             }
         })
         imagePreview.saveButton.isEnabled = true
-        dismiss(animated: true)
+        dismiss(animated: true) {
+            self.delegate?.createdNewJourney()
+        }
     }
     
     func checkHashTags(from string: String) -> Set<String>? {
@@ -66,5 +78,11 @@ class AddJourneyViewController: UIViewController {
         }
         if set.isEmpty {return nil}
         return set
+    }
+}
+
+extension AddJourneyViewController: UITextViewDelegate {
+    func textViewDidBeginEditing(_ textView: UITextView) {
+        textView.textColor = .black
     }
 }

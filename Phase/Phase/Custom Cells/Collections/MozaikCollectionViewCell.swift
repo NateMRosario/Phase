@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 class MozaikCollectionViewCell: UICollectionViewCell {
 
@@ -16,5 +17,10 @@ class MozaikCollectionViewCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+    }
+    
+    func configureCell(with event: Event) {
+        howManyMoreLabel.text = ""
+        mozaik.kf.setImage(with: URL(string: "https://s3.amazonaws.com/phase-journey-events/\(event._media!)"))
     }
 }

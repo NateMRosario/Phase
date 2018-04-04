@@ -8,24 +8,25 @@
 
 import UIKit
 import ADMozaicCollectionViewLayout
+import Kingfisher
 
 class JourneyTableViewCell: UITableViewCell {
     
-    var journey: Journey? {
+    var eventids = [String]() {
         didSet {
-            if let journey = journey {
-                getEvents(for: journey)
-            }
+            getEventFor(for: eventids)
         }
     }
-    var events = [Event]() {
+    
+    var unsortedEvents = [Event]()
+    var sortedEvents = [Event]() {
         didSet {
-            DispatchQueue.main.async {
-                print(self.events.count)
-                self.collectionView.reloadData()
-            }
+        DispatchQueue.main.async {
+            self.collectionView.reloadData()
+        }
         }
     }
+    @IBOutlet weak var emptyJourneyView: UIView!
     
     @IBOutlet weak var containter: UIView! {
         didSet {
@@ -72,32 +73,58 @@ class JourneyTableViewCell: UITableViewCell {
         return date.timeAgoDisplay()
     }
     
-    public func configureCell(with journey: Journey, creator: AppUser?) {
+    public func configureCell(with journey: Journey, creator: AppUser?, row rows: Int) {
+        if journey._events?.count == 0 {
+            emptyJourneyView.isHidden = false
+        }
+        getEvents(for: journey)
         self.startDateLabel.text = convertDate(from: journey._creationDate)
         self.userName.text = creator?._username
         self.watchersLabel.text = "Watchers: \(String(describing: journey._numberOfWatchers!))"
         self.journeyTitle.text = journey._title
         if let profileImageUrl = creator?._profileImage {
-            ImageAPIClient.manager.loadImage(from: profileImageUrl,
-                                             completionHandler: {self.profileImageView.image = $0},
-                                             errorHandler: {print($0)})
+            profileImageView.kf.setImage(with: URL(string: profileImageUrl))
         }
     }
     
     private func getEvents(for journey: Journey) {
-        //TODO: Check if journey contains 1,2,3 or more events
+        var allEventids = [String]()
         if let events = journey._events {
             for event in events {
-                print(event)
-                DynamoDBManager.shared.loadEvent(eventId: event) { (event, error) in
-                    if let error = error {
-                        print(error)
-                    } else {
-                        self.events.append(event!)
+                if !allEventids.contains(event) {
+                    allEventids.append(event)
+                }
+            }
+        }
+        if !allEventids.isEmpty {
+            self.eventids = allEventids
+        }
+    }
+    
+    private func getEventFor(for events: [String]) {
+        var loadedEvents = [Event]()
+        for id in events {
+            DynamoDBManager.shared.loadEvent(eventId: id) { (event, error) in
+                if let error = error {
+                    print(error)
+                } else {
+                    if let event = event {
+                        if !loadedEvents.contains(event) {
+                            loadedEvents.append(event)
+                        }
                     }
                 }
             }
         }
+        if !loadedEvents.isEmpty {
+            loadedEvents = loadedEvents.sorted(by: { (prev, next) -> Bool in
+                (prev._creationDate as! Double) < (next._creationDate as! Double)
+            })
+        }
+        self.sortedEvents = loadedEvents
+//        DispatchQueue.main.async {
+//            self.collectionView.reloadData()
+//        }
     }
 }
 
@@ -109,29 +136,23 @@ extension JourneyTableViewCell: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "ADMozaikLayoutCell", for: indexPath) as! MozaikCollectionViewCell
+        let event = sortedEvents[indexPath.row]
+        
+        
+        
         if indexPath.row < 3 {
-            let event = events[indexPath.row]
-            //TODO: GET PICTURE URL OR VIDEO URL FROM DB
-            if let media = event._media {
-                print(media)
-                S3Manager.shared.downloadManagerData(imageUID: media) { (image, error) in
-                    if let error = error {
-                        print(error)
-                    }
-                    cell.mozaik.image = image
-                }
-            }
-            cell.howManyMoreLabel.text = ""
+            cell.configureCell(with: event)
         } else {
             cell.mozaik.backgroundColor = UIColor.lightGray
-            cell.howManyMoreLabel.text = "\(Int(truncating: (journey?._eventCount)!) - 3)"
+            cell.mozaik.image = nil
+            cell.howManyMoreLabel.text = "\(eventids.count - 3) more"
             cell.isVideo.image = nil
         }
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return events.count
+        return sortedEvents.count
     }
 }
 

@@ -74,12 +74,15 @@ class CameraViewController: UIViewController {
         tapGestureRecognizer.numberOfTapsRequired = 2
         cameraView.previewLayerContainer.addGestureRecognizer(tapGestureRecognizer)
     }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         getImages()
-        
-    }
+   }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -102,14 +105,11 @@ class CameraViewController: UIViewController {
     }
     
     func setupNav() {
-        let newJourneyButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(addNewJourney(_:)))
-        self.navigationItem.rightBarButtonItem = newJourneyButton
+        navigationController?.navigationBar.isHidden = true
+        
     }
     
-    @objc func addNewJourney(_ sender: UIBarButtonItem) {
-        navigationController?.pushViewController(NewPostViewController.instantiate(withStoryboard: "NewPost"), animated: true)
-
-    }
+    
     
     // This function sets up a switch to change the camera in use depending on current position when called.
     private func setUpCaptureSessionInput(position: AVCaptureDevice.Position) {
@@ -252,6 +252,7 @@ extension CameraViewController: AVCapturePhotoCaptureDelegate {
             image = UIImage(data: imageData)
             guard let image = image else { return }
             let previewVC = PreviewViewController(image: image)
+            previewVC.delegate = self
             present(previewVC, animated: true, completion: nil)
             
         }
@@ -280,6 +281,7 @@ extension CameraViewController: UIImagePickerControllerDelegate, UINavigationCon
             self.imagePreview.saveButton.isEnabled = false
             self.image = editedImage
             let cpVC = PreviewViewController(image: self.image!)
+            cpVC.delegate = self
             self.present(cpVC, animated: true, completion: nil)}
         
        
@@ -348,5 +350,11 @@ extension CameraViewController: UICollectionViewDelegateFlowLayout{
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         return cellSpacing
+    }
+}
+extension CameraViewController: PreviewVCDelegate {
+    func didPost() {
+        self.tabBarController?.selectedIndex = 0
+//        self.navigationController?.tabBarController?.selectedIndex = 0
     }
 }

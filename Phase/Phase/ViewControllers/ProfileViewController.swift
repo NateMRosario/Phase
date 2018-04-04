@@ -68,16 +68,15 @@ class ProfileViewController: UIViewController, DynamoDBUserActionsDelegate {
     @IBAction func editProfileButtonPressed(_ sender: UIButton) {
         //TODO: Present settingsVC
     }
-    @IBOutlet weak var subscribeButton: UIButton!
-    @IBAction func subscribeButtonPressed(_ sender: UIButton) {
-    }
     
     // At this offset the Header stops its transformations
     private let headerStopOffset:CGFloat = 200 - 64
     private let hiddenLabelDistanceToTop:CGFloat = 30.0
     private var selectedSegment = selectedSegmentioIndex {
         didSet {
-            tableView.reloadData()
+            DispatchQueue.main.async {
+                self.tableView.reloadData()
+            }
         }
     }
     @IBOutlet weak var followButton: UIButton! {
@@ -88,12 +87,25 @@ class ProfileViewController: UIViewController, DynamoDBUserActionsDelegate {
     }
     @IBAction func followButtonPressed(_ sender: UIButton) {
         guard let user = currentDisplayedUser else {followButton.isEnabled = false; return}
-        DynamoDBManager.shared.followUser(user: user) { (error) in
-            if let error = error {
-                self.showAlert(title: "Error", message: "\(error.localizedDescription)")
-            } else {
-                
+        switch followButton.currentTitle! {
+        case "Follow":
+            dynamoDBActions.followUser(user: user) { (error) in
+                if let error = error {
+                    self.showAlert(title: "Error", message: "\(error.localizedDescription)")
+                } else {
+                    self.followButton.titleLabel?.text = "Following"
+                }
             }
+        case "Unfollow":
+            dynamoDBActions.unfollowUser(user: user) { (error) in
+                if let error = error {
+                    self.showAlert(title: "Error", message: "\(error.localizedDescription)")
+                } else {
+                    self.followButton.titleLabel?.text = "Follow"
+                }
+            }
+        default:
+            break
         }
     }
     
@@ -122,12 +134,17 @@ class ProfileViewController: UIViewController, DynamoDBUserActionsDelegate {
     }
     public var userInfoToDisplay = "" {
         didSet {
-            loadData(for: userInfoToDisplay)
+            if userInfoToDisplay != "" {
+                print("this is the current user: \(userInfoToDisplay)")
+                loadData(for: userInfoToDisplay)
+            }
         }
     }
+    
     public var isOwnProfile = true
     private var userJourneys = [Journey]() {
         didSet {
+            print("user journeys set")
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
@@ -138,12 +155,21 @@ class ProfileViewController: UIViewController, DynamoDBUserActionsDelegate {
     // MARK: - View life cycles
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        bioLabel.text = "A VEEREEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEERRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYYY LOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOONNNNNNNNNNNNNNNNNNNNNNNNNNNNNNGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGGG header"
+        bioLabel.text = "I tried so hard and got so far, but in the end, it doesn't even maaatterrrrr"
         
         // This makes tableView header height dynamic
         let size = profileView.systemLayoutSizeFitting(UILayoutFittingCompressedSize)
         profileView.frame.size = size
         tableView.tableHeaderView = profileView
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        userJourneys = []
+        if isOwnProfile {
+            loadData(for: CognitoManager.shared.userId)
+        }
+        tableView.reloadData()
     }
     
     override func viewDidLoad() {
@@ -183,7 +209,9 @@ class ProfileViewController: UIViewController, DynamoDBUserActionsDelegate {
             self.username.text = userInfo._username
             self.followers.text = "\(userInfo._followerCount ?? 0)"
             self.watchers.text = "\(userInfo._watcherCount ?? 0)"
-            
+            self.following.text = "\(String(describing: userInfo._usersFollowed?.count ?? 0))"
+            self.watching.text = "\(String(describing: userInfo._isWatching?.count ?? 0))"
+            self.nameLabel.text = ""
         }
         
         if let headerImageUrl = userInfo._headerImage {
@@ -192,18 +220,26 @@ class ProfileViewController: UIViewController, DynamoDBUserActionsDelegate {
                                              errorHandler: {(print($0))})
         }
     }
+    
     private func loadJourneys(for user: AppUser) {
+        var loadedJourneys = [Journey]()
         if let journeys = user._journeys {
             for journey in journeys {
                 dynamoDBActions.loadJourney(journeyId: journey) { (journey, error) in
-                    if let error = error {
+                    if error != nil {
                         self.showAlert(title: "Error", message: "Failed to load user Journeys")
                     } else {
-                        self.userJourneys.append(journey!)
+                        if !loadedJourneys.contains(journey!) {
+                            loadedJourneys.append(journey!)
+                        }
                     }
                 }
             }
         }
+        loadedJourneys = loadedJourneys.sorted(by: { (prev, next) -> Bool in
+            (prev._creationDate as! Double) > (next._creationDate as! Double)
+        })
+        self.userJourneys = loadedJourneys
     }
     
     private func setupUI() {
@@ -303,12 +339,11 @@ extension ProfileViewController: UITableViewDataSource {
         // UIScreen.main.bounds.width * 0.5628 + 32 //for testing purposes
     }
     
+    // MARK: - Cell for row at
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "JourneyCell", for: indexPath) as! JourneyTableViewCell
-        let journey = self.userJourneys[indexPath.row]
-        cell.configureCell(with: journey, creator: currentDisplayedUser)
-        cell.journey = journey
-        
+        let journey = userJourneys[indexPath.row]
+        cell.configureCell(with: journey, creator: currentDisplayedUser, row: indexPath.row)
         return cell
     }
 }

@@ -41,7 +41,7 @@ class CognitoManager {
         return user!.isSignedIn
     }
     
-    func signUp(username: String, email: String, password: String, completion: @escaping (Error?) -> Void) {
+    func signUp(username: String, email: String, password: String, name: String, completion: @escaping (Error?) -> Void) {
         
         let emailAttribute = AWSCognitoIdentityUserAttributeType(name: "email", value: email)
         
@@ -54,7 +54,7 @@ class CognitoManager {
                 
                 self.userId = result.userSub
                 
-                DynamoDBManager.shared.createUser(sub: self.userId!, username: result.user.username!, completion: { (error) in
+                DynamoDBManager.shared.createUser(sub: self.userId!, username: result.user.username!, name: name, completion: { (error) in
                     if let error = error {
                         completion(error)
                     } else {
