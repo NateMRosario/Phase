@@ -87,8 +87,8 @@
 		8128B47C206951B2009E0629 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8128B479206951B2009E0629 /* Event.swift */; };
 		812B325F20616C3F006C69F7 /* CameraView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 812B325E20616C3F006C69F7 /* CameraView.swift */; };
 		812B326120616C4F006C69F7 /* CapturedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 812B326020616C4F006C69F7 /* CapturedImageView.swift */; };
-		8134CF00205C47EB00A146B1 /* HomeFeed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8134CEFF205C47EB00A146B1 /* HomeFeed.storyboard */; };
 		8134CF0620615EE700A146B1 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8134CF0520615EE700A146B1 /* LoginView.swift */; };
+		813CC4CB20756027007EB20D /* HomeFeed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8134CEFF205C47EB00A146B1 /* HomeFeed.storyboard */; };
 		817C6EDD2069A99500010EDF /* FollowsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817C6EDC2069A99500010EDF /* FollowsViewController.swift */; };
 		817C6EE72069AB7E00010EDF /* FollowsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817C6EE32069AB7E00010EDF /* FollowsCollectionViewCell.swift */; };
 		817C6EE82069AB7E00010EDF /* FollowingTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817C6EE42069AB7E00010EDF /* FollowingTableCell.swift */; };
@@ -1227,6 +1227,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				813CC4CB20756027007EB20D /* HomeFeed.storyboard in Resources */,
 				811BDB76206C82530050EBA3 /* TestTableViewController.xib in Resources */,
 				811BDBA8206C832D0050EBA3 /* man2.jpg in Resources */,
 				810935D620600D6600A95B30 /* awsconfiguration.json in Resources */,
@@ -1246,7 +1247,6 @@
 				811BDBA6206C832D0050EBA3 /* loved.png in Resources */,
 				811BDBB0206C832D0050EBA3 /* man6.jpg in Resources */,
 				811BDB59206C82530050EBA3 /* TestCollectionViewController.xib in Resources */,
-				8134CF00205C47EB00A146B1 /* HomeFeed.storyboard in Resources */,
 				811BDBB8206C832D0050EBA3 /* hungry.png in Resources */,
 				811BDBA4206C832D0050EBA3 /* woman4.jpg in Resources */,
 				81C1F87D2060AC410037BF42 /* DiscoverDetail.storyboard in Resources */,

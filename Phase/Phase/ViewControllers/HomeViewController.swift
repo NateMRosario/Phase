@@ -35,9 +35,8 @@ class HomeViewController: UIViewController {
             }
         }
     }
-    var appEvents = [String : [Event]]() {
+    var appEvents = [Event]() {
         didSet {
-//            print("AppEvent: \(appEvents)")
             DispatchQueue.main.async {
                 self.tableView.reloadData()
             }
@@ -47,21 +46,21 @@ class HomeViewController: UIViewController {
     var eventIDs = [String]() {
         didSet {
             for id in eventIDs {
-//                print(id)
-                DynamoDBManager.shared.loadEvent(eventId: id, completion: { (event, error) in ///FIX THIS ALMOST THERE!
+                DynamoDBManager.shared.loadEvent(eventId: id, completion: { (event, error) in
                     if let error = error {
                         print(error)
                     }
                     guard let event = event else {print("event in eventIDs");return}
-                    var currentEvents = [Event]()
-                    if self.appEvents[event._journey!] == nil {
-                        currentEvents.append(event)
-                        self.appEvents[event._journey!] = currentEvents
-                    } else {
-                        currentEvents = self.appEvents[event._journey!]!
-                        currentEvents.append(event)
-                        self.appEvents[event._journey!] = currentEvents
-                    }
+                    self.appEvents.append(event)
+//                    var currentEvents = [Event]()
+//                    if self.appEvents[event._journey!] == nil {
+//                        currentEvents.append(event)
+//                        self.appEvents[event._journey!] = currentEvents
+//                    } else {
+//                        currentEvents = self.appEvents[event._journey!]!
+//                        currentEvents.append(event)
+//                        self.appEvents[event._journey!] = currentEvents
+//                    }
                 })
             }
 //            self.fetchEvents()
@@ -93,6 +92,10 @@ class HomeViewController: UIViewController {
         let img = #imageLiteral(resourceName: "085 October Silence").crop(toWidth: UIScreen.main.bounds.width, toHeight: UIScreen.main.bounds.width)!
         tableView.dg_setPullToRefreshFillColor(UIColor(patternImage: img))
         tableView.dg_setPullToRefreshBackgroundColor(tableView.backgroundColor!)
+        tableView.dataSource = self
+        tableView.delegate = self
+        let nib = UINib(nibName: "HomeFeedTableViewCell", bundle: nil)
+        tableView.register(nib, forCellReuseIdentifier: "HomeFeedCell")
         fetchCurrentUser()
     }
     
@@ -111,11 +114,6 @@ class HomeViewController: UIViewController {
     }
 
     private func fetchJourney() {
-//        var currentEventID = Set<String>() {
-//            didSet {
-//                    self.eventIDs = Array(currentEventID)
-//            }
-//        }
         
         var currentJourney = Set<Journey>() {
             didSet {
@@ -138,10 +136,6 @@ class HomeViewController: UIViewController {
         }
     }
     
-    private func fetchEvents() {
-        
-    }
-    
     deinit {
         tableView?.dg_removePullToRefresh()
         print("deinit")
@@ -150,21 +144,37 @@ class HomeViewController: UIViewController {
 extension HomeViewController: UITableViewDataSource {
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return events.count
+        return appEvents.count
     }
+//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+//        if indexPath.item == appEvents.count{
+//            return CGSize(width: UIScreen.main.bounds.width, height: 100)
+//        }
+
+//        let image = #imageLiteral(resourceName: "nostalgic4")
+//        let width = UIScreen.main.bounds.width - 16
+//        let height = width * 1.2 / image.size.width * image.size.height
+//        return CGFloat(height)
+//        return UITableViewAutomaticDimension
+//    }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.item == events.count{ // add paging
-            let cell = tableView.dequeueReusableCell(withIdentifier: "loading", for: indexPath)
-            cell.addSubview(loading)
-            loading.snp.makeConstraints({ (make) in
-                make.centerX.equalTo(cell.contentView.snp.centerX)
-                make.centerY.equalTo(cell.contentView.snp.centerY)
-            })
-            loading.startAnimating()
-            return cell
-        }
-        let cell = tableView.dequeueReusableCell(withIdentifier: "", for: indexPath)
+//        if indexPath.item == events.count{ // add paging
+//            let cell = tableView.dequeueReusableCell(withIdentifier: "loading", for: indexPath)
+//            cell.addSubview(loading)
+//            loading.snp.makeConstraints({ (make) in
+//                make.centerX.equalTo(cell.contentView.snp.centerX)
+//                make.centerY.equalTo(cell.contentView.snp.centerY)
+//            })
+//            loading.startAnimating()
+//            return cell
+//        }
+        let cell = tableView.dequeueReusableCell(withIdentifier: "HomeFeedCell", for: indexPath) as! HomeFeedTableViewCell ///Change name
+        let event = appEvents[indexPath.row]
+        cell.configureCell(event: event)
+        cell.detailView.sizeToFit()
+        cell.detailView.layoutIfNeeded()
+        cell.delegate = self
         cell.layer.cornerRadius = 8
         return cell
     }
@@ -172,9 +182,8 @@ extension HomeViewController: UITableViewDataSource {
 
 extension HomeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        
-        //navigationController?.pushViewController(JourneyCarouselViewController(heroID: ""), animated: true)
-        
+
+        navigationController?.pushViewController(JourneyDetailViewController(), animated: true)
     }
 }
 
@@ -188,6 +197,10 @@ extension HomeViewController: UIScrollViewDelegate {
 }
 
 extension HomeViewController: PresentVCDelgate {
+    func updateTableView() {
+        self.tableView?.setNeedsDisplay()
+    }
+    
     func mentionsTapped() {
         self.navigationController?.pushViewController(ProfileViewController.instantiate(withStoryboard: "Main"), animated: true)
     }
@@ -197,21 +210,11 @@ extension HomeViewController: PresentVCDelgate {
     }
 }
 
-//let cell = collectionView.dequeueReusableCell(with: HomeFeedCollectionViewCell.self, for: indexPath)
-//let journey = journeysFollowed[indexPath.row]
-//let event = appEvents[journey._journeyId!]?.last
-//guard let user = appUser else {return cell}
-//
-//let event1: Event = Event()
-//
-//cell.configureCell(journey: journey, user: user)
-////        let content = contents[indexPath.row]
-////        cell.set(image: contents[indexPath.row])
-////        switchItUp(image: content, cell: cell)
-//cell.layer.cornerRadius = 8
-//return cell
-//}
 /////Delete when AWS is set up
+//        let content = contents[indexPath.row]
+//        cell.set(image: contents[indexPath.row])
+//        switchItUp(image: content, cell: cell)
+
 //private func switchItUp(image: UIImage, cell: HomeFeedCollectionViewCell) {
 //    switch image {
 //    case #imageLiteral(resourceName: "a11"):
@@ -233,29 +236,4 @@ extension HomeViewController: PresentVCDelgate {
 //        break
 //    }
 //}
-//}
-//extension HomeViewController: UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
-//
-//    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        navigationController?.pushViewController(JourneyCarouselViewController(), animated: true)
-//    }
-//    //TODO:
-//}
-//
-//extension HomeViewController: CollectionViewDelegateLayout {
-//    private func numberOfColumns() -> Int {
-//        return 1
-//    }
-//
-//    internal func sizeForItemAt(indexPath: IndexPath) -> CGSize {
-//        if indexPath.item == journeysFollowed.count{
-//            return CGSize(width: configure.itemWidth,height: 100)
-//        }
-//        let image = #imageLiteral(resourceName: "nostalgic4")
-//        let width = configure.itemWidth
-//        var height = width / image.size.width * image.size.height + 49
-//        if height < 300 {
-//            height = 400
-//        }
-//        return CGSize(width: width, height: height)
 
