@@ -9,7 +9,7 @@
 import UIKit
 
 protocol AddNewJourneyViewDelegate: class {
-    func createdNewJourney()
+    func createdNewJourney(with name: String, details: String)
 }
 
 class AddJourneyViewController: UIViewController {
@@ -58,14 +58,17 @@ class AddJourneyViewController: UIViewController {
                     self.showAlert(title: "Error", message: "\(error.localizedDescription)")}
             } else {
                 DispatchQueue.main.async {
-                    self.showAlert(title: "Created", message: "Created New Journey")
+                    self.dismiss(animated: true) {
+                        self.imagePreview.saveButton.isEnabled = true
+                        self.delegate?.createdNewJourney(with: self.addJourneyView.newJourneyNameTextField.text!,
+                                                         details: self.addJourneyView.newJourneyDescriptionTextView.text!)
+                    }
                 }
             }
         })
-        imagePreview.saveButton.isEnabled = true
-        dismiss(animated: true) {
-            self.delegate?.createdNewJourney()
-        }
+//        dismiss(animated: true) {
+//            self.delegate?.createdNewJourney(with: , details: <#T##String#>)
+//        }
     }
     
     func checkHashTags(from string: String) -> Set<String>? {
