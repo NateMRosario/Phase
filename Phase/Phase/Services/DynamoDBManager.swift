@@ -437,6 +437,7 @@ extension DynamoDBManager {
                         let journeyToUpdate: Journey = journey
                         journeyToUpdate._eventCount = newEventCount
                         journeyToUpdate._events = eventSet
+                        journeyToUpdate._lastEvent = newEvent._eventId!
                         
                         self.updateJourney(journey: journeyToUpdate) { (error) in
                             if let error = error {

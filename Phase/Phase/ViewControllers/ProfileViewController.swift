@@ -87,7 +87,7 @@ class ProfileViewController: UIViewController, DynamoDBUserActionsDelegate {
     }
     @IBAction func followButtonPressed(_ sender: UIButton) {
         guard let user = currentDisplayedUser else {followButton.isEnabled = false; return}
-        switch followButton.currentTitle {
+        switch followButton.currentTitle! {
         case "Follow":
             dynamoDBActions.followUser(user: user) { (error) in
                 if let error = error {
