@@ -176,8 +176,9 @@ extension HomeViewController: UITableViewDataSource {
 
 extension HomeViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
-        navigationController?.pushViewController(JourneyDetailViewController(), animated: true)
+        let cell = tableView.cellForRow(at: indexPath) as! HomeFeedTableViewCell
+        guard let journey = cell.journey else {return}
+        navigationController?.pushViewController(JourneyDetailViewController(journey: journey), animated: true)
     }
 }
 

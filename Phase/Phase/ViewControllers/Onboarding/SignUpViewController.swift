@@ -32,7 +32,8 @@ class SignUpViewController: UIViewController {
                     let alertController = UIAlertController(title: "Success", message: "Signed Up! Please check your email to verify.", preferredStyle: .alert)
                     let okAction = UIAlertAction(title: "Ok", style: .default) { (alert) in
                         let confirmAccountVC = ConfirmAccountViewController(username: self.userName.text!)
-                        self.present(confirmAccountVC, animated: true, completion: nil)
+                        self.navigationController?.pushViewController(confirmAccountVC, animated: true)
+                        //self.present(confirmAccountVC, animated: true, completion: nil)
                     }
                     alertController.addAction(okAction)
                     self.present(alertController, animated: true, completion: nil)
@@ -52,6 +53,8 @@ class SignUpViewController: UIViewController {
         super.viewDidLoad()
         let pastelView = PastelView(frame: view.bounds)
         
+        navigationController?.navigationBar.isHidden = true
+
         // Custom Direction
         pastelView.startPastelPoint = .topLeft
         pastelView.endPastelPoint = .bottomRight

@@ -19,6 +19,8 @@ class HomeFeedTableViewCell: UITableViewCell {
     
     weak var delegate: PresentVCDelgate?
     
+    var journey: Journey?
+    
     var eventImage: UIImage?
     @IBOutlet weak var journeyTitle: UILabel!
     @IBOutlet weak var userName: UILabel!
@@ -58,6 +60,7 @@ class HomeFeedTableViewCell: UITableViewCell {
                 print(error)
             }
             currentJourney = journey
+            self.journey = journey
         }
         DynamoDBManager.shared.loadUser(userId: event._userId!) { (user, error) in
             if let error = error {

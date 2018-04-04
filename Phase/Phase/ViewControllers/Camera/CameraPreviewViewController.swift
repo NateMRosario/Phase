@@ -71,6 +71,12 @@ class PreviewViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
+    deinit {
+        print("THIS VIEW CONTROLLER IS DEINITED")
+        self.journeys = []
+        print("hi")
+    }
+    
     private func getJourneys() {
         var journeys = [String]()
         let userID = CognitoManager.shared.userId!
@@ -250,7 +256,17 @@ extension PreviewViewController: UICollectionViewDataSource {
             let journey = journeys[indexPath.row - 1]
             cell.journey = journey
             cell.journeyNameLabel.text = journey._title
-            
+            if let lastEvent = journey._lastEvent {
+                DynamoDBManager.shared.loadEvent(eventId: lastEvent, completion: { (event, error) in
+                    if let error = error {
+                        
+                    } else if let event = event {
+                        DispatchQueue.main.async {
+                            cell.journeyImageView.kf.setImage(with: URL(string: "https://s3.amazonaws.com/phase-journey-events/\(event._media!)"))
+                        }
+                    }
+                })
+            }
             if selectedIndexPath != nil {
                 if indexPath == selectedIndexPath {
                     cell.selectedJourneyLayer.isHidden = false
@@ -308,9 +324,30 @@ extension PreviewViewController: UITextViewDelegate {
 }
 
 extension PreviewViewController: AddNewJourneyViewDelegate {
-    func createdNewJourney(with name: String, details: String) {
-        self.journeys = []
-        getJourneys()
+    func createdNewJourney(with name: String, details: String, hashtags: Set<String>?) {
+        let newJourney: Journey = Journey()
+        newJourney._title = name
+        newJourney._description = details
+        newJourney._hashtags = hashtags
+        newJourney._journeyId = UUID().uuidString
+        newJourney._userId = CognitoManager.shared.userId!
+        newJourney._creationDate = Date().timeIntervalSinceReferenceDate as NSNumber
+        newJourney._isOriginal = true
+        newJourney._numberOfWatchers = 0
+        newJourney._eventCount = 0
+        
+        DynamoDBManager.shared.createJourneyWith(journey: newJourney) { (error) in
+            if let error = error {
+                print(error)
+            }
+        }
+        
+        
+        //        self.journeys = []
+        //        getJourneys()
+        self.journeys.insert(newJourney, at: 0)
     }
+    
 }
+
 

@@ -269,6 +269,49 @@ extension DynamoDBManager {
         
     }
     
+    func createJourneyWith(journey: Journey, completion: @escaping (Error?) -> Void) {
+        
+        let newJourney = journey
+        
+        mapper.save(newJourney) { (error) in
+            if let error = error {
+                print(error)
+                completion(error)
+            } else {
+                print("about to load user...")
+                self.loadUser(userId: CognitoManager.shared.userId!, completion: { (user, error) in
+                    if let error = error {
+                        print(error)
+                        completion(error)
+                    } else if let user = user {
+                        print(user)
+                        let userToUpdate = user
+                        
+                        var newSet = user._journeys ?? Set<String>()
+                        newSet.insert(newJourney._journeyId!)
+                        
+                        userToUpdate._numberOfJourneys = ((user._numberOfJourneys as! Int) + 1) as NSNumber
+                        userToUpdate._journeys = newSet
+                        
+                        self.updateUser(appUser: user, completion: { (error) in
+                            if let error = error {
+                                completion(error)
+                            } else {
+                                completion(nil)
+                            }
+                        })
+                    }
+                })
+                
+                print("success creating journey")
+                completion(nil)
+            }
+        }
+        
+    }
+
+    
+    
     func loadJourney(journeyId: String, completion: @escaping (Journey?, Error?) -> Void) {
         
         var journey: Journey = Journey()
