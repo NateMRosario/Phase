@@ -28,11 +28,13 @@ class DynamoDBManager {
     @objc optional func didUnfollow()
     @objc optional func didWatchJourney()
     @objc optional func didUnwatchJourney()
+    @objc optional func didLikeEvent()
+    @objc optional func didUnlikeEvent()
 }
 
 // MARK: - AppUser Methods
 extension DynamoDBManager {
-    func createUser(sub: String, username: String, completion: @escaping (Error?) -> Void) {
+    func createUser(sub: String, username: String, name: String, completion: @escaping (Error?) -> Void) {
         
         let newUser: AppUser = AppUser()
         newUser._userId = sub
@@ -49,6 +51,33 @@ extension DynamoDBManager {
             } else {
                 print("success creating user in database")
                 completion(nil)
+            }
+        }
+    }
+    
+    func updateBio(bio: String, completion: @escaping (Error?) -> Void) {
+        guard let userId = CognitoManager.shared.userId else {
+            completion(CognitoError.noActiveUser)
+            return
+        }
+        
+        loadUser(userId: userId) { (user, error) in
+            if let error = error {
+                completion(error)
+            } else if let user = user {
+                
+                let newUser = user
+                newUser._bio = bio
+                
+                self.updateUser(appUser: newUser, completion: { (error) in
+                    if let error = error {
+                        completion(error)
+                    } else {
+                        completion(nil)
+                    }
+                })
+            } else {
+                print("update bio function is nil")
             }
         }
     }
@@ -291,11 +320,46 @@ extension DynamoDBManager {
         }
     }
     
-    func watchJourney(completion: @escaping (Error?) -> Void) {
+    func watchJourney(journey: Journey, completion: @escaping (Error?) -> Void) {
         guard let userId = CognitoManager.shared.userId else {
             completion(CognitoError.noActiveUser)
             return
         }
+        
+        loadUser(userId: userId) { (user, error) in
+            if let error = error {
+                completion(error)
+            } else {
+                if let user = user {
+                    
+                    let newUser = user
+                    var newSet = user._isWatching ?? Set<String>()
+                    newSet.insert(journey._journeyId!)
+                    
+                    self.updateUser(appUser: newUser, completion: { (error) in
+                        if let error = error {
+                            completion(error)
+                        } else {
+                            
+                            let newJourney = journey
+                            newJourney._numberOfWatchers = ((journey._numberOfWatchers as! Int) + 1) as NSNumber
+                            
+                            self.updateJourney(journey: newJourney, completion: { (error) in
+                                if let error = error {
+                                    completion(error)
+                                } else {
+                                    self.delegate?.didWatchJourney!()
+                                    completion(nil)
+                                }
+                            })
+                        }
+                    })
+                    
+                    
+                }
+            }
+        }
+        
 
     }
     
@@ -373,6 +437,7 @@ extension DynamoDBManager {
                         let journeyToUpdate: Journey = journey
                         journeyToUpdate._eventCount = newEventCount
                         journeyToUpdate._events = eventSet
+                        journeyToUpdate._lastEvent = newEvent._eventId!
                         
                         self.updateJourney(journey: journeyToUpdate) { (error) in
                             if let error = error {
@@ -422,10 +487,24 @@ extension DynamoDBManager {
     }
     
     func likeEvent(event: Event, completion: @escaping (Error?) -> Void) {
-        guard let userId = CognitoManager.shared.userId else {
+        guard let _ = CognitoManager.shared.userId else {
             completion(CognitoError.noActiveUser)
             return
         }
+        
+        let newEvent = event
+        newEvent._numberOfLikes = ((event._numberOfLikes as! Int) + 1) as NSNumber
+        
+        mapper.save(newEvent) { (error) in
+            if let error = error {
+                completion(error)
+            } else {
+                self.delegate?.didLikeEvent!()
+                completion(nil)
+            }
+        }
+        
+        
         
     }
 

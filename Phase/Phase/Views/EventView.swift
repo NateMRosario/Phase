@@ -126,7 +126,7 @@ class EventView: UIView {
         button.setTitleColor(UIColor.white, for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 11)
         button.contentEdgeInsets = UIEdgeInsetsMake(5, 8, 5, 8)
-        button.addTarget(self, action: #selector(subscribeButtonPressed), for: .touchUpInside)
+        //button.addTarget(self, action: #selector(followButtonPressed), for: .touchUpInside)
         return button
     }()
     

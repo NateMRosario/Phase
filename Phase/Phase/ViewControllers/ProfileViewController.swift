@@ -68,9 +68,6 @@ class ProfileViewController: UIViewController, DynamoDBUserActionsDelegate {
     @IBAction func editProfileButtonPressed(_ sender: UIButton) {
         //TODO: Present settingsVC
     }
-    @IBOutlet weak var subscribeButton: UIButton!
-    @IBAction func subscribeButtonPressed(_ sender: UIButton) {
-    }
     
     // At this offset the Header stops its transformations
     private let headerStopOffset:CGFloat = 200 - 64
@@ -90,12 +87,25 @@ class ProfileViewController: UIViewController, DynamoDBUserActionsDelegate {
     }
     @IBAction func followButtonPressed(_ sender: UIButton) {
         guard let user = currentDisplayedUser else {followButton.isEnabled = false; return}
-        DynamoDBManager.shared.followUser(user: user) { (error) in
-            if let error = error {
-                self.showAlert(title: "Error", message: "\(error.localizedDescription)")
-            } else {
-                
+        switch followButton.currentTitle! {
+        case "Follow":
+            dynamoDBActions.followUser(user: user) { (error) in
+                if let error = error {
+                    self.showAlert(title: "Error", message: "\(error.localizedDescription)")
+                } else {
+                    self.followButton.titleLabel?.text = "Following"
+                }
             }
+        case "Unfollow":
+            dynamoDBActions.unfollowUser(user: user) { (error) in
+                if let error = error {
+                    self.showAlert(title: "Error", message: "\(error.localizedDescription)")
+                } else {
+                    self.followButton.titleLabel?.text = "Follow"
+                }
+            }
+        default:
+            break
         }
     }
     
@@ -125,6 +135,7 @@ class ProfileViewController: UIViewController, DynamoDBUserActionsDelegate {
     public var userInfoToDisplay = "" {
         didSet {
             if userInfoToDisplay != "" {
+                print("this is the current user: \(userInfoToDisplay)")
                 loadData(for: userInfoToDisplay)
             }
         }
@@ -198,7 +209,9 @@ class ProfileViewController: UIViewController, DynamoDBUserActionsDelegate {
             self.username.text = userInfo._username
             self.followers.text = "\(userInfo._followerCount ?? 0)"
             self.watchers.text = "\(userInfo._watcherCount ?? 0)"
-            
+            self.following.text = "\(String(describing: userInfo._usersFollowed?.count ?? 0))"
+            self.watching.text = "\(String(describing: userInfo._isWatching?.count ?? 0))"
+            self.nameLabel.text = ""
         }
         
         if let headerImageUrl = userInfo._headerImage {
