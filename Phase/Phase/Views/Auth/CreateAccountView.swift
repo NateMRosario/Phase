@@ -49,6 +49,7 @@ class CreateAccountView: UIView {
         
         textField.placeholder = "Email"
         textField.title = "Email Address"
+        textField.keyboardType = .emailAddress
         textField.tintColor = .blue // the color of the blinking cursor
         textField.textColor = .darkGray
         textField.lineColor = .darkGray
