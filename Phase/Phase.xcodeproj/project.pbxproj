@@ -89,6 +89,7 @@
 		812B326120616C4F006C69F7 /* CapturedImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 812B326020616C4F006C69F7 /* CapturedImageView.swift */; };
 		8134CF0620615EE700A146B1 /* LoginView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8134CF0520615EE700A146B1 /* LoginView.swift */; };
 		813CC4CB20756027007EB20D /* HomeFeed.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8134CEFF205C47EB00A146B1 /* HomeFeed.storyboard */; };
+		8152A57220767CB7000C01AE /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8152A57120767CB6000C01AE /* Login.storyboard */; };
 		817C6EDD2069A99500010EDF /* FollowsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817C6EDC2069A99500010EDF /* FollowsViewController.swift */; };
 		817C6EE72069AB7E00010EDF /* FollowsCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817C6EE32069AB7E00010EDF /* FollowsCollectionViewCell.swift */; };
 		817C6EE82069AB7E00010EDF /* FollowingTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 817C6EE42069AB7E00010EDF /* FollowingTableCell.swift */; };
@@ -141,7 +142,6 @@
 		81C1F87F2060AC410037BF42 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81C1F87C2060AC410037BF42 /* Main.storyboard */; };
 		81C279CF20616D3900DB1825 /* DiscoveryNavViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C279CE20616D3900DB1825 /* DiscoveryNavViewController.swift */; };
 		81C279DA206193ED00DB1825 /* CreateNewPostView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8109358B2059BD6500A95B30 /* CreateNewPostView.swift */; };
-		81C279DC2061F74B00DB1825 /* Login.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81C279DB2061F74B00DB1825 /* Login.storyboard */; };
 		81C368B6206B2ED400A1873E /* AddRandomMessageChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C368AF206B2ED400A1873E /* AddRandomMessageChatViewController.swift */; };
 		81C368B7206B2ED400A1873E /* DemoChatMessageSender.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C368B0206B2ED400A1873E /* DemoChatMessageSender.swift */; };
 		81C368B8206B2ED400A1873E /* DemoChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81C368B1206B2ED400A1873E /* DemoChatViewController.swift */; };
@@ -314,6 +314,7 @@
 		8134CEFF205C47EB00A146B1 /* HomeFeed.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = HomeFeed.storyboard; sourceTree = "<group>"; };
 		8134CF0520615EE700A146B1 /* LoginView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginView.swift; path = Auth/LoginView.swift; sourceTree = "<group>"; };
 		8134CF0720615EF200A146B1 /* CreateAccountView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreateAccountView.swift; path = Auth/CreateAccountView.swift; sourceTree = "<group>"; };
+		8152A57120767CB6000C01AE /* Login.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		817C6EDC2069A99500010EDF /* FollowsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FollowsViewController.swift; path = Phase/ViewControllers/FollowsViewController.swift; sourceTree = SOURCE_ROOT; };
 		817C6EE32069AB7E00010EDF /* FollowsCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FollowsCollectionViewCell.swift; path = "Phase/Custom Cells/FollowingCells/FollowsCollectionViewCell.swift"; sourceTree = SOURCE_ROOT; };
 		817C6EE42069AB7E00010EDF /* FollowingTableCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = FollowingTableCell.swift; path = "Phase/Custom Cells/FollowingCells/FollowingTableCell.swift"; sourceTree = SOURCE_ROOT; };
@@ -364,7 +365,6 @@
 		81C1F87B2060AC410037BF42 /* Discover.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Discover.storyboard; sourceTree = "<group>"; };
 		81C1F87C2060AC410037BF42 /* Main.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Main.storyboard; sourceTree = "<group>"; };
 		81C279CE20616D3900DB1825 /* DiscoveryNavViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DiscoveryNavViewController.swift; sourceTree = "<group>"; };
-		81C279DB2061F74B00DB1825 /* Login.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Login.storyboard; sourceTree = "<group>"; };
 		81C368AF206B2ED400A1873E /* AddRandomMessageChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddRandomMessageChatViewController.swift; sourceTree = "<group>"; };
 		81C368B0206B2ED400A1873E /* DemoChatMessageSender.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoChatMessageSender.swift; sourceTree = "<group>"; };
 		81C368B1206B2ED400A1873E /* DemoChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DemoChatViewController.swift; sourceTree = "<group>"; };
@@ -1065,11 +1065,11 @@
 			isa = PBXGroup;
 			children = (
 				81C9EE1D2058795200C27016 /* LaunchScreen.storyboard */,
+				8152A57120767CB6000C01AE /* Login.storyboard */,
 				8134CEFF205C47EB00A146B1 /* HomeFeed.storyboard */,
 				81C1F87B2060AC410037BF42 /* Discover.storyboard */,
 				81C1F87A2060AC410037BF42 /* DiscoverDetail.storyboard */,
 				81C1F87C2060AC410037BF42 /* Main.storyboard */,
-				81C279DB2061F74B00DB1825 /* Login.storyboard */,
 				81CA1BE4206442E600EF7B8E /* SearchVCs.storyboard */,
 				81817A462065941C00CA7044 /* NewPost.storyboard */,
 				818DBB6F206986B500B91990 /* Notifications.storyboard */,
@@ -1256,6 +1256,7 @@
 				F4183094206AB90700466705 /* HomeFeedTableViewCell.xib in Resources */,
 				811BDBAD206C832D0050EBA3 /* wealthy.png in Resources */,
 				811BDB9C206C832D0050EBA3 /* mood7.jpg in Resources */,
+				8152A57220767CB7000C01AE /* Login.storyboard in Resources */,
 				811BDBB6206C832D0050EBA3 /* man1.jpg in Resources */,
 				811BDBA3206C832D0050EBA3 /* man7.jpg in Resources */,
 				818DBB70206986B500B91990 /* Notifications.storyboard in Resources */,
@@ -1276,7 +1277,6 @@
 				811BDB9F206C832D0050EBA3 /* adventurous.png in Resources */,
 				817C6EE92069AB7E00010EDF /* FollowingTableCell.xib in Resources */,
 				811BDB9D206C832D0050EBA3 /* man3.jpg in Resources */,
-				81C279DC2061F74B00DB1825 /* Login.storyboard in Resources */,
 				811BDBA5206C832D0050EBA3 /* mood8.jpg in Resources */,
 				811BDBB3206C832D0050EBA3 /* mood3.jpg in Resources */,
 				811BDBAA206C832D0050EBA3 /* happy.png in Resources */,
@@ -1803,11 +1803,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = XYLS53SA6G;
+				DEVELOPMENT_TEAM = KSNU4DN7MY;
 				INFOPLIST_FILE = "$(SRCROOT)/Phase/SupportingFiles/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = blahblahblah.Phase;
+				PRODUCT_BUNDLE_IDENTIFIER = tyzhaoac.Phase;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Phase/iCarousel/Phase-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1823,11 +1823,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = XYLS53SA6G;
+				DEVELOPMENT_TEAM = KSNU4DN7MY;
 				INFOPLIST_FILE = "$(SRCROOT)/Phase/SupportingFiles/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = blahblahblah.Phase;
+				PRODUCT_BUNDLE_IDENTIFIER = tyzhaoac.Phase;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Phase/iCarousel/Phase-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
