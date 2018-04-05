@@ -35,6 +35,7 @@ class HomeViewController: UIViewController {
         didSet {
             DispatchQueue.main.async {
                 self.tableView.reloadData()
+                self.tableView.setNeedsLayout()
             }
         }
     }
@@ -47,7 +48,9 @@ class HomeViewController: UIViewController {
                         print(error)
                     }
                     guard let event = event else {print("event in eventIDs");return}
-                    self.appEvents.insert(event)
+                    if !self.appEvents.contains(event) {
+                        self.appEvents.insert(event)
+                    }
                 })
             }
         }
@@ -72,8 +75,18 @@ class HomeViewController: UIViewController {
         self.tableView.alwaysBounceVertical = true
         loadingView.tintColor = UIColor(red: 78/255.0, green: 221/255.0, blue: 200/255.0, alpha: 1.0)
             tableView.dg_addPullToRefreshWithActionHandler({ [weak self] () -> Void in
-            //DO THINGS
-            self?.tableView.dg_stopLoading()
+                for id in (self?.eventIDs)! {
+                    DynamoDBManager.shared.loadEvent(eventId: id, completion: { (event, error) in
+                        if let error = error {
+                            print(error)
+                        }
+                        guard let event = event else {print("event in eventIDs");return}
+                        self?.appEvents.insert(event)
+                    })
+                }
+                
+                
+                self?.tableView.dg_stopLoading()
             }, loadingView: loadingView)
         let img = #imageLiteral(resourceName: "085 October Silence").crop(toWidth: UIScreen.main.bounds.width, toHeight: UIScreen.main.bounds.width)!
         tableView.dg_setPullToRefreshFillColor(UIColor(patternImage: img))
@@ -138,32 +151,42 @@ class HomeViewController: UIViewController {
     }
 }
 extension HomeViewController: UITableViewDataSource {
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return appEvents.count
+        return appEvents.count + 1
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//        if indexPath.item == events.count{ // add paging
-//            let cell = tableView.dequeueReusableCell(withIdentifier: "loading", for: indexPath)
-//            cell.addSubview(loading)
-//            loading.snp.makeConstraints({ (make) in
-//                make.centerX.equalTo(cell.contentView.snp.centerX)
-//                make.centerY.equalTo(cell.contentView.snp.centerY)
-//            })
-//            loading.startAnimating()
-//            return cell
-//        }
-        let cell = tableView.dequeueReusableCell(withIdentifier: "HomeFeedCell", for: indexPath) as! HomeFeedTableViewCell ///Change name
-        let event = Array(appEvents)[indexPath.row]
-        cell.configureCell(event: event)
-        cell.delegate = self
-        cell.layer.cornerRadius = 8
-        return cell
+        if indexPath.item == appEvents.count { // add paging
+            let cell = tableView.dequeueReusableCell(withIdentifier: "loading", for: indexPath)
+            cell.addSubview(loading)
+            loading.snp.makeConstraints({ (make) in
+                make.centerX.equalTo(self.view.snp.centerX)
+                make.centerY.equalTo(cell.contentView.snp.centerY)
+            })
+            loading.startAnimating()
+            return cell
+        } else {
+            let cell = tableView.dequeueReusableCell(withIdentifier: "HomeFeedCell", for: indexPath) as! HomeFeedTableViewCell ///Change name
+            let event = Array(appEvents)[indexPath.row]
+            cell.configureCell(event: event)
+            cell.layer.cornerRadius = 8
+            return cell
+        }
     }
 }
 
 extension HomeViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        if indexPath.row == appEvents.count {
+            return 100
+        } else {
+            return UITableViewAutomaticDimension
+        }
+    }
+    
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        guard indexPath.row != appEvents.count else {return}
         let cell = tableView.cellForRow(at: indexPath) as! HomeFeedTableViewCell
         guard let journey = cell.journey else {return}
         navigationController?.pushViewController(JourneyDetailViewController(journey: journey), animated: true)
@@ -174,7 +197,7 @@ extension HomeViewController: UIScrollViewDelegate {
     
     func collectionView(collectionView: UICollectionView, willDisplayCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
         if indexPath.item == events.count{
-            // loadMoreData()
+            
         }
     }
 }

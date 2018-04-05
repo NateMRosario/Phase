@@ -65,7 +65,7 @@ class DiscoveryViewController: UIViewController {
     
     var journeys = [Journey]() {
         didSet {
-            
+            print(journeys)
         }
     }
 
@@ -85,6 +85,8 @@ class DiscoveryViewController: UIViewController {
         let img = #imageLiteral(resourceName: "085 October Silence").crop(toWidth: UIScreen.main.bounds.width, toHeight: UIScreen.main.bounds.width)!
         collectionView.dg_setPullToRefreshFillColor(UIColor(patternImage: img))
         collectionView.dg_setPullToRefreshBackgroundColor(collectionView.backgroundColor!)
+        
+        getJourneys()
     }
     
     override func didReceiveMemoryWarning() {
@@ -125,8 +127,16 @@ class DiscoveryViewController: UIViewController {
     }
     
 
-    private func getPopularJourneys() {
-        
+    private func getJourneys() {
+        DynamoDBManager.shared.scanJourneys { (journeys, error) in
+            if let error = error {
+                print(error)
+            } else {
+                if let journeys = journeys {
+                    self.journeys = journeys
+                }
+            }
+        }
     }
     
     deinit {
@@ -145,6 +155,7 @@ extension DiscoveryViewController: UICollectionViewDataSource {
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        return journeys.count
         return contents.count + 1
     }
     

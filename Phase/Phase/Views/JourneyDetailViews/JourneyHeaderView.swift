@@ -13,6 +13,7 @@ import SnapKit
 protocol JourneyHeaderDelegate: class {
     func showCommentsTapped()
     func segueToProfileTapped()
+    func showFollowersTapped()
 }
 
 
@@ -52,19 +53,19 @@ class JourneyHeaderView: UIView {
         return button
     }()
     
-//    lazy var journeyUserNamelabel: UILabel = {
-//        let label = UILabel()
-//        label.text = "Ty PodMaster"
-//        label.textAlignment = .left
-//        label.backgroundColor = UIColor.clear
-//        label.font = UIFont.systemFont(ofSize: 16, weight: .heavy)
-//        return label
-//    }()
-    
     lazy var journeyDescriptionLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = UIColor.clear
-        label.text = "\"Ty PodMaster. Ty PodMaster. Ty PodMaster.\""
+        label.text = "This is were the description will appear."
+        label.textAlignment = .left
+        label.font = UIFont.systemFont(ofSize: 12, weight: .regular)
+        return label
+    }()
+    
+    lazy var journeyCaptionLabel: UILabel = {
+        let label = UILabel()
+        label.backgroundColor = UIColor.clear
+        label.text = "This is were the caption will appear."
         label.textAlignment = .left
         label.font = UIFont.systemFont(ofSize: 12, weight: .regular)
         return label
@@ -72,7 +73,7 @@ class JourneyHeaderView: UIView {
     
     lazy var journeyStartDate: UILabel = {
         let label = UILabel()
-        label.text = "Started: 45 days ago"
+        label.text = "45 days ago"
         label.textAlignment = .left
         label.backgroundColor = UIColor.clear
         label.font = UIFont.systemFont(ofSize: 11, weight: .light)
@@ -85,19 +86,41 @@ class JourneyHeaderView: UIView {
         button.titleLabel?.textAlignment = .right
         button.backgroundColor = UIColor.clear
         button.setTitleColor(UIColor.gray, for: .normal)
+        button.setTitleColor(UIColor.blue, for: .highlighted)
+        button.setTitleColor(UIColor.black, for: .selected)
         button.titleLabel?.font = UIFont.systemFont(ofSize: 11, weight: .light)
         button.addTarget(self, action: #selector(showCommentsTapped), for: .touchUpInside)
         return button
     }()
     
-//    lazy var journeyTotalComments: UILabel = {
-//        let label = UILabel()
-//        label.text = "5 comments"
-//        label.textAlignment = .right
-//        label.backgroundColor = UIColor.clear
-//        label.font = UIFont.systemFont(ofSize: 11, weight: .light)
-//        return label
-//    }()
+    lazy var journeyCommentsUpButton: UIButton = {
+        let button = UIButton(type: UIButtonType.custom) as UIButton
+        button.setImage(#imageLiteral(resourceName: "up-arrow"), for: .normal)
+        button.tintColor = .black
+        button.addTarget(self, action: #selector(showCommentsTapped), for: .touchDown)
+        return button
+    }()
+    
+    lazy var journeyFollowersButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("5 followers", for: .normal)
+        button.titleLabel?.textAlignment = .right
+        button.backgroundColor = UIColor.clear
+        button.setTitleColor(UIColor.gray, for: .normal)
+        button.setTitleColor(UIColor.blue, for: .highlighted)
+        button.setTitleColor(UIColor.black, for: .selected)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 11, weight: .light)
+        button.addTarget(self, action: #selector(showFollowersTapped), for: .touchUpInside)
+        return button
+    }()
+    
+    lazy var journeyFollowersUpButton: UIButton = {
+        let button = UIButton(type: UIButtonType.custom) as UIButton
+        button.setImage(#imageLiteral(resourceName: "up-arrow"), for: .normal)
+        button.tintColor = .black
+        button.addTarget(self, action: #selector(showFollowersTapped), for: .touchDown)
+        return button
+    }()
     
     // MARK: - Initializers
     override init(frame: CGRect) {
@@ -127,16 +150,25 @@ class JourneyHeaderView: UIView {
         setupJourneyDescriptionLabel()
         setupJourneyJourneyStartDate()
         setupJourneyTotalComments()
+        setupJourneyFollowersUpButton()
+        setupJourneyFollowersButton()
+        setupJourneyCommentsUpButton()
+        setupJourneyCaptionLabel()
     }
     
     @objc private func segueToProfileTapped() {
-        print("profile")
+        print("profileTapped")
         delegate?.segueToProfileTapped()
     }
     
     @objc private func showCommentsTapped() {
-        print("as")
+        print("commentsTapped")
         delegate?.showCommentsTapped()
+    }
+    
+    @objc private func showFollowersTapped() {
+        print("showFollowersTapped")
+        delegate?.showFollowersTapped()
     }
     
     // MARK: - Constraints
@@ -145,7 +177,7 @@ class JourneyHeaderView: UIView {
         thinButton.snp.makeConstraints { (make) in
             make.top.equalTo(self).offset(10)
             make.centerX.equalTo(self)
-            make.height.equalTo(5)
+            make.height.equalTo(8)
             make.width.equalTo(self).multipliedBy(0.19)
         }
     }
@@ -167,22 +199,60 @@ class JourneyHeaderView: UIView {
         }
     }
     
+    private func setupJourneyCaptionLabel() {
+        addSubview(journeyCaptionLabel)
+        journeyCaptionLabel.snp.makeConstraints { (make) in
+            make.leading.equalTo(self).offset(12)
+            make.trailing.equalTo(self).offset(-12)
+            make.top.equalTo(journeyDescriptionLabel
+                .snp.bottom).offset(8)
+        }
+    }
+    
+    
     private func setupJourneyJourneyStartDate() {
         addSubview(journeyStartDate)
         journeyStartDate.snp.makeConstraints { (make) in
             make.leading.equalTo(self).offset(12)
             make.trailing.equalTo(self).offset(-12)
-            make.top.equalTo(journeyDescriptionLabel.snp.bottom).offset(16)
+            make.bottom.equalTo(self).offset(-12)
         }
     }
     
     private func setupJourneyTotalComments() {
         addSubview(journeyTotalComments)
         journeyTotalComments.snp.makeConstraints { (make) in
-            make.trailing.equalTo(self).offset(-12)
+            make.centerX.equalTo(self)
             make.firstBaseline.equalTo(journeyStartDate.snp.firstBaseline)
         }
     }
+    
+    private func setupJourneyCommentsUpButton() {
+        addSubview(journeyCommentsUpButton)
+        journeyCommentsUpButton.snp.makeConstraints { (make) in
+            make.leading.equalTo(journeyTotalComments.snp.trailing).offset(12)
+            make.centerY.equalTo(journeyTotalComments.snp.centerY)
+            make.size.equalTo(10)
+        }
+    }
+    
+    private func setupJourneyFollowersUpButton() {
+        addSubview(journeyFollowersUpButton)
+        journeyFollowersUpButton.snp.makeConstraints { (make) in
+            make.trailing.equalTo(self).offset(-12)
+            make.centerY.equalTo(journeyStartDate.snp.centerY)
+            make.size.equalTo(10)
+        }
+    }
+    
+    private func setupJourneyFollowersButton() {
+        addSubview(journeyFollowersButton)
+        journeyFollowersButton.snp.makeConstraints { (make) in
+            make.trailing.equalTo(journeyFollowersUpButton.snp.leading).offset(-8)
+            make.firstBaseline.equalTo(journeyStartDate.snp.firstBaseline)
+        }
+    }
+
 }
 
 

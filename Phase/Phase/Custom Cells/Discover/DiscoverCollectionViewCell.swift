@@ -7,8 +7,11 @@
 //
 
 import UIKit
+import Kingfisher
 
 class DiscoverCollectionViewCell: UICollectionViewCell {
+    
+    var journey: Journey?
     
     @IBOutlet weak var profileImage: UIImageView! {
         didSet {

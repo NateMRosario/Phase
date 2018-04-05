@@ -35,7 +35,7 @@ class JourneyDetailViewController: UIViewController {
         frm.size.height = frm.size.height + 500
     }
     
-    
+    private let refreshControl = UIRefreshControl()
     private var comments = [EventDummyDate]() {
         didSet {
             DispatchQueue.main.async {
@@ -43,7 +43,7 @@ class JourneyDetailViewController: UIViewController {
             }
         }
     }
-    
+
     private func dummmyData() {
         let event0 = EventDummyDate(userId: "Nate", creationDate: "2h", caption: "Cool stuff, bruh! 21! 21! 21! 21!", media: "man4.jpg")
         let event1 = EventDummyDate(userId: "Clint", creationDate: "1h 39m", caption: "Prayer hands", media: "man5.jpg")
@@ -57,7 +57,6 @@ class JourneyDetailViewController: UIViewController {
     }
     
     private var headerViewMoved = false
-    private var followersViewMoved = false
     
     // MARK: - Lazy Properties
     lazy private var journeyProfileImageView: UIImageView = {
@@ -76,12 +75,10 @@ class JourneyDetailViewController: UIViewController {
     
     // MARK: - Instances
     private let journeyCarouselView = JourneyCarouselView()
-    private let followersView = JourneySecondMenuView()
     private let headerView = JourneyHeaderView()
     private let middleView = JourneyCommentTableView()
     private let footerView = JourneyBottomView()
     
-    //    let picArr = [#imageLiteral(resourceName: "a1"),#imageLiteral(resourceName: "a2"),#imageLiteral(resourceName: "a3"),#imageLiteral(resourceName: "a4"),#imageLiteral(resourceName: "a5"),#imageLiteral(resourceName: "a6"),#imageLiteral(resourceName: "a7"),#imageLiteral(resourceName: "a8"),#imageLiteral(resourceName: "a9"),#imageLiteral(resourceName: "a10"),#imageLiteral(resourceName: "a11")]
     var scrolledBySlider = false
     var sliderValue: Int = 0 {
         didSet {
@@ -133,7 +130,6 @@ class JourneyDetailViewController: UIViewController {
         self.middleView.journeyCommentTableView.delegate = self
         self.middleView.journeyCommentTableView.dataSource = self
         self.headerView.delegate = self
-        self.followersView.delegate = self
         
         setupView()
         setupSlider()
@@ -145,6 +141,10 @@ class JourneyDetailViewController: UIViewController {
         super.viewDidAppear(animated)
         setInitialAnimation()
         animteViewsToIdlePosition()
+    }
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        resetViews()
     }
     
     // MARK: - Overrides
@@ -165,11 +165,22 @@ class JourneyDetailViewController: UIViewController {
         setJourneyProfileImageViewConstraints()
         setMiddleViewConstraints()
         setFooterViewConstraints()
-        setFollowersConstraints()
+    }
+    
+    private func resetViews() {
+    headerViewMoved = false
+    headerView.transform = .identity
+    middleView.transform = .identity
+    middleView.isHidden = !headerViewMoved
+    footerView.transform = .identity
+    footerView.isHidden = !headerViewMoved
+    headerView.journeyCommentsUpButton.transform = .identity
+    headerView.journeyFollowersUpButton.transform = .identity
+    headerView.round(corners: .allCorners, radius: 18)
     }
     
     private func setupSlider() {
-        journeyCarouselView.carouselSlider.maximumValue = Float(events.count)
+        journeyCarouselView.carouselSlider.maximumValue = Float(events.count + 1)
         journeyCarouselView.carouselSlider.minimumValue = 0
         journeyCarouselView.carouselSlider.addTarget(self, action: #selector(sliderValueChanged(_:)), for: .valueChanged)
     }
@@ -178,20 +189,19 @@ class JourneyDetailViewController: UIViewController {
     
     // views are set beyoned the superview's x position
     private func setInitialAnimation() {
-        self.headerView.transform = CGAffineTransform(translationX: -headerView.frame.width, y: 0)
-        self.journeyProfileImageView.transform = CGAffineTransform(translationX: -headerView.frame.width, y: 0)
-        self.followersView.transform = CGAffineTransform(translationX: -headerView.frame.width, y: 0)
+        self.headerView.transform = CGAffineTransform(translationX: -(headerView.frame.width + 100), y: 0)
+        self.journeyProfileImageView.transform = CGAffineTransform(translationX: -(headerView.frame.width + 100), y: 0)
     }
     
     // animated Views that were set by setInitialAnimation to their idle position
     private func animteViewsToIdlePosition() {
-        UIView.animate(withDuration: 0.8, delay: 0.8, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: [], animations: {
+        headerView.isHidden = false
+        journeyProfileImageView.isHidden = false
+        UIView.animate(withDuration: 0.8, delay: 0.05, usingSpringWithDamping: 0.8, initialSpringVelocity: 0, options: [], animations: {
             self.headerView.transform = .identity
             self.journeyProfileImageView.transform = .identity
-            self.followersView.transform = .identity
         })
-        headerView.round(corners: [.topLeft, .topRight], radius: 18)
-        followersView.round(corners: [.bottomLeft, .bottomRight], radius: 18)
+        headerView.round(corners: .allCorners, radius: 18)
     }
     
     // animation for header tapped animation
@@ -200,10 +210,12 @@ class JourneyDetailViewController: UIViewController {
         UIView.animate(withDuration: 0.3, animations: {
             guard self.headerView.transform == .identity else {
                 self.headerView.transform = .identity
-                self.headerView.round(corners: [.topRight, .topLeft], radius: 18)
+                self.headerView.round(corners: .allCorners, radius: 18)
                 self.journeyProfileImageView.transform = .identity
                 self.middleView.transform = .identity
                 self.footerView.transform = .identity
+                self.headerView.journeyCommentsUpButton.transform = .identity
+                self.headerView.journeyFollowersUpButton.transform = .identity
                 self.isHiddenWhenHeaderTapped()
                 return
             }
@@ -217,7 +229,6 @@ class JourneyDetailViewController: UIViewController {
     private func isHiddenWhenHeaderTapped() {
         footerView.isHidden = !headerViewMoved
         middleView.isHidden = !headerViewMoved
-        followersView.isHidden = headerViewMoved
         if !headerViewMoved {
             journeyCarouselView.unBlur()
         } else {
@@ -228,50 +239,23 @@ class JourneyDetailViewController: UIViewController {
     private func headerTappedAnimation() {
         headerView.round(corners: [.topRight, .topLeft], radius: 18)
         footerView.round(corners: [.bottomRight, .bottomLeft], radius: 18)
-        headerView.transform = CGAffineTransform(translationX: 0, y: -self.view.frame.bounds.height * 0.625)
-        journeyProfileImageView.transform = CGAffineTransform(translationX: 0, y: -self.view.frame.bounds.height * 0.625)
-        middleView.transform = CGAffineTransform(translationX: 0, y: -self.view.frame.bounds.height * 0.625)
-        footerView.transform = CGAffineTransform(translationX: 0, y: -self.view.frame.bounds.height * 0.625)
+        headerView.transform = CGAffineTransform(translationX: 0, y: -self.view.frame.bounds.height * 0.55)
+        journeyProfileImageView.transform = CGAffineTransform(translationX: 0, y: -self.view.frame.bounds.height * 0.55)
+        middleView.transform = CGAffineTransform(translationX: 0, y: -self.view.frame.bounds.height * 0.55)
+        footerView.transform = CGAffineTransform(translationX: 0, y: -self.view.frame.bounds.height * 0.55)
+        headerView.journeyCommentsUpButton.transform = CGAffineTransform(rotationAngle: self.radians(degrees: 180))
+        headerView.journeyFollowersUpButton.transform = CGAffineTransform(rotationAngle: self.radians(degrees: 180))
     }
     
-    // animation for followers tapped animation
-    private func followersViewTapped() {
-        followersViewMoved = !followersViewMoved
-        UIView.animate(withDuration: 0.3, animations: {
-            guard self.followersView.transform == .identity else {
-                self.followersView.transform = .identity
-                self.journeyProfileImageView.transform = .identity
-                self.followersView.round(corners: [.bottomRight, .bottomLeft], radius: 18)
-                self.isHiddenWhenFollowerTapped()
-                return
-            }
-            self.animateFollowersView()
-            self.isHiddenWhenFollowerTapped()
-            return
-        })
-    }
-    
-    // hides Header, middle and footer when Followers is tapped
-    private func isHiddenWhenFollowerTapped() {
-        headerView.isHidden = followersViewMoved
-        if !followersViewMoved {
-            journeyCarouselView.unBlur()
-        } else {
-            journeyCarouselView.blur()
-        }
-    }
-    
-    private func animateFollowersView() {
-        followersView.round(corners: [.topRight, .topLeft], radius: 18)
-        followersView.transform = CGAffineTransform(translationX: 0, y: -self.view.frame.bounds.height * 0.779)
-        journeyProfileImageView.transform = CGAffineTransform(translationX: 0, y: -self.view.frame.bounds.height * 0.625)
-        
+    private func radians(degrees: Double) -> CGFloat {
+        return CGFloat(degrees * .pi / degrees)
     }
     
     // selector functions
     @objc private func sliderValueChanged(_ sender: UISlider) {
         scrolledBySlider = true
         sliderValue = Int(sender.value)
+        print("slider value is \(Int(sender.value)) ---")
     }
     
     @objc private func journeyProfileImageTapped() {}
@@ -290,21 +274,24 @@ class JourneyDetailViewController: UIViewController {
     
     private func setHeaderViewConstraints() {
         self.view.addSubview(headerView)
+        headerView.isHidden = true
         headerView.snp.makeConstraints { (make) in
-            make.bottom.equalTo(self.view.snp.bottom).offset(-84)
+            make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(-16)
             make.centerX.equalTo(self.view.snp.centerX)
             make.leading.equalTo(16)
             make.trailing.equalTo(-16)
-            make.height.equalTo(self.view.snp.height).multipliedBy(0.16)
+            make.height.equalTo(self.view.snp.height).multipliedBy(0.185)
         }
     }
     
     private func setJourneyProfileImageViewConstraints() {
         self.view.addSubview(journeyProfileImageView)
+        journeyProfileImageView.isHidden = true
         journeyProfileImageView.snp.makeConstraints { (make) in
             make.centerY.equalTo(headerView.snp.top)
             make.trailing.equalTo(headerView.snp.trailing).offset(-25)
-            make.height.equalTo(headerView.snp.height).multipliedBy(0.55)
+//            make.height.equalTo(headerView.snp.height).multipliedBy(0.1)
+            make.height.equalTo(self.view.snp.height).multipliedBy(0.09)
             make.width.equalTo(journeyProfileImageView.snp.height)
         }
     }
@@ -314,7 +301,8 @@ class JourneyDetailViewController: UIViewController {
         middleView.snp.makeConstraints { (make) in
             make.leading.equalTo(16)
             make.trailing.equalTo(-16)
-            make.height.equalTo(self.view.snp.height).multipliedBy(0.6)
+            make.height.equalTo(self.view.snp.height).multipliedBy(0.48
+            )
             make.centerX.equalTo(headerView.snp.centerX)
             make.top.equalTo(headerView.snp.bottom)
         }
@@ -330,37 +318,24 @@ class JourneyDetailViewController: UIViewController {
             make.top.equalTo(middleView.snp.bottom)
         }
     }
-    
-    private func setFollowersConstraints() {
-        self.view.addSubview(followersView)
-        followersView.snp.makeConstraints { (make) in
-            make.leading.equalTo(16)
-            make.trailing.equalTo(-16)
-            make.height.equalTo(self.view.snp.height).multipliedBy(0.07)
-            make.top.equalTo(headerView.snp.bottom)
-        }
-    }
 }
 
 // MARK: - iCarouselDataSource
 extension JourneyDetailViewController: iCarouselDataSource {
     func numberOfItems(in carousel: iCarousel) -> Int {
-        //return picArr.count
+//        return picArr.count
+        print("events.count \(events.count)")
         return events.count
     }
     
     func carousel(_ carousel: iCarousel, viewForItemAt index: Int, reusing view: UIView?) -> UIView {
         var itemView: UIImageView
         itemView = UIImageView(frame: CGRect(x: 0, y: 0, width: journeyCarouselView.carouselCollectionView.frame.width, height: journeyCarouselView.carouselCollectionView.frame.height))
-        //itemView.image = picArr[index]
+//        itemView.image = picArr[index]
         let event = events[index]
-        
         let url = URL(string: "https://s3.amazonaws.com/phase-journey-events/\(event._media!)")
-        
         itemView.kf.indicatorType = .activity
         itemView.kf.setImage(with: url, placeholder: nil, options: nil, progressBlock: nil, completionHandler: nil)
-//
-//        itemView.kf.setImage(with: URL(string: event._media!)!)
         itemView.layer.masksToBounds = true
         itemView.clipsToBounds = true
         itemView.contentMode = .scaleAspectFill
@@ -371,15 +346,22 @@ extension JourneyDetailViewController: iCarouselDataSource {
 // MARK: - iCarouselDelegate
 extension JourneyDetailViewController: iCarouselDelegate {
     func carousel(_ carousel: iCarousel, valueFor option: iCarouselOption, withDefault value: CGFloat) -> CGFloat {
-        if (option == .spacing) {
+        switch option {
+        case .wrap:
+            return 0.0 // note: 0.0 if you want to disable wrap
+        case .spacing:
             return value * 1.1
+        case .count:
+            return CGFloat(events.count)
+        default:
+            return value
         }
-        return value
     }
     
     func carouselCurrentItemIndexDidChange(_ carousel: iCarousel) {
         journeyCarouselView.carouselSlider.value = Float(carousel.currentItemIndex)
     }
+    
 }
 
 // MARK: - MiddleView TableViewDelegate
@@ -410,15 +392,9 @@ extension JourneyDetailViewController: JourneyCommentTableCellDelegate {
 }
 
 extension JourneyDetailViewController: JourneyHeaderDelegate {
+    func showFollowersTapped() {}
     func segueToProfileTapped() {}
     func showCommentsTapped() {
         headerViewTapped()
-    }
-}
-
-extension JourneyDetailViewController: JourneySecondMenuViewDelegate {
-    func showFollowersTapped() {
-        followersViewTapped()
-        print("followerViewTapped")
     }
 }

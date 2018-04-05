@@ -20,7 +20,7 @@ class JourneyCommentTableView: UIView {
         let tableView = UITableView()
         tableView.register(JourneyCommentTableViewCell.self, forCellReuseIdentifier: cellID)
         tableView.backgroundColor = .white
-        tableView.separatorStyle = .singleLine
+        tableView.separatorStyle = .none
         return tableView
     }()
     
