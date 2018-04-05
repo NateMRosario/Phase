@@ -1,19 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="13771" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="iTk-JZ-ogB">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="14109" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="iTk-JZ-ogB">
     <device id="retina4_7" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13772"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="14088"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
-    <customFonts key="customFonts">
-        <array key="TrebuchetMSBold.ttf">
-            <string>TrebuchetMS-Bold</string>
-        </array>
-    </customFonts>
     <scenes>
         <!--Welcome View Controller-->
         <scene sceneID="KUA-Wz-la0">
@@ -132,17 +127,6 @@
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="kXk-O1-3jo">
                                     <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                    <subviews>
-                                        <button hidden="YES" opaque="NO" userInteractionEnabled="NO" alpha="0.94999999999999996" contentMode="scaleToFill" fixedFrame="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zpO-A9-yN5">
-                                            <rect key="frame" x="0.0" y="485" width="375" height="45"/>
-                                            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                            <color key="backgroundColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            <fontDescription key="fontDescription" name="TrebuchetMS-Bold" family="Trebuchet MS" pointSize="17"/>
-                                            <state key="normal" title="Login with facebook">
-                                                <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            </state>
-                                        </button>
-                                    </subviews>
                                 </view>
                                 <vibrancyEffect>
                                     <blurEffect style="prominent"/>
@@ -257,19 +241,6 @@
                                         <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="P0p-AE-sTv">
                                             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                            <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BY SIGNING UP, YOU AGREE TO OUR TERMS OF USE AND PRIVACY POLICY" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i12-wB-xY9" customClass="ActiveLabel" customModule="Phase" customModuleProvider="target">
-                                                    <rect key="frame" x="32" y="574.5" width="311" height="31.5"/>
-                                                    <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="13"/>
-                                                    <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="0.90000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="i12-wB-xY9" secondAttribute="trailing" constant="32" id="Tj6-wn-beW"/>
-                                                <constraint firstItem="i12-wB-xY9" firstAttribute="leading" secondItem="P0p-AE-sTv" secondAttribute="leading" constant="32" id="YdW-Rh-kWT"/>
-                                                <constraint firstItem="i12-wB-xY9" firstAttribute="centerX" secondItem="P0p-AE-sTv" secondAttribute="centerX" id="crA-Zn-acO"/>
-                                            </constraints>
                                         </view>
                                         <vibrancyEffect>
                                             <blurEffect style="prominent"/>
@@ -336,37 +307,31 @@
                                             <action selector="backButton:" destination="HE9-cW-86C" eventType="touchUpInside" id="Xx1-xS-Aza"/>
                                         </connections>
                                     </button>
-                                    <button hidden="YES" opaque="NO" userInteractionEnabled="NO" alpha="0.94999999999999996" contentMode="scaleToFill" misplaced="YES" enabled="NO" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cUJ-eK-zj0">
-                                        <rect key="frame" x="0.0" y="501" width="375" height="45"/>
-                                        <color key="backgroundColor" red="0.0" green="0.58980089430000004" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="45" id="foM-Nq-rzX"/>
-                                        </constraints>
-                                        <fontDescription key="fontDescription" name="TrebuchetMS-Bold" family="Trebuchet MS" pointSize="17"/>
-                                        <state key="normal" title="Sign up with facebook">
-                                            <color key="titleColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                        </state>
-                                    </button>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="BY SIGNING UP, YOU AGREE TO OUR TERMS OF USE AND PRIVACY POLICY" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i12-wB-xY9" customClass="ActiveLabel" customModule="Phase" customModuleProvider="target">
+                                        <rect key="frame" x="32" y="574" width="311" height="32"/>
+                                        <fontDescription key="fontDescription" name=".AppleSystemUIFont" family=".AppleSystemUIFont" pointSize="13"/>
+                                        <color key="textColor" red="0.99999600649999998" green="1" blue="1" alpha="0.90000000000000002" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="FNr-a3-q70" firstAttribute="centerX" secondItem="mb7-LG-2Cu" secondAttribute="centerX" id="1AA-TO-boR"/>
-                                    <constraint firstItem="x4a-Cg-wsq" firstAttribute="trailing" secondItem="cUJ-eK-zj0" secondAttribute="trailing" id="7r7-eU-b0B"/>
                                     <constraint firstItem="Eit-l9-an6" firstAttribute="centerX" secondItem="mb7-LG-2Cu" secondAttribute="centerX" id="8Tc-As-gol"/>
                                     <constraint firstItem="mQ6-6G-Rx4" firstAttribute="width" secondItem="mb7-LG-2Cu" secondAttribute="width" multiplier="0.75" id="8Vi-lf-Oxl"/>
                                     <constraint firstItem="Eit-l9-an6" firstAttribute="top" secondItem="FNr-a3-q70" secondAttribute="bottom" constant="32" id="9LS-rN-H56"/>
-                                    <constraint firstItem="cUJ-eK-zj0" firstAttribute="leading" secondItem="x4a-Cg-wsq" secondAttribute="leading" id="A1N-3e-HR1"/>
+                                    <constraint firstItem="i12-wB-xY9" firstAttribute="leading" secondItem="x4a-Cg-wsq" secondAttribute="leading" constant="32" id="9SW-t3-NYF"/>
                                     <constraint firstItem="PS5-Km-0ix" firstAttribute="bottom" secondItem="x4a-Cg-wsq" secondAttribute="bottom" id="ChI-MD-8Mh"/>
+                                    <constraint firstItem="TEy-hA-CgM" firstAttribute="top" secondItem="i12-wB-xY9" secondAttribute="bottom" constant="16" id="FcB-Al-MUx"/>
                                     <constraint firstItem="FNr-a3-q70" firstAttribute="leading" secondItem="x4a-Cg-wsq" secondAttribute="leading" constant="16" id="GLe-63-PgZ"/>
                                     <constraint firstItem="PS5-Km-0ix" firstAttribute="trailing" secondItem="x4a-Cg-wsq" secondAttribute="trailing" id="H9Y-4b-Qsx"/>
                                     <constraint firstItem="aXD-7e-Utk" firstAttribute="top" secondItem="x4a-Cg-wsq" secondAttribute="top" constant="16" id="Pkf-vd-uQI"/>
                                     <constraint firstItem="aXD-7e-Utk" firstAttribute="leading" secondItem="x4a-Cg-wsq" secondAttribute="leading" constant="16" id="VND-dp-4Vz"/>
-                                    <constraint firstItem="cUJ-eK-zj0" firstAttribute="bottom" secondItem="x4a-Cg-wsq" secondAttribute="bottom" id="XWZ-Me-8gm"/>
                                     <constraint firstItem="TEy-hA-CgM" firstAttribute="leading" secondItem="x4a-Cg-wsq" secondAttribute="leading" id="ZM3-N4-7yM"/>
                                     <constraint firstItem="PS5-Km-0ix" firstAttribute="top" secondItem="mb7-LG-2Cu" secondAttribute="top" id="gpx-6B-JE7"/>
                                     <constraint firstItem="PS5-Km-0ix" firstAttribute="leading" secondItem="x4a-Cg-wsq" secondAttribute="leading" id="hhM-gk-IuB"/>
                                     <constraint firstItem="FNr-a3-q70" firstAttribute="centerY" secondItem="mb7-LG-2Cu" secondAttribute="centerY" multiplier="0.45" id="l2L-io-RTQ"/>
                                     <constraint firstItem="x4a-Cg-wsq" firstAttribute="trailing" secondItem="FNr-a3-q70" secondAttribute="trailing" constant="16" id="nwd-uc-VQ6"/>
-                                    <constraint firstItem="TEy-hA-CgM" firstAttribute="top" secondItem="i12-wB-xY9" secondAttribute="bottom" constant="16" id="t0e-RQ-BfQ"/>
+                                    <constraint firstItem="x4a-Cg-wsq" firstAttribute="trailing" secondItem="i12-wB-xY9" secondAttribute="trailing" constant="32" id="qzN-GS-cvi"/>
                                     <constraint firstItem="x4a-Cg-wsq" firstAttribute="trailing" secondItem="TEy-hA-CgM" secondAttribute="trailing" id="utw-mM-heL"/>
                                 </constraints>
                                 <viewLayoutGuide key="safeArea" id="x4a-Cg-wsq"/>
@@ -392,7 +357,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8ue-9H-CnC" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-340" y="-74"/>
+            <point key="canvasLocation" x="-340" y="-74.212893553223395"/>
         </scene>
         <!--Forgot Pass View Controller-->
         <scene sceneID="0jP-SP-Guu">

@@ -211,7 +211,9 @@ class ProfileViewController: UIViewController, DynamoDBUserActionsDelegate {
             self.watchers.text = "\(userInfo._watcherCount ?? 0)"
             self.following.text = "\(String(describing: userInfo._usersFollowed?.count ?? 0))"
             self.watching.text = "\(String(describing: userInfo._isWatching?.count ?? 0))"
-            self.nameLabel.text = ""
+            self.nameLabel.text = userInfo._fullName
+            self.bioLabel.text = userInfo._bio
+            self.headerLabel.text = userInfo._username
         }
         
         if let headerImageUrl = userInfo._headerImage {
