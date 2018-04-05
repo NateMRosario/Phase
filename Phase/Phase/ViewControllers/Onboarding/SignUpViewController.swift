@@ -33,7 +33,6 @@ class SignUpViewController: UIViewController {
                     let okAction = UIAlertAction(title: "Ok", style: .default) { (alert) in
                         let confirmAccountVC = ConfirmAccountViewController(username: self.userName.text!)
                         self.navigationController?.pushViewController(confirmAccountVC, animated: true)
-                        //self.present(confirmAccountVC, animated: true, completion: nil)
                     }
                     alertController.addAction(okAction)
                     self.present(alertController, animated: true, completion: nil)

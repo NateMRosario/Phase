@@ -20,8 +20,11 @@ class OnboardingLoginViewController: UIViewController {
         loginButton.isEnabled = false
         CognitoManager.shared.signIn(username: userInfo , password: password) { (error) in
             if let error = error {
-                self.showAlert(title: "Error", message: "\(error.localizedDescription)")
-                self.loginButton.isEnabled = true
+                DispatchQueue.main.async {
+                    self.showAlert(title: "Error", message: "\(error.localizedDescription)")
+                    self.loginButton.isEnabled = true
+                }
+
             } else {
                 DispatchQueue.main.async {
                     self.present(TabsViewController.instantiate(withStoryboard: "Main"), animated: true, completion: nil)
