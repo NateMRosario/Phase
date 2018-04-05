@@ -66,6 +66,9 @@ class DiscoveryViewController: UIViewController {
     var journeys = [Journey]() {
         didSet {
             print(journeys)
+            DispatchQueue.main.async {
+                self.collectionView.reloadData()
+            }
         }
     }
 
@@ -156,11 +159,11 @@ extension DiscoveryViewController: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return journeys.count
-        return contents.count + 1
+        //return contents.count + 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        if indexPath.item == contents.count{
+        if indexPath.item == journeys.count{
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "loading", for: indexPath)
             cell.addSubview(tailLoading)
             tailLoading.snp.makeConstraints({ (make) in
@@ -172,43 +175,49 @@ extension DiscoveryViewController: UICollectionViewDataSource {
         }
         
         let cell = collectionView.dequeueReusableCell(with: DiscoverCollectionViewCell.self, for: indexPath)
-        cell.set(image: contents[indexPath.row])
+        let journey = journeys[indexPath.row]
+        cell.journey = journey
+        
+        cell.set()
+        
         return cell
     }
 }
 
 extension DiscoveryViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-
-//        let cell = collectionView.cellForItem(at: indexPath) as! DiscoverCollectionViewCell
-//        let detailNC = JourneyCarouselViewController(heroID: "view\(indexPath.row)")
-//        selectedIndexPath = indexPath
-//        cell.image1.hero.id = "view\(indexPath.row)"
-//        let nonFade = HeroModifier.forceNonFade
-//        let orange = HeroModifier.backgroundColor(.orange)
-//        cell.hero.modifiers = [nonFade, orange]
-//        navigationController?.pushViewController(detailNC, animated: true)
+        let cell = collectionView.cellForItem(at: indexPath) as! DiscoverCollectionViewCell
+        
+        guard let journey = cell.journey else { return }
+        
+        let journeyDetailViewController = JourneyDetailViewController(journey: journey)
+        navigationController?.pushViewController(journeyDetailViewController, animated: true)
+        //self.present(journeyDetailViewController, animated: true, completion: nil)
+        
+        
     }
 }
 
 extension DiscoveryViewController: CollectionViewDelegateLayout {
     
     func numberOfColumns(indexPath: IndexPath) -> Int {
-        if indexPath.item == contents.count {
+        if indexPath.item == journeys.count {
             return 1
         }
         return 2
     }
     
     func sizeForItemAt(indexPath: IndexPath) -> CGSize {
-//        let cell = collectionView.cellForItem(at: indexPath) as! DiscoverCollectionViewCell
-        if indexPath.item == contents.count{
+        //let cell = collectionView.cellForItem(at: indexPath) as! DiscoverCollectionViewCell
+        if indexPath.item == journeys.count{
              return CGSize(width: UIScreen.main.bounds.width, height: 100)
         }
         
-        let image = contents[indexPath.row]
+        let image = journeys[indexPath.row]
         let width = CollectionViewLayout.Configuration(numberOfColumns: numberOfColumns(indexPath: indexPath)).itemWidth
-        let height = width * 1.2 / image.size.width * image.size.height + 79 // 79 = Cell's clear space below image
+        //let imgWidth = cell.image1.image?.size.width
+        //let imgHeight = cell.image1.image?.size.height
+        let height: CGFloat = 300//width * 1.2 / (imgWidth ?? 100) * (imgHeight ?? 150) + 79 // 79 = Cell's clear space below image
         return CGSize(width: width, height: height)
     }
 }
