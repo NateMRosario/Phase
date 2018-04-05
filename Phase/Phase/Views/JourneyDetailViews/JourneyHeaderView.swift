@@ -84,6 +84,14 @@ class JourneyHeaderView: UIView {
         return button
     }()
     
+    lazy var journeyCommentsUpButton: UIButton = {
+        let button = UIButton(type: UIButtonType.custom) as UIButton
+        button.setImage(#imageLiteral(resourceName: "up-arrow"), for: .normal)
+        button.tintColor = .black
+        button.addTarget(self, action: #selector(showFollowersTapped), for: .touchDown)
+        return button
+    }()
+    
     lazy var journeyFollowersButton: UIButton = {
         let button = UIButton()
         button.setTitle("5 followers", for: .normal)
@@ -100,6 +108,7 @@ class JourneyHeaderView: UIView {
     lazy var journeyFollowersUpButton: UIButton = {
         let button = UIButton(type: UIButtonType.custom) as UIButton
         button.setImage(#imageLiteral(resourceName: "up-arrow"), for: .normal)
+        button.tintColor = .black
         button.addTarget(self, action: #selector(showFollowersTapped), for: .touchDown)
         return button
     }()
@@ -134,6 +143,7 @@ class JourneyHeaderView: UIView {
         setupJourneyTotalComments()
         setupJourneyFollowersUpButton()
         setupJourneyFollowersButton()
+        setupJourneyCommentsUpButton()
     }
     
     @objc private func segueToProfileTapped() {
@@ -196,14 +206,21 @@ class JourneyHeaderView: UIView {
         }
     }
     
+    private func setupJourneyCommentsUpButton() {
+        addSubview(journeyCommentsUpButton)
+        journeyCommentsUpButton.snp.makeConstraints { (make) in
+            make.leading.equalTo(journeyTotalComments.snp.trailing).offset(12)
+            make.centerY.equalTo(journeyTotalComments.snp.centerY)
+            make.size.equalTo(10)
+        }
+    }
+    
     private func setupJourneyFollowersUpButton() {
         addSubview(journeyFollowersUpButton)
         journeyFollowersUpButton.snp.makeConstraints { (make) in
             make.trailing.equalTo(self).offset(-12)
             make.centerY.equalTo(journeyStartDate.snp.centerY)
             make.size.equalTo(10)
-//            make.height.equalTo(journeyFollowersUpButton.snp.height).multipliedBy(0.75)
-//            make.width.equalTo(journeyFollowersUpButton.snp.height)
         }
     }
     
