@@ -184,7 +184,7 @@ class JourneyDetailViewController: UIViewController {
     }
     
     private func setupSlider() {
-        journeyCarouselView.carouselSlider.maximumValue = Float(events.count)
+        journeyCarouselView.carouselSlider.maximumValue = Float(events.count + 1)
         journeyCarouselView.carouselSlider.minimumValue = 0
         journeyCarouselView.carouselSlider.addTarget(self, action: #selector(sliderValueChanged(_:)), for: .valueChanged)
     }
@@ -287,6 +287,7 @@ class JourneyDetailViewController: UIViewController {
     @objc private func sliderValueChanged(_ sender: UISlider) {
         scrolledBySlider = true
         sliderValue = Int(sender.value)
+        print("slider value is \(Int(sender.value)) ---")
     }
     
     @objc private func journeyProfileImageTapped() {}
@@ -370,17 +371,12 @@ extension JourneyDetailViewController: iCarouselDataSource {
         itemView = UIImageView(frame: CGRect(x: 0, y: 0, width: journeyCarouselView.carouselCollectionView.frame.width, height: journeyCarouselView.carouselCollectionView.frame.height))
 //        itemView.image = picArr[index]
         let event = events[index]
-        print("current event count \(events[index])")
-
         let url = URL(string: "https://s3.amazonaws.com/phase-journey-events/\(event._media!)")
-
         itemView.kf.indicatorType = .activity
         itemView.kf.setImage(with: url, placeholder: nil, options: nil, progressBlock: nil, completionHandler: nil)
         itemView.layer.masksToBounds = true
         itemView.clipsToBounds = true
         itemView.contentMode = .scaleAspectFill
-        print("current event count after call \(events[index])")
-
         return itemView
     }
 }
