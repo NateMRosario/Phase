@@ -34,23 +34,37 @@ class DynamoDBManager {
 
 // MARK: - AppUser Methods
 extension DynamoDBManager {
-    func createUser(sub: String, username: String, name: String, completion: @escaping (Error?) -> Void) {
+    func createUser(sub: String, username: String, completion: @escaping (Error?) -> Void) {
         
-        let newUser: AppUser = AppUser()
-        newUser._userId = sub
-        newUser._creationDate = Date().timeIntervalSinceReferenceDate as NSNumber
-        newUser._followerCount = 0
-        newUser._isPremium = false
-        newUser._watcherCount = 0
-        newUser._numberOfJourneys = 0
-        newUser._username = username
-        newUser._fullName = name
-        
-        mapper.save(newUser) { (error) in
-            if let error = error {
+        loadUser(userId: sub) { (user, error) in
+            if let error = error as?  DBError {
+                if error == DBError.loadResultNil {
+                    
+                    let newUser: AppUser = AppUser()
+                    
+                    newUser._userId = sub
+                    newUser._creationDate = Date().timeIntervalSinceReferenceDate as NSNumber
+                    newUser._followerCount = 0
+                    newUser._isPremium = false
+                    newUser._watcherCount = 0
+                    newUser._numberOfJourneys = 0
+                    newUser._username = username
+                    
+                    self.mapper.save(newUser) { (error) in
+                        if let error = error {
+                            completion(error)
+                        } else {
+                            print("success creating user in database")
+                            completion(nil)
+                        }
+                    }
+                    
+                    
+                    
+                }
+            } else if let error = error {
                 completion(error)
-            } else {
-                print("success creating user in database")
+            } else if let _ = user {
                 completion(nil)
             }
         }
@@ -406,19 +420,19 @@ extension DynamoDBManager {
 
     }
     
-    func mostPopularJourneys(completion: @escaping ([Journey]?, Error?) -> Void) {
+    func scanJourneys(completion: @escaping ([Journey]?, Error?) -> Void) {
         let scanExpression = AWSDynamoDBScanExpression()
-        scanExpression.limit = 20
-        //scanExpression.table
-        scanExpression.expressionAttributeValues = [":val": 0]
+        scanExpression.limit = 50
         
         mapper.scan(Journey.self, expression: scanExpression) { (output, error) in
             if let error = error {
                 completion(nil, error)
-            } else if let output = output {
+            } else if let output = output as? AWSDynamoDBPaginatedOutput {
                 if let journeys = output.items as? [Journey] {
                     completion(journeys, nil)
                 }
+            } else {
+                completion(nil, DBError.loadResultNil)
             }
         }
     }
