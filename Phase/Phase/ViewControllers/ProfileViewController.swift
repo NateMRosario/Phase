@@ -9,6 +9,7 @@ import UIKit
 import Material
 import SnapKit
 import Segmentio
+import Kingfisher
 
 class ProfileViewController: UIViewController, DynamoDBUserActionsDelegate {
     
@@ -16,9 +17,19 @@ class ProfileViewController: UIViewController, DynamoDBUserActionsDelegate {
         self.init()
         self.userInfoToDisplay = loadSelectedUser
     }
+    @IBAction func editProfileImage(_ sender: UIButton) {
+        //Edit profile Image
+    }
     
     @IBAction func hitUpDMs(_ sender: UIButton) {
         
+    }
+    @IBOutlet weak var editProfileIndicator: UIImageView! {
+        didSet {
+            editProfileButton.layer.cornerRadius = editProfileIndicator.frame.height / 2
+            editProfileIndicator.clipsToBounds = true
+            
+        }
     }
     
     @IBAction func goToUserSocialDetail(_ sender: UIButton) {
@@ -114,7 +125,7 @@ class ProfileViewController: UIViewController, DynamoDBUserActionsDelegate {
         let biv = UIImageView()
         biv.alpha = 0.0
         biv.contentMode = .scaleAspectFill
-//        biv.backgroundColor = ColorPalette.appBlue
+        //        biv.backgroundColor = ColorPalette.appBlue
         biv.image = #imageLiteral(resourceName: "085 October Silence").blur(radius: 10, tintColor: UIColor.clear, saturationDeltaFactor: 1)
         return biv
     }()
@@ -155,20 +166,21 @@ class ProfileViewController: UIViewController, DynamoDBUserActionsDelegate {
     // MARK: - View life cycles
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-        bioLabel.text = "I tried so hard and got so far, but in the end, it doesn't even maaatterrrrr"
+//        bioLabel.text = "I tried so hard and got so far, but in the end, it doesn't even maaatterrrrr"
         
         // This makes tableView header height dynamic
-        let size = profileView.systemLayoutSizeFitting(UILayoutFittingCompressedSize)
-        profileView.frame.size = size
-        tableView.tableHeaderView = profileView
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        setupUserInfo(with: currentDisplayedUser!)
         userJourneys = []
         if isOwnProfile {
             loadData(for: CognitoManager.shared.userId)
         }
+        let size = profileView.systemLayoutSizeFitting(UILayoutFittingCompressedSize)
+        profileView.frame.size = size
+        tableView.tableHeaderView = profileView
         tableView.reloadData()
     }
     
@@ -212,14 +224,12 @@ class ProfileViewController: UIViewController, DynamoDBUserActionsDelegate {
             self.following.text = "\(String(describing: userInfo._usersFollowed?.count ?? 0))"
             self.watching.text = "\(String(describing: userInfo._isWatching?.count ?? 0))"
             self.nameLabel.text = userInfo._fullName
-            self.bioLabel.text = userInfo._bio
+            self.bioLabel.text = userInfo._bio ?? "Hi my name is \(userInfo._fullName!)"
             self.headerLabel.text = userInfo._username
         }
         
         if let headerImageUrl = userInfo._headerImage {
-            ImageAPIClient.manager.loadImage(from: headerImageUrl,
-                                             completionHandler: {self.headerImageView.image = $0},
-                                             errorHandler: {(print($0))})
+            headerImageView.kf.setImage(with: URL(string: headerImageUrl)!)
         }
     }
     
@@ -350,11 +360,11 @@ extension ProfileViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        let cell = tableView.cellForRow(at: indexPath) as! JourneyTableViewCell
-//        
-//        let detailVC = JourneyDetailViewController(journey: )
-//        
-//        self.navigationController?.pushViewController(detailVC, animated: true)
+        //        let cell = tableView.cellForRow(at: indexPath) as! JourneyTableViewCell
+        //
+        //        let detailVC = JourneyDetailViewController(journey: )
+        //
+        //        self.navigationController?.pushViewController(detailVC, animated: true)
     }
 }
 
@@ -362,7 +372,7 @@ extension ProfileViewController: UITableViewDataSource {
 // Basically all the fancy stuff goes on here
 extension ProfileViewController: UIScrollViewDelegate, UITableViewDelegate {
     internal func scrollViewDidScroll(_ scrollView: UIScrollView) {
-
+        
         let offset = scrollView.contentOffset.y + headerView.bounds.height
         var profileImageTransform = CATransform3DIdentity
         var headerTransform = CATransform3DIdentity
