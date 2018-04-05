@@ -84,6 +84,11 @@ class HomeViewController: UIViewController {
         fetchCurrentUser()
     }
     
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(true)
+        tableView.reloadData()
+    }
+    
     private func setupNavbar() {
         navigationItem.title = "Phase"
     }
