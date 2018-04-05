@@ -114,7 +114,6 @@ extension DynamoDBManager {
                 completion(nil, error)
             } else if let loadedUser = loadedUser {
                 user = loadedUser as! AppUser
-                print(loadedUser)
                 completion(user, nil)
                 CacheService.manager.add(userData: user, withID: userId)
             } else {

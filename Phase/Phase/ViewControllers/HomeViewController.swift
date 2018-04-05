@@ -47,18 +47,8 @@ class HomeViewController: UIViewController {
                     }
                     guard let event = event else {print("event in eventIDs");return}
                     self.appEvents.insert(event)
-//                    var currentEvents = [Event]()
-//                    if self.appEvents[event._journey!] == nil {
-//                        currentEvents.append(event)
-//                        self.appEvents[event._journey!] = currentEvents
-//                    } else {
-//                        currentEvents = self.appEvents[event._journey!]!
-//                        currentEvents.append(event)
-//                        self.appEvents[event._journey!] = currentEvents
-//                    }
                 })
             }
-//            self.fetchEvents()
         }
     }
     
@@ -111,11 +101,10 @@ class HomeViewController: UIViewController {
     private func fetchJourney() {
         
         var currentJourney = Set<Journey>() {
-            didSet {
-                self.journeysFollowed = currentJourney.sorted{$0._creationDate as! Double > $1._creationDate as! Double}
+            didSet {                
                 for journey in currentJourney {
-                    guard let eventID = journey._events else {print("eventID");return}
-                    self.eventIDs.formUnion(eventID)
+                    guard let eventID = journey._lastEvent else {print("eventID");return}
+                    self.eventIDs.insert(eventID)
                 }
             }
         }
@@ -140,18 +129,6 @@ extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return appEvents.count
     }
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        if indexPath.item == appEvents.count{
-//            return CGSize(width: UIScreen.main.bounds.width, height: 100)
-//        }
-
-//        let image = #imageLiteral(resourceName: "nostalgic4")
-//        let width = UIScreen.main.bounds.width - 16
-//        let height = width * 1.2 / image.size.width * image.size.height
-//        return CGFloat(height)
-//        return UITableViewAutomaticDimension
-//    }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 //        if indexPath.item == events.count{ // add paging
 //            let cell = tableView.dequeueReusableCell(withIdentifier: "loading", for: indexPath)
@@ -166,8 +143,6 @@ extension HomeViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "HomeFeedCell", for: indexPath) as! HomeFeedTableViewCell ///Change name
         let event = Array(appEvents)[indexPath.row]
         cell.configureCell(event: event)
-        cell.detailView.sizeToFit()
-        cell.detailView.layoutIfNeeded()
         cell.delegate = self
         cell.layer.cornerRadius = 8
         return cell
