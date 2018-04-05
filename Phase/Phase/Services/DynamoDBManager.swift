@@ -44,6 +44,7 @@ extension DynamoDBManager {
         newUser._watcherCount = 0
         newUser._numberOfJourneys = 0
         newUser._username = username
+        newUser._fullName = name
         
         mapper.save(newUser) { (error) in
             if let error = error {
@@ -114,7 +115,6 @@ extension DynamoDBManager {
                 completion(nil, error)
             } else if let loadedUser = loadedUser {
                 user = loadedUser as! AppUser
-                print(loadedUser)
                 completion(user, nil)
                 CacheService.manager.add(userData: user, withID: userId)
             } else {
@@ -408,8 +408,8 @@ extension DynamoDBManager {
     
     func mostPopularJourneys(completion: @escaping ([Journey]?, Error?) -> Void) {
         let scanExpression = AWSDynamoDBScanExpression()
-        scanExpression.limit = 10
-        scanExpression.filterExpression = "Likes > :val"
+        scanExpression.limit = 20
+        scanExpression.table
         scanExpression.expressionAttributeValues = [":val": 0]
         
         mapper.scan(Journey.self, expression: scanExpression) { (output, error) in

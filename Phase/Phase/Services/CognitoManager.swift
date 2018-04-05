@@ -30,11 +30,7 @@ class CognitoManager {
     
     var pool: AWSCognitoIdentityUserPool!
     var user: AWSCognitoIdentityUser?
-    var userId: String? {
-        didSet {
-            print(userId ?? "no userId")
-        }
-    }
+    var userId: String?
     
     func isUserSignedIn() -> Bool {
         user = pool.getUser()
@@ -47,11 +43,8 @@ class CognitoManager {
         
         pool.signUp(username, password: password, userAttributes: [emailAttribute], validationData: nil).continueWith { (task) -> Any? in
             if let error = task.error {
-                print(error)
                 completion(error)
-            } else if let result = task.result {
-                print("sign up response: \(task.result?.description ?? "pool sign up success block reached")" )
-                
+            } else if let result = task.result {                
                 self.userId = result.userSub
                 
                 DynamoDBManager.shared.createUser(sub: self.userId!, username: result.user.username!, name: name, completion: { (error) in
@@ -74,10 +67,8 @@ class CognitoManager {
         user?.getSession(username, password: password, validationData: nil)
             .continueWith(block: { (task) -> Any? in
                 if let error = task.error {
-                    print(error)
                     completion(error)
                 } else {
-                    print(task.result?.description ?? "sign in success block reached")
                     self.getDetails(user: self.user, completion: { (error) in
                         if let error = error {
                             completion(error)
@@ -96,7 +87,6 @@ class CognitoManager {
                 completion(error)
             } else {
                 if let result = task.result {
-                    print(result.description())
                     let attributes = result.userAttributes
                     for attribute in attributes! {
                         if let name = attribute.name, let value = attribute.value {
@@ -119,7 +109,6 @@ class CognitoManager {
             if let error = task.error {
                 completion(error)
             } else if let result = task.result {
-                print(result.description())
                 completion(nil)
             }
             return nil
@@ -149,7 +138,6 @@ class CognitoManager {
             if let error = task.error {
                 completion(error)
             } else {
-                print(task.result?.description() ?? "forgot password success block reached")
                 completion(nil)
             }
             return nil
