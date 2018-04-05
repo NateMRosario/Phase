@@ -19,7 +19,7 @@ class S3Manager {
     
     func uploadManagerData(image: UIImage, completion: @escaping (String?, Error?) -> Void) {
         
-        let kfImg = image.kf.resize(to: CGSize(width: 1024, height: 1024), for: ContentMode.aspectFit)
+        let kfImg = image.kf.resize(to: CGSize(width: 512, height: 512), for: ContentMode.aspectFill)
         guard let pngData = kfImg.kf.pngRepresentation() else { print("image is nil"); return }
         
         //guard let pngImage = UIImagePNGRepresentation(image) else { print("image is nil"); return }
