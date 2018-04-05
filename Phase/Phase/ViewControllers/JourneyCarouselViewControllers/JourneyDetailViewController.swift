@@ -81,7 +81,6 @@ class JourneyDetailViewController: UIViewController {
     private let middleView = JourneyCommentTableView()
     private let footerView = JourneyBottomView()
     
-    //    let picArr = [#imageLiteral(resourceName: "a1"),#imageLiteral(resourceName: "a2"),#imageLiteral(resourceName: "a3"),#imageLiteral(resourceName: "a4"),#imageLiteral(resourceName: "a5"),#imageLiteral(resourceName: "a6"),#imageLiteral(resourceName: "a7"),#imageLiteral(resourceName: "a8"),#imageLiteral(resourceName: "a9"),#imageLiteral(resourceName: "a10"),#imageLiteral(resourceName: "a11")]
     var scrolledBySlider = false
     var sliderValue: Int = 0 {
         didSet {
@@ -147,6 +146,10 @@ class JourneyDetailViewController: UIViewController {
         animteViewsToIdlePosition()
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        resetViews()
+    }
+    
     // MARK: - Overrides
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -168,6 +171,18 @@ class JourneyDetailViewController: UIViewController {
         setFollowersConstraints()
     }
     
+    private func resetViews() {
+    headerViewMoved = false
+    headerView.transform = .identity
+    middleView.transform = .identity
+    middleView.isHidden = !headerViewMoved
+    footerView.transform = .identity
+    footerView.isHidden = !headerViewMoved
+    followersView.transform = .identity
+    headerView.round(corners: [.topLeft, .topRight], radius: 18)
+    followersView.round(corners: [.bottomLeft, .bottomRight], radius: 18)
+    }
+    
     private func setupSlider() {
         journeyCarouselView.carouselSlider.maximumValue = Float(events.count)
         journeyCarouselView.carouselSlider.minimumValue = 0
@@ -178,9 +193,9 @@ class JourneyDetailViewController: UIViewController {
     
     // views are set beyoned the superview's x position
     private func setInitialAnimation() {
-        self.headerView.transform = CGAffineTransform(translationX: -headerView.frame.width, y: 0)
-        self.journeyProfileImageView.transform = CGAffineTransform(translationX: -headerView.frame.width, y: 0)
-        self.followersView.transform = CGAffineTransform(translationX: -headerView.frame.width, y: 0)
+        self.headerView.transform = CGAffineTransform(translationX: -(headerView.frame.width + 100), y: 0)
+        self.journeyProfileImageView.transform = CGAffineTransform(translationX: -(headerView.frame.width + 100), y: 0)
+        self.followersView.transform = CGAffineTransform(translationX: -(headerView.frame.width + 100), y: 0)
     }
     
     // animated Views that were set by setInitialAnimation to their idle position
@@ -228,10 +243,10 @@ class JourneyDetailViewController: UIViewController {
     private func headerTappedAnimation() {
         headerView.round(corners: [.topRight, .topLeft], radius: 18)
         footerView.round(corners: [.bottomRight, .bottomLeft], radius: 18)
-        headerView.transform = CGAffineTransform(translationX: 0, y: -self.view.frame.bounds.height * 0.625)
-        journeyProfileImageView.transform = CGAffineTransform(translationX: 0, y: -self.view.frame.bounds.height * 0.625)
-        middleView.transform = CGAffineTransform(translationX: 0, y: -self.view.frame.bounds.height * 0.625)
-        footerView.transform = CGAffineTransform(translationX: 0, y: -self.view.frame.bounds.height * 0.625)
+        headerView.transform = CGAffineTransform(translationX: 0, y: -self.view.frame.bounds.height * 0.55)
+        journeyProfileImageView.transform = CGAffineTransform(translationX: 0, y: -self.view.frame.bounds.height * 0.55)
+        middleView.transform = CGAffineTransform(translationX: 0, y: -self.view.frame.bounds.height * 0.55)
+        footerView.transform = CGAffineTransform(translationX: 0, y: -self.view.frame.bounds.height * 0.55)
     }
     
     // animation for followers tapped animation
@@ -263,8 +278,8 @@ class JourneyDetailViewController: UIViewController {
     
     private func animateFollowersView() {
         followersView.round(corners: [.topRight, .topLeft], radius: 18)
-        followersView.transform = CGAffineTransform(translationX: 0, y: -self.view.frame.bounds.height * 0.779)
-        journeyProfileImageView.transform = CGAffineTransform(translationX: 0, y: -self.view.frame.bounds.height * 0.625)
+        followersView.transform = CGAffineTransform(translationX: 0, y: -self.headerView.frame.bounds.height * 0.725)
+        journeyProfileImageView.transform = CGAffineTransform(translationX: 0, y: -self.headerView.frame.bounds.height * 0.55)
         
     }
     
@@ -291,11 +306,11 @@ class JourneyDetailViewController: UIViewController {
     private func setHeaderViewConstraints() {
         self.view.addSubview(headerView)
         headerView.snp.makeConstraints { (make) in
-            make.bottom.equalTo(self.view.snp.bottom).offset(-84)
+            make.bottom.equalTo(self.view.safeAreaLayoutGuide.snp.bottom).offset(-62)
             make.centerX.equalTo(self.view.snp.centerX)
             make.leading.equalTo(16)
             make.trailing.equalTo(-16)
-            make.height.equalTo(self.view.snp.height).multipliedBy(0.16)
+            make.height.equalTo(self.view.snp.height).multipliedBy(0.14)
         }
     }
     
@@ -314,7 +329,7 @@ class JourneyDetailViewController: UIViewController {
         middleView.snp.makeConstraints { (make) in
             make.leading.equalTo(16)
             make.trailing.equalTo(-16)
-            make.height.equalTo(self.view.snp.height).multipliedBy(0.6)
+            make.height.equalTo(self.view.snp.height).multipliedBy(0.55)
             make.centerX.equalTo(headerView.snp.centerX)
             make.top.equalTo(headerView.snp.bottom)
         }
@@ -336,7 +351,7 @@ class JourneyDetailViewController: UIViewController {
         followersView.snp.makeConstraints { (make) in
             make.leading.equalTo(16)
             make.trailing.equalTo(-16)
-            make.height.equalTo(self.view.snp.height).multipliedBy(0.07)
+            make.height.equalTo(self.view.snp.height).multipliedBy(0.04)
             make.top.equalTo(headerView.snp.bottom)
         }
     }
