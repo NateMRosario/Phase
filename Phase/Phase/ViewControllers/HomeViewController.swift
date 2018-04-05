@@ -28,14 +28,9 @@ class HomeViewController: UIViewController {
     fileprivate var contents = [#imageLiteral(resourceName: "a11"), #imageLiteral(resourceName: "nostalgic1"), #imageLiteral(resourceName: "nostalgic2"), #imageLiteral(resourceName: "nostalgic3"), #imageLiteral(resourceName: "nostalgic4")]
     
     var appUser = AppUser() 
-    var journeysFollowed = [Journey]() {
-        didSet {
-            DispatchQueue.main.async {
-                self.tableView.reloadData()
-            }
-        }
-    }
-    var appEvents = [Event]() {
+    var journeysFollowed = [Journey]()
+    
+    var appEvents = Set<Event>() {
         didSet {
             DispatchQueue.main.async {
                 self.tableView.reloadData()
@@ -43,7 +38,7 @@ class HomeViewController: UIViewController {
         }
     }
     
-    var eventIDs = [String]() {
+    var eventIDs = Set<String>() {
         didSet {
             for id in eventIDs {
                 DynamoDBManager.shared.loadEvent(eventId: id, completion: { (event, error) in
@@ -51,19 +46,9 @@ class HomeViewController: UIViewController {
                         print(error)
                     }
                     guard let event = event else {print("event in eventIDs");return}
-                    self.appEvents.append(event)
-//                    var currentEvents = [Event]()
-//                    if self.appEvents[event._journey!] == nil {
-//                        currentEvents.append(event)
-//                        self.appEvents[event._journey!] = currentEvents
-//                    } else {
-//                        currentEvents = self.appEvents[event._journey!]!
-//                        currentEvents.append(event)
-//                        self.appEvents[event._journey!] = currentEvents
-//                    }
+                    self.appEvents.insert(event)
                 })
             }
-//            self.fetchEvents()
         }
     }
     
@@ -116,17 +101,15 @@ class HomeViewController: UIViewController {
     private func fetchJourney() {
         
         var currentJourney = Set<Journey>() {
-            didSet {
-                self.journeysFollowed = currentJourney.sorted{$0._creationDate as! Double > $1._creationDate as! Double}
+            didSet {                
                 for journey in currentJourney {
-                    guard let eventID = journey._events else {print("eventID");return}
-                    self.eventIDs = Array(eventID)
+                    guard let eventID = journey._lastEvent else {print("eventID");return}
+                    self.eventIDs.insert(eventID)
                 }
             }
         }
         ///TODO: Switch to this when following is active
 //        guard let journeyIds = appUser?._journeysFollowed else {return}
-        
         guard let journeyIds = appUser?._journeys else {print("journeyIds");return}
         for journey in journeyIds {
             DynamoDBManager.shared.loadJourney(journeyId: journey, completion: { (journey, error) in
@@ -146,18 +129,6 @@ extension HomeViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return appEvents.count
     }
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        if indexPath.item == appEvents.count{
-//            return CGSize(width: UIScreen.main.bounds.width, height: 100)
-//        }
-
-//        let image = #imageLiteral(resourceName: "nostalgic4")
-//        let width = UIScreen.main.bounds.width - 16
-//        let height = width * 1.2 / image.size.width * image.size.height
-//        return CGFloat(height)
-//        return UITableViewAutomaticDimension
-//    }
-    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
 //        if indexPath.item == events.count{ // add paging
 //            let cell = tableView.dequeueReusableCell(withIdentifier: "loading", for: indexPath)
@@ -170,10 +141,8 @@ extension HomeViewController: UITableViewDataSource {
 //            return cell
 //        }
         let cell = tableView.dequeueReusableCell(withIdentifier: "HomeFeedCell", for: indexPath) as! HomeFeedTableViewCell ///Change name
-        let event = appEvents[indexPath.row]
+        let event = Array(appEvents)[indexPath.row]
         cell.configureCell(event: event)
-        cell.detailView.sizeToFit()
-        cell.detailView.layoutIfNeeded()
         cell.delegate = self
         cell.layer.cornerRadius = 8
         return cell

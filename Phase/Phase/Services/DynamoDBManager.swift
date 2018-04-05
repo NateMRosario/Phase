@@ -44,6 +44,7 @@ extension DynamoDBManager {
         newUser._watcherCount = 0
         newUser._numberOfJourneys = 0
         newUser._username = username
+        newUser._fullName = name
         
         mapper.save(newUser) { (error) in
             if let error = error {
@@ -114,7 +115,6 @@ extension DynamoDBManager {
                 completion(nil, error)
             } else if let loadedUser = loadedUser {
                 user = loadedUser as! AppUser
-                print(loadedUser)
                 completion(user, nil)
                 CacheService.manager.add(userData: user, withID: userId)
             } else {
@@ -269,6 +269,49 @@ extension DynamoDBManager {
         
     }
     
+    func createJourneyWith(journey: Journey, completion: @escaping (Error?) -> Void) {
+        
+        let newJourney = journey
+        
+        mapper.save(newJourney) { (error) in
+            if let error = error {
+                print(error)
+                completion(error)
+            } else {
+                print("about to load user...")
+                self.loadUser(userId: CognitoManager.shared.userId!, completion: { (user, error) in
+                    if let error = error {
+                        print(error)
+                        completion(error)
+                    } else if let user = user {
+                        print(user)
+                        let userToUpdate = user
+                        
+                        var newSet = user._journeys ?? Set<String>()
+                        newSet.insert(newJourney._journeyId!)
+                        
+                        userToUpdate._numberOfJourneys = ((user._numberOfJourneys as! Int) + 1) as NSNumber
+                        userToUpdate._journeys = newSet
+                        
+                        self.updateUser(appUser: user, completion: { (error) in
+                            if let error = error {
+                                completion(error)
+                            } else {
+                                completion(nil)
+                            }
+                        })
+                    }
+                })
+                
+                print("success creating journey")
+                completion(nil)
+            }
+        }
+        
+    }
+
+    
+    
     func loadJourney(journeyId: String, completion: @escaping (Journey?, Error?) -> Void) {
         
         var journey: Journey = Journey()
@@ -365,8 +408,8 @@ extension DynamoDBManager {
     
     func mostPopularJourneys(completion: @escaping ([Journey]?, Error?) -> Void) {
         let scanExpression = AWSDynamoDBScanExpression()
-        scanExpression.limit = 10
-        scanExpression.filterExpression = "Likes > :val"
+        scanExpression.limit = 20
+        //scanExpression.table
         scanExpression.expressionAttributeValues = [":val": 0]
         
         mapper.scan(Journey.self, expression: scanExpression) { (output, error) in
