@@ -20,7 +20,9 @@ class OnboardingLoginViewController: UIViewController {
         loginButton.isEnabled = false
         CognitoManager.shared.signIn(username: userInfo , password: password) { (error) in
             if let error = error {
-                self.showAlert(title: "Error", message: "\(error.localizedDescription)")
+                DispatchQueue.main.async {
+                    self.showAlert(title: "Error", message: "\(error.localizedDescription)")
+                }
                 self.loginButton.isEnabled = true
             } else {
                 DispatchQueue.main.async {
@@ -37,7 +39,7 @@ class OnboardingLoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let pastelView = PastelView(frame: view.bounds)
-                
+        
         // Custom Direction
         pastelView.startPastelPoint = .topLeft
         pastelView.endPastelPoint = .bottomRight
@@ -51,7 +53,7 @@ class OnboardingLoginViewController: UIViewController {
         pastelView.startAnimation()
         view.insertSubview(pastelView, at: 0)
         
-        userLoginInfoTF.text = "test"
+        userLoginInfoTF.text = "Kuuhaku"
         passwordTF.text = "123456"
     }
     
