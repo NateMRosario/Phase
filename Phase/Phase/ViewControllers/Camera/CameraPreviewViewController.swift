@@ -313,7 +313,9 @@ extension PreviewViewController: UITextViewDelegate {
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
-        imagePreview.postTextView.resignFirstResponder()
+        DispatchQueue.main.async {
+            self.imagePreview.postTextView.resignFirstResponder()
+        }
     }
 }
 
