@@ -49,6 +49,18 @@ class JourneySecondMenuView: UIView {
         return button
     }()
     
+    lazy var followersCountLabel: UIButton = {
+        let button = UIButton()
+        button.setTitle("5 followers", for: .normal)
+        button.titleLabel?.textAlignment = .left
+        button.setTitleColor(UIColor.black, for: .normal)
+        button.backgroundColor = UIColor.clear
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 12, weight: .regular)
+        button.addTarget(self, action: #selector(showFollowersTapped), for: .touchUpInside)
+        return button
+    }()
+    
+    
     // MARK: - Initializers
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -69,6 +81,7 @@ class JourneySecondMenuView: UIView {
     private func setupViews() {
         setFollowerThinButtonConstraints()
         setFollowersLabelConstraints()
+        setFollowersCountLabelConstraints()
     }
     
     @objc func showFollowersTapped() {
@@ -92,7 +105,16 @@ class JourneySecondMenuView: UIView {
         followersLabel.snp.makeConstraints { (make) in
             make.bottom.equalTo(self).offset(-2)
             make.leading.equalTo(self).offset(12)
+//            make.trailing.equalTo(self).offset(-12)
+        }
+    }
+    
+    private func setFollowersCountLabelConstraints() {
+        addSubview(followersCountLabel)
+        followersCountLabel.snp.makeConstraints { (make) in
+            make.bottom.equalTo(self).offset(-2)
             make.trailing.equalTo(self).offset(-12)
+            //            make.trailing.equalTo(self).offset(-12)
         }
     }
 

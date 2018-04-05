@@ -100,9 +100,9 @@ class JourneyCarouselView: UIView {
     private func setupCarouselSlider() {
         addSubview(carouselSlider)
         carouselSlider.snp.makeConstraints { (make) in
-            make.top.equalTo(carouselCollectionView.snp.bottom).offset(10)
+            make.top.equalTo(carouselCollectionView.snp.bottom).offset(16)
             make.width.equalTo(self).multipliedBy(0.75)
-            make.height.equalTo(20)
+            make.height.equalTo(5)
             make.centerX.equalTo(self)
         }
     }
