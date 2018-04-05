@@ -43,7 +43,7 @@ class JourneyDetailViewController: UIViewController {
             }
         }
     }
-    
+
     private func dummmyData() {
         let event0 = EventDummyDate(userId: "Nate", creationDate: "2h", caption: "Cool stuff, bruh! 21! 21! 21! 21!", media: "man4.jpg")
         let event1 = EventDummyDate(userId: "Clint", creationDate: "1h 39m", caption: "Prayer hands", media: "man5.jpg")
@@ -360,25 +360,27 @@ class JourneyDetailViewController: UIViewController {
 // MARK: - iCarouselDataSource
 extension JourneyDetailViewController: iCarouselDataSource {
     func numberOfItems(in carousel: iCarousel) -> Int {
-        //return picArr.count
+//        return picArr.count
+        print("events.count \(events.count)")
         return events.count
     }
     
     func carousel(_ carousel: iCarousel, viewForItemAt index: Int, reusing view: UIView?) -> UIView {
         var itemView: UIImageView
         itemView = UIImageView(frame: CGRect(x: 0, y: 0, width: journeyCarouselView.carouselCollectionView.frame.width, height: journeyCarouselView.carouselCollectionView.frame.height))
-        //itemView.image = picArr[index]
+//        itemView.image = picArr[index]
         let event = events[index]
-        
+        print("current event count \(events[index])")
+
         let url = URL(string: "https://s3.amazonaws.com/phase-journey-events/\(event._media!)")
-        
+
         itemView.kf.indicatorType = .activity
         itemView.kf.setImage(with: url, placeholder: nil, options: nil, progressBlock: nil, completionHandler: nil)
-//
-//        itemView.kf.setImage(with: URL(string: event._media!)!)
         itemView.layer.masksToBounds = true
         itemView.clipsToBounds = true
         itemView.contentMode = .scaleAspectFill
+        print("current event count after call \(events[index])")
+
         return itemView
     }
 }
@@ -386,15 +388,22 @@ extension JourneyDetailViewController: iCarouselDataSource {
 // MARK: - iCarouselDelegate
 extension JourneyDetailViewController: iCarouselDelegate {
     func carousel(_ carousel: iCarousel, valueFor option: iCarouselOption, withDefault value: CGFloat) -> CGFloat {
-        if (option == .spacing) {
+        switch option {
+        case .wrap:
+            return 0.0 // note: 0.0 if you want to disable wrap
+        case .spacing:
             return value * 1.1
+        case .count:
+            return CGFloat(events.count)
+        default:
+            return value
         }
-        return value
     }
     
     func carouselCurrentItemIndexDidChange(_ carousel: iCarousel) {
         journeyCarouselView.carouselSlider.value = Float(carousel.currentItemIndex)
     }
+    
 }
 
 // MARK: - MiddleView TableViewDelegate

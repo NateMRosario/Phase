@@ -409,7 +409,7 @@ extension DynamoDBManager {
     func mostPopularJourneys(completion: @escaping ([Journey]?, Error?) -> Void) {
         let scanExpression = AWSDynamoDBScanExpression()
         scanExpression.limit = 20
-        scanExpression.table
+//        scanExpression.table
         scanExpression.expressionAttributeValues = [":val": 0]
         
         mapper.scan(Journey.self, expression: scanExpression) { (output, error) in
