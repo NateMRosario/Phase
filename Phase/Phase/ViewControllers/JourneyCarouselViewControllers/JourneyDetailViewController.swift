@@ -35,7 +35,7 @@ class JourneyDetailViewController: UIViewController {
         frm.size.height = frm.size.height + 500
     }
     
-    
+    private let refreshControl = UIRefreshControl()
     private var comments = [EventDummyDate]() {
         didSet {
             DispatchQueue.main.async {
