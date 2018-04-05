@@ -11,6 +11,7 @@ import AWSCognitoIdentityProvider
 
 enum CognitoError: Error {
     case noActiveUser
+    case makingUserInDBError
 }
 
 class CognitoManager {
@@ -45,17 +46,17 @@ class CognitoManager {
             if let error = task.error {
                 completion(error)
             } else if let result = task.result {                
-                self.userId = result.userSub
-                
-                DynamoDBManager.shared.createUser(sub: self.userId!, username: result.user.username!, name: name, completion: { (error) in
-                    if let error = error {
-                        completion(error)
-                    } else {
-                        completion(nil)
-                    }
-                })
-                
+                guard let userId = result.userSub else { completion(CognitoError.makingUserInDBError); return nil }
+                self.userId = userId
+                self.user = result.user
                 completion(nil)
+//                DynamoDBManager.shared.createUser(sub: result.userSub!, username: result.user.username!, completion: { (error) in
+//                    if let error = error {
+//                        completion(error)
+//                    } else {
+//                        completion(nil)
+//                    }
+//                })
             }
             return nil
         }
@@ -73,7 +74,16 @@ class CognitoManager {
                         if let error = error {
                             completion(error)
                         } else {
-                            completion(nil)
+                            
+                            DynamoDBManager.shared.createUser(sub: self.userId!, username: username, completion: { (error) in
+                                if let error = error {
+                                    completion(error)
+                                } else {
+                                    completion(nil)
+                                }
+                            })
+                            
+                            
                         }
                     })
                 }

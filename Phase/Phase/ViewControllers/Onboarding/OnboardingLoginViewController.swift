@@ -22,8 +22,9 @@ class OnboardingLoginViewController: UIViewController {
             if let error = error {
                 DispatchQueue.main.async {
                     self.showAlert(title: "Error", message: "\(error.localizedDescription)")
+                    self.loginButton.isEnabled = true
                 }
-                self.loginButton.isEnabled = true
+
             } else {
                 DispatchQueue.main.async {
                     self.present(TabsViewController.instantiate(withStoryboard: "Main"), animated: true, completion: nil)
