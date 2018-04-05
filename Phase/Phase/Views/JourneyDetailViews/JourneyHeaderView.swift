@@ -62,6 +62,15 @@ class JourneyHeaderView: UIView {
         return label
     }()
     
+    lazy var journeyCaptionLabel: UILabel = {
+        let label = UILabel()
+        label.backgroundColor = UIColor.clear
+        label.text = "This is were the caption will appear."
+        label.textAlignment = .left
+        label.font = UIFont.systemFont(ofSize: 12, weight: .regular)
+        return label
+    }()
+    
     lazy var journeyStartDate: UILabel = {
         let label = UILabel()
         label.text = "45 days ago"
@@ -88,7 +97,7 @@ class JourneyHeaderView: UIView {
         let button = UIButton(type: UIButtonType.custom) as UIButton
         button.setImage(#imageLiteral(resourceName: "up-arrow"), for: .normal)
         button.tintColor = .black
-        button.addTarget(self, action: #selector(showFollowersTapped), for: .touchDown)
+        button.addTarget(self, action: #selector(showCommentsTapped), for: .touchDown)
         return button
     }()
     
@@ -144,6 +153,7 @@ class JourneyHeaderView: UIView {
         setupJourneyFollowersUpButton()
         setupJourneyFollowersButton()
         setupJourneyCommentsUpButton()
+        setupJourneyCaptionLabel()
     }
     
     @objc private func segueToProfileTapped() {
@@ -167,7 +177,7 @@ class JourneyHeaderView: UIView {
         thinButton.snp.makeConstraints { (make) in
             make.top.equalTo(self).offset(10)
             make.centerX.equalTo(self)
-            make.height.equalTo(5)
+            make.height.equalTo(8)
             make.width.equalTo(self).multipliedBy(0.19)
         }
     }
@@ -189,12 +199,23 @@ class JourneyHeaderView: UIView {
         }
     }
     
+    private func setupJourneyCaptionLabel() {
+        addSubview(journeyCaptionLabel)
+        journeyCaptionLabel.snp.makeConstraints { (make) in
+            make.leading.equalTo(self).offset(12)
+            make.trailing.equalTo(self).offset(-12)
+            make.top.equalTo(journeyDescriptionLabel
+                .snp.bottom).offset(8)
+        }
+    }
+    
+    
     private func setupJourneyJourneyStartDate() {
         addSubview(journeyStartDate)
         journeyStartDate.snp.makeConstraints { (make) in
             make.leading.equalTo(self).offset(12)
             make.trailing.equalTo(self).offset(-12)
-            make.top.equalTo(journeyDescriptionLabel.snp.bottom).offset(16)
+            make.bottom.equalTo(self).offset(-12)
         }
     }
     

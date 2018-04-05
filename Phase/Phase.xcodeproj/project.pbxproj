@@ -199,7 +199,6 @@
 		F4183098206AB91D00466705 /* DiscoverCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4183096206AB91D00466705 /* DiscoverCollectionViewCell.xib */; };
 		F4882847206955690008A656 /* JourneyCommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4882846206955690008A656 /* JourneyCommentTableViewCell.swift */; };
 		F4882856206A95130008A656 /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = F4882854206A95120008A656 /* iCarousel.m */; };
-		F4899F3320742375009388B4 /* JourneySecondMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4899F3220742375009388B4 /* JourneySecondMenuView.swift */; };
 		F49638FA206ABD0A002D62E7 /* JourneyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F49638F9206ABD09002D62E7 /* JourneyTableViewCell.xib */; };
 		F4D34A7A205C482C00F4D50D /* EventCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4D34A79205C482C00F4D50D /* EventCollectionViewCell.swift */; };
 		F4E9F8AB2073DDA400D56A97 /* JourneyFollowersDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4E9F8AA2073DDA400D56A97 /* JourneyFollowersDetailView.swift */; };
@@ -437,7 +436,6 @@
 		F4882853206A95120008A656 /* iCarousel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCarousel.h; sourceTree = "<group>"; };
 		F4882854206A95120008A656 /* iCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCarousel.m; sourceTree = "<group>"; };
 		F4882855206A95120008A656 /* Phase-Bridging-Header.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "Phase-Bridging-Header.h"; sourceTree = "<group>"; };
-		F4899F3220742375009388B4 /* JourneySecondMenuView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneySecondMenuView.swift; sourceTree = "<group>"; };
 		F48DA6BC20588ACD006E4FFC /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		F48DA6BE20588F17006E4FFC /* Post.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Post.swift; sourceTree = "<group>"; };
 		F48DA6C020589024006E4FFC /* Comment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comment.swift; sourceTree = "<group>"; };
@@ -1104,7 +1102,6 @@
 				87F742BE2072906200972DD8 /* JourneyBottomView.swift */,
 				F4E9F8AA2073DDA400D56A97 /* JourneyFollowersDetailView.swift */,
 				8791DFDA2060171F00337CA3 /* JourneyFollowersImagesView.swift */,
-				F4899F3220742375009388B4 /* JourneySecondMenuView.swift */,
 				F4E9F8AE2073E50B00D56A97 /* RoundedfollowersView.swift */,
 			);
 			path = JourneyDetailViews;
@@ -1591,7 +1588,6 @@
 				81CA1BE3206442C100EF7B8E /* TopViewController.swift in Sources */,
 				8109356E2059BA5B00A95B30 /* LoginViewController.swift in Sources */,
 				81817A4420655FE700CA7044 /* RegexParser.swift in Sources */,
-				F4899F3320742375009388B4 /* JourneySecondMenuView.swift in Sources */,
 				81C368B7206B2ED400A1873E /* DemoChatMessageSender.swift in Sources */,
 				81C368D7206B2EDF00A1873E /* BaseMessageCollectionViewCellAvatarStyle.swift in Sources */,
 				8128B47120694808009E0629 /* CognitoManager.swift in Sources */,
