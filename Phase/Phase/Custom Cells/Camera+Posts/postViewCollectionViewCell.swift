@@ -22,7 +22,7 @@ class JourneyCollectionViewCell: UICollectionViewCell {
     // MARK: - Outlets
     lazy var journeyImageView: UIImageView = {
         let imageView = UIImageView()
-        imageView.image = #imageLiteral(resourceName: "placeholder-image")
+        imageView.image = #imageLiteral(resourceName: "EmptyImageState")
         imageView.contentMode = .scaleAspectFill
         imageView.clipsToBounds = true
         return imageView

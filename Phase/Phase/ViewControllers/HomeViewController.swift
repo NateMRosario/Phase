@@ -24,6 +24,7 @@ class HomeViewController: UIViewController {
     fileprivate var layout = CollectionViewLayout(number: 1)
     let configure = CollectionViewLayout.Configuration(numberOfColumns: 1)
     fileprivate let loadingView = DGElasticPullToRefreshLoadingViewCircle()
+    let emptyView = HomeEmptyView()
     
     fileprivate var contents = [#imageLiteral(resourceName: "a11"), #imageLiteral(resourceName: "nostalgic1"), #imageLiteral(resourceName: "nostalgic2"), #imageLiteral(resourceName: "nostalgic3"), #imageLiteral(resourceName: "nostalgic4")]
     
@@ -81,11 +82,11 @@ class HomeViewController: UIViewController {
         tableView.delegate = self
         let nib = UINib(nibName: "HomeFeedTableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "HomeFeedCell")
-        fetchCurrentUser()
     }
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(true)
+        fetchCurrentUser()
         tableView.reloadData()
     }
     
@@ -106,7 +107,7 @@ class HomeViewController: UIViewController {
     private func fetchJourney() {
         
         var currentJourney = Set<Journey>() {
-            didSet {                
+            didSet {
                 for journey in currentJourney {
                     guard let eventID = journey._lastEvent else {print("eventID");return}
                     self.eventIDs.insert(eventID)
@@ -115,7 +116,14 @@ class HomeViewController: UIViewController {
         }
         ///TODO: Switch to this when following is active
 //        guard let journeyIds = appUser?._journeysFollowed else {return}
-        guard let journeyIds = appUser?._journeys else {print("journeyIds");return}
+        guard let journeyIds = appUser?._journeys else {
+            DispatchQueue.main.async {
+                self.view.addSubview(self.emptyView)
+            }
+            return }
+        DispatchQueue.main.async {
+            self.emptyView.removeFromSuperview()
+        }
         for journey in journeyIds {
             DynamoDBManager.shared.loadJourney(journeyId: journey, completion: { (journey, error) in
                 guard let journey = journey else {return}
