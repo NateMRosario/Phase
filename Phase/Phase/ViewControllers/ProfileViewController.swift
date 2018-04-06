@@ -189,8 +189,9 @@ class ProfileViewController: UIViewController, DynamoDBUserActionsDelegate {
         if isOwnProfile {
             loadData(for: CognitoManager.shared.userId)
         }
+        navigationController?.navigationBar.isHidden = true
         dynamoDBActions.delegate = self
-        navigationController?.hidesBarsOnSwipe = true
+        //navigationController?.hidesBarsOnSwipe = true
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         setupUI()
@@ -360,11 +361,11 @@ extension ProfileViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        //        let cell = tableView.cellForRow(at: indexPath) as! JourneyTableViewCell
-        //
-        //        let detailVC = JourneyDetailViewController(journey: )
-        //
-        //        self.navigationController?.pushViewController(detailVC, animated: true)
+        //let cell = tableView.cellForRow(at: indexPath) as! JourneyTableViewCell
+        let journey = userJourneys[indexPath.row]
+        let journeyDetailViewController = JourneyDetailViewController(journey: journey)
+        //self.present(journeyDetailViewController, animated: true, completion: nil)
+        self.navigationController?.pushViewController(journeyDetailViewController, animated: true)
     }
 }
 

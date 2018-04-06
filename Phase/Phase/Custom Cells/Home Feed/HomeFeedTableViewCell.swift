@@ -76,7 +76,7 @@ class HomeFeedTableViewCell: UITableViewCell {
         let url = URL(string: "https://s3.amazonaws.com/phase-journey-events/\(currentImage)")
         
         contentImage.kf.indicatorType = .activity
-        contentImage.kf.setImage(with: url, placeholder: #imageLiteral(resourceName: "icon6"), options: nil, progressBlock: nil, completionHandler: nil)
+        contentImage.kf.setImage(with: url, placeholder: #imageLiteral(resourceName: "EmptyImageState"), options: nil, progressBlock: nil, completionHandler: nil)
 //        { (image, error, cache, url) in
 //            if let image = image {
 //                let ratio = image.size.width / image.size.height
