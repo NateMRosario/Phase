@@ -134,13 +134,8 @@ class JourneyDetailViewController: UIViewController {
         self.middleView.journeyCommentTableView.delegate = self
         self.middleView.journeyCommentTableView.dataSource = self
         self.headerView.delegate = self
-<<<<<<< HEAD
         
         configureNavBar()
-=======
-        self.navigationController?.navigationBar.isHidden = false
-        self.navigationController?.navigationItem.title = "Journey"
->>>>>>> a6505c420987faf54ff8e2b1bcfd1df48fa5f485
         setupView()
         setupSlider()
         dummmyData()
@@ -179,6 +174,8 @@ class JourneyDetailViewController: UIViewController {
     }
     
     private func configureNavBar() {
+        self.navigationController?.navigationBar.isHidden = false
+        self.navigationController?.navigationItem.title = "Journey"
         navigationItem.title = "\(self.journey._description ?? "Journey")"
     }
     
