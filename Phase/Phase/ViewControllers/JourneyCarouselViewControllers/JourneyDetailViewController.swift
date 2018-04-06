@@ -178,6 +178,9 @@ class JourneyDetailViewController: UIViewController {
         self.navigationController?.navigationBar.isHidden = false
         self.navigationController?.navigationItem.title = "Journey"
         navigationItem.title = "\(self.journey._title ?? "Journey")"
+//        self.navigationController?.navigationBar.barTintColor = UIColor.white
+        self.navigationController?.navigationBar.backgroundColor = UIColor.white
+        self.navigationController?.navigationBar.isTranslucent = false
     }
     
     private func resetViews() {
@@ -293,7 +296,7 @@ class JourneyDetailViewController: UIViewController {
             make.centerX.equalTo(self.view.snp.centerX)
             make.leading.equalTo(16)
             make.trailing.equalTo(-16)
-            make.height.equalTo(self.view.snp.height).multipliedBy(0.185)
+            make.height.equalTo(self.view.snp.height).multipliedBy(0.180)
         }
     }
     
@@ -304,7 +307,7 @@ class JourneyDetailViewController: UIViewController {
             make.centerY.equalTo(headerView.snp.top)
             make.trailing.equalTo(headerView.snp.trailing).offset(-25)
 //            make.height.equalTo(headerView.snp.height).multipliedBy(0.1)
-            make.height.equalTo(self.view.snp.height).multipliedBy(0.085)
+            make.height.equalTo(self.view.snp.height).multipliedBy(0.081)
             make.width.equalTo(journeyProfileImageView.snp.height)
         }
     }

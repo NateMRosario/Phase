@@ -58,6 +58,7 @@ class JourneyHeaderView: UIView {
         label.backgroundColor = UIColor.clear
         label.text = "This is were the caption will appear."
         label.textAlignment = .left
+        label.numberOfLines = 0
         label.font = UIFont.systemFont(ofSize: 13, weight: .semibold)
         return label
     }()
@@ -187,7 +188,7 @@ class JourneyHeaderView: UIView {
             make.leading.equalTo(self).offset(12)
             make.trailing.equalTo(self).offset(-12)
             make.top.equalTo(journeyUserNamelabel
-                .snp.bottom).offset(12)
+                .snp.bottom).offset(8)
         }
     }
     
