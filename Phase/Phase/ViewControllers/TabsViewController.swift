@@ -21,9 +21,11 @@ class TabsViewController: UITabBarController {
                 
         // Profile VC
         let profileVC = ProfileViewController.instantiate(withStoryboard: "Main")
-        profileVC.tabBarItem.image = #imageLiteral(resourceName: "profile-unselected")
-        profileVC.tabBarItem.selectedImage = #imageLiteral(resourceName: "profile-seleced")
-        profileVC.tabBarItem.imageInsets = UIEdgeInsets(top: 6, left: 0, bottom: -6, right: 0)
+        let navigation = UINavigationController(rootViewController: profileVC)
+
+        navigation.tabBarItem.image = #imageLiteral(resourceName: "profile-unselected")
+        navigation.tabBarItem.selectedImage = #imageLiteral(resourceName: "profile-seleced")
+        navigation.tabBarItem.imageInsets = UIEdgeInsets(top: 6, left: 0, bottom: -6, right: 0)
 
         //Camera View Controller
         func newCollectionButtonPressed() {
@@ -52,6 +54,6 @@ class TabsViewController: UITabBarController {
         notificationVC.tabBarItem.image = #imageLiteral(resourceName: "alert-unseleced")
         notificationVC.tabBarItem.selectedImage = #imageLiteral(resourceName: "alert-selected")
         notificationVC.tabBarItem.imageInsets = UIEdgeInsets(top: 6, left: 0, bottom: -6, right: 0)
-        self.setViewControllers([homeVC, discoverVC, cameraVC, notificationVC, profileVC], animated: true)
+        self.setViewControllers([homeVC, discoverVC, cameraVC, notificationVC, navigation], animated: true)
     }
 }

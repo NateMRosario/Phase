@@ -40,14 +40,14 @@ class DiscoveryViewController: UIViewController {
 
     fileprivate(set) var selectedIndexPath = IndexPath(item: 0, section: 0)
     fileprivate var layout = CollectionViewLayout(number: 2)
-    fileprivate var contents = [UIImage]() {
-        didSet {
-            print(contents.count)
-            DispatchQueue.main.async {
-                self.collectionView.reloadData()
-            }
-        }
-    }
+//    fileprivate var contents = [UIImage]() {
+//        didSet {
+//            print(contents.count)
+//            DispatchQueue.main.async {
+//                self.collectionView.reloadData()
+//            }
+//        }
+//    }
     
     // Loading Indicators
     lazy fileprivate var loadingView: DGElasticPullToRefreshLoadingViewCircle = {
@@ -77,7 +77,7 @@ class DiscoveryViewController: UIViewController {
         layout.headerReferenceSize = CGSize(width: UIScreen.main.bounds.width, height: 100)
         
         initNavigationBar()
-        fetchContents()
+//        fetchContents()
         
         self.collectionView.alwaysBounceVertical = true
         loadingView.tintColor = UIColor(red: 78/255.0, green: 221/255.0, blue: 200/255.0, alpha: 1.0)
@@ -119,15 +119,15 @@ class DiscoveryViewController: UIViewController {
             SearchViewController.instantiate(withStoryboard: "SearchVCs")), animated: false)
     }
     
-    private func fetchContents() {
-        for _ in 0...40 {
-            ImageAPIClient.manager.loadImage(from: urls[Int(arc4random_uniform(UInt32(urls.count - 1)))], completionHandler: {self.contents.append($0)}, errorHandler: {print($0)})
-        }
+//    private func fetchContents() {
+//        for _ in 0...40 {
+//            ImageAPIClient.manager.loadImage(from: urls[Int(arc4random_uniform(UInt32(urls.count - 1)))], completionHandler: {self.contents.append($0)}, errorHandler: {print($0)})
+//        }
 //        DB.fetchContents() { [weak self] contents in
 //            self?.contents = contents
 //            self?.collectionView.reloadData()
 //        }
-    }
+//    }
     
 
     private func getJourneys() {
@@ -177,7 +177,7 @@ extension DiscoveryViewController: UICollectionViewDataSource {
         let cell = collectionView.dequeueReusableCell(with: DiscoverCollectionViewCell.self, for: indexPath)
         let journey = journeys[indexPath.row]
         cell.journey = journey
-        
+        cell.image1.image = nil
         cell.set()
         
         return cell
@@ -192,9 +192,6 @@ extension DiscoveryViewController: UICollectionViewDelegate {
         
         let journeyDetailViewController = JourneyDetailViewController(journey: journey)
         navigationController?.pushViewController(journeyDetailViewController, animated: true)
-        //self.present(journeyDetailViewController, animated: true, completion: nil)
-        
-        
     }
 }
 

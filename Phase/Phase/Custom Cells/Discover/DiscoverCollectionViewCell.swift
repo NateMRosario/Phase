@@ -117,10 +117,10 @@ class DiscoverCollectionViewCell: UICollectionViewCell {
     }()
     
     public func set() {
-        let num = 10
+//        let num = 10
         
         guard let journey = journey else { return }
-        
+        guard let event = journey._lastEvent else { return }
         DynamoDBManager.shared.loadEvent(eventId: journey._lastEvent!) { (event, error) in
             if let error = error {
                 

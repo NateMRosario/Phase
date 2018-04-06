@@ -33,21 +33,20 @@ class PeopleViewController: UIViewController {
     }
     
     private func getAppUsers() {
-        DynamoDBManager.shared.loadAllUsers { (user, error) in
+        DynamoDBManager.shared.scanUsers { (users, error) in
             if let error = error {
                 print(error)
-            } else {
-                if let user = user {
-                    self.people.append(user)
-                }
+            } else if let users = users {
+                self.people = users
             }
+            
         }
     }
 }
 
 extension PeopleViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 30
+        return people.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -57,5 +56,7 @@ extension PeopleViewController: UITableViewDataSource {
     }
 }
 extension PeopleViewController: UITableViewDelegate {
-    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        
+    }
 }
