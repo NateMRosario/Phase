@@ -53,15 +53,6 @@ class JourneyHeaderView: UIView {
         return button
     }()
     
-    lazy var journeyDescriptionLabel: UILabel = {
-        let label = UILabel()
-        label.backgroundColor = UIColor.clear
-        label.text = "This is were the description will appear."
-        label.textAlignment = .left
-        label.font = UIFont.systemFont(ofSize: 12, weight: .regular)
-        return label
-    }()
-    
     lazy var journeyCaptionLabel: UILabel = {
         let label = UILabel()
         label.backgroundColor = UIColor.clear
@@ -147,7 +138,6 @@ class JourneyHeaderView: UIView {
     private func setupViews() {
         setupThinButton()
         setupJourneyUserNamelabel()
-        setupJourneyDescriptionLabel()
         setupJourneyJourneyStartDate()
         setupJourneyTotalComments()
         setupJourneyFollowersUpButton()
@@ -190,22 +180,13 @@ class JourneyHeaderView: UIView {
         }
     }
     
-    private func setupJourneyDescriptionLabel() {
-        addSubview(journeyDescriptionLabel)
-        journeyDescriptionLabel.snp.makeConstraints { (make) in
-            make.leading.equalTo(self).offset(12)
-            make.trailing.equalTo(self).offset(-12)
-            make.top.equalTo(journeyUserNamelabel.snp.bottom).offset(4)
-        }
-    }
-    
     private func setupJourneyCaptionLabel() {
         addSubview(journeyCaptionLabel)
         journeyCaptionLabel.snp.makeConstraints { (make) in
             make.leading.equalTo(self).offset(12)
             make.trailing.equalTo(self).offset(-12)
-            make.top.equalTo(journeyDescriptionLabel
-                .snp.bottom).offset(8)
+            make.top.equalTo(journeyUserNamelabel
+                .snp.bottom).offset(12)
         }
     }
     
@@ -252,7 +233,32 @@ class JourneyHeaderView: UIView {
             make.firstBaseline.equalTo(journeyStartDate.snp.firstBaseline)
         }
     }
+    
+    public func configureHeaderView(with journey: Journey) {
+        var user = AppUser()
+            DynamoDBManager.shared.loadUser(userId: journey._userId!) { (currentUser, error) in
+            if let error = error {
+                
+            }
+            user = currentUser
+                print("\(user)")
+        }
+        guard let name = user?._username else { return }
+        self.journeyUserNamelabel.setTitle("\(name)", for: .normal)
+        self.journeyStartDate.text = convertDate(from: journey._creationDate)
+        self.journeyTotalComments.setTitle("\(journey._comments?.count ?? 0) comments", for: .normal)
+        self.journeyFollowersButton.setTitle("\(Int(journey._numberOfWatchers as! Double)) followers", for: .normal)
+    }
+    
+    public func configureHeaderView(with event: Event) {
+        self.journeyCaptionLabel.text = "\(event._caption ?? "No caption provided")"
+    }
 
+    private func convertDate(from num: NSNumber?) -> String? {
+        guard num != nil else {return nil}
+        let date = Date(timeIntervalSinceReferenceDate: num as! TimeInterval)
+        return date.timeAgoDisplay()
+    }
 }
 
 
