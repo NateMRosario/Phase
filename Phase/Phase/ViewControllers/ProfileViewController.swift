@@ -191,7 +191,7 @@ class ProfileViewController: UIViewController, DynamoDBUserActionsDelegate {
         }
         navigationController?.navigationBar.isHidden = true
         dynamoDBActions.delegate = self
-        navigationController?.hidesBarsOnSwipe = true
+        //navigationController?.hidesBarsOnSwipe = true
         navigationController?.navigationBar.isTranslucent = false
         navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
         setupUI()
@@ -365,7 +365,7 @@ extension ProfileViewController: UITableViewDataSource {
         let journey = userJourneys[indexPath.row]
         let journeyDetailViewController = JourneyDetailViewController(journey: journey)
         //self.present(journeyDetailViewController, animated: true, completion: nil)
-        navigationController?.pushViewController(journeyDetailViewController, animated: true)
+        self.navigationController?.pushViewController(journeyDetailViewController, animated: true)
     }
 }
 
