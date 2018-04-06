@@ -48,7 +48,7 @@ class JourneyHeaderView: UIView {
         button.titleLabel?.textAlignment = .left
         button.setTitleColor(UIColor.black, for: .normal)
         button.backgroundColor = UIColor.clear
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .heavy)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .heavy)
         button.addTarget(self, action: #selector(segueToProfileTapped), for: .touchUpInside)
         return button
     }()
@@ -58,7 +58,7 @@ class JourneyHeaderView: UIView {
         label.backgroundColor = UIColor.clear
         label.text = "This is were the caption will appear."
         label.textAlignment = .left
-        label.font = UIFont.systemFont(ofSize: 12, weight: .regular)
+        label.font = UIFont.systemFont(ofSize: 13, weight: .semibold)
         return label
     }()
     
@@ -67,6 +67,7 @@ class JourneyHeaderView: UIView {
         label.text = "45 days ago"
         label.textAlignment = .left
         label.backgroundColor = UIColor.clear
+        label.textColor = UIColor.gray
         label.font = UIFont.systemFont(ofSize: 11, weight: .light)
         return label
     }()
@@ -241,7 +242,6 @@ class JourneyHeaderView: UIView {
                 
             }
             user = currentUser
-                print("\(user)")
         }
         guard let name = user?._username else { return }
         self.journeyUserNamelabel.setTitle("\(name)", for: .normal)
@@ -257,7 +257,11 @@ class JourneyHeaderView: UIView {
     private func convertDate(from num: NSNumber?) -> String? {
         guard num != nil else {return nil}
         let date = Date(timeIntervalSinceReferenceDate: num as! TimeInterval)
-        return date.timeAgoDisplay()
+        let hour = (Calendar.current.component(.hour, from: date))
+        guard (hour / 24) > 1 else {
+            return "\(hour) hours ago"
+        }
+        return "\(Calendar.current.component(.day, from: date)) days ago"
     }
 }
 

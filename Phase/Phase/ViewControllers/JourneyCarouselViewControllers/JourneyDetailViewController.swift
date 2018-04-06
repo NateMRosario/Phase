@@ -41,6 +41,7 @@ class JourneyDetailViewController: UIViewController {
             DispatchQueue.main.async {
                 self.middleView.journeyCommentTableView.reloadData()
             }
+
         }
     }
 
@@ -109,8 +110,8 @@ class JourneyDetailViewController: UIViewController {
         didSet {
             DispatchQueue.main.async {
                 self.journeyCarouselView.carouselCollectionView.reloadData()
+                self.journeyCarouselView.carouselSlider.maximumValue = Float(self.events.count-1)
             }
-//            self.journeyCarouselView.carouselSlider.maximumValue = Float(events.count)
         }
     }
     
@@ -176,7 +177,7 @@ class JourneyDetailViewController: UIViewController {
     private func configureNavBar() {
         self.navigationController?.navigationBar.isHidden = false
         self.navigationController?.navigationItem.title = "Journey"
-        navigationItem.title = "\(self.journey._description ?? "Journey")"
+        navigationItem.title = "\(self.journey._title ?? "Journey")"
     }
     
     private func resetViews() {
@@ -192,7 +193,7 @@ class JourneyDetailViewController: UIViewController {
     }
     
     private func setupSlider() {
-        journeyCarouselView.carouselSlider.maximumValue = Float(events.count)
+        journeyCarouselView.carouselSlider.maximumValue = Float(events.count-1)
         journeyCarouselView.carouselSlider.minimumValue = 0
         journeyCarouselView.carouselSlider.addTarget(self, action: #selector(sliderValueChanged(_:)), for: .valueChanged)
     }
