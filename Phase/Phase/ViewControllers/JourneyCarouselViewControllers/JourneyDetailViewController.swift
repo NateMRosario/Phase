@@ -130,7 +130,8 @@ class JourneyDetailViewController: UIViewController {
         self.middleView.journeyCommentTableView.delegate = self
         self.middleView.journeyCommentTableView.dataSource = self
         self.headerView.delegate = self
-        
+        self.navigationController?.navigationBar.isHidden = false
+        self.navigationController?.navigationItem.title = "Journey"
         setupView()
         setupSlider()
         dummmyData()
