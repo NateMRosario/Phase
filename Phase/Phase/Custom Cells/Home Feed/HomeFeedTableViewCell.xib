@@ -19,7 +19,7 @@
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lL7-fn-kwX">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="447.5"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="448"/>
                         <subviews>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="imageView:QT1-aQ-NK2:image" translatesAutoresizingMaskIntoConstraints="NO" id="QT1-aQ-NK2">
                                 <rect key="frame" x="8" y="8" width="50" height="50"/>
@@ -29,19 +29,19 @@
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Kuuhaku" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="b4c-LL-AFM">
-                                <rect key="frame" x="62" y="12" width="68.5" height="21"/>
+                                <rect key="frame" x="66" y="8" width="69" height="50"/>
                                 <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="753" text="100 Days of Code" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S8X-U1-0DT">
-                                <rect key="frame" x="8" y="66" width="359" height="20.5"/>
-                                <fontDescription key="fontDescription" type="system" weight="medium" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" verticalCompressionResistancePriority="753" text="100 Days of Code" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S8X-U1-0DT">
+                                <rect key="frame" x="8" y="66" width="359" height="23"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="19"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="top" horizontalHuggingPriority="251" verticalCompressionResistancePriority="752" text="@Tyler #Art Bruh" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" minimumFontSize="10" adjustsLetterSpacingToFitWidth="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dQX-Qg-cmY" userLabel="Post" customClass="ActiveLabel" customModule="Phase" customModuleProvider="target">
-                                <rect key="frame" x="8" y="390.5" width="359" height="49"/>
+                                <rect key="frame" x="8" y="393" width="359" height="47"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -55,32 +55,42 @@
                                 </userDefinedRuntimeAttributes>
                             </label>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="085 October Silence" translatesAutoresizingMaskIntoConstraints="NO" id="9Hp-vu-UEU">
-                                <rect key="frame" x="0.0" y="90.5" width="375" height="300"/>
+                                <rect key="frame" x="0.0" y="93" width="375" height="300"/>
                                 <constraints>
                                     <constraint firstAttribute="height" relation="lessThanOrEqual" constant="300" id="WBO-dy-ied"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="3 hours ago" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="9my-Qt-9Tl">
-                                <rect key="frame" x="62" y="37" width="72.5" height="16"/>
+                                <rect key="frame" x="294" y="25" width="73" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dcY-G6-Hfb">
+                                <rect key="frame" x="8" y="8" width="127" height="50"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="127" id="uIo-zl-txh"/>
+                                </constraints>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="dcY-G6-Hfb" firstAttribute="centerY" secondItem="QT1-aQ-NK2" secondAttribute="centerY" id="0Sb-Or-kGR"/>
+                            <constraint firstItem="b4c-LL-AFM" firstAttribute="height" secondItem="QT1-aQ-NK2" secondAttribute="height" id="5uU-oi-lBl"/>
                             <constraint firstAttribute="trailing" secondItem="9Hp-vu-UEU" secondAttribute="trailing" id="7ry-a4-wQH"/>
-                            <constraint firstItem="9my-Qt-9Tl" firstAttribute="top" secondItem="b4c-LL-AFM" secondAttribute="bottom" constant="4" id="BPM-Vv-xyS"/>
+                            <constraint firstItem="b4c-LL-AFM" firstAttribute="top" secondItem="QT1-aQ-NK2" secondAttribute="top" id="A3J-JE-uq3"/>
                             <constraint firstItem="S8X-U1-0DT" firstAttribute="top" secondItem="QT1-aQ-NK2" secondAttribute="bottom" constant="8" id="Ezd-t1-5UL"/>
+                            <constraint firstItem="dcY-G6-Hfb" firstAttribute="leading" secondItem="lL7-fn-kwX" secondAttribute="leading" constant="8" id="LvI-uv-WlE"/>
                             <constraint firstAttribute="bottom" secondItem="dQX-Qg-cmY" secondAttribute="bottom" constant="8" id="Nve-4C-7Au"/>
                             <constraint firstAttribute="trailing" secondItem="S8X-U1-0DT" secondAttribute="trailing" constant="8" id="VfQ-SU-mPi"/>
+                            <constraint firstItem="9my-Qt-9Tl" firstAttribute="centerY" secondItem="QT1-aQ-NK2" secondAttribute="centerY" id="Wnc-WO-yCj"/>
                             <constraint firstAttribute="trailing" secondItem="dQX-Qg-cmY" secondAttribute="trailing" constant="8" id="Y5d-vx-CX4"/>
+                            <constraint firstAttribute="trailing" secondItem="9my-Qt-9Tl" secondAttribute="trailing" constant="8" id="azC-a3-aS7"/>
                             <constraint firstItem="9Hp-vu-UEU" firstAttribute="top" secondItem="S8X-U1-0DT" secondAttribute="bottom" constant="4" id="bgu-Uw-6kx"/>
-                            <constraint firstItem="b4c-LL-AFM" firstAttribute="top" secondItem="QT1-aQ-NK2" secondAttribute="top" constant="4" id="bmv-2d-nF8"/>
+                            <constraint firstItem="b4c-LL-AFM" firstAttribute="leading" secondItem="QT1-aQ-NK2" secondAttribute="trailing" constant="8" id="drE-Zf-NrK"/>
                             <constraint firstItem="QT1-aQ-NK2" firstAttribute="leading" secondItem="lL7-fn-kwX" secondAttribute="leading" constant="8" id="eaU-nJ-zti"/>
                             <constraint firstItem="9Hp-vu-UEU" firstAttribute="leading" secondItem="lL7-fn-kwX" secondAttribute="leading" id="fcF-8u-FuN"/>
-                            <constraint firstItem="9my-Qt-9Tl" firstAttribute="leading" secondItem="QT1-aQ-NK2" secondAttribute="trailing" constant="4" id="g1Q-kD-Vzg"/>
-                            <constraint firstItem="b4c-LL-AFM" firstAttribute="leading" secondItem="QT1-aQ-NK2" secondAttribute="trailing" constant="4" id="gmR-Oi-9y9"/>
+                            <constraint firstItem="dcY-G6-Hfb" firstAttribute="height" secondItem="QT1-aQ-NK2" secondAttribute="height" id="fdI-rJ-vAA"/>
                             <constraint firstItem="S8X-U1-0DT" firstAttribute="leading" secondItem="lL7-fn-kwX" secondAttribute="leading" constant="8" id="mEs-qg-EK4"/>
                             <constraint firstItem="QT1-aQ-NK2" firstAttribute="top" secondItem="lL7-fn-kwX" secondAttribute="top" constant="8" id="xrb-xz-n9k"/>
                             <constraint firstItem="dQX-Qg-cmY" firstAttribute="leading" secondItem="lL7-fn-kwX" secondAttribute="leading" constant="8" id="yyK-aI-I5n"/>
@@ -100,11 +110,12 @@
                 <outlet property="detailView" destination="lL7-fn-kwX" id="pQB-bw-Ghy"/>
                 <outlet property="journeyLabel" destination="dQX-Qg-cmY" id="6Vm-d2-IV7"/>
                 <outlet property="journeyTitle" destination="S8X-U1-0DT" id="BYb-U1-FQw"/>
+                <outlet property="profileButton" destination="dcY-G6-Hfb" id="eJ7-XT-aqE"/>
                 <outlet property="timeStamp" destination="9my-Qt-9Tl" id="K00-FB-pfe"/>
                 <outlet property="userImage" destination="QT1-aQ-NK2" id="XsE-dn-2aH"/>
                 <outlet property="userName" destination="b4c-LL-AFM" id="uW2-ej-zvx"/>
             </connections>
-            <point key="canvasLocation" x="74" y="-33"/>
+            <point key="canvasLocation" x="73.5" y="-33"/>
         </tableViewCell>
     </objects>
     <resources>

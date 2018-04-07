@@ -40,7 +40,7 @@ class HomeFeedTableViewCell: UITableViewCell {
             userImage.layer.borderWidth = 2
         }
     }
-    
+    @IBOutlet weak var profileButton: UIButton!    
     @IBOutlet dynamic fileprivate(set) weak var contentImage: UIImageView! {
         didSet {
             contentImage.layer.masksToBounds = true
