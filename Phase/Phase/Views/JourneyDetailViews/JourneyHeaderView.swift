@@ -48,18 +48,9 @@ class JourneyHeaderView: UIView {
         button.titleLabel?.textAlignment = .left
         button.setTitleColor(UIColor.black, for: .normal)
         button.backgroundColor = UIColor.clear
-        button.titleLabel?.font = UIFont.systemFont(ofSize: 16, weight: .heavy)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 18, weight: .heavy)
         button.addTarget(self, action: #selector(segueToProfileTapped), for: .touchUpInside)
         return button
-    }()
-    
-    lazy var journeyDescriptionLabel: UILabel = {
-        let label = UILabel()
-        label.backgroundColor = UIColor.clear
-        label.text = "This is were the description will appear."
-        label.textAlignment = .left
-        label.font = UIFont.systemFont(ofSize: 12, weight: .regular)
-        return label
     }()
     
     lazy var journeyCaptionLabel: UILabel = {
@@ -67,7 +58,8 @@ class JourneyHeaderView: UIView {
         label.backgroundColor = UIColor.clear
         label.text = "This is were the caption will appear."
         label.textAlignment = .left
-        label.font = UIFont.systemFont(ofSize: 12, weight: .regular)
+        label.numberOfLines = 0
+        label.font = UIFont.systemFont(ofSize: 13, weight: .semibold)
         return label
     }()
     
@@ -76,6 +68,7 @@ class JourneyHeaderView: UIView {
         label.text = "45 days ago"
         label.textAlignment = .left
         label.backgroundColor = UIColor.clear
+        label.textColor = UIColor.gray
         label.font = UIFont.systemFont(ofSize: 11, weight: .light)
         return label
     }()
@@ -147,7 +140,6 @@ class JourneyHeaderView: UIView {
     private func setupViews() {
         setupThinButton()
         setupJourneyUserNamelabel()
-        setupJourneyDescriptionLabel()
         setupJourneyJourneyStartDate()
         setupJourneyTotalComments()
         setupJourneyFollowersUpButton()
@@ -190,21 +182,12 @@ class JourneyHeaderView: UIView {
         }
     }
     
-    private func setupJourneyDescriptionLabel() {
-        addSubview(journeyDescriptionLabel)
-        journeyDescriptionLabel.snp.makeConstraints { (make) in
-            make.leading.equalTo(self).offset(12)
-            make.trailing.equalTo(self).offset(-12)
-            make.top.equalTo(journeyUserNamelabel.snp.bottom).offset(4)
-        }
-    }
-    
     private func setupJourneyCaptionLabel() {
         addSubview(journeyCaptionLabel)
         journeyCaptionLabel.snp.makeConstraints { (make) in
             make.leading.equalTo(self).offset(12)
             make.trailing.equalTo(self).offset(-12)
-            make.top.equalTo(journeyDescriptionLabel
+            make.top.equalTo(journeyUserNamelabel
                 .snp.bottom).offset(8)
         }
     }
@@ -252,7 +235,35 @@ class JourneyHeaderView: UIView {
             make.firstBaseline.equalTo(journeyStartDate.snp.firstBaseline)
         }
     }
+    
+    public func configureHeaderView(with journey: Journey) {
+        var user = AppUser()
+            DynamoDBManager.shared.loadUser(userId: journey._userId!) { (currentUser, error) in
+            if let error = error {
+                
+            }
+            user = currentUser
+        }
+        guard let name = user?._username else { return }
+        self.journeyUserNamelabel.setTitle("\(name)", for: .normal)
+        self.journeyStartDate.text = convertDate(from: journey._creationDate)
+        self.journeyTotalComments.setTitle("\(journey._comments?.count ?? 0) comments", for: .normal)
+        self.journeyFollowersButton.setTitle("\(Int(journey._numberOfWatchers as! Double)) followers", for: .normal)
+    }
+    
+    public func configureHeaderView(with event: Event) {
+        self.journeyCaptionLabel.text = "\(event._caption ?? "No caption provided")"
+    }
 
+    private func convertDate(from num: NSNumber?) -> String? {
+        guard num != nil else {return nil}
+        let date = Date(timeIntervalSinceReferenceDate: num as! TimeInterval)
+        let hour = (Calendar.current.component(.hour, from: date))
+        guard (hour / 24) > 1 else {
+            return "\(hour) hours ago"
+        }
+        return "\(Calendar.current.component(.day, from: date)) days ago"
+    }
 }
 
 

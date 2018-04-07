@@ -41,6 +41,7 @@ class JourneyDetailViewController: UIViewController {
             DispatchQueue.main.async {
                 self.middleView.journeyCommentTableView.reloadData()
             }
+
         }
     }
 
@@ -96,16 +97,20 @@ class JourneyDetailViewController: UIViewController {
                 if let error = error {
                     
                 } else if let event = event {
-                    self.events.append(event)
+                    if !self.events.contains(event) {
+                        self.events.append(event)
+                    }
                 }
             })
         }
+        self.events.sort{ ($0._creationDate as! Double) <  ($1._creationDate as! Double) }
     }
     
     var events = [Event]() {
         didSet {
             DispatchQueue.main.async {
                 self.journeyCarouselView.carouselCollectionView.reloadData()
+                self.journeyCarouselView.carouselSlider.maximumValue = Float(self.events.count-1)
             }
         }
     }
@@ -131,6 +136,7 @@ class JourneyDetailViewController: UIViewController {
         self.middleView.journeyCommentTableView.dataSource = self
         self.headerView.delegate = self
         
+        configureNavBar()
         setupView()
         setupSlider()
         dummmyData()
@@ -162,9 +168,19 @@ class JourneyDetailViewController: UIViewController {
     private func setupView() {
         setJourneyCarouselViewConstraints()
         setHeaderViewConstraints()
+        headerView.configureHeaderView(with: journey)
         setJourneyProfileImageViewConstraints()
         setMiddleViewConstraints()
         setFooterViewConstraints()
+    }
+    
+    private func configureNavBar() {
+        self.navigationController?.navigationBar.isHidden = false
+        self.navigationController?.navigationItem.title = "Journey"
+        navigationItem.title = "\(self.journey._title ?? "Journey")"
+//        self.navigationController?.navigationBar.barTintColor = UIColor.white
+        self.navigationController?.navigationBar.backgroundColor = UIColor.white
+        self.navigationController?.navigationBar.isTranslucent = false
     }
     
     private func resetViews() {
@@ -180,7 +196,7 @@ class JourneyDetailViewController: UIViewController {
     }
     
     private func setupSlider() {
-        journeyCarouselView.carouselSlider.maximumValue = Float(events.count + 1)
+        journeyCarouselView.carouselSlider.maximumValue = Float(events.count-1)
         journeyCarouselView.carouselSlider.minimumValue = 0
         journeyCarouselView.carouselSlider.addTarget(self, action: #selector(sliderValueChanged(_:)), for: .valueChanged)
     }
@@ -280,7 +296,7 @@ class JourneyDetailViewController: UIViewController {
             make.centerX.equalTo(self.view.snp.centerX)
             make.leading.equalTo(16)
             make.trailing.equalTo(-16)
-            make.height.equalTo(self.view.snp.height).multipliedBy(0.185)
+            make.height.equalTo(self.view.snp.height).multipliedBy(0.180)
         }
     }
     
@@ -291,7 +307,7 @@ class JourneyDetailViewController: UIViewController {
             make.centerY.equalTo(headerView.snp.top)
             make.trailing.equalTo(headerView.snp.trailing).offset(-25)
 //            make.height.equalTo(headerView.snp.height).multipliedBy(0.1)
-            make.height.equalTo(self.view.snp.height).multipliedBy(0.09)
+            make.height.equalTo(self.view.snp.height).multipliedBy(0.081)
             make.width.equalTo(journeyProfileImageView.snp.height)
         }
     }
@@ -333,6 +349,7 @@ extension JourneyDetailViewController: iCarouselDataSource {
         itemView = UIImageView(frame: CGRect(x: 0, y: 0, width: journeyCarouselView.carouselCollectionView.frame.width, height: journeyCarouselView.carouselCollectionView.frame.height))
 //        itemView.image = picArr[index]
         let event = events[index]
+        headerView.configureHeaderView(with: event)
         let url = URL(string: "https://s3.amazonaws.com/phase-journey-events/\(event._media!)")
         itemView.kf.indicatorType = .activity
         itemView.kf.setImage(with: url, placeholder: nil, options: nil, progressBlock: nil, completionHandler: nil)

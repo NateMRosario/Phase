@@ -97,19 +97,39 @@ extension DynamoDBManager {
         }
     }
     
-    func loadAllUsers(completion: @escaping (AppUser?, Error?) -> Void) {
-        var user: AppUser = AppUser()
-        let exp = AWSDynamoDBScanExpression()
-        mapper.scan(AppUser.self, expression: exp) { (loadedUser, error) in
+//    func loadAllUsers(completion: @escaping (AppUser?, Error?) -> Void) {
+//        var user: AppUser = AppUser()
+//        let exp = AWSDynamoDBScanExpression()
+//        mapper.scan(AppUser.self, expression: exp) { (loadedUser, error) in
+//            if let error = error {
+//                print(error)
+//                completion(nil, error)
+//            } else {
+//                if let loadedUser = loadedUser {
+//                    //user = loadedUser as! AppUser
+//                    completion(user, nil)
+////                    CacheService.manager.add(userData: user, withID: user._userId!)
+//                }
+//            }
+//        }
+//    }
+    
+    func scanUsers(completion: @escaping ([AppUser]?, Error?) -> Void) {
+        let scanExpression = AWSDynamoDBScanExpression()
+        scanExpression.limit = 50
+        
+        mapper.scan(AppUser.self, expression: scanExpression) { (output, error) in
             if let error = error {
-                print(error)
                 completion(nil, error)
-            } else {
-                if let loadedUser = loadedUser {
-                    //user = loadedUser as! AppUser
-                    completion(user, nil)
-//                    CacheService.manager.add(userData: user, withID: user._userId!)
+            } else if let output = output as? AWSDynamoDBPaginatedOutput {
+                if let users = output.items as? [AppUser] {
+                    completion(users, nil)
+                    for user in users {
+                        CacheService.manager.add(userData: user, withID: user._userId!)
+                    }
                 }
+            } else {
+                completion(nil, DBError.loadResultNil)
             }
         }
     }
