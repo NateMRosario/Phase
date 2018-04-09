@@ -38,7 +38,7 @@ class JourneyHeaderView: UIView {
         button.layer.masksToBounds = false
         button.layer.shadowRadius = 1
         button.layer.cornerRadius = 4
-        button.backgroundColor = UIColor(hue: 0.0222, saturation: 0, brightness: 0.92, alpha: 1.0) /* #eaeaea */
+        button.backgroundColor = UIColor(hue: 9/360, saturation: 0/100, brightness: 94/100, alpha: 1.0) /* #efefef */
         button.addTarget(self, action: #selector(thinButtonTapped), for: .touchUpInside)
         return button
     }()
