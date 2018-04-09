@@ -14,6 +14,7 @@ protocol JourneyHeaderDelegate: class {
     func showCommentsTapped()
     func segueToProfileTapped()
     func showFollowersTapped()
+    func thinButtonTapped()
 }
 
 
@@ -38,7 +39,7 @@ class JourneyHeaderView: UIView {
         button.layer.shadowRadius = 1
         button.layer.cornerRadius = 4
         button.backgroundColor = UIColor(hue: 0/360, saturation: 0/100, brightness: 98/100, alpha: 1.0)
-        button.addTarget(self, action: #selector(showCommentsTapped), for: .touchUpInside)
+        button.addTarget(self, action: #selector(thinButtonTapped), for: .touchUpInside)
         return button
     }()
     
@@ -192,6 +193,11 @@ class JourneyHeaderView: UIView {
     @objc private func showFollowersTapped() {
         print("showFollowersTapped")
         delegate?.showFollowersTapped()
+    }
+    
+    @objc private func thinButtonTapped() {
+        print("thinButtonTapped")
+        delegate?.thinButtonTapped()
     }
     
     // MARK: - Constraints

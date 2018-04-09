@@ -46,7 +46,7 @@ class JourneyFollowersDetailView: UIView {
     private func setJourneyFollowersImagesViewConstraints() {
         addSubview(journeyFollowersImagesView)
         journeyFollowersImagesView.snp.makeConstraints { (make) in
-//            make.top.equalTo(followersLabel.snp.bottom).offset(12)
+            make.top.equalTo(self).offset(12)
             make.leading.equalTo(self).offset(12)
             make.trailing.equalTo(self).offset(-12)
             make.bottom.equalTo(self).offset(-12)

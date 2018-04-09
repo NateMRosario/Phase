@@ -25,16 +25,9 @@ class EventDummyDate {
 }
 
 
-class JourneyDetailViewController: UIViewController {
+class JourneyDetailViewController: UIViewController, UICollisionBehaviorDelegate {
     
     // MARK: - Testbed properties
-    func getXY(cgRect: CGRect) {
-        var frm: CGRect = cgRect
-        print("frm.origin.x \(frm.origin.x), frm.origin.y \(frm.origin.y)")
-        frm.size.width = frm.size.width + 500
-        frm.size.height = frm.size.height + 500
-    }
-    
     private var comments = [EventDummyDate]() {
         didSet {
             DispatchQueue.main.async {
@@ -58,6 +51,7 @@ class JourneyDetailViewController: UIViewController {
     }
     
     private var headerViewMoved = false
+    private var backGroundBlurred = false
     
     // MARK: - Lazy Properties
     lazy private var journeyProfileImageView: UIImageView = {
@@ -79,6 +73,7 @@ class JourneyDetailViewController: UIViewController {
     private let headerView = JourneyHeaderView()
     private let middleView = JourneyCommentTableView()
     private let footerView = JourneyBottomView()
+    private let followersView = JourneyFollowersDetailView()
     
     var scrolledBySlider = false
     var sliderValue: Int = 0 {
@@ -145,7 +140,7 @@ class JourneyDetailViewController: UIViewController {
         setupView()
         setupSlider()
         dummmyData()
-        isHiddenWhenHeaderTapped()
+        isHiddenWhenHeaderThinButtonTapped()
         keyboardNotifications()
     }
     
@@ -184,6 +179,7 @@ class JourneyDetailViewController: UIViewController {
         setJourneyProfileImageViewConstraints()
         setMiddleViewConstraints()
         setFooterViewConstraints()
+        setFollowersViewConstraints()
     }
     
     private func keyboardNotifications() {
@@ -225,9 +221,13 @@ class JourneyDetailViewController: UIViewController {
         middleView.isHidden = !headerViewMoved
         footerView.transform = .identity
         footerView.isHidden = !headerViewMoved
+        followersView.transform = .identity
+        followersView.isHidden = !headerViewMoved
+        journeyProfileImageView.transform = .identity
         headerView.journeyCommentsUpButton.transform = .identity
         headerView.journeyFollowersUpButton.transform = .identity
         headerView.round(corners: .allCorners, radius: 18)
+        
     }
     
     private func checkForNewJourney() -> NSNumber? {
@@ -242,8 +242,6 @@ class JourneyDetailViewController: UIViewController {
         journeyCarouselView.carouselSlider.minimumValue = 0
         journeyCarouselView.carouselSlider.addTarget(self, action: #selector(sliderValueChanged(_:)), for: .valueChanged)
     }
-    
-    private func getPost() {}
     
     // views are set beyoned the superview's x position
     private func setInitialAnimation() {
@@ -263,46 +261,119 @@ class JourneyDetailViewController: UIViewController {
     }
     
     // animation for header tapped animation
-    private func headerViewTapped() {
+    private func headerThinButtonTapped() {
         headerViewMoved = !headerViewMoved
         UIView.animate(withDuration: 0.3, animations: {
             guard self.headerView.transform == .identity else {
-                self.headerView.transform = .identity
-                self.headerView.round(corners: .allCorners, radius: 18)
-                self.journeyProfileImageView.transform = .identity
-                self.middleView.transform = .identity
-                self.footerView.transform = .identity
-                self.headerView.journeyCommentsUpButton.transform = .identity
-                self.headerView.journeyFollowersUpButton.transform = .identity
-                self.isHiddenWhenHeaderTapped()
-                return
+                self.resetViews()
+                return self.journeyCarouselView.unBlur()
             }
             self.headerTappedAnimation()
-            self.isHiddenWhenHeaderTapped()
-            return
+            self.journeyCarouselView.blur()
+            self.isHiddenWhenHeaderThinButtonTapped()
         })
     }
     
     // hides tableView and footerView when headerView is in its default position
-    private func isHiddenWhenHeaderTapped() {
+    private func isHiddenWhenHeaderThinButtonTapped() {
+        followersView.isHidden = true
         footerView.isHidden = !headerViewMoved
         middleView.isHidden = !headerViewMoved
-        if !headerViewMoved {
-            journeyCarouselView.unBlur()
-        } else {
-            journeyCarouselView.blur()
+//        blurBackground()
+    }
+    
+    private func commentsTapped() {
+        guard self.headerViewMoved != false else {
+            UIView.animate(withDuration: 0.3, animations: {
+                self.headerTappedAnimation()
+                self.middleView.isHidden = false
+                self.followersView.isHidden = true
+                self.footerView.isHidden = false
+                self.journeyCarouselView.blur()
+            })
+            return
+        }
+        //if headerMoved = false && transform != .identity
+        guard self.headerViewMoved != false && self.middleView.isHidden == true else {
+            UIView.animate(withDuration: 0.3, animations: {
+                self.resetViews()
+                self.journeyCarouselView.unBlur()
+            })
+            return
+        }
+        if self.headerViewMoved == true && self.followersView.isHidden == false {
+            UIView.animate(withDuration: 0.3, animations: {
+                self.middleView.isHidden = false
+                self.footerView.isHidden = false
+                self.followersView.isHidden = true
+                self.headerView.journeyCommentsUpButton.transform = CGAffineTransform(rotationAngle: self.radians(degrees: 180))
+                self.headerView.journeyFollowersUpButton.transform = .identity
+            })
         }
     }
     
+    private func followersTapped() {
+        guard self.headerViewMoved != false else {
+            UIView.animate(withDuration: 0.3, animations: {
+                self.headerView.round(corners: [.topRight, .topLeft], radius: 18)
+                self.followersView.round(corners: [.bottomRight, .bottomLeft], radius: 18)
+                self.headerView.journeyFollowersUpButton.transform = CGAffineTransform(rotationAngle: self.radians(degrees: 180))
+                self.headerView.transform = CGAffineTransform(translationX: 0, y: -self.view.frame.bounds.height * 0.55)
+                self.journeyProfileImageView.transform = CGAffineTransform(translationX: 0, y: -self.view.frame.bounds.height * 0.55)
+                self.middleView.transform = CGAffineTransform(translationX: 0, y: -self.view.frame.bounds.height * 0.55)
+                self.footerView.transform = CGAffineTransform(translationX: 0, y: -self.view.frame.bounds.height * 0.55)
+                self.followersView.transform = CGAffineTransform(translationX: 0, y: -self.view.frame.bounds.height * 0.55)
+                self.isHiddenWhenFollowersTapped()
+                self.journeyCarouselView.blur()
+                self.headerViewMoved = true
+            })
+            return
+        }
+        guard self.followersView.isHidden != true else {
+            UIView.animate(withDuration: 0.3, animations: {
+                self.followersView.isHidden = false
+                self.middleView.isHidden = true
+                self.footerView.isHidden = true
+                self.followersView.round(corners: [.bottomRight, .bottomLeft], radius: 18)
+                self.headerView.journeyFollowersUpButton.transform = CGAffineTransform(rotationAngle: self.radians(degrees: 180))
+                self.headerView.journeyCommentsUpButton.transform = .identity
+            })
+            return
+        }
+        guard self.headerViewMoved != true && self.followersView.isHidden == true else {
+            print("\(headerViewMoved == true) \(self.followersView.isHidden != true)")
+            UIView.animate(withDuration: 0.3, animations: {
+                self.resetViews()
+                self.self.journeyCarouselView.unBlur()
+            })
+            return
+        }
+    }
+    
+    
+    private func isHiddenWhenFollowersTapped() {
+        followersView.isHidden = false
+        footerView.isHidden = true
+        middleView.isHidden = true
+        blurBackground()
+    }
+    
+    private func blurBackground(){
+        guard backGroundBlurred == true else { backGroundBlurred = true; return journeyCarouselView.blur() }
+        backGroundBlurred = false
+        return journeyCarouselView.unBlur()
+    }
+    
     private func headerTappedAnimation() {
+        headerViewMoved = true
         headerView.round(corners: [.topRight, .topLeft], radius: 18)
         footerView.round(corners: [.bottomRight, .bottomLeft], radius: 18)
         headerView.transform = CGAffineTransform(translationX: 0, y: -self.view.frame.bounds.height * 0.55)
         journeyProfileImageView.transform = CGAffineTransform(translationX: 0, y: -self.view.frame.bounds.height * 0.55)
         middleView.transform = CGAffineTransform(translationX: 0, y: -self.view.frame.bounds.height * 0.55)
         footerView.transform = CGAffineTransform(translationX: 0, y: -self.view.frame.bounds.height * 0.55)
+        followersView.transform = CGAffineTransform(translationX: 0, y: -self.view.frame.bounds.height * 0.55)
         headerView.journeyCommentsUpButton.transform = CGAffineTransform(rotationAngle: self.radians(degrees: 180))
-        headerView.journeyFollowersUpButton.transform = CGAffineTransform(rotationAngle: self.radians(degrees: 180))
     }
     
     private func radians(degrees: Double) -> CGFloat {
@@ -361,8 +432,7 @@ class JourneyDetailViewController: UIViewController {
         middleView.snp.makeConstraints { (make) in
             make.leading.equalTo(16)
             make.trailing.equalTo(-16)
-            make.height.equalTo(self.view.snp.height).multipliedBy(0.48
-            )
+            make.height.equalTo(self.view.snp.height).multipliedBy(0.48)
             make.centerX.equalTo(headerView.snp.centerX)
             make.top.equalTo(headerView.snp.bottom)
         }
@@ -378,6 +448,19 @@ class JourneyDetailViewController: UIViewController {
             make.top.equalTo(middleView.snp.bottom)
         }
     }
+    
+    private func setFollowersViewConstraints() {
+        self.view.addSubview(followersView)
+        self.followersView.isHidden = true
+        followersView.snp.makeConstraints { (make) in
+            make.leading.equalTo(16)
+            make.trailing.equalTo(-16)
+            make.height.equalTo(self.view.snp.height).multipliedBy(0.48)
+            make.centerX.equalTo(headerView.snp.centerX)
+            make.top.equalTo(headerView.snp.bottom)
+        }
+    }
+    
 }
 
 // MARK: - iCarouselDataSource
@@ -449,23 +532,23 @@ extension JourneyDetailViewController: UITableViewDataSource {
 // MARK: - TextField Delegate
 extension JourneyDetailViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
-            //move textfields up
-            let myScreenRect: CGRect = UIScreen.main.bounds
-            let keyboardHeight : CGFloat = 216
-            
-            UIView.beginAnimations( "animateView", context: nil)
-            var movementDuration:TimeInterval = 0.35
-            var needToMove: CGFloat = 0
-            
-            var frame : CGRect = self.view.frame
-            if (textField.frame.origin.y + textField.frame.size.height + UIApplication.shared.statusBarFrame.size.height > (myScreenRect.size.height - keyboardHeight - 30)) {
-                needToMove = (textField.frame.origin.y + textField.frame.size.height + UIApplication.shared.statusBarFrame.size.height) - (myScreenRect.size.height - keyboardHeight - 30);
-            }
-            
-            frame.origin.y = -needToMove
-            self.view.frame = frame
-            UIView.commitAnimations()
+        //move textfields up
+        let myScreenRect: CGRect = UIScreen.main.bounds
+        let keyboardHeight : CGFloat = 216
+        
+        UIView.beginAnimations( "animateView", context: nil)
+        var movementDuration:TimeInterval = 0.35
+        var needToMove: CGFloat = 0
+        
+        var frame : CGRect = self.view.frame
+        if (textField.frame.origin.y + textField.frame.size.height + UIApplication.shared.statusBarFrame.size.height > (myScreenRect.size.height - keyboardHeight - 30)) {
+            needToMove = (textField.frame.origin.y + textField.frame.size.height + UIApplication.shared.statusBarFrame.size.height) - (myScreenRect.size.height - keyboardHeight - 30);
         }
+        
+        frame.origin.y = -needToMove
+        self.view.frame = frame
+        UIView.commitAnimations()
+    }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         self.footerView.commentTextField.resignFirstResponder()
@@ -483,10 +566,15 @@ extension JourneyDetailViewController: JourneyCommentTableCellDelegate {
 }
 
 extension JourneyDetailViewController: JourneyHeaderDelegate {
-    func showFollowersTapped() {}
+    func showFollowersTapped() {
+        followersTapped()
+    }
     func segueToProfileTapped() {}
     func showCommentsTapped() {
-        headerViewTapped()
+        commentsTapped()
+    }
+    func thinButtonTapped() {
+        headerThinButtonTapped()
     }
 }
 
