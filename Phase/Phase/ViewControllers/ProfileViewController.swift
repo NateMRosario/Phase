@@ -182,6 +182,7 @@ class ProfileViewController: UIViewController, DynamoDBUserActionsDelegate {
         profileView.frame.size = size
         tableView.tableHeaderView = profileView
         tableView.reloadData()
+        navigationController?.navigationBar.isHidden = true
     }
     
     override func viewDidLoad() {
