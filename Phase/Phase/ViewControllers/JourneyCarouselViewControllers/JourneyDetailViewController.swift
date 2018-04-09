@@ -387,9 +387,23 @@ class JourneyDetailViewController: UIViewController, UICollisionBehaviorDelegate
         print("slider value is \(Int(sender.value)) ---")
     }
     
-    @objc private func journeyProfileImageTapped() {}
+    @objc private func journeyProfileImageTapped() {
+        let profileVC = ProfileViewController(loadSelectedUser: journey._userId!)
+        navigationController?.pushViewController(profileVC!, animated: true)
+    }
     
-    @objc private func subscribeButtonTapped() {}
+    @objc private func subscribeButtonTapped() {
+        DynamoDBManager.shared.watchJourney(journey: self.journey) { (error) in
+            if let _ = error {
+                DispatchQueue.main.async {
+                    self.showAlert(title: "Error", message: "Could not subscribe at this time.  Please try again later.")
+                }
+            } else {
+                DispatchQueue.main.async {
+                    self.showAlert(title: "Success", message: "You have subscribed to this journey.")
+                }            }
+        }
+    }
     
     
     // MARK: - Contraints

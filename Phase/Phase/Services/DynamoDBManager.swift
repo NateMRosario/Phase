@@ -248,6 +248,27 @@ extension DynamoDBManager {
         
     }
     
+    func updateProfileImage(user: AppUser, image: UIImage, completion: @escaping (Error?) -> Void) {
+        
+        S3Manager.shared.uploadManagerData(image: image) { (imageId, error) in
+            if let error = error {
+                completion(error)
+            } else if let imageId = imageId {
+                
+                let newUser = user
+                user._profileImage = imageId
+                
+                self.mapper.save(newUser, completionHandler: { (error) in
+                    if let error = error {
+                        completion(error)
+                    } else {
+                        completion(nil)
+                    }
+                })
+            }
+        }
+    }
+    
     
 }
 
@@ -410,30 +431,30 @@ extension DynamoDBManager {
                 if let user = user {
                     
                     let newUser = user
-                    var newSet = user._isWatching ?? Set<String>()
+                    var newSet = user._journeysFollowed ?? Set<String>()
                     newSet.insert(journey._journeyId!)
+                    newUser._journeysFollowed = newSet
                     
                     self.updateUser(appUser: newUser, completion: { (error) in
                         if let error = error {
                             completion(error)
                         } else {
                             
-                            let newJourney = journey
-                            newJourney._numberOfWatchers = ((journey._numberOfWatchers as! Int) + 1) as NSNumber
-                            
-                            self.updateJourney(journey: newJourney, completion: { (error) in
-                                if let error = error {
-                                    completion(error)
-                                } else {
-                                    self.delegate?.didWatchJourney!()
-                                    completion(nil)
-                                }
-                            })
                         }
                     })
                     
-                    
                 }
+                let newJourney = journey
+                newJourney._numberOfWatchers = ((journey._numberOfWatchers as! Int) + 1) as NSNumber
+                
+                self.updateJourney(journey: newJourney, completion: { (error) in
+                    if let error = error {
+                        completion(error)
+                    } else {
+                        self.delegate?.didWatchJourney!()
+                        completion(nil)
+                    }
+                })
             }
         }
         
