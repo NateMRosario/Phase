@@ -89,6 +89,9 @@ class DiscoveryViewController: UIViewController {
         collectionView.dg_setPullToRefreshFillColor(UIColor(patternImage: img))
         collectionView.dg_setPullToRefreshBackgroundColor(collectionView.backgroundColor!)
         
+        self.searchBar.tintColor = .white
+        self.searchBar.textField?.tintColor = .white
+        
         getJourneys()
     }
     

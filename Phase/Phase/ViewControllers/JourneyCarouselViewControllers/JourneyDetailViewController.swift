@@ -101,7 +101,14 @@ class JourneyDetailViewController: UIViewController, UICollisionBehaviorDelegate
         self.events.sort{ ($0._creationDate as! Double) <  ($1._creationDate as! Double) }
     }
     
-    private var didSort = false
+    private var didSort = false {
+        didSet {
+            DispatchQueue.main.async {
+                self.journeyCarouselView.carouselCollectionView.reloadData()
+                self.journeyCarouselView.carouselCollectionView.scrollToItem(at: self.events.count, animated: false)
+            }
+        }
+    }
     
     var events = [Event]() {
         didSet {
@@ -109,9 +116,6 @@ class JourneyDetailViewController: UIViewController, UICollisionBehaviorDelegate
                 let sortedEvents = events.sorted() { ($0._creationDate as! Double) < ($1._creationDate as! Double) }
                 self.events = sortedEvents
                 didSort = true
-                DispatchQueue.main.async {
-                    self.journeyCarouselView.carouselCollectionView.scrollToItem(at: self.events.count, animated: false)
-                }
             }
             DispatchQueue.main.async {
                 self.journeyCarouselView.carouselCollectionView.reloadData()
