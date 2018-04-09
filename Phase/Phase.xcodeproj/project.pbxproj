@@ -201,6 +201,7 @@
 		F4183094206AB90700466705 /* HomeFeedTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4183092206AB90700466705 /* HomeFeedTableViewCell.xib */; };
 		F4183097206AB91D00466705 /* DiscoverCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4183095206AB91D00466705 /* DiscoverCollectionViewCell.swift */; };
 		F4183098206AB91D00466705 /* DiscoverCollectionViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F4183096206AB91D00466705 /* DiscoverCollectionViewCell.xib */; };
+		F419610A207BDD6E00D07837 /* CustomSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4196109207BDD6E00D07837 /* CustomSlider.swift */; };
 		F4882847206955690008A656 /* JourneyCommentTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = F4882846206955690008A656 /* JourneyCommentTableViewCell.swift */; };
 		F4882856206A95130008A656 /* iCarousel.m in Sources */ = {isa = PBXBuildFile; fileRef = F4882854206A95120008A656 /* iCarousel.m */; };
 		F49638FA206ABD0A002D62E7 /* JourneyTableViewCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = F49638F9206ABD09002D62E7 /* JourneyTableViewCell.xib */; };
@@ -440,6 +441,7 @@
 		F4183092206AB90700466705 /* HomeFeedTableViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = HomeFeedTableViewCell.xib; sourceTree = "<group>"; };
 		F4183095206AB91D00466705 /* DiscoverCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DiscoverCollectionViewCell.swift; sourceTree = "<group>"; };
 		F4183096206AB91D00466705 /* DiscoverCollectionViewCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DiscoverCollectionViewCell.xib; sourceTree = "<group>"; };
+		F4196109207BDD6E00D07837 /* CustomSlider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomSlider.swift; sourceTree = "<group>"; };
 		F4882846206955690008A656 /* JourneyCommentTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyCommentTableViewCell.swift; sourceTree = "<group>"; };
 		F4882853206A95120008A656 /* iCarousel.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = iCarousel.h; sourceTree = "<group>"; };
 		F4882854206A95120008A656 /* iCarousel.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = iCarousel.m; sourceTree = "<group>"; };
@@ -1115,6 +1117,7 @@
 				87F742BE2072906200972DD8 /* JourneyBottomView.swift */,
 				F4E9F8AA2073DDA400D56A97 /* JourneyFollowersDetailView.swift */,
 				8791DFDA2060171F00337CA3 /* JourneyFollowersImagesView.swift */,
+				F4196109207BDD6E00D07837 /* CustomSlider.swift */,
 			);
 			path = JourneyDetailViews;
 			sourceTree = "<group>";
@@ -1610,6 +1613,7 @@
 				81C368D4206B2EDF00A1873E /* DemoTextMessageHandler.swift in Sources */,
 				8128B47A206951B2009E0629 /* Journey.swift in Sources */,
 				81C368B9206B2ED400A1873E /* DemoChatItemsDecorator.swift in Sources */,
+				F419610A207BDD6E00D07837 /* CustomSlider.swift in Sources */,
 				8128B47320694815009E0629 /* DynamoDBManager.swift in Sources */,
 				810935722059BA8400A95B30 /* HomeViewController.swift in Sources */,
 				F404878C20657904009039AF /* JourneyCarouselView.swift in Sources */,

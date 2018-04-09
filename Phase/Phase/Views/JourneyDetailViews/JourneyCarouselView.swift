@@ -36,8 +36,8 @@ class JourneyCarouselView: UIView {
         return carousel
     }()
     
-    lazy var carouselSlider: UISlider = {
-        let slider = UISlider()
+    lazy var carouselSlider: CustomSlider = {
+        let slider = CustomSlider()
         slider.tintColor = UIColor.black
         slider.minimumTrackTintColor = UIColor(hue: 0.5861, saturation: 1, brightness: 0.99, alpha: 1.0) /* #007afe */
         return slider
