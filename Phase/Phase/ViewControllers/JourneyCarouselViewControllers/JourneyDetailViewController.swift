@@ -101,8 +101,15 @@ class JourneyDetailViewController: UIViewController, UICollisionBehaviorDelegate
         self.events.sort{ ($0._creationDate as! Double) <  ($1._creationDate as! Double) }
     }
     
+    private var didSort = false
+    
     var events = [Event]() {
         didSet {
+            if events.count == journey._eventCount as! Int && didSort == false {
+                let sortedEvents = events.sorted() { ($0._creationDate as! Double) < ($1._creationDate as! Double) }
+                self.events = sortedEvents
+                didSort = true
+            }
             DispatchQueue.main.async {
                 self.journeyCarouselView.carouselCollectionView.reloadData()
                 self.journeyCarouselView.carouselSlider.maximumValue = Float(self.events.count-1)
