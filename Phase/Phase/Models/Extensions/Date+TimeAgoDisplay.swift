@@ -87,7 +87,7 @@ extension Date {
         
         switch fabs(distanceBetweenDatesGuarded) {
         case 0..<60:
-            return "\(distanceBetweenDatesGuarded) seconds ago" // seconds
+            return "seconds ago" // seconds
         case 60..<3600:
             return "\(minutesBetweenDates) minutes ago" // minutes
         case 3600..<86400:

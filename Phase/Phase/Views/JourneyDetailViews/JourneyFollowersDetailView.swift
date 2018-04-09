@@ -34,7 +34,7 @@ class JourneyFollowersDetailView: UIView {
     
     // MARK: - Functions
     private func commonInit() {
-        backgroundColor = UIColor.blue
+        backgroundColor = UIColor.white
         setupViews()
     }
     
