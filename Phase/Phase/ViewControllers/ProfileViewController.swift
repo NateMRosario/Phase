@@ -166,7 +166,7 @@ class ProfileViewController: UIViewController, DynamoDBUserActionsDelegate {
     // MARK: - View life cycles
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-//        bioLabel.text = "I tried so hard and got so far, but in the end, it doesn't even maaatterrrrr"
+        bioLabel.text = "Boy from NYC.  I love tech, biking, and anime."
         
         // This makes tableView header height dynamic
     }
@@ -225,7 +225,7 @@ class ProfileViewController: UIViewController, DynamoDBUserActionsDelegate {
             self.following.text = "\(String(describing: userInfo._usersFollowed?.count ?? 0))"
             self.watching.text = "\(String(describing: userInfo._isWatching?.count ?? 0))"
             self.nameLabel.text = userInfo._fullName
-            //self.bioLabel.text = userInfo._bio ?? "Hi my name is \(userInfo._fullName!)"
+            self.bioLabel.text = userInfo._bio ?? ""
             self.headerLabel.text = userInfo._username
         }
         
