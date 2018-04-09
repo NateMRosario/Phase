@@ -109,6 +109,9 @@ class JourneyDetailViewController: UIViewController, UICollisionBehaviorDelegate
                 let sortedEvents = events.sorted() { ($0._creationDate as! Double) < ($1._creationDate as! Double) }
                 self.events = sortedEvents
                 didSort = true
+                DispatchQueue.main.async {
+                    self.journeyCarouselView.carouselCollectionView.scrollToItem(at: self.events.count, animated: false)
+                }
             }
             DispatchQueue.main.async {
                 self.journeyCarouselView.carouselCollectionView.reloadData()
