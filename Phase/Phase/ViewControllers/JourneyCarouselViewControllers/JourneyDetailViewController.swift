@@ -522,6 +522,7 @@ extension JourneyDetailViewController: iCarouselDataSource {
         itemView = UIImageView(frame: CGRect(x: 0, y: 0, width: journeyCarouselView.carouselCollectionView.frame.width, height: journeyCarouselView.carouselCollectionView.frame.height))
         //        itemView.image = picArr[index]
         let event = events[index]
+        print("caption assigned in detailView: \(event._caption ?? "no comment")")
         headerView.configureHeaderViewCommentLabel(with: event)
         let url = URL(string: "https://s3.amazonaws.com/phase-journey-events/\(event._media!)")
         itemView.kf.indicatorType = .activity

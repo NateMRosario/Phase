@@ -167,6 +167,7 @@ class JourneyHeaderView: UIView {
     
     public func configureHeaderViewCommentLabel(with event: Event) {
         self.journeyCaptionLabel.text = "\(event._caption ?? "No caption provided")"
+        print("caption assigned in journeyheaderView: \(event._caption)")
     }
     
     public func configureHeaderViewCommentsCountLabel(with comments: Int) {
