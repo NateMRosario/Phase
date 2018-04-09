@@ -28,6 +28,7 @@ class PreviewViewController: UIViewController {
     var selectedIndexPath: IndexPath!
     var selectedJourney: Journey!
     weak var delegate: PreviewVCDelegate?
+    var imageCaption = String()
     //var mediaType: MediaType
     
     let addNewJourneyDelegate = AddJourneyViewController()
@@ -148,7 +149,7 @@ class PreviewViewController: UIViewController {
     
     @objc func cancel(){
         imagePreview.saveButton.isEnabled = true
-        dismiss(animated: true, completion: nil)
+        dismiss(animated: false, completion: nil)
     }
     
     @objc func post(){
@@ -307,18 +308,23 @@ extension PreviewViewController: UITextViewDelegate {
             textView.resignFirstResponder()
             return false
         }
-        let currentText = textView.text ?? "CHANGE LATER"
+        let currentText = textView.text ?? " "
         guard let stringRange = Range(range, in: currentText) else { return false }
         let changedText = currentText.replacingCharacters(in: stringRange, with: text)
         return changedText.count <= 120 // Pass your character count here
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
-        imagePreview.postTextView.text = "CHANGE LATER"
+        if imageCaption != " " {
+            textView.text = imageCaption
+        } else {
+        imagePreview.postTextView.text = " "
+        }
         imagePreview.postTextView.textColor = .black
     }
     
     func textViewDidEndEditing(_ textView: UITextView) {
+        imageCaption = textView.text
         DispatchQueue.main.async {
             self.imagePreview.postTextView.resignFirstResponder()
         }
