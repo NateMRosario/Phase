@@ -132,10 +132,10 @@ class JourneyHeaderView: UIView {
     }
     
     // MARK: - Functions
-//    override func layoutSubviews() {
-//        super.layoutSubviews()
-//        journeyProfileImageView.layer.cornerRadius = journeyProfileImageView.bounds.width/2.0
-//    }
+    //    override func layoutSubviews() {
+    //        super.layoutSubviews()
+    //        journeyProfileImageView.layer.cornerRadius = journeyProfileImageView.bounds.width/2.0
+    //    }
     
     private func setupViews() {
         setupThinButton()
@@ -146,6 +146,37 @@ class JourneyHeaderView: UIView {
         setupJourneyFollowersButton()
         setupJourneyCommentsUpButton()
         setupJourneyCaptionLabel()
+    }
+    
+    public func configureHeaderView(with journey: Journey) {
+        var user = AppUser()
+        DynamoDBManager.shared.loadUser(userId: journey._userId!) { (currentUser, error) in
+            if let error = error {
+                
+            }
+            user = currentUser
+        }
+        let date = Date()
+        guard let name = user?._username else { return }
+        self.journeyUserNamelabel.setTitle("\(name)", for: .normal)
+        self.journeyStartDate.text = "\(date.timePosted(from: journey._creationDate) ?? "0 seconds ago")"
+        self.journeyTotalComments.setTitle("\(journey._comments?.count ?? 0) comments", for: .normal)
+        self.journeyFollowersButton.setTitle("\(Int(journey._numberOfWatchers as! Double)) followers", for: .normal)
+    }
+    
+    public func configureHeaderViewCommentLabel(with event: Event) {
+        self.journeyCaptionLabel.text = "\(event._caption ?? "No caption provided")"
+    }
+    
+    public func configureHeaderViewCommentsCountLabel(with comments: Int) {
+        switch comments {
+        case 0:
+            journeyTotalComments.setTitle("0 comments", for: .normal)
+        case 1:
+            journeyTotalComments.setTitle("1 comment", for: .normal)
+        default:
+            journeyTotalComments.setTitle("\(comments) comments", for: .normal)
+        }
     }
     
     @objc private func segueToProfileTapped() {
@@ -236,34 +267,6 @@ class JourneyHeaderView: UIView {
         }
     }
     
-    public func configureHeaderView(with journey: Journey) {
-        var user = AppUser()
-            DynamoDBManager.shared.loadUser(userId: journey._userId!) { (currentUser, error) in
-            if let error = error {
-                
-            }
-            user = currentUser
-        }
-        guard let name = user?._username else { return }
-        self.journeyUserNamelabel.setTitle("\(name)", for: .normal)
-        self.journeyStartDate.text = convertDate(from: journey._creationDate)
-        self.journeyTotalComments.setTitle("\(journey._comments?.count ?? 0) comments", for: .normal)
-        self.journeyFollowersButton.setTitle("\(Int(journey._numberOfWatchers as! Double)) followers", for: .normal)
-    }
-    
-    public func configureHeaderView(with event: Event) {
-        self.journeyCaptionLabel.text = "\(event._caption ?? "No caption provided")"
-    }
-
-    private func convertDate(from num: NSNumber?) -> String? {
-        guard num != nil else {return nil}
-        let date = Date(timeIntervalSinceReferenceDate: num as! TimeInterval)
-        let hour = (Calendar.current.component(.hour, from: date))
-        guard (hour / 24) > 1 else {
-            return "\(hour) hours ago"
-        }
-        return "\(Calendar.current.component(.day, from: date)) days ago"
-    }
 }
 
 

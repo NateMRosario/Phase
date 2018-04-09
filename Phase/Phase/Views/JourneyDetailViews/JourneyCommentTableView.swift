@@ -9,6 +9,10 @@
 import UIKit
 import SnapKit
 
+// MARK: - Custom Delegate
+protocol JourneyCommentTableViewDelegate: class {
+    func refreshTableView()
+}
 
 class JourneyCommentTableView: UIView {
     
@@ -17,12 +21,18 @@ class JourneyCommentTableView: UIView {
     
     // MARK: - Lazy variables
     lazy var journeyCommentTableView: UITableView = {
+        let refreshControl = UIRefreshControl()
+        refreshControl.addTarget(self, action: #selector(refreshTableView), for: .valueChanged)
         let tableView = UITableView()
         tableView.register(JourneyCommentTableViewCell.self, forCellReuseIdentifier: cellID)
         tableView.backgroundColor = .white
         tableView.separatorStyle = .none
+        tableView.refreshControl = refreshControl
         return tableView
     }()
+    
+    // MARK: - Delegate
+    weak var delegate: JourneyCommentTableViewDelegate?
     
     // MARK: - Initializers
     override init(frame: CGRect) {
@@ -43,6 +53,11 @@ class JourneyCommentTableView: UIView {
     
     private func setupViews() {
         setupJourneyCommentTableViewConstraints()
+    }
+    
+    @objc private func refreshTableView() {
+        print("refreshTableView")
+        delegate?.refreshTableView()
     }
     
     // MARK: - Constraints

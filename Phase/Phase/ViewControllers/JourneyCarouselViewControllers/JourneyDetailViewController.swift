@@ -1,5 +1,5 @@
 //
-//  JourneyTestViewController.swift
+//  JourneyDetailViewController.swift
 //  Phase
 //
 //  Created by Clint M on 4/2/18.
@@ -35,16 +35,16 @@ class JourneyDetailViewController: UIViewController {
         frm.size.height = frm.size.height + 500
     }
     
-    private let refreshControl = UIRefreshControl()
     private var comments = [EventDummyDate]() {
         didSet {
             DispatchQueue.main.async {
                 self.middleView.journeyCommentTableView.reloadData()
+                self.headerView.configureHeaderViewCommentsCountLabel(with: self.comments.count)
             }
-
+            
         }
     }
-
+    
     private func dummmyData() {
         let event0 = EventDummyDate(userId: "Nate", creationDate: "2h", caption: "Cool stuff, bruh! 21! 21! 21! 21!", media: "man4.jpg")
         let event1 = EventDummyDate(userId: "Clint", creationDate: "1h 39m", caption: "Prayer hands", media: "man5.jpg")
@@ -111,6 +111,8 @@ class JourneyDetailViewController: UIViewController {
             DispatchQueue.main.async {
                 self.journeyCarouselView.carouselCollectionView.reloadData()
                 self.journeyCarouselView.carouselSlider.maximumValue = Float(self.events.count-1)
+                self.journeyCarouselView.configureCarouselSliderButtons(with: self.events.first?._creationDate, and: self.checkForNewJourney())
+                self.journeyCarouselView.configureCarouselCounter(with: self.events.count)
             }
         }
     }
@@ -135,12 +137,16 @@ class JourneyDetailViewController: UIViewController {
         self.middleView.journeyCommentTableView.delegate = self
         self.middleView.journeyCommentTableView.dataSource = self
         self.headerView.delegate = self
+        self.middleView.delegate = self
+        self.footerView.commentTextField.delegate = self
+        self.view.addGestureRecognizer(UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:))))
         
         configureNavBar()
         setupView()
         setupSlider()
         dummmyData()
         isHiddenWhenHeaderTapped()
+        keyboardNotifications()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -151,6 +157,12 @@ class JourneyDetailViewController: UIViewController {
     
     override func viewDidDisappear(_ animated: Bool) {
         resetViews()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(true)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.removeObserver(self, name: NSNotification.Name.UIKeyboardWillHide, object: nil)
     }
     
     // MARK: - Overrides
@@ -174,25 +186,55 @@ class JourneyDetailViewController: UIViewController {
         setFooterViewConstraints()
     }
     
+    private func keyboardNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(JourneyDetailViewController.keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(JourneyDetailViewController.keyboardWillHide), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    
+    
+    @objc func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y == 0{
+                self.view.frame.origin.y -= keyboardSize.height
+            }
+        }
+    }
+    
+    @objc func keyboardWillHide(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            if self.view.frame.origin.y != 0{
+                self.view.frame.origin.y += keyboardSize.height
+            }
+        }
+    }
+    
     private func configureNavBar() {
         self.navigationController?.navigationBar.isHidden = false
         self.navigationController?.navigationItem.title = "Journey"
         navigationItem.title = "\(self.journey._title ?? "Journey")"
-//        self.navigationController?.navigationBar.barTintColor = UIColor.white
+        //        self.navigationController?.navigationBar.barTintColor = UIColor.white
         self.navigationController?.navigationBar.backgroundColor = UIColor.white
         self.navigationController?.navigationBar.isTranslucent = false
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Subscribe", style: .plain, target: self, action: #selector(subscribeButtonTapped))
     }
     
     private func resetViews() {
-    headerViewMoved = false
-    headerView.transform = .identity
-    middleView.transform = .identity
-    middleView.isHidden = !headerViewMoved
-    footerView.transform = .identity
-    footerView.isHidden = !headerViewMoved
-    headerView.journeyCommentsUpButton.transform = .identity
-    headerView.journeyFollowersUpButton.transform = .identity
-    headerView.round(corners: .allCorners, radius: 18)
+        headerViewMoved = false
+        headerView.transform = .identity
+        middleView.transform = .identity
+        middleView.isHidden = !headerViewMoved
+        footerView.transform = .identity
+        footerView.isHidden = !headerViewMoved
+        headerView.journeyCommentsUpButton.transform = .identity
+        headerView.journeyFollowersUpButton.transform = .identity
+        headerView.round(corners: .allCorners, radius: 18)
+    }
+    
+    private func checkForNewJourney() -> NSNumber? {
+        guard events.count > 1 else { return nil }
+        let date = Date()
+        guard date.timePosted(from: events.first?._creationDate) != date.timePosted(from: events.last?._creationDate) else { return nil }
+        return events.last?._creationDate
     }
     
     private func setupSlider() {
@@ -276,6 +318,8 @@ class JourneyDetailViewController: UIViewController {
     
     @objc private func journeyProfileImageTapped() {}
     
+    @objc private func subscribeButtonTapped() {}
+    
     
     // MARK: - Contraints
     private func setJourneyCarouselViewConstraints() {
@@ -306,7 +350,7 @@ class JourneyDetailViewController: UIViewController {
         journeyProfileImageView.snp.makeConstraints { (make) in
             make.centerY.equalTo(headerView.snp.top)
             make.trailing.equalTo(headerView.snp.trailing).offset(-25)
-//            make.height.equalTo(headerView.snp.height).multipliedBy(0.1)
+            //            make.height.equalTo(headerView.snp.height).multipliedBy(0.1)
             make.height.equalTo(self.view.snp.height).multipliedBy(0.081)
             make.width.equalTo(journeyProfileImageView.snp.height)
         }
@@ -339,7 +383,7 @@ class JourneyDetailViewController: UIViewController {
 // MARK: - iCarouselDataSource
 extension JourneyDetailViewController: iCarouselDataSource {
     func numberOfItems(in carousel: iCarousel) -> Int {
-//        return picArr.count
+        //        return picArr.count
         print("events.count \(events.count)")
         return events.count
     }
@@ -347,9 +391,9 @@ extension JourneyDetailViewController: iCarouselDataSource {
     func carousel(_ carousel: iCarousel, viewForItemAt index: Int, reusing view: UIView?) -> UIView {
         var itemView: UIImageView
         itemView = UIImageView(frame: CGRect(x: 0, y: 0, width: journeyCarouselView.carouselCollectionView.frame.width, height: journeyCarouselView.carouselCollectionView.frame.height))
-//        itemView.image = picArr[index]
+        //        itemView.image = picArr[index]
         let event = events[index]
-        headerView.configureHeaderView(with: event)
+        headerView.configureHeaderViewCommentLabel(with: event)
         let url = URL(string: "https://s3.amazonaws.com/phase-journey-events/\(event._media!)")
         itemView.kf.indicatorType = .activity
         itemView.kf.setImage(with: url, placeholder: nil, options: nil, progressBlock: nil, completionHandler: nil)
@@ -402,6 +446,36 @@ extension JourneyDetailViewController: UITableViewDataSource {
     }
 }
 
+// MARK: - TextField Delegate
+extension JourneyDetailViewController: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+            //move textfields up
+            let myScreenRect: CGRect = UIScreen.main.bounds
+            let keyboardHeight : CGFloat = 216
+            
+            UIView.beginAnimations( "animateView", context: nil)
+            var movementDuration:TimeInterval = 0.35
+            var needToMove: CGFloat = 0
+            
+            var frame : CGRect = self.view.frame
+            if (textField.frame.origin.y + textField.frame.size.height + UIApplication.shared.statusBarFrame.size.height > (myScreenRect.size.height - keyboardHeight - 30)) {
+                needToMove = (textField.frame.origin.y + textField.frame.size.height + UIApplication.shared.statusBarFrame.size.height) - (myScreenRect.size.height - keyboardHeight - 30);
+            }
+            
+            frame.origin.y = -needToMove
+            self.view.frame = frame
+            UIView.commitAnimations()
+        }
+    
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        self.footerView.commentTextField.resignFirstResponder()
+        return true
+    }
+}
+
+extension JourneyDetailViewController: UIGestureRecognizerDelegate {
+}
+
 // MARK: - Custom Delegates
 extension JourneyDetailViewController: JourneyCommentTableCellDelegate {
     func profileImageTapped() {}
@@ -413,5 +487,12 @@ extension JourneyDetailViewController: JourneyHeaderDelegate {
     func segueToProfileTapped() {}
     func showCommentsTapped() {
         headerViewTapped()
+    }
+}
+
+extension JourneyDetailViewController: JourneyCommentTableViewDelegate {
+    func refreshTableView() {
+        self.middleView.journeyCommentTableView.reloadData()
+        self.middleView.journeyCommentTableView.refreshControl?.endRefreshing()
     }
 }
