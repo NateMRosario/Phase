@@ -101,8 +101,39 @@ class JourneyDetailViewController: UIViewController, UICollisionBehaviorDelegate
         self.events.sort{ ($0._creationDate as! Double) <  ($1._creationDate as! Double) }
     }
     
+    private func loadProfileImage() {
+        var currentUser = AppUser()
+        guard let userId = journey._userId else { return }
+        DynamoDBManager.shared.loadUser(userId: userId) { (user, error) in
+            if let error = error {
+                print(error)
+            }
+            currentUser = user
+        }
+        guard let imageLink = currentUser?._profileImage else { return journeyProfileImageView.image = #imageLiteral(resourceName: "profile-unselected") }
+        print("\(imageLink)")
+        let imageUrl = URL(string: "https://s3.amazonaws.com/phase-journey-events/\(imageLink)")
+        
+        journeyProfileImageView.kf.indicatorType = .activity
+        journeyProfileImageView.kf.setImage(with: imageUrl, placeholder: #imageLiteral(resourceName: "profile-unselected"), options: nil, progressBlock: nil, completionHandler: nil)
+    }
+
+    private var didSort = false {
+        didSet {
+            DispatchQueue.main.async {
+                self.journeyCarouselView.carouselCollectionView.reloadData()
+                self.journeyCarouselView.carouselCollectionView.scrollToItem(at: self.events.count, animated: false)
+            }
+        }
+    }
+    
     var events = [Event]() {
         didSet {
+            if events.count == journey._eventCount as! Int && didSort == false {
+                let sortedEvents = events.sorted() { ($0._creationDate as! Double) < ($1._creationDate as! Double) }
+                self.events = sortedEvents
+                didSort = true
+            }
             DispatchQueue.main.async {
                 self.journeyCarouselView.carouselCollectionView.reloadData()
                 self.journeyCarouselView.carouselSlider.maximumValue = Float(self.events.count-1)
@@ -127,6 +158,7 @@ class JourneyDetailViewController: UIViewController, UICollisionBehaviorDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         loadJourney()
+        loadProfileImage()
         self.journeyCarouselView.carouselCollectionView.delegate = self
         self.journeyCarouselView.carouselCollectionView.dataSource = self
         self.middleView.journeyCommentTableView.delegate = self
@@ -490,13 +522,13 @@ extension JourneyDetailViewController: iCarouselDataSource {
         itemView = UIImageView(frame: CGRect(x: 0, y: 0, width: journeyCarouselView.carouselCollectionView.frame.width, height: journeyCarouselView.carouselCollectionView.frame.height))
         //        itemView.image = picArr[index]
         let event = events[index]
-        headerView.configureHeaderViewCommentLabel(with: event)
         let url = URL(string: "https://s3.amazonaws.com/phase-journey-events/\(event._media!)")
         itemView.kf.indicatorType = .activity
         itemView.kf.setImage(with: url, placeholder: nil, options: nil, progressBlock: nil, completionHandler: nil)
         itemView.layer.masksToBounds = true
         itemView.clipsToBounds = true
         itemView.contentMode = .scaleAspectFill
+        
         return itemView
     }
 }
@@ -518,6 +550,10 @@ extension JourneyDetailViewController: iCarouselDelegate {
     
     func carouselCurrentItemIndexDidChange(_ carousel: iCarousel) {
         journeyCarouselView.carouselSlider.value = Float(carousel.currentItemIndex)
+        let currentIndex = carousel.currentItemIndex
+        let event = events[currentIndex]
+        self.headerView.journeyCaptionLabel.text = event._caption ?? ""
+
     }
     
 }

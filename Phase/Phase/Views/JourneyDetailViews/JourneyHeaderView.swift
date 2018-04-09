@@ -60,7 +60,7 @@ class JourneyHeaderView: UIView {
         label.text = "This is were the caption will appear."
         label.textAlignment = .left
         label.numberOfLines = 0
-        label.font = UIFont.systemFont(ofSize: 13, weight: .semibold)
+        label.font = UIFont.systemFont(ofSize: 13, weight: .regular)
         return label
     }()
     
@@ -167,6 +167,7 @@ class JourneyHeaderView: UIView {
     
     public func configureHeaderViewCommentLabel(with event: Event) {
         self.journeyCaptionLabel.text = "\(event._caption ?? "No caption provided")"
+        print("caption assigned in journeyheaderView: \(event._caption)")
     }
     
     public func configureHeaderViewCommentsCountLabel(with comments: Int) {
@@ -225,7 +226,7 @@ class JourneyHeaderView: UIView {
             make.leading.equalTo(self).offset(12)
             make.trailing.equalTo(self).offset(-12)
             make.top.equalTo(journeyUserNamelabel
-                .snp.bottom).offset(8)
+                .snp.bottom).offset(4)
         }
     }
     

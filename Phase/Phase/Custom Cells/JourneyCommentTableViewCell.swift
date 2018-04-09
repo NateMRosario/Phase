@@ -133,7 +133,6 @@ class JourneyCommentTableViewCell: UITableViewCell {
         }
     }
     
-    
     public func configureCell(with event: EventDummyDate) {
         self.profileImageView.image = UIImage(imageLiteralResourceName: "\(event._media)")
         self.timePostedLabel.text = event._eventId

@@ -176,25 +176,25 @@ class HomeViewController: UIViewController {
 extension HomeViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return appEvents.count + 1
+        return appEvents.count
     }
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        if indexPath.item == appEvents.count { // add paging
-            let cell = tableView.dequeueReusableCell(withIdentifier: "loading", for: indexPath)
-            cell.addSubview(loading)
-            loading.snp.makeConstraints({ (make) in
-                make.centerX.equalTo(self.view.snp.centerX)
-                make.centerY.equalTo(cell.contentView.snp.centerY)
-            })
-            loading.startAnimating()
-            return cell
-        } else {
+//        if indexPath.item == appEvents.count { // add paging
+//            let cell = tableView.dequeueReusableCell(withIdentifier: "loading", for: indexPath)
+//            cell.addSubview(loading)
+//            loading.snp.makeConstraints({ (make) in
+//                make.centerX.equalTo(self.view.snp.centerX)
+//                make.centerY.equalTo(cell.contentView.snp.centerY)
+//            })
+//            loading.startAnimating()
+//            return cell
+//        } else {
             let cell = tableView.dequeueReusableCell(withIdentifier: "HomeFeedCell", for: indexPath) as! HomeFeedTableViewCell ///Change name
             let event = Array(appEvents)[indexPath.row]
             cell.configureCell(event: event)
             cell.layer.cornerRadius = 8
             return cell
-        }
+//        }
     }
 }
 
