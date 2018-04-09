@@ -175,7 +175,7 @@ class PreviewViewController: UIViewController {
                 }
             } else {
                 DispatchQueue.main.async {
-                    self.dismiss(animated: true)
+                    self.dismiss(animated: false)
                     self.delegate?.didPost()
                 }
             }
