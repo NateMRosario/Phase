@@ -21,7 +21,7 @@ class CreateNewJourneyView: UIView {
     
     lazy var headerView: UIView = {
         let header = UIView()
-        header.layer.opacity = 0.45
+        header.layer.opacity = 0.2
         header.backgroundColor = .white
         return header
     }()
@@ -50,7 +50,8 @@ class CreateNewJourneyView: UIView {
     lazy var headerLabel: UILabel = {
         let label = UILabel()
         label.text = "New Journey"
-        label.font = UIFont.systemFont(ofSize: 18, weight: .regular)
+        label.textColor = .white
+        label.font = UIFont.systemFont(ofSize: 20, weight: .medium)
         return label
     }()
     

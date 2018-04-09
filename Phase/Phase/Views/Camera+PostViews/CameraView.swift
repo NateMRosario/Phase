@@ -25,7 +25,7 @@ class CameraView: UIView {
     lazy var containerView: UIView = {
         let bc = UIView()
         bc.backgroundColor = .white
-        bc.layer.opacity = 0.45
+        bc.layer.opacity = 0.35
         return bc
     }()
     

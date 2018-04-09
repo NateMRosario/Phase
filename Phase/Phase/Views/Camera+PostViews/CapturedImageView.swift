@@ -40,9 +40,17 @@ class CapturedImageView: UIView {
         return header
     }()
     
+    lazy var headerLabel: UILabel = {
+        let label = UILabel()
+        label.text = "Add Phase"
+        label.textColor = .white
+        label.font = UIFont.systemFont(ofSize: 20, weight: .medium)
+        return label
+    }()
+    
     lazy var headerView: UIView = {
         let header = UIView()
-            header.layer.opacity = 0.45
+            header.layer.opacity = 0.2
             header.backgroundColor = .white
         return header
     }()
@@ -134,6 +142,7 @@ class CapturedImageView: UIView {
         setupHeaderView()
         setupCancelButton()
         setupPostButton()
+        setupHeaderLabel()
         setupPostCollectionView()
         setupScrollView()
         setupContentView()
@@ -185,6 +194,15 @@ class CapturedImageView: UIView {
             postButton.trailingAnchor.constraint(equalTo: headerView.safeAreaLayoutGuide.trailingAnchor, constant: -10),
             postButton.centerYAnchor.constraint(equalTo: headerView.safeAreaLayoutGuide.centerYAnchor),
             postButton.widthAnchor.constraint(equalTo: headerView.widthAnchor, multiplier: 0.15)
+            ])
+    }
+    
+    private func setupHeaderLabel() {
+        addSubview(headerLabel)
+        headerLabel.translatesAutoresizingMaskIntoConstraints = false
+        NSLayoutConstraint.activate([
+            headerLabel.centerXAnchor.constraint(equalTo: headerView.safeAreaLayoutGuide.centerXAnchor),
+            headerLabel.centerYAnchor.constraint(equalTo: headerView.safeAreaLayoutGuide.centerYAnchor)
             ])
     }
     
