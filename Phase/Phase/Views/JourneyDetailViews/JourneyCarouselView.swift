@@ -9,38 +9,12 @@
 import UIKit
 import SnapKit
 
-extension UIView {
-    func makeCorner(withRadius radius: CGFloat) {
-        self.layer.cornerRadius = radius
-        self.layer.masksToBounds = true
-        self.clipsToBounds = true
-        self.layer.isOpaque = false
-    }
-    
-    func makeCircle() {
-        self.layer.masksToBounds = true
-        self.clipsToBounds = true
-        self.layer.cornerRadius = self.bounds.width/2.0
-    }
-    
-    func drawCircleInView(parentView: UIView, targetView: UIView, color: UIColor, diameter: CGFloat)
-    {
-        let square = CGSize(width: min(parentView.bounds.width, parentView.bounds.height), height: min(parentView.bounds.width, parentView.bounds.height))
-        let center = CGPoint(x: square.width / 2 - diameter, y: square.height / 2 - diameter)
-        
-        let circlePath = UIBezierPath(arcCenter: center, radius: CGFloat(diameter), startAngle: CGFloat(0), endAngle: CGFloat(Double.pi * 2), clockwise: true)
-        let shapeLayer = CAShapeLayer()
-        print(targetView.center)
-        shapeLayer.path = circlePath.cgPath
-        
-        shapeLayer.fillColor = color.cgColor
-        shapeLayer.strokeColor = color.cgColor
-        shapeLayer.lineWidth = 1.0
-        
-        targetView.backgroundColor = UIColor.clear
-        targetView.layer.addSublayer(shapeLayer)
-    }
+// MARK: - Custom Delegate
+protocol JourneyCarouselViewDelegate: class {
+    func showFirstPost()
+    func showLastPost()
 }
+
 
 class JourneyCarouselView: UIView {
     
@@ -56,14 +30,62 @@ class JourneyCarouselView: UIView {
         let numberOfCells: CGFloat = 3
         carousel.type = .coverFlow
         carousel.clipsToBounds = true
+        carousel.decelerationRate = 0.5
+        carousel.bounceDistance = 0.5
+        carousel.isPagingEnabled = true
         return carousel
     }()
     
     lazy var carouselSlider: UISlider = {
         let slider = UISlider()
         slider.tintColor = UIColor.black
+        slider.minimumTrackTintColor = UIColor(hue: 0.5861, saturation: 1, brightness: 0.99, alpha: 1.0) /* #007afe */
         return slider
     }()
+    
+    lazy var leftDateButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("45\ndays ago", for: .normal)
+        button.titleLabel?.lineBreakMode = .byWordWrapping
+        button.titleLabel?.textAlignment = .center
+        button.backgroundColor = UIColor.clear
+        button.setTitleColor(UIColor.gray, for: .normal)
+        button.setTitleColor(UIColor.blue, for: .highlighted)
+        button.setTitleColor(UIColor.black, for: .selected)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 8, weight: .semibold)
+        button.addTarget(self, action: #selector(showFirstPost), for: .touchUpInside)
+        return button
+    }()
+    
+    lazy var rightDateButton: UIButton = {
+        let button = UIButton()
+        button.setTitle("1\ndays ago", for: .normal)
+        button.titleLabel?.textAlignment = .center
+        button.titleLabel?.lineBreakMode = .byWordWrapping
+        button.backgroundColor = UIColor.clear
+        button.setTitleColor(UIColor.gray, for: .normal)
+        button.setTitleColor(UIColor.blue, for: .highlighted)
+        button.setTitleColor(UIColor.black, for: .selected)
+        button.titleLabel?.font = UIFont.systemFont(ofSize: 8, weight: .semibold)
+        button.addTarget(self, action: #selector(showLastPost), for: .touchUpInside)
+        return button
+    }()
+    
+    lazy var totalCellsInCarouselLabel: PaddingLabel = {
+        let label = PaddingLabel(withInsets: 4, 4, 14, 14)
+        label.backgroundColor = UIColor.white.withAlphaComponent(1)
+        label.text = "1 out of 1"
+        label.textAlignment = .center
+        label.numberOfLines = 0
+        label.layer.cornerRadius = 8
+        label.clipsToBounds = true
+        label.font = UIFont.systemFont(ofSize: 10, weight: .semibold)
+        return label
+    }()
+    
+    
+    // MARK: - Delegate
+    weak var delegate: JourneyCarouselViewDelegate?
     
     // MARK: - Initializers
     override init(frame: CGRect) {
@@ -85,7 +107,32 @@ class JourneyCarouselView: UIView {
     private func setupViews() {
         setupCarouselCollectionView()
         setupCarouselSlider()
+        setRightDateButtonConstraints()
+        setLeftDateButtonConstraints()
+        setTotalCellsInCarouselLabelConstraints()
     }
+    
+    public func configureCarouselSliderButtons(with startDate: NSNumber?, and endDate: NSNumber?) {
+        let date = Date()
+        self.leftDateButton.setTitle("\(date.timePosted(from: startDate) ?? "0 seconds ago")", for: .normal)
+        self.rightDateButton.setTitle("\(date.timePosted(from: endDate) ?? "")", for: .normal)
+    }
+    
+    public func configureCarouselCounter(with events: Int) {
+        self.totalCellsInCarouselLabel.text = "total Phases: \(events)"
+    }
+    
+    
+    @objc private func showFirstPost() {
+        print("showFirstPost")
+        delegate?.showFirstPost()
+    }
+    
+    @objc private func showLastPost() {
+        print("showFirstPost")
+        delegate?.showLastPost()
+    }
+    
     
     private func setupCarouselCollectionView() {
         addSubview(carouselCollectionView)
@@ -101,9 +148,36 @@ class JourneyCarouselView: UIView {
         addSubview(carouselSlider)
         carouselSlider.snp.makeConstraints { (make) in
             make.top.equalTo(carouselCollectionView.snp.bottom).offset(16)
-            make.width.equalTo(self).multipliedBy(0.75)
+            make.width.equalTo(self).multipliedBy(0.73)
             make.height.equalTo(5)
             make.centerX.equalTo(self)
+            
+        }
+    }
+    
+    private func setLeftDateButtonConstraints() {
+        addSubview(leftDateButton)
+        leftDateButton.snp.makeConstraints { (make) in
+            make.trailing.equalTo(carouselSlider.snp.leading).offset(-6)
+            make.leading.equalTo(self).offset(8)
+            make.centerY.equalTo(carouselSlider.snp.centerY)
+        }
+    }
+    
+    private func setRightDateButtonConstraints() {
+        addSubview(rightDateButton)
+        rightDateButton.snp.makeConstraints { (make) in
+            make.leading.equalTo(carouselSlider.snp.trailing).offset(6)
+            make.centerY.equalTo(carouselSlider.snp.centerY)
+            make.trailing.equalTo(self).offset(-8)
+        }
+    }
+    
+    private func setTotalCellsInCarouselLabelConstraints() {
+        addSubview(totalCellsInCarouselLabel)
+        totalCellsInCarouselLabel.snp.makeConstraints { (make) in
+            make.top.equalTo(carouselSlider.snp.bottom).offset(16)
+            make.centerX.equalTo(carouselSlider.snp.centerX)
         }
     }
     
