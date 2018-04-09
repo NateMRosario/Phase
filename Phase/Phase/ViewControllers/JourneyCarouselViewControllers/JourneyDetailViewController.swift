@@ -118,8 +118,14 @@ class JourneyDetailViewController: UIViewController, UICollisionBehaviorDelegate
         journeyProfileImageView.kf.setImage(with: imageUrl, placeholder: #imageLiteral(resourceName: "profile-unselected"), options: nil, progressBlock: nil, completionHandler: nil)
     }
 
-    
-    private var didSort = false
+    private var didSort = false {
+        didSet {
+            DispatchQueue.main.async {
+                self.journeyCarouselView.carouselCollectionView.reloadData()
+                self.journeyCarouselView.carouselCollectionView.scrollToItem(at: self.events.count, animated: false)
+            }
+        }
+    }
     
     var events = [Event]() {
         didSet {
