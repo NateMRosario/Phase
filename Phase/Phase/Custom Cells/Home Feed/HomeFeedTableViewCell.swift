@@ -77,22 +77,13 @@ class HomeFeedTableViewCell: UITableViewCell {
         
         contentImage.kf.indicatorType = .activity
         contentImage.kf.setImage(with: url, placeholder: #imageLiteral(resourceName: "EmptyImageState"), options: nil, progressBlock: nil, completionHandler: nil)
-//        { (image, error, cache, url) in
-//            if let image = image {
-//                let ratio = image.size.width / image.size.height
-//                if ratio > 1 {
-//                    let newHeight = self.contentView.frame.width / ratio
-//                    self.contentImage.bounds.size = CGSize(width: self.contentView.frame.width, height: newHeight)
-//                        self.delegate?.updateTableView()
-//                } else {
-//                    let newWidth = self.contentView.frame.height * ratio
-//                    self.contentImage.frame.size = CGSize(width: newWidth, height: self.contentView.frame.height)
-//                    self.delegate?.updateTableView()
-//                }
-//            }
-//        }
-        guard let image = eventImage else {return userImage.image = #imageLiteral(resourceName: "7-R5CLfl_400x400") }
-        userImage.image = image
+
+        
+        guard let imageLink = currentUser?._profileImage else { return userImage.image = #imageLiteral(resourceName: "profile-unselected") }
+        let imageUrl = URL(string: "https://s3.amazonaws.com/phase-journey-events/\(imageLink)")
+        
+        userImage.kf.indicatorType = .activity
+        userImage.kf.setImage(with: imageUrl, placeholder: #imageLiteral(resourceName: "profile-unselected"), options: nil, progressBlock: nil, completionHandler: nil)
     }
         
     public func set(image: UIImage, event: Event) {

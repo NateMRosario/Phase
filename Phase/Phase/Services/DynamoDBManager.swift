@@ -451,7 +451,6 @@ extension DynamoDBManager {
                     if let error = error {
                         completion(error)
                     } else {
-                        self.delegate?.didWatchJourney!()
                         completion(nil)
                     }
                 })
