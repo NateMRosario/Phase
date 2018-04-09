@@ -118,24 +118,31 @@ class HomeViewController: UIViewController {
     }
 
     private func fetchJourney() {
-        
-        var currentJourney = Set<Journey>() {
+        var totalJourneys = Set<Journey>() {
             didSet {
-                for journey in currentJourney {
+                for journey in totalJourneys {
                     guard let eventID = journey._lastEvent else {print("eventID");return}
                     self.eventIDs.insert(eventID)
                 }
             }
         }
-        ///TODO: Switch to this when following is active
-//        guard let journeyIds = appUser?._journeysFollowed else {return}
-        guard let journeyIds = appUser?._journeys else {
+        if usersFollowedJourneys().isEmpty && usersJourneys().isEmpty {
             DispatchQueue.main.async {
                 self.view.addSubview(self.emptyView)
             }
-            return }
-        DispatchQueue.main.async {
-            self.emptyView.removeFromSuperview()
+        } else {
+            DispatchQueue.main.async {
+                self.emptyView.removeFromSuperview()
+            }
+            totalJourneys.formUnion(usersFollowedJourneys())
+            totalJourneys.formUnion(usersJourneys())
+        }
+    }
+    
+    fileprivate func usersJourneys() -> Set<Journey> {
+        var currentJourney = Set<Journey>()
+        guard let journeyIds = appUser?._journeys else {
+            return currentJourney
         }
         for journey in journeyIds {
             DynamoDBManager.shared.loadJourney(journeyId: journey, completion: { (journey, error) in
@@ -143,7 +150,23 @@ class HomeViewController: UIViewController {
                 currentJourney.insert(journey)
             })
         }
+        return currentJourney
     }
+    
+    fileprivate func usersFollowedJourneys() -> Set<Journey> {
+        var currentJourney = Set<Journey>()
+        guard let followedJourneyIds = appUser?._journeysFollowed else {
+            return currentJourney
+        }
+        for journey in followedJourneyIds {
+            DynamoDBManager.shared.loadJourney(journeyId: journey, completion: { (journey, error) in
+                guard let journey = journey else {return}
+                currentJourney.insert(journey)
+            })
+        }
+        return currentJourney
+    }
+    
     
     deinit {
         tableView?.dg_removePullToRefresh()
