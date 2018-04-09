@@ -18,6 +18,7 @@ class JourneyFollowersImagesView: UIView {
         let roundedView = RoundedfollowersView.init(tag: 0)
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(followerImageViewTapped))
         roundedView.addGestureRecognizer(tapRecognizer)
+        roundedView.imageView.image = #imageLiteral(resourceName: "man1.jpg")
         return roundedView
     }()
     
@@ -25,6 +26,7 @@ class JourneyFollowersImagesView: UIView {
         let roundedView = RoundedfollowersView.init(tag: 1)
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(followerImageViewTapped))
         roundedView.addGestureRecognizer(tapRecognizer)
+        roundedView.imageView.image = #imageLiteral(resourceName: "man6.jpg")
         return roundedView
     }()
     
@@ -32,6 +34,7 @@ class JourneyFollowersImagesView: UIView {
         let roundedView = RoundedfollowersView.init(tag: 2)
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(followerImageViewTapped))
         roundedView.addGestureRecognizer(tapRecognizer)
+        roundedView.imageView.image = #imageLiteral(resourceName: "woman4.jpg")
         return roundedView
     }()
     
@@ -39,6 +42,7 @@ class JourneyFollowersImagesView: UIView {
         let roundedView = RoundedfollowersView.init(tag: 3)
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(followerImageViewTapped))
         roundedView.addGestureRecognizer(tapRecognizer)
+        roundedView.imageView.image = #imageLiteral(resourceName: "man2.jpg")
         return roundedView
     }()
     
@@ -46,6 +50,7 @@ class JourneyFollowersImagesView: UIView {
         let roundedView = RoundedfollowersView.init(tag: 4)
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(followerImageViewTapped))
         roundedView.addGestureRecognizer(tapRecognizer)
+        roundedView.imageView.image = #imageLiteral(resourceName: "woman5.jpg")
         return roundedView
     }()
     
