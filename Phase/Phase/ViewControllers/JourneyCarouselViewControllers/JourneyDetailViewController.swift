@@ -101,6 +101,24 @@ class JourneyDetailViewController: UIViewController, UICollisionBehaviorDelegate
         self.events.sort{ ($0._creationDate as! Double) <  ($1._creationDate as! Double) }
     }
     
+    private func loadProfileImage() {
+        var currentUser = AppUser()
+        guard let userId = journey._userId else { return }
+        DynamoDBManager.shared.loadUser(userId: userId) { (user, error) in
+            if let error = error {
+                print(error)
+            }
+            currentUser = user
+        }
+        guard let imageLink = currentUser?._profileImage else { return journeyProfileImageView.image = #imageLiteral(resourceName: "profile-unselected") }
+        print("\(imageLink)")
+        let imageUrl = URL(string: "https://s3.amazonaws.com/phase-journey-events/\(imageLink)")
+        
+        journeyProfileImageView.kf.indicatorType = .activity
+        journeyProfileImageView.kf.setImage(with: imageUrl, placeholder: #imageLiteral(resourceName: "profile-unselected"), options: nil, progressBlock: nil, completionHandler: nil)
+    }
+
+    
     private var didSort = false
     
     var events = [Event]() {
@@ -134,6 +152,7 @@ class JourneyDetailViewController: UIViewController, UICollisionBehaviorDelegate
     override func viewDidLoad() {
         super.viewDidLoad()
         loadJourney()
+        loadProfileImage()
         self.journeyCarouselView.carouselCollectionView.delegate = self
         self.journeyCarouselView.carouselCollectionView.dataSource = self
         self.middleView.journeyCommentTableView.delegate = self
