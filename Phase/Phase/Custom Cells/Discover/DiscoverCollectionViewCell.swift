@@ -40,6 +40,11 @@ class DiscoverCollectionViewCell: UICollectionViewCell {
             DispatchQueue.main.async {
                 guard let user = self.user else { return }
                 self.usernameLabel.text = user._username!
+                guard let imageLink = user._profileImage else { return self.profileImage.image = #imageLiteral(resourceName: "profile-unselected") }
+                let imageUrl = URL(string: "https://s3.amazonaws.com/phase-journey-events/\(imageLink)")
+                
+                self.profileImage.kf.indicatorType = .activity
+                self.profileImage.kf.setImage(with: imageUrl, placeholder: #imageLiteral(resourceName: "profile-unselected"), options: nil, progressBlock: nil, completionHandler: nil)
             }
         }
     }
