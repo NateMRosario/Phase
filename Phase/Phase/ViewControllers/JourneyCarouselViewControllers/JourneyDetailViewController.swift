@@ -504,13 +504,13 @@ extension JourneyDetailViewController: iCarouselDataSource {
         itemView = UIImageView(frame: CGRect(x: 0, y: 0, width: journeyCarouselView.carouselCollectionView.frame.width, height: journeyCarouselView.carouselCollectionView.frame.height))
         //        itemView.image = picArr[index]
         let event = events[index]
-        headerView.configureHeaderViewCommentLabel(with: event)
         let url = URL(string: "https://s3.amazonaws.com/phase-journey-events/\(event._media!)")
         itemView.kf.indicatorType = .activity
         itemView.kf.setImage(with: url, placeholder: nil, options: nil, progressBlock: nil, completionHandler: nil)
         itemView.layer.masksToBounds = true
         itemView.clipsToBounds = true
         itemView.contentMode = .scaleAspectFill
+        
         return itemView
     }
 }
@@ -532,6 +532,10 @@ extension JourneyDetailViewController: iCarouselDelegate {
     
     func carouselCurrentItemIndexDidChange(_ carousel: iCarousel) {
         journeyCarouselView.carouselSlider.value = Float(carousel.currentItemIndex)
+        let currentIndex = carousel.currentItemIndex
+        let event = events[currentIndex]
+        self.headerView.journeyCaptionLabel.text = event._caption ?? ""
+
     }
     
 }
