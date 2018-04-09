@@ -54,7 +54,7 @@ class OnboardingLoginViewController: UIViewController {
         pastelView.startAnimation()
         view.insertSubview(pastelView, at: 0)
         
-        userLoginInfoTF.text = "Kuuhaku"
+        userLoginInfoTF.text = "Tyler"
         passwordTF.text = "123456"
     }
     
