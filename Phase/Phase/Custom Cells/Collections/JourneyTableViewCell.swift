@@ -69,12 +69,13 @@ class JourneyTableViewCell: UITableViewCell {
     
     public func configureCell(with journey: Journey, creator: AppUser?, row rows: Int) {
         getEvents(for: journey)
+        
         self.startDateLabel.text = convertDate(from: journey._creationDate)
         self.userName.text = creator?._username
         self.watchersLabel.text = "Watchers: \(String(describing: journey._numberOfWatchers!))"
         self.journeyTitle.text = journey._title
         if let profileImageUrl = creator?._profileImage {
-            profileImageView.kf.setImage(with: URL(string: profileImageUrl))
+            profileImageView.kf.setImage(with: URL(string: "https://s3.amazonaws.com/phase-journey-events/\(profileImageUrl)")!)
         }
     }
     

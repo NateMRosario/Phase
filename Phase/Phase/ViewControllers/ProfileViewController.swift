@@ -229,10 +229,17 @@ class ProfileViewController: UIViewController, DynamoDBUserActionsDelegate {
             self.bioLabel.text = userInfo._bio ?? ""
             self.headerLabel.text = userInfo._username
         }
-        
-        if let headerImageUrl = userInfo._headerImage {
-            headerImageView.kf.setImage(with: URL(string: headerImageUrl)!)
+        if let profile = userInfo._profileImage {
+            DispatchQueue.main.async {
+                self.profileImage.kf.setImage(with: URL(string: "https://s3.amazonaws.com/phase-journey-events/\(profile)")!)
+                self.tableView.reloadData()
+            }
         }
+    }
+    
+    func getAWSUrl(interpolated: String) -> String {
+        let str = "https://s3.amazonaws.com/phase-journey-events/\(interpolated)"
+        return str
     }
     
     private func loadJourneys(for user: AppUser) {
