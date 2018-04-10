@@ -608,6 +608,14 @@ extension JourneyDetailViewController: UITextFieldDelegate {
         self.footerView.commentTextField.resignFirstResponder()
         return true
     }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        guard let text = textField.text else {
+            
+            return
+        }
+    }
+    
 }
 
 extension JourneyDetailViewController: UIGestureRecognizerDelegate {

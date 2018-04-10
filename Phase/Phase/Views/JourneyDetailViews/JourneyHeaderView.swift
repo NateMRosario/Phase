@@ -45,7 +45,7 @@ class JourneyHeaderView: UIView {
     
     lazy var journeyUserNamelabel: UIButton = {
         let button = UIButton()
-        button.setTitle("Ty PodMaster", for: .normal)
+        button.setTitle("", for: .normal)
         button.titleLabel?.textAlignment = .left
         button.setTitleColor(UIColor.black, for: .normal)
         button.backgroundColor = UIColor.clear
