@@ -187,6 +187,8 @@
 		870C0F53207B199C00A175DA /* UIView+MakeCorner+MakeCircle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870C0F52207B199C00A175DA /* UIView+MakeCorner+MakeCircle.swift */; };
 		870C0F55207B248100A175DA /* UILabel+AttributedText.swift in Sources */ = {isa = PBXBuildFile; fileRef = 870C0F54207B248100A175DA /* UILabel+AttributedText.swift */; };
 		8791DFDB2060171F00337CA3 /* JourneyFollowersImagesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8791DFDA2060171F00337CA3 /* JourneyFollowersImagesView.swift */; };
+		87A4B524207C5FE200CEE801 /* SplashScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A4B523207C5FE200CEE801 /* SplashScreen.swift */; };
+		87A4B526207C600700CEE801 /* SplashVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87A4B525207C600700CEE801 /* SplashVC.swift */; };
 		87F742BB2072904700972DD8 /* JourneyHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F742BA2072904700972DD8 /* JourneyHeaderView.swift */; };
 		87F742BD2072905600972DD8 /* JourneyCommentTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F742BC2072905600972DD8 /* JourneyCommentTableView.swift */; };
 		87F742BF2072906200972DD8 /* JourneyBottomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 87F742BE2072906200972DD8 /* JourneyBottomView.swift */; };
@@ -424,6 +426,8 @@
 		870C0F52207B199C00A175DA /* UIView+MakeCorner+MakeCircle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+MakeCorner+MakeCircle.swift"; sourceTree = "<group>"; };
 		870C0F54207B248100A175DA /* UILabel+AttributedText.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UILabel+AttributedText.swift"; sourceTree = "<group>"; };
 		8791DFDA2060171F00337CA3 /* JourneyFollowersImagesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyFollowersImagesView.swift; sourceTree = "<group>"; };
+		87A4B523207C5FE200CEE801 /* SplashScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashScreen.swift; sourceTree = "<group>"; };
+		87A4B525207C600700CEE801 /* SplashVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashVC.swift; sourceTree = "<group>"; };
 		87F742BA2072904700972DD8 /* JourneyHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyHeaderView.swift; sourceTree = "<group>"; };
 		87F742BC2072905600972DD8 /* JourneyCommentTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyCommentTableView.swift; sourceTree = "<group>"; };
 		87F742BE2072906200972DD8 /* JourneyBottomView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JourneyBottomView.swift; sourceTree = "<group>"; };
@@ -509,6 +513,7 @@
 		810935C7205C436300A95B30 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
+				810935732059BAAC00A95B30 /* EventViewController.swift */,
 				8109356D2059BA5B00A95B30 /* LoginViewController.swift */,
 				8109356F2059BA7600A95B30 /* CreateAccountViewController.swift */,
 				810935C8205C452A00A95B30 /* ConfirmAccountViewController.swift */,
@@ -1037,6 +1042,8 @@
 				F49638FC206AC705002D62E7 /* JourneyDetailViews */,
 				817C6EEB2069AB9D00010EDF /* Following */,
 				819EACDA2076A1D800CFBF4D /* HomeEmptyView.swift */,
+				87A4B523207C5FE200CEE801 /* SplashScreen.swift */,
+				87A4B525207C600700CEE801 /* SplashVC.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -1054,7 +1061,6 @@
 				818DBB69206980A500B91990 /* NotificationsViewController.swift */,
 				810935C7205C436300A95B30 /* Auth */,
 				810935712059BA8400A95B30 /* HomeViewController.swift */,
-				810935732059BAAC00A95B30 /* EventViewController.swift */,
 				810935752059BB0D00A95B30 /* FollowsViewController.swift */,
 				810935772059BB9200A95B30 /* EditProfileViewController.swift */,
 				817C6EDC2069A99500010EDF /* FollowsViewController.swift */,
@@ -1583,7 +1589,9 @@
 				817C6EE82069AB7E00010EDF /* FollowingTableCell.swift in Sources */,
 				81C368D6206B2EDF00A1873E /* BaseMessageHandler.swift in Sources */,
 				810935DA2061503800A95B30 /* CognitoConstants.swift in Sources */,
+				87A4B526207C600700CEE801 /* SplashVC.swift in Sources */,
 				819EACDB2076A1D900CFBF4D /* HomeEmptyView.swift in Sources */,
+				87A4B524207C5FE200CEE801 /* SplashScreen.swift in Sources */,
 				81237789206AA03300A6BC02 /* CameraViewController.swift in Sources */,
 				81AB8AB4205AF7AB00A98AFB /* UINavigationBar+Extensions.swift in Sources */,
 				810935842059BCDD00A95B30 /* EventView.swift in Sources */,
@@ -1819,11 +1827,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 26RHXP32FH;
+				DEVELOPMENT_TEAM = XYLS53SA6G;
 				INFOPLIST_FILE = "$(SRCROOT)/Phase/SupportingFiles/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = reiazgafar.Phase;
+				PRODUCT_BUNDLE_IDENTIFIER = blahblahblah.Phase;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Phase/iCarousel/Phase-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1839,11 +1847,11 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
-				DEVELOPMENT_TEAM = 26RHXP32FH;
+				DEVELOPMENT_TEAM = XYLS53SA6G;
 				INFOPLIST_FILE = "$(SRCROOT)/Phase/SupportingFiles/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 11.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = reiazgafar.Phase;
+				PRODUCT_BUNDLE_IDENTIFIER = blahblahblah.Phase;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "Phase/iCarousel/Phase-Bridging-Header.h";
 				SWIFT_VERSION = 4.0;
