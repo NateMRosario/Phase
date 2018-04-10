@@ -558,7 +558,6 @@ extension JourneyDetailViewController: iCarouselDelegate {
         let currentIndex = carousel.currentItemIndex
         let event = events[currentIndex]
         self.headerView.journeyCaptionLabel.text = event._caption ?? ""
-
     }
     
 }
@@ -609,6 +608,14 @@ extension JourneyDetailViewController: UITextFieldDelegate {
         self.footerView.commentTextField.resignFirstResponder()
         return true
     }
+    
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        guard let text = textField.text else {
+            
+            return
+        }
+    }
+    
 }
 
 extension JourneyDetailViewController: UIGestureRecognizerDelegate {
