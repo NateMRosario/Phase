@@ -413,13 +413,14 @@ class JourneyDetailViewController: UIViewController, UICollisionBehaviorDelegate
     }
     
     // selector functions
-    @objc private func sliderValueChanged(_ sender: UISlider) { 
+    @objc private func sliderValueChanged(_ sender: UISlider) {
         scrolledBySlider = true
         sliderValue = Int(sender.value)
         print("slider value is \(Int(sender.value)) ---")
     }
     
     @objc private func journeyProfileImageTapped() {
+        //TODO: - fix wegue to prifle vc
 //        let profileVC = ProfileViewController(loadSelectedUser: journey._userId!)
 //        navigationController?.pushViewController(profileVC!, animated: true)
     }
