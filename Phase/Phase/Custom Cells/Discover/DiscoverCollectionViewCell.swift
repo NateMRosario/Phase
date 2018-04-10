@@ -90,14 +90,14 @@ class DiscoverCollectionViewCell: UICollectionViewCell {
     
     
     @IBAction func likeButtonTapped(_ sender: UIButton) {
-        guard let event = event else { return }
-        DynamoDBManager.shared.likeEvent(event: event) { (error) in
-            if let error = error {
-                print(error)
-            } else {
-                print("successfully liked")
-            }
-        }
+//        guard let event = event else { return }
+//        DynamoDBManager.shared.likeEvent(event: event) { (error) in
+//            if let error = error {
+//                print(error)
+//            } else {
+//                print("successfully liked")
+//            }
+//        }
     }
     
     lazy var stackImageView: UIImageView = {
