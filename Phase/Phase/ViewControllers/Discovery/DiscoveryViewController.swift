@@ -65,7 +65,6 @@ class DiscoveryViewController: UIViewController {
     
     var journeys = [Journey]() {
         didSet {
-            print(journeys)
             DispatchQueue.main.async {
                 self.collectionView.reloadData()
             }
@@ -82,7 +81,7 @@ class DiscoveryViewController: UIViewController {
         self.collectionView.alwaysBounceVertical = true
         loadingView.tintColor = UIColor(red: 78/255.0, green: 221/255.0, blue: 200/255.0, alpha: 1.0)
         collectionView.dg_addPullToRefreshWithActionHandler({ [weak self] () -> Void in
-            
+            self?.getJourneys()
             self?.collectionView.dg_stopLoading()
             }, loadingView: loadingView)
         let img = #imageLiteral(resourceName: "085 October Silence").crop(toWidth: UIScreen.main.bounds.width, toHeight: UIScreen.main.bounds.width)!
