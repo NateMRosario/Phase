@@ -58,7 +58,7 @@ class JourneyFollowersImagesView: UIView {
         let button = UIButton(type: UIButtonType.custom) as UIButton
         button.backgroundColor = UIColor.white
         button.layer.borderColor = UIColor.gray.cgColor
-        button.setTitle("53 More", for: .normal)
+        button.setTitle("3 More", for: .normal)
         button.setTitleColor(UIColor.black, for: .normal)
         button.titleLabel?.font = UIFont.boldSystemFont(ofSize: 8)
         button.titleLabel?.minimumScaleFactor = 2
