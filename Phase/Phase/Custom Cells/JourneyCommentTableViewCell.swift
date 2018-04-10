@@ -136,7 +136,18 @@ class JourneyCommentTableViewCell: UITableViewCell {
     public func configureCell(with event: EventDummyDate) {
         self.profileImageView.image = UIImage(imageLiteralResourceName: "\(event._media)")
         self.timePostedLabel.text = event._eventId
-        self.commentLabel.text = event._caption
+//        self.commentLabel.text = event._caption
+        self.commentLabel.attributedText = setLabel(with: event)
+    }
+    
+    private func setLabel(with event: EventDummyDate) -> NSAttributedString {
+        let semiBold = [NSAttributedStringKey.foregroundColor: UIColor.black, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 12, weight: UIFont.Weight.semibold)]
+        let regular = [NSAttributedStringKey.foregroundColor: UIColor.black, NSAttributedStringKey.font: UIFont.systemFont(ofSize: 10, weight: UIFont.Weight.regular)]
+        
+        let partOne = NSMutableAttributedString(string: "\(event._userId) ", attributes: semiBold)
+        let partTwo = NSMutableAttributedString(string: "  \(event._caption)", attributes: regular)
+        partOne.append(partTwo)
+        return partOne
     }
     
 }

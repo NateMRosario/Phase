@@ -420,8 +420,9 @@ class JourneyDetailViewController: UIViewController, UICollisionBehaviorDelegate
     }
     
     @objc private func journeyProfileImageTapped() {
-        let profileVC = ProfileViewController(loadSelectedUser: journey._userId!)
-        navigationController?.pushViewController(profileVC!, animated: true)
+        //TODO: - fix wegue to prifle vc
+//        let profileVC = ProfileViewController(loadSelectedUser: journey._userId!)
+//        navigationController?.pushViewController(profileVC!, animated: true)
     }
     
     @objc private func subscribeButtonTapped() {
@@ -435,6 +436,10 @@ class JourneyDetailViewController: UIViewController, UICollisionBehaviorDelegate
                     self.showAlert(title: "Success", message: "You have subscribed to this journey.")
                 }            }
         }
+    }
+    
+    private func replyButtonPressed()  {
+            footerView.commentTextField.becomeFirstResponder()
     }
     
     
@@ -612,7 +617,9 @@ extension JourneyDetailViewController: UIGestureRecognizerDelegate {
 // MARK: - Custom Delegates
 extension JourneyDetailViewController: JourneyCommentTableCellDelegate {
     func profileImageTapped() {}
-    func replyButtonTapped() {}
+    func replyButtonTapped() {
+        replyButtonPressed()
+    }
 }
 
 extension JourneyDetailViewController: JourneyHeaderDelegate {
