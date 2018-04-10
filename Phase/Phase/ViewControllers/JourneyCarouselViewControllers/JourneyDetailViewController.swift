@@ -57,7 +57,7 @@ class JourneyDetailViewController: UIViewController, UICollisionBehaviorDelegate
     lazy private var journeyProfileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "g")
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
         imageView.layer.borderWidth = 0.5
         imageView.layer.borderColor = UIColor.gray.cgColor
         let tapRecognizer = UITapGestureRecognizer(target: self, action: #selector(journeyProfileImageTapped))
