@@ -420,8 +420,9 @@ class JourneyDetailViewController: UIViewController, UICollisionBehaviorDelegate
     }
     
     @objc private func journeyProfileImageTapped() {
-        let profileVC = ProfileViewController(loadSelectedUser: journey._userId!)
-        navigationController?.pushViewController(profileVC!, animated: true)
+        //TODO: - fix wegue to prifle vc
+//        let profileVC = ProfileViewController(loadSelectedUser: journey._userId!)
+//        navigationController?.pushViewController(profileVC!, animated: true)
     }
     
     @objc private func subscribeButtonTapped() {
