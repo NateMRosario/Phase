@@ -437,6 +437,10 @@ class JourneyDetailViewController: UIViewController, UICollisionBehaviorDelegate
         }
     }
     
+    private func replyButtonPressed()  {
+            footerView.commentTextField.becomeFirstResponder()
+    }
+    
     
     // MARK: - Contraints
     private func setJourneyCarouselViewConstraints() {
@@ -612,7 +616,9 @@ extension JourneyDetailViewController: UIGestureRecognizerDelegate {
 // MARK: - Custom Delegates
 extension JourneyDetailViewController: JourneyCommentTableCellDelegate {
     func profileImageTapped() {}
-    func replyButtonTapped() {}
+    func replyButtonTapped() {
+        replyButtonPressed()
+    }
 }
 
 extension JourneyDetailViewController: JourneyHeaderDelegate {
