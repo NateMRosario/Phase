@@ -95,10 +95,12 @@ class HomeViewController: UIViewController {
         tableView.delegate = self
         let nib = UINib(nibName: "HomeFeedTableViewCell", bundle: nil)
         tableView.register(nib, forCellReuseIdentifier: "HomeFeedCell")
+        fetchCurrentUser()
+        tableView.reloadData()
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(true)
+        super.viewDidAppear(false)
         fetchCurrentUser()
         tableView.reloadData()
     }
