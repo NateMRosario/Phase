@@ -23,7 +23,7 @@ class JourneyBottomView: UIView {
     lazy var commentProfileImageView: UIImageView = {
         let imageView = UIImageView()
         imageView.image = UIImage(named: "g")
-        imageView.contentMode = .scaleAspectFit
+        imageView.contentMode = .scaleAspectFill
         imageView.layer.borderWidth = 0.5
         imageView.layer.borderColor = UIColor.gray.cgColor
         imageView.layer.cornerRadius = bounds.width / 2
