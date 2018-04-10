@@ -558,7 +558,6 @@ extension JourneyDetailViewController: iCarouselDelegate {
         let currentIndex = carousel.currentItemIndex
         let event = events[currentIndex]
         self.headerView.journeyCaptionLabel.text = event._caption ?? ""
-
     }
     
 }
