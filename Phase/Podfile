@@ -1,5 +1,5 @@
 # Uncomment the next line to define a global platform for your project
- platform :ios, '9.0'
+platform :ios, '9.0'
 
 target 'Phase' do
   # Comment the next line if you're not using Swift and don't want to use dynamic frameworks
@@ -7,6 +7,25 @@ target 'Phase' do
 
   # Pods for Phase
   pod 'AWSMobileClient'
+  pod 'SnapKit'
+  pod 'Material'
+  pod 'BetterSegmentedControl', '~> 0.9'
+  pod 'SkyFloatingLabelTextField', '~> 3.0'
+  pod 'AMPopTip'
+  pod 'AWSCognitoIdentityProvider'
+  pod 'AWSCognitoAuth'
+  pod 'AWSUserPoolsSignIn'
+  pod 'AWSDynamoDB'
+  pod 'AWSS3'
+  pod 'ADMozaicCollectionViewLayout', '~> 4.0'
+  pod 'Segmentio'
+  pod 'DGElasticPullToRefresh'
+  pod 'Pastel'
+  pod 'Chatto', '=3.3.0'
+  pod 'ChattoAdditions', '=3.3.0'
+  pod 'Parchment'
+  pod 'Kingfisher'
+  pod 'Hero'
 
   target 'PhaseTests' do
     inherit! :search_paths
